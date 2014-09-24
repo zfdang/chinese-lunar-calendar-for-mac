@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6950E40D19D30611005642FF /* MenuCracker.menu in Resources */ = {isa = PBXBuildFile; fileRef = 6950E40C19D30611005642FF /* MenuCracker.menu */; };
+		6950E41219D30D05005642FF /* CLCMenuExtra.menu in Resources */ = {isa = PBXBuildFile; fileRef = 6950E41119D30D05005642FF /* CLCMenuExtra.menu */; };
+		69B6FCE019D2B15100191D8D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B6FCDF19D2B15100191D8D /* main.m */; };
+		69B6FCE319D2B15100191D8D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B6FCE219D2B15100191D8D /* AppDelegate.m */; };
+		69B6FCE519D2B15100191D8D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B6FCE419D2B15100191D8D /* Images.xcassets */; };
+		69B6FCE819D2B15100191D8D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B6FCE619D2B15100191D8D /* MainMenu.xib */; };
+		69B6FCF419D2B15100191D8D /* CLCLauncherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B6FCF319D2B15100191D8D /* CLCLauncherTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		69B6FCEE19D2B15100191D8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B6FCD219D2B15100191D8D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69B6FCD919D2B15100191D8D;
+			remoteInfo = CLCLauncher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6950E40C19D30611005642FF /* MenuCracker.menu */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MenuCracker.menu; path = CLCLauncher/MenuCracker/MenuCracker.menu; sourceTree = "<group>"; };
+		6950E41119D30D05005642FF /* CLCMenuExtra.menu */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CLCMenuExtra.menu; path = CLCLauncher/CLCMenuExtra/CLCMenuExtra.menu; sourceTree = "<group>"; };
+		69B6FCDA19D2B15100191D8D /* Chinese_Lunar_Calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chinese_Lunar_Calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		69B6FCDE19D2B15100191D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69B6FCDF19D2B15100191D8D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		69B6FCE119D2B15100191D8D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		69B6FCE219D2B15100191D8D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		69B6FCE419D2B15100191D8D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		69B6FCE719D2B15100191D8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		69B6FCED19D2B15100191D8D /* CLCLauncherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLCLauncherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		69B6FCF219D2B15100191D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69B6FCF319D2B15100191D8D /* CLCLauncherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCLauncherTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69B6FCD719D2B15100191D8D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B6FCEA19D2B15100191D8D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6950E40B19D305F9005642FF /* MenuCracker */ = {
+			isa = PBXGroup;
+			children = (
+				6950E40C19D30611005642FF /* MenuCracker.menu */,
+			);
+			name = MenuCracker;
+			sourceTree = "<group>";
+		};
+		6950E40E19D309E7005642FF /* CLCMenuExtra */ = {
+			isa = PBXGroup;
+			children = (
+				6950E41119D30D05005642FF /* CLCMenuExtra.menu */,
+			);
+			name = CLCMenuExtra;
+			sourceTree = "<group>";
+		};
+		69B6FCD119D2B15100191D8D = {
+			isa = PBXGroup;
+			children = (
+				6950E40E19D309E7005642FF /* CLCMenuExtra */,
+				6950E40B19D305F9005642FF /* MenuCracker */,
+				69B6FCDC19D2B15100191D8D /* CLCLauncher */,
+				69B6FCF019D2B15100191D8D /* CLCLauncherTests */,
+				69B6FCDB19D2B15100191D8D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		69B6FCDB19D2B15100191D8D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69B6FCDA19D2B15100191D8D /* Chinese_Lunar_Calendar.app */,
+				69B6FCED19D2B15100191D8D /* CLCLauncherTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69B6FCDC19D2B15100191D8D /* CLCLauncher */ = {
+			isa = PBXGroup;
+			children = (
+				69B6FCE119D2B15100191D8D /* AppDelegate.h */,
+				69B6FCE219D2B15100191D8D /* AppDelegate.m */,
+				69B6FCE419D2B15100191D8D /* Images.xcassets */,
+				69B6FCE619D2B15100191D8D /* MainMenu.xib */,
+				69B6FCDD19D2B15100191D8D /* Supporting Files */,
+			);
+			path = CLCLauncher;
+			sourceTree = "<group>";
+		};
+		69B6FCDD19D2B15100191D8D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				69B6FCDE19D2B15100191D8D /* Info.plist */,
+				69B6FCDF19D2B15100191D8D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		69B6FCF019D2B15100191D8D /* CLCLauncherTests */ = {
+			isa = PBXGroup;
+			children = (
+				69B6FCF319D2B15100191D8D /* CLCLauncherTests.m */,
+				69B6FCF119D2B15100191D8D /* Supporting Files */,
+			);
+			path = CLCLauncherTests;
+			sourceTree = "<group>";
+		};
+		69B6FCF119D2B15100191D8D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				69B6FCF219D2B15100191D8D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		69B6FCD919D2B15100191D8D /* CLCLauncher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69B6FCF719D2B15100191D8D /* Build configuration list for PBXNativeTarget "CLCLauncher" */;
+			buildPhases = (
+				69B6FCD619D2B15100191D8D /* Sources */,
+				69B6FCD719D2B15100191D8D /* Frameworks */,
+				69B6FCD819D2B15100191D8D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CLCLauncher;
+			productName = CLCLauncher;
+			productReference = 69B6FCDA19D2B15100191D8D /* Chinese_Lunar_Calendar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		69B6FCEC19D2B15100191D8D /* CLCLauncherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69B6FCFA19D2B15100191D8D /* Build configuration list for PBXNativeTarget "CLCLauncherTests" */;
+			buildPhases = (
+				69B6FCE919D2B15100191D8D /* Sources */,
+				69B6FCEA19D2B15100191D8D /* Frameworks */,
+				69B6FCEB19D2B15100191D8D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69B6FCEF19D2B15100191D8D /* PBXTargetDependency */,
+			);
+			name = CLCLauncherTests;
+			productName = CLCLauncherTests;
+			productReference = 69B6FCED19D2B15100191D8D /* CLCLauncherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		69B6FCD219D2B15100191D8D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = Zhengfa;
+				TargetAttributes = {
+					69B6FCD919D2B15100191D8D = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					69B6FCEC19D2B15100191D8D = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = 69B6FCD919D2B15100191D8D;
+					};
+				};
+			};
+			buildConfigurationList = 69B6FCD519D2B15100191D8D /* Build configuration list for PBXProject "CLCLauncher" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 69B6FCD119D2B15100191D8D;
+			productRefGroup = 69B6FCDB19D2B15100191D8D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69B6FCD919D2B15100191D8D /* CLCLauncher */,
+				69B6FCEC19D2B15100191D8D /* CLCLauncherTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		69B6FCD819D2B15100191D8D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69B6FCE519D2B15100191D8D /* Images.xcassets in Resources */,
+				6950E40D19D30611005642FF /* MenuCracker.menu in Resources */,
+				69B6FCE819D2B15100191D8D /* MainMenu.xib in Resources */,
+				6950E41219D30D05005642FF /* CLCMenuExtra.menu in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B6FCEB19D2B15100191D8D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69B6FCD619D2B15100191D8D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69B6FCE319D2B15100191D8D /* AppDelegate.m in Sources */,
+				69B6FCE019D2B15100191D8D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B6FCE919D2B15100191D8D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69B6FCF419D2B15100191D8D /* CLCLauncherTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		69B6FCEF19D2B15100191D8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69B6FCD919D2B15100191D8D /* CLCLauncher */;
+			targetProxy = 69B6FCEE19D2B15100191D8D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		69B6FCE619D2B15100191D8D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69B6FCE719D2B15100191D8D /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		69B6FCF519D2B15100191D8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		69B6FCF619D2B15100191D8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		69B6FCF819D2B15100191D8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CLCLauncher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = Chinese_Lunar_Calendar;
+			};
+			name = Debug;
+		};
+		69B6FCF919D2B15100191D8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CLCLauncher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = Chinese_Lunar_Calendar;
+			};
+			name = Release;
+		};
+		69B6FCFB19D2B15100191D8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CLCLauncherTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CLCLauncher.app/Contents/MacOS/CLCLauncher";
+			};
+			name = Debug;
+		};
+		69B6FCFC19D2B15100191D8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CLCLauncherTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CLCLauncher.app/Contents/MacOS/CLCLauncher";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69B6FCD519D2B15100191D8D /* Build configuration list for PBXProject "CLCLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69B6FCF519D2B15100191D8D /* Debug */,
+				69B6FCF619D2B15100191D8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69B6FCF719D2B15100191D8D /* Build configuration list for PBXNativeTarget "CLCLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69B6FCF819D2B15100191D8D /* Debug */,
+				69B6FCF919D2B15100191D8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69B6FCFA19D2B15100191D8D /* Build configuration list for PBXNativeTarget "CLCLauncherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69B6FCFB19D2B15100191D8D /* Debug */,
+				69B6FCFC19D2B15100191D8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 69B6FCD219D2B15100191D8D /* Project object */;
+}
