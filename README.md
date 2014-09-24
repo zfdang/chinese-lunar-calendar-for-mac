@@ -4,7 +4,7 @@ This is a MenuExtra app which shows a simple chinese lunar calendar.
 You can use CMD+Drag to move the location of this item.
 
 ## Code Structure
-there are two projects in this application.
+there are three projects in this application.
 
 ### 1. CLCLauncher
 this application is a agent application, which launch "MenuCracker.menu" & "CLCMenuExtra.menu"
@@ -12,8 +12,11 @@ this application is a agent application, which launch "MenuCracker.menu" & "CLCM
 It dependens on MenuCracker.menu and CLCMenuExtra.menu (these two bundles will be packed into CLCLauncher.app as resources)
 
 ### 2. CLCMenuExtra
-This bundle finishs the actual funcationality.
-this bundle is using un-official NSMenuExtra interfaces.
+This bundle finishs the actual functionality.
+this bundle is using un-official NSMenuExtra API.
+
+### 3. CLCStatusItem
+This application has the same functionality with CLCMenuExtra, but it's using official NSStatusItem API.
 
 ## Simple Demo for MenuExtra
 You can use branch "MenuExtraDemo" to learn how to develop menuExtra app.
