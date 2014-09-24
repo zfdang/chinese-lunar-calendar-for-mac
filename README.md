@@ -15,7 +15,9 @@ It dependens on MenuCracker.menu and CLCMenuExtra.menu (these two bundles will b
 This bundle finishs the actual funcationality.
 this bundle is using un-official NSMenuExtra interfaces.
 
-
+## Simple Demo for MenuExtra
+You can use branch "MenuExtraDemo" to learn how to develop menuExtra app.
+It's a early stage of CLC.
 
 ## Referrences
 http://duhanebel.wordpress.com/2010/04/02/nsmenuextra-how-to-work-with-undocumented-apis/
