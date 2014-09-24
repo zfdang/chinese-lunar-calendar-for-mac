@@ -16,11 +16,12 @@ This bundle finishs the actual functionality.
 this bundle is using un-official NSMenuExtra API.
 
 ### 3. CLCStatusItem
-This application has the same functionality with CLCMenuExtra, but it's using official NSStatusItem API.
+This application has the same functionality with CLCMenuExtra, but it's using official NSStatusItem API. This means its location can't be changed with CMD+Drag.
 
 ## Simple Demo for MenuExtra
 You can use branch "MenuExtraDemo" to learn how to develop menuExtra app.
 It's a early stage of CLC.
+Branch Link: [MenuExtraDemo](https://github.com/zfdang/chinese-lunar-calendar-for-mac/tree/menuextrademo)
 
 ## Referrences
 http://duhanebel.wordpress.com/2010/04/02/nsmenuextra-how-to-work-with-undocumented-apis/
