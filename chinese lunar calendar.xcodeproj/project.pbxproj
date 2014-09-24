@@ -1,0 +1,325 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		69D8B52019D27A3E00A75B32 /* SystemUIPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */; };
+		69D8B52419D27AF900A75B32 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B52319D27AF900A75B32 /* Cocoa.framework */; };
+		69D8B53D19D290E400A75B32 /* CLCMenuExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */; };
+		69D8B53E19D290E400A75B32 /* CLCMenuExtraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D8B53C19D290E400A75B32 /* CLCMenuExtraView.m */; };
+		69D8B54119D2957100A75B32 /* MenuCracker.menu in Resources */ = {isa = PBXBuildFile; fileRef = 69D8B54019D2957100A75B32 /* MenuCracker.menu */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		69D8B51519D278A900A75B32 /* chinese lunar calendar.menu */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "chinese lunar calendar.menu"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69D8B51919D278A900A75B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SystemUIPlugin.framework; sourceTree = "<group>"; };
+		69D8B52319D27AF900A75B32 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		69D8B53419D290DB00A75B32 /* NSMenuExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMenuExtra.h; path = NSMenuExtra/NSMenuExtra.h; sourceTree = "<group>"; };
+		69D8B53519D290DB00A75B32 /* NSMenuExtraAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMenuExtraAnimationView.h; path = NSMenuExtra/NSMenuExtraAnimationView.h; sourceTree = "<group>"; };
+		69D8B53619D290DB00A75B32 /* NSMenuExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMenuExtraView.h; path = NSMenuExtra/NSMenuExtraView.h; sourceTree = "<group>"; };
+		69D8B53719D290DB00A75B32 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = NSMenuExtra/readme.txt; sourceTree = "<group>"; };
+		69D8B53919D290E400A75B32 /* CLCMenuExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCMenuExtra.h; path = CLCMenuExtra/CLCMenuExtra.h; sourceTree = "<group>"; };
+		69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCMenuExtra.m; path = CLCMenuExtra/CLCMenuExtra.m; sourceTree = "<group>"; };
+		69D8B53B19D290E400A75B32 /* CLCMenuExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCMenuExtraView.h; path = CLCMenuExtra/CLCMenuExtraView.h; sourceTree = "<group>"; };
+		69D8B53C19D290E400A75B32 /* CLCMenuExtraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCMenuExtraView.m; path = CLCMenuExtra/CLCMenuExtraView.m; sourceTree = "<group>"; };
+		69D8B54019D2957100A75B32 /* MenuCracker.menu */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MenuCracker.menu; path = MenuCracker/MenuCracker.menu; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69D8B51219D278A900A75B32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69D8B52419D27AF900A75B32 /* Cocoa.framework in Frameworks */,
+				69D8B52019D27A3E00A75B32 /* SystemUIPlugin.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69D8B50C19D278A900A75B32 = {
+			isa = PBXGroup;
+			children = (
+				69D8B53F19D2946300A75B32 /* Resources */,
+				69D8B52D19D27F4D00A75B32 /* sources */,
+				69D8B52119D27A9800A75B32 /* Frameworks */,
+				69D8B51719D278A900A75B32 /* chinese lunar calendar */,
+				69D8B51619D278A900A75B32 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		69D8B51619D278A900A75B32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69D8B51519D278A900A75B32 /* chinese lunar calendar.menu */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69D8B51719D278A900A75B32 /* chinese lunar calendar */ = {
+			isa = PBXGroup;
+			children = (
+				69D8B51819D278A900A75B32 /* Supporting Files */,
+			);
+			path = "chinese lunar calendar";
+			sourceTree = "<group>";
+		};
+		69D8B51819D278A900A75B32 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				69D8B51919D278A900A75B32 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		69D8B52119D27A9800A75B32 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69D8B52319D27AF900A75B32 /* Cocoa.framework */,
+				69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69D8B52A19D27ECF00A75B32 /* NSMenuExtra */ = {
+			isa = PBXGroup;
+			children = (
+				69D8B53419D290DB00A75B32 /* NSMenuExtra.h */,
+				69D8B53519D290DB00A75B32 /* NSMenuExtraAnimationView.h */,
+				69D8B53619D290DB00A75B32 /* NSMenuExtraView.h */,
+				69D8B53719D290DB00A75B32 /* readme.txt */,
+			);
+			name = NSMenuExtra;
+			sourceTree = "<group>";
+		};
+		69D8B52D19D27F4D00A75B32 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				69D8B52A19D27ECF00A75B32 /* NSMenuExtra */,
+				69D8B53919D290E400A75B32 /* CLCMenuExtra.h */,
+				69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */,
+				69D8B53B19D290E400A75B32 /* CLCMenuExtraView.h */,
+				69D8B53C19D290E400A75B32 /* CLCMenuExtraView.m */,
+			);
+			name = sources;
+			sourceTree = "<group>";
+		};
+		69D8B53F19D2946300A75B32 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				69D8B54019D2957100A75B32 /* MenuCracker.menu */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		69D8B51419D278A900A75B32 /* chinese lunar calendar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69D8B51C19D278A900A75B32 /* Build configuration list for PBXNativeTarget "chinese lunar calendar" */;
+			buildPhases = (
+				69D8B51119D278A900A75B32 /* Sources */,
+				69D8B51219D278A900A75B32 /* Frameworks */,
+				69D8B51319D278A900A75B32 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "chinese lunar calendar";
+			productName = "chinese lunar calendar";
+			productReference = 69D8B51519D278A900A75B32 /* chinese lunar calendar.menu */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		69D8B50D19D278A900A75B32 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = Zhengfa;
+				TargetAttributes = {
+					69D8B51419D278A900A75B32 = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 69D8B51019D278A900A75B32 /* Build configuration list for PBXProject "chinese lunar calendar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 69D8B50C19D278A900A75B32;
+			productRefGroup = 69D8B51619D278A900A75B32 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69D8B51419D278A900A75B32 /* chinese lunar calendar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		69D8B51319D278A900A75B32 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69D8B54119D2957100A75B32 /* MenuCracker.menu in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69D8B51119D278A900A75B32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69D8B53D19D290E400A75B32 /* CLCMenuExtra.m in Sources */,
+				69D8B53E19D290E400A75B32 /* CLCMenuExtraView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		69D8B51A19D278A900A75B32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		69D8B51B19D278A900A75B32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		69D8B51D19D278A900A75B32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "chinese lunar calendar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = menu;
+			};
+			name = Debug;
+		};
+		69D8B51E19D278A900A75B32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "chinese lunar calendar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = menu;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69D8B51019D278A900A75B32 /* Build configuration list for PBXProject "chinese lunar calendar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69D8B51A19D278A900A75B32 /* Debug */,
+				69D8B51B19D278A900A75B32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69D8B51C19D278A900A75B32 /* Build configuration list for PBXNativeTarget "chinese lunar calendar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69D8B51D19D278A900A75B32 /* Debug */,
+				69D8B51E19D278A900A75B32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 69D8B50D19D278A900A75B32 /* Project object */;
+}
