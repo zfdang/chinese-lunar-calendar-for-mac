@@ -10,15 +10,9 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-    NSStatusItem *statusItem;
 }
 
-@property (weak) IBOutlet NSMenu *statusMenu;
-
 @property (weak) IBOutlet NSWindow *window;
-- (IBAction)menuA:(id)sender;
-- (IBAction)menuQuit:(id)sender;
-- (IBAction)menuExtra:(id)sender;
 
 @end
 

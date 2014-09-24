@@ -13,36 +13,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
-                <outlet property="statusMenu" destination="pOW-E8-gvA" id="SLW-ds-Wr8"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-        <menu id="pOW-E8-gvA" userLabel="StatusMenu">
-            <items>
-                <menuItem title="Open File" id="RG8-XP-iaO">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="menuA:" target="Voe-Tx-rLC" id="T63-bq-IOF"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="MenuExtra" id="47F-IK-IbJ" userLabel="MenuExtra">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="menuExtra:" target="Voe-Tx-rLC" id="U1x-Pm-2GG"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Test" id="kn6-FB-HJW">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Quit" id="83M-Ka-X3l">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="menuQuit:" target="Voe-Tx-rLC" id="QaB-E5-McK"/>
-                    </connections>
-                </menuItem>
-            </items>
-        </menu>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
                 <menuItem title="CLCLauncher" id="1Xt-HY-uBw">

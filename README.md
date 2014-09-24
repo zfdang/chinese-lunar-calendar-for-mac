@@ -1,5 +1,5 @@
 # Chinese Lunar Calendar for Mac
-This is a MenuExtra bundle which shows a simple chinese lunar calendar.
+This is a MenuExtra app which shows a simple chinese lunar calendar.
 
 You can use CMD+Drag to move the location of this item.
 
@@ -12,7 +12,7 @@ this application is a agent application, which launch "MenuCracker.menu" & "CLCM
 It dependens on MenuCracker.menu and CLCMenuExtra.menu (these two bundles will be packed into CLCLauncher.app as resources)
 
 ### 2. CLCMenuExtra
-This bundle finishs the actual funcationalityy.
+This bundle finishs the actual funcationality.
 this bundle is using un-official NSMenuExtra interfaces.
 
 
