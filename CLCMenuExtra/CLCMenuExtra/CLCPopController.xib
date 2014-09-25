@@ -2,28 +2,47 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CLCPopController">
             <connections>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+                <outlet property="webview" destination="nLn-XO-wV9" id="qVq-Gv-1WW"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="239" height="259"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cf8-wy-Aea">
-                    <rect key="frame" x="208" y="128" width="75" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="hello world" id="cUn-iH-U1u">
+                <webView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLn-XO-wV9">
+                    <rect key="frame" x="7" y="7" width="225" height="245"/>
+                    <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                        <nil key="identifier"/>
+                    </webPreferences>
+                </webView>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qfs-3c-g77">
+                    <rect key="frame" x="208" y="11" width="18" height="20"/>
+                    <buttonCell key="cell" type="smallSquare" title=" " bezelStyle="smallSquare" image="github" imagePosition="overlaps" alignment="center" toolTip="Find Code in Github" imageScaling="proportionallyDown" inset="2" id="IPh-rk-99d">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VYz-0w-a7c">
+                    <rect key="frame" x="9" y="11" width="199" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 1.0 © 2014 by zfdang" id="znv-qF-THq">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
+            <point key="canvasLocation" x="4.5" y="158.5"/>
         </customView>
     </objects>
+    <resources>
+        <image name="github" width="200" height="200"/>
+    </resources>
 </document>

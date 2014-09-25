@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="index.css"></link>
+
+
+<table bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" style="border-collapse: collapse;border: 1px solid #D2DEE2; padding: 1" align="center" width="220" border="0">
+<tr height="20" bgcolor="#EDF2F2">
+<td align="center" width="14" style="cursor: hand; color: #1F72D0;font-size:9pt;" title="上一年" onclick="pushBtm('YU')">||</td>
+<td align="center" width="14" style="cursor: hand; color: #1F72D0;font-size:9pt" title="上一月" onclick="pushBtm('MU')">&lt;&lt;</td>
+<td align="center" nowrap="nowrap" id="YMBG" style="color: #1F72D0;font-size:9pt"></td>
+<td align="center" nowrap="nowrap" id="GZ" style="color: #1F72D0;font-size:9pt"></td>
+<td align="center" width="14" style="cursor: hand; color: #1F72D0;font-size:9pt" title="下一月" onclick="pushBtm('MD')">>></td>
+<td align="center" width="14" style="cursor: hand; color: #1F72D0;font-size:9pt" title="下一年" onclick="pushBtm('YD')">||</td>
+</tr>
+<tr><td colspan="6">
+<div id="ttdiv" align="center" width="210"></div>
+</td></tr>
+<tr><td colspan="6" height="1"></td></tr>
+</table>
+
+<script src="mdate.js" ></script>
+<script language="javascript">
+var arrArtdate=new Array('20100705','20100713');
+initial("ttdiv");
+</script>

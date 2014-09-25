@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<link rel="stylesheet" href="index.css"></link>
+</head>
+
+<body oncontextmenu="window.event.returnValue=false" ondragstart='return false' onselectstart ='return false' onselect='document.selection.empty()' oncopy='document.selection.empty()' onbeforecopy='return false' onmouseup='document.selection.empty()'>
+
+<div class="calendarWcj">
+	<div class="calendarTitleBar">
+    		<span id="YMBG" ></span>
+    		<span id="GZ" ></span>
+    	</div>
+
+	<div id="ttdiv" align="center" width="210"></div>
+         <div class="calendarBtn">
+         	<Div class="daySelectBtn">
+                           <span class="BtnRR" onclick="pushBtm('YD')"></span>
+                           <span class="BtnR" onclick="pushBtm('MD')"></span>
+                           <span class="BtnC" onclick="initial('ttdiv')"></span>
+                           <span class="BtnL" onclick="pushBtm('MU')"></span>
+                           <span class="BtnLL" onclick="pushBtm('YU')"></span>
+                  </Div>
+                  
+                  <div id="mysDate"></div>
+         </div>
+</div>
+
+
+
+<script src="mdate.js" ></script>
+<script language="javascript">
+document.onkeydown = function()
+ {
+          if(event.keyCode==116) {
+          event.keyCode=0;
+          event.returnValue = false;
+          }
+}
+document.oncontextmenu = function() {event.returnValue = false;}
+
+
+var arrArtdate=new Array('20100705','20100713');
+initial("ttdiv");
+</script>
+
+
+</body>
+</html>

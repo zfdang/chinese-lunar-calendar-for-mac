@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		691657AB19D3F8410086C6D9 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 691657A719D3F8410086C6D9 /* cloud.png */; };
-		691657AC19D3F8410086C6D9 /* cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 691657A819D3F8410086C6D9 /* cloud@2x.png */; };
-		691657AD19D3F8410086C6D9 /* cloudgrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 691657A919D3F8410086C6D9 /* cloudgrey.png */; };
-		691657AE19D3F8410086C6D9 /* cloudgrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 691657AA19D3F8410086C6D9 /* cloudgrey@2x.png */; };
 		6985D80B19D4423F00343F35 /* CLCPopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985D80919D4423F00343F35 /* CLCPopController.m */; };
 		6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80A19D4423F00343F35 /* CLCPopController.xib */; };
+		6985D80E19D4539B00343F35 /* github.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80D19D4539B00343F35 /* github.png */; };
+		6985D82C19D45C1B00343F35 /* BtnCen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81019D45B4D00343F35 /* BtnCen.png */; };
+		6985D82D19D45C1B00343F35 /* BtnHCen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81119D45B4D00343F35 /* BtnHCen.png */; };
+		6985D82E19D45C1B00343F35 /* BtnHLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81219D45B4D00343F35 /* BtnHLeft.png */; };
+		6985D82F19D45C1B00343F35 /* BtnHLeftL.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81319D45B4D00343F35 /* BtnHLeftL.png */; };
+		6985D83019D45C1B00343F35 /* BtnHRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81419D45B4D00343F35 /* BtnHRight.png */; };
+		6985D83119D45C1B00343F35 /* BtnHRightR.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81519D45B4D00343F35 /* BtnHRightR.png */; };
+		6985D83219D45C1B00343F35 /* BtnLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81619D45B4D00343F35 /* BtnLeft.png */; };
+		6985D83319D45C1B00343F35 /* BtnLeftL.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81719D45B4D00343F35 /* BtnLeftL.png */; };
+		6985D83419D45C1B00343F35 /* BtnRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81819D45B4D00343F35 /* BtnRight.png */; };
+		6985D83519D45C1B00343F35 /* BtnRightR.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81919D45B4D00343F35 /* BtnRightR.png */; };
+		6985D83619D45C1B00343F35 /* calendar.html in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81A19D45B4D00343F35 /* calendar.html */; };
+		6985D83719D45C1B00343F35 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81B19D45B4D00343F35 /* index.css */; };
+		6985D83819D45C1B00343F35 /* mdate.js in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81C19D45B4D00343F35 /* mdate.js */; };
+		6985D83919D45C1B00343F35 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81D19D45B4D00343F35 /* test.html */; };
 		69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD119D3B17D004AC6DD /* CLCCalendar.m */; };
 		69D8B52019D27A3E00A75B32 /* SystemUIPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */; };
 		69D8B52419D27AF900A75B32 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B52319D27AF900A75B32 /* Cocoa.framework */; };
@@ -21,13 +32,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		691657A719D3F8410086C6D9 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloud.png; path = CLCMenuExtra/Resources/cloud.png; sourceTree = "<group>"; };
-		691657A819D3F8410086C6D9 /* cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cloud@2x.png"; path = "CLCMenuExtra/Resources/cloud@2x.png"; sourceTree = "<group>"; };
-		691657A919D3F8410086C6D9 /* cloudgrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloudgrey.png; path = CLCMenuExtra/Resources/cloudgrey.png; sourceTree = "<group>"; };
-		691657AA19D3F8410086C6D9 /* cloudgrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cloudgrey@2x.png"; path = "CLCMenuExtra/Resources/cloudgrey@2x.png"; sourceTree = "<group>"; };
 		6985D80819D4423F00343F35 /* CLCPopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCPopController.h; path = CLCMenuExtra/CLCPopController.h; sourceTree = "<group>"; };
 		6985D80919D4423F00343F35 /* CLCPopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCPopController.m; path = CLCMenuExtra/CLCPopController.m; sourceTree = "<group>"; };
 		6985D80A19D4423F00343F35 /* CLCPopController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLCPopController.xib; path = CLCMenuExtra/CLCPopController.xib; sourceTree = "<group>"; };
+		6985D80D19D4539B00343F35 /* github.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = github.png; path = CLCMenuExtra/Resources/github.png; sourceTree = "<group>"; };
+		6985D81019D45B4D00343F35 /* BtnCen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnCen.png; sourceTree = "<group>"; };
+		6985D81119D45B4D00343F35 /* BtnHCen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnHCen.png; sourceTree = "<group>"; };
+		6985D81219D45B4D00343F35 /* BtnHLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnHLeft.png; sourceTree = "<group>"; };
+		6985D81319D45B4D00343F35 /* BtnHLeftL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnHLeftL.png; sourceTree = "<group>"; };
+		6985D81419D45B4D00343F35 /* BtnHRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnHRight.png; sourceTree = "<group>"; };
+		6985D81519D45B4D00343F35 /* BtnHRightR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnHRightR.png; sourceTree = "<group>"; };
+		6985D81619D45B4D00343F35 /* BtnLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnLeft.png; sourceTree = "<group>"; };
+		6985D81719D45B4D00343F35 /* BtnLeftL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnLeftL.png; sourceTree = "<group>"; };
+		6985D81819D45B4D00343F35 /* BtnRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnRight.png; sourceTree = "<group>"; };
+		6985D81919D45B4D00343F35 /* BtnRightR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnRightR.png; sourceTree = "<group>"; };
+		6985D81A19D45B4D00343F35 /* calendar.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = calendar.html; sourceTree = "<group>"; };
+		6985D81B19D45B4D00343F35 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
+		6985D81C19D45B4D00343F35 /* mdate.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mdate.js; sourceTree = "<group>"; };
+		6985D81D19D45B4D00343F35 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		69C45CD019D3B17D004AC6DD /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCCalendar.h; path = CLCMenuExtra/CLCCalendar.h; sourceTree = "<group>"; };
 		69C45CD119D3B17D004AC6DD /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCCalendar.m; path = CLCMenuExtra/CLCCalendar.m; sourceTree = "<group>"; };
 		69D8B51519D278A900A75B32 /* CLCMenuExtra.menu */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLCMenuExtra.menu; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +79,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6985D80F19D45B4D00343F35 /* calendarHTML */ = {
+			isa = PBXGroup;
+			children = (
+				6985D81019D45B4D00343F35 /* BtnCen.png */,
+				6985D81119D45B4D00343F35 /* BtnHCen.png */,
+				6985D81219D45B4D00343F35 /* BtnHLeft.png */,
+				6985D81319D45B4D00343F35 /* BtnHLeftL.png */,
+				6985D81419D45B4D00343F35 /* BtnHRight.png */,
+				6985D81519D45B4D00343F35 /* BtnHRightR.png */,
+				6985D81619D45B4D00343F35 /* BtnLeft.png */,
+				6985D81719D45B4D00343F35 /* BtnLeftL.png */,
+				6985D81819D45B4D00343F35 /* BtnRight.png */,
+				6985D81919D45B4D00343F35 /* BtnRightR.png */,
+				6985D81A19D45B4D00343F35 /* calendar.html */,
+				6985D81B19D45B4D00343F35 /* index.css */,
+				6985D81C19D45B4D00343F35 /* mdate.js */,
+				6985D81D19D45B4D00343F35 /* test.html */,
+			);
+			name = calendarHTML;
+			path = CLCMenuExtra/Resources/calendarHTML;
+			sourceTree = "<group>";
+		};
 		69D8B50C19D278A900A75B32 = {
 			isa = PBXGroup;
 			children = (
@@ -131,11 +175,9 @@
 		69D8B53F19D2946300A75B32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6985D80F19D45B4D00343F35 /* calendarHTML */,
+				6985D80D19D4539B00343F35 /* github.png */,
 				6985D80A19D4423F00343F35 /* CLCPopController.xib */,
-				691657A719D3F8410086C6D9 /* cloud.png */,
-				691657A819D3F8410086C6D9 /* cloud@2x.png */,
-				691657A919D3F8410086C6D9 /* cloudgrey.png */,
-				691657AA19D3F8410086C6D9 /* cloudgrey@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -196,11 +238,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6985D82C19D45C1B00343F35 /* BtnCen.png in Resources */,
+				6985D82D19D45C1B00343F35 /* BtnHCen.png in Resources */,
+				6985D82E19D45C1B00343F35 /* BtnHLeft.png in Resources */,
+				6985D82F19D45C1B00343F35 /* BtnHLeftL.png in Resources */,
+				6985D83019D45C1B00343F35 /* BtnHRight.png in Resources */,
+				6985D83119D45C1B00343F35 /* BtnHRightR.png in Resources */,
+				6985D83219D45C1B00343F35 /* BtnLeft.png in Resources */,
+				6985D83319D45C1B00343F35 /* BtnLeftL.png in Resources */,
+				6985D83419D45C1B00343F35 /* BtnRight.png in Resources */,
+				6985D83519D45C1B00343F35 /* BtnRightR.png in Resources */,
+				6985D83619D45C1B00343F35 /* calendar.html in Resources */,
+				6985D83719D45C1B00343F35 /* index.css in Resources */,
+				6985D83819D45C1B00343F35 /* mdate.js in Resources */,
+				6985D83919D45C1B00343F35 /* test.html in Resources */,
+				6985D80E19D4539B00343F35 /* github.png in Resources */,
 				6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */,
-				691657AB19D3F8410086C6D9 /* cloud.png in Resources */,
-				691657AE19D3F8410086C6D9 /* cloudgrey@2x.png in Resources */,
-				691657AD19D3F8410086C6D9 /* cloudgrey.png in Resources */,
-				691657AC19D3F8410086C6D9 /* cloud@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

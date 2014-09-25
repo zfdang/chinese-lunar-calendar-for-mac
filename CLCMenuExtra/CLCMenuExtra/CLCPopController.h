@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class WebView;
 
 @interface CLCPopController : NSViewController
+
+@property (weak) IBOutlet WebView *webview;
 
 @end

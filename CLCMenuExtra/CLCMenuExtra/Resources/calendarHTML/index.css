@@ -1,0 +1,43 @@
+body,html,td, tr{font: 12px song, Verdana;margin:0;padding:0;}
+
+a:link {text-decoration:underline;color: #0044B6;}
+a:visited {text-decoration:underline;color: #0044B6;}
+a:active {text-decoration:underline;color: #0044B6;}
+a:hover {text-decoration:underline;color: #FF0000;}
+
+.tableDate .todyaColor {width:30px;height:25px;background: #ffffff;color:#000;margin:-3px 0 0 0;padding:1px 0 0 0;}
+.tableDate font{display:block;}
+.tableDate .nongli{font-size:9px;padding:0 0 0 0;height:10px;overflow:hidden;margin:-10px 0 0 0;}
+.tableDate .yinli{width:30px;height:21px;line-height:12px;}
+
+
+.calendarWcj{background:#2a2b2a;width:225px;}
+.calendarTitleBar{color:#FFF;height:23px;padding:5px 0 0 0 ;line-height:23px;text-align:center;font-weight:bold;font-size:14px;}
+.tableDate{text-align:center;margin:0 auto 0 auto; cursor:default;}
+.tableDate td{padding:2px 0 0 0;width:30px;height:23px;overflow:hidden;color:#929292;background:#373837;border-top:1px solid #454645; border-left:#454645 1px solid; border-right:1px solid #2d2d2d;border-bottom:#2d2d2d 1px solid;}
+
+
+
+.tableDate .ti1{background:#4eaf40;border-top:solid #93d787;border-width:0 0 0 0;}
+.tableDate .ti2{background:#439710;border-top:solid #65bf2d;border-width:0 0 0 0;}
+.tableDate .ti2,.tableDate .ti1{font-weight:bold;color:#FFF;}
+
+.calendarBtn{height:28px;line-height:28px;background:#373837;border-top:1px solid #454645;}
+.calendarBtn span{display:block;float:right;width:30px;height:25px;cursor:pointer;margin:0 0 0 2px; background-position:center;}
+.calendarBtn span:hover{background-position:center;}
+.daySelectBtn{float:right;position:relative;margin:-27px 2px 0 0;}
+
+.BtnLL{background:url(BtnLeftL.png) no-repeat;}
+.BtnL{background:url(BtnLeft.png) no-repeat;}
+.BtnR{background:url(BtnRight.png) no-repeat;}
+.BtnRR{background:url(BtnRightR.png) no-repeat;}
+.BtnC{background:url(BtnCen.png) no-repeat;}
+
+
+.BtnLL:hover{background:url(BtnHLeftL.png) no-repeat;}
+.BtnL:hover{background:url(BtnHLeft.png) no-repeat;}
+.BtnR:hover{background:url(BtnHRight.png) no-repeat;}
+.BtnRR:hover{background:url(BtnHRightR.png) no-repeat;}
+.BtnC:hover{background:url(BtnHCen.png) no-repeat;}
+
+#mysDate{float:left;color:#c7c7c7;padding:0 0 0 10px;}
