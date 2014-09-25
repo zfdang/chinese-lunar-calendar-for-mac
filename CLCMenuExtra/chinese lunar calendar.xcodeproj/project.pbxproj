@@ -19,10 +19,9 @@
 		6985D83319D45C1B00343F35 /* BtnLeftL.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81719D45B4D00343F35 /* BtnLeftL.png */; };
 		6985D83419D45C1B00343F35 /* BtnRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81819D45B4D00343F35 /* BtnRight.png */; };
 		6985D83519D45C1B00343F35 /* BtnRightR.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81919D45B4D00343F35 /* BtnRightR.png */; };
-		6985D83619D45C1B00343F35 /* calendar.html in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81A19D45B4D00343F35 /* calendar.html */; };
 		6985D83719D45C1B00343F35 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81B19D45B4D00343F35 /* index.css */; };
 		6985D83819D45C1B00343F35 /* mdate.js in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81C19D45B4D00343F35 /* mdate.js */; };
-		6985D83919D45C1B00343F35 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81D19D45B4D00343F35 /* test.html */; };
+		6985D83919D45C1B00343F35 /* calendar.html in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81D19D45B4D00343F35 /* calendar.html */; };
 		6985D83B19D4737300343F35 /* project.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D83A19D4737300343F35 /* project.png */; };
 		69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD119D3B17D004AC6DD /* CLCCalendar.m */; };
 		69D8B52019D27A3E00A75B32 /* SystemUIPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */; };
@@ -45,10 +44,9 @@
 		6985D81719D45B4D00343F35 /* BtnLeftL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnLeftL.png; sourceTree = "<group>"; };
 		6985D81819D45B4D00343F35 /* BtnRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnRight.png; sourceTree = "<group>"; };
 		6985D81919D45B4D00343F35 /* BtnRightR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnRightR.png; sourceTree = "<group>"; };
-		6985D81A19D45B4D00343F35 /* calendar.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = calendar.html; sourceTree = "<group>"; };
 		6985D81B19D45B4D00343F35 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
 		6985D81C19D45B4D00343F35 /* mdate.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mdate.js; sourceTree = "<group>"; };
-		6985D81D19D45B4D00343F35 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		6985D81D19D45B4D00343F35 /* calendar.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = calendar.html; sourceTree = "<group>"; };
 		6985D83A19D4737300343F35 /* project.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = project.png; path = CLCMenuExtra/Resources/project.png; sourceTree = "<group>"; };
 		69C45CD019D3B17D004AC6DD /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCCalendar.h; path = CLCMenuExtra/CLCCalendar.h; sourceTree = "<group>"; };
 		69C45CD119D3B17D004AC6DD /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCCalendar.m; path = CLCMenuExtra/CLCCalendar.m; sourceTree = "<group>"; };
@@ -92,10 +90,9 @@
 				6985D81719D45B4D00343F35 /* BtnLeftL.png */,
 				6985D81819D45B4D00343F35 /* BtnRight.png */,
 				6985D81919D45B4D00343F35 /* BtnRightR.png */,
-				6985D81A19D45B4D00343F35 /* calendar.html */,
 				6985D81B19D45B4D00343F35 /* index.css */,
 				6985D81C19D45B4D00343F35 /* mdate.js */,
-				6985D81D19D45B4D00343F35 /* test.html */,
+				6985D81D19D45B4D00343F35 /* calendar.html */,
 			);
 			name = calendarHTML;
 			path = CLCMenuExtra/Resources/calendarHTML;
@@ -249,10 +246,9 @@
 				6985D83319D45C1B00343F35 /* BtnLeftL.png in Resources */,
 				6985D83419D45C1B00343F35 /* BtnRight.png in Resources */,
 				6985D83519D45C1B00343F35 /* BtnRightR.png in Resources */,
-				6985D83619D45C1B00343F35 /* calendar.html in Resources */,
 				6985D83719D45C1B00343F35 /* index.css in Resources */,
 				6985D83819D45C1B00343F35 /* mdate.js in Resources */,
-				6985D83919D45C1B00343F35 /* test.html in Resources */,
+				6985D83919D45C1B00343F35 /* calendar.html in Resources */,
 				6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

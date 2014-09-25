@@ -1,23 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Calendar</title>
 <link rel="stylesheet" href="index.css"></link>
+</head>
+
+<body oncontextmenu="window.event.returnValue=false" ondragstart='return false' onselectstart ='return false' onselect='document.selection.empty()' oncopy='document.selection.empty()' onbeforecopy='return false' onmouseup='document.selection.empty()'>
+
+<div class="calendarWcj">
+	<div class="calendarTitleBar">
+    		<span id="YMBG" ></span>
+    		<span id="GZ" ></span>
+    	</div>
+
+	<div id="ttdiv" align="center" width="210"></div>
+         <div class="calendarBtn">
+         	<Div class="daySelectBtn">
+                           <span class="BtnRR" onclick="pushBtm('YD')"></span>
+                           <span class="BtnR" onclick="pushBtm('MD')"></span>
+                           <span class="BtnC" onclick="initial('ttdiv')"></span>
+                           <span class="BtnL" onclick="pushBtm('MU')"></span>
+                           <span class="BtnLL" onclick="pushBtm('YU')"></span>
+                  </Div>
+                  
+                  <div id="mysDate"></div>
+         </div>
+</div>
 
 
-<table bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" style="border-collapse: collapse;border: 1px solid #D2DEE2; padding: 1" align="center" width="220" border="0">
-<tr height="20" bgcolor="#EDF2F2">
-<td align="center" width="14" style="cursor: hand; color: #1F72D0;font-size:9pt;" title="上一年" onclick="pushBtm('YU')">||</td>
-<td align="center" width="14" style="cursor: hand; color: #1F72D0;font-size:9pt" title="上一月" onclick="pushBtm('MU')">&lt;&lt;</td>
-<td align="center" nowrap="nowrap" id="YMBG" style="color: #1F72D0;font-size:9pt"></td>
-<td align="center" nowrap="nowrap" id="GZ" style="color: #1F72D0;font-size:9pt"></td>
-<td align="center" width="14" style="cursor: hand; color: #1F72D0;font-size:9pt" title="下一月" onclick="pushBtm('MD')">>></td>
-<td align="center" width="14" style="cursor: hand; color: #1F72D0;font-size:9pt" title="下一年" onclick="pushBtm('YD')">||</td>
-</tr>
-<tr><td colspan="6">
-<div id="ttdiv" align="center" width="210"></div>
-</td></tr>
-<tr><td colspan="6" height="1"></td></tr>
-</table>
 
 <script src="mdate.js" ></script>
 <script language="javascript">
+document.onkeydown = function()
+ {
+          if(event.keyCode==116) {
+          event.keyCode=0;
+          event.returnValue = false;
+          }
+}
+document.oncontextmenu = function() {event.returnValue = false;}
+
+
 var arrArtdate=new Array('20100705','20100713');
 initial("ttdiv");
 </script>
+
+
+</body>
+</html>
