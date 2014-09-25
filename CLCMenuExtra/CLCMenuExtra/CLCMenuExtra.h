@@ -11,10 +11,12 @@
 #import "NSMenuExtraView.h"
 
 @class CLCMenuExtraView;
+@class CLCMenuExtraController;
 
 @interface CLCMenuExtra : NSMenuExtra
 {
     CLCMenuExtraView *theView;
+    CLCMenuExtraController *theControl;
 }
 
 @end

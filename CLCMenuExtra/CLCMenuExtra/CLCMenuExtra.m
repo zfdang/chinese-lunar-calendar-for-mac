@@ -8,6 +8,8 @@
 
 #import "CLCMenuExtra.h"
 #import "CLCMenuExtraView.h"
+#import "CLCMenuExtraController.h"
+
 
 @implementation CLCMenuExtra
 - (id)initWithBundle:(id)bundle
@@ -16,18 +18,23 @@
     if(self == nil)
         return nil;
     
-    // we will create and set the MenuExtraView
+    // MenuExtraView
     theView = [[CLCMenuExtraView alloc] initWithFrame:[[self view] frame] menuExtra:self];
     [self setView:theView];
+
+    // MenuExtraController
+    theControl = [[CLCMenuExtraController alloc] init];
+    [theControl setMenulet:self];
+    [self setAction:@selector(clickStatusItem)];
+    [self setTarget:theControl];
     
     return self;
 }
 
+
+
 - (void)dealloc
 {
-    // we are using ARC, so no need to call dealloc any more
-//    [theView release];
-//    [super dealloc];
 }
 
 @end

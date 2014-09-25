@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "69D8B51419D278A900A75B32"
-               BuildableName = "chinese lunar calendar.menu"
+               BuildableName = "CLCMenuExtra.menu"
                BlueprintName = "chinese lunar calendar"
                ReferencedContainer = "container:chinese lunar calendar.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "69D8B51419D278A900A75B32"
-            BuildableName = "chinese lunar calendar.menu"
+            BuildableName = "CLCMenuExtra.menu"
             BlueprintName = "chinese lunar calendar"
             ReferencedContainer = "container:chinese lunar calendar.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "69D8B51419D278A900A75B32"
-            BuildableName = "chinese lunar calendar.menu"
+            BuildableName = "CLCMenuExtra.menu"
             BlueprintName = "chinese lunar calendar"
             ReferencedContainer = "container:chinese lunar calendar.xcodeproj">
          </BuildableReference>
