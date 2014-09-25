@@ -10,12 +10,14 @@
 #import "NSMenuExtra.h"
 #import "NSMenuExtraView.h"
 @class CLCPopoverViewController;
+@class CLCCalendar;
 
 @interface CLCMenuExtraView : NSMenuExtraView
 {
 }
 
 @property(strong, nonatomic) CLCPopoverViewController *control;
+@property(strong, nonatomic) CLCCalendar *calendar;
 @property BOOL active;
 
 @end

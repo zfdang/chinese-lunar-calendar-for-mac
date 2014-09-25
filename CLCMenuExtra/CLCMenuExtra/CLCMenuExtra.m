@@ -20,8 +20,8 @@
     
     // MenuExtraView
     theView = [[CLCMenuExtraView alloc] initWithFrame:[[self view] frame] menuExtra:self];
-    [theView setImage:[NSImage imageNamed:@"cloud"]];
-    [theView setAlternateImage:[NSImage imageNamed:@"cloudgrey"]];
+//    [theView setImage:[NSImage imageNamed:@"cloud"]];
+//    [theView setAlternateImage:[NSImage imageNamed:@"cloudgrey"]];
     [theView setActive:false];
     
     [self setView:theView];
@@ -43,11 +43,10 @@
     return self;
 }
 
-- (NSMenu *)menu
-{
-    //    return theMenu;
-    return nil;
-}
+//- (NSMenu *)menu
+//{
+//    return theMenu;
+//}
 
 
 - (void)dealloc

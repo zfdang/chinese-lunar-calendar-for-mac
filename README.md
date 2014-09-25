@@ -25,4 +25,7 @@ Branch Link: [MenuExtraDemo](https://github.com/zfdang/chinese-lunar-calendar-fo
 
 ## Referrences
 http://duhanebel.wordpress.com/2010/04/02/nsmenuextra-how-to-work-with-undocumented-apis/
+https://github.com/aschuch/AXStatusItemPopup
 http://sourceforge.net/projects/menucracker/
+
+

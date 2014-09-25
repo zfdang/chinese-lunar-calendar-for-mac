@@ -10,4 +10,7 @@
 
 @interface CLCCalendar : NSObject
 
+- (int) getDay:(NSDate *)date;
+- (NSString*) getChineseDay:(NSDate *)date;
+
 @end

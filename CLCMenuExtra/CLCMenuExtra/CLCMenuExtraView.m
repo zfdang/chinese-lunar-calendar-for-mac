@@ -8,6 +8,7 @@
 
 #import "CLCMenuExtraView.h"
 #import "CLCPopoverViewController.h"
+#import "CLCCalendar.h"
 
 @interface CLCMenuExtraView()
 {
@@ -21,6 +22,17 @@
 
 @synthesize control;
 @synthesize active;
+@synthesize calendar;
+
+
+- (id)initWithFrame:(CGRect)arg1 menuExtra:(id)arg2
+{
+    self = [super initWithFrame:arg1 menuExtra:arg2];
+    
+    self.calendar = [[CLCCalendar alloc] init];
+    return self;
+}
+
 
 - (void)drawRect:(CGRect)rect
 {
@@ -32,11 +44,11 @@
     } else {
         [[NSColor yellowColor] set];
     }
-    NSRect smallerRect = NSMakeRect(2, 3, rect.size.width - 4 , rect.size.height - 6);
-    [[NSBezierPath bezierPathWithRect:smallerRect] fill];
-
-    NSString *str = [NSString stringWithFormat:@"%d", status];
-
+    NSRect smallerRect = NSMakeRect(0, 4, rect.size.width - 2 , rect.size.height - 8);
+    [[NSBezierPath bezierPathWithRoundedRect:smallerRect xRadius:4 yRadius:4] fill];
+    
+    NSString *str = [NSString stringWithFormat:@"%d", [self.calendar getDay:nil]];
+    
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [style setAlignment:kCTTextAlignmentCenter];
     NSDictionary *attr = [NSDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
