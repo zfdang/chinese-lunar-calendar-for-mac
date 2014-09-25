@@ -28,7 +28,7 @@
 
 ## 声明
 #### 1.对使用本程序所造成的任何损失，本人不承担任何责任
-#### 2.使用了https://github.com/tanhaogg/Calendar的部分代码，在此表示感谢。如原作者觉不妥，请告知
+#### 2.使用了[Calendar](https://github.com/tanhaogg/Calendar)的部分代码，在此表示感谢。如原作者觉不妥，请告知
 
 
 
