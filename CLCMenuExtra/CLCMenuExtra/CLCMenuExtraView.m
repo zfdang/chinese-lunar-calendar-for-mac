@@ -40,18 +40,24 @@
     // init the status item popup
     if(self.active)
     {
-        [[NSColor selectedMenuItemTextColor] set];
+        [[NSColor blueColor] set];
     } else {
-        [[NSColor yellowColor] set];
+        [[NSColor blackColor] set];
     }
+    
+    // to do: draw chinese & digits seperately; save attr for future usage
     NSRect smallerRect = NSMakeRect(0, 4, rect.size.width - 2 , rect.size.height - 8);
     [[NSBezierPath bezierPathWithRoundedRect:smallerRect xRadius:4 yRadius:4] fill];
     
     NSString *str = [NSString stringWithFormat:@"%d", [self.calendar getDay:nil]];
-    
+
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [style setAlignment:kCTTextAlignmentCenter];
-    NSDictionary *attr = [NSDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+    NSDictionary *attr = [NSDictionary  dictionaryWithObjectsAndKeys:
+                            [NSColor whiteColor], NSForegroundColorAttributeName,
+                            [NSFont systemFontOfSize:11], NSFontAttributeName,
+                            style, NSParagraphStyleAttributeName,
+                            nil];
     [str drawInRect:smallerRect withAttributes:attr];
 }
 
