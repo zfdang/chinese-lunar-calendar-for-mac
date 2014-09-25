@@ -1,31 +1,34 @@
-# Chinese Lunar Calendar for Mac
-This is a MenuExtra app which shows a simple chinese lunar calendar.
+# MAC平台的状态栏农历小工具
+这是一个MAC平台下的状态栏小程序，可以比较方便的看到公历、农历。下载链接：
 
-You can use CMD+Drag to move the location of this item.
+[农历日历](https://github.com/zfdang/chinese-lunar-calendar-for-mac/releases)
 
-## Code Structure
-there are three projects in this application.
+## 功能和截图
+1.显示农历、公历的日历
 
-### 1. CLCLauncher
-this application is a agent application, which launch "MenuCracker.menu" & "CLCMenuExtra.menu"
+2.可以按月或者按年的方式改变日期，也可以快速回到当前日期
 
-It dependens on MenuCracker.menu and CLCMenuExtra.menu (these two bundles will be packed into CLCLauncher.app as resources)
+3.可改变位置，使用CMD+Drag的方式移动位置，或者拖至桌面空白处删除本工具
 
-### 2. CLCMenuExtra
-This bundle finishs the actual functionality.
-this bundle is using un-official NSMenuExtra API.
+4.安装后会自动随机启动
 
-### 3. CLCStatusItem
-This application has the same functionality with CLCMenuExtra, but it's using official NSStatusItem API. This means its location can't be changed with CMD+Drag.
+5.开源，你可以根据自己的需要对软件做进一步的修改 
 
-## Simple Demo for MenuExtra
-if you want to learn how to develop menulet application, you can start with v0.1 release. It has a basic framework, but with full functionality:
+### 效果图如下
+![image](http://blog.zfdang.com/wp-content/uploads/2014/09/snapshot2.jpg)
 
-[v0.1 release](https://github.com/zfdang/chinese-lunar-calendar-for-mac/releases)
+## 建议使用方法
+#### 1.关闭Mac自带时钟的日期部分
 
-## Referrences
-http://duhanebel.wordpress.com/2010/04/02/nsmenuextra-how-to-work-with-undocumented-apis/
-https://github.com/aschuch/AXStatusItemPopup
-http://sourceforge.net/projects/menucracker/
+![image](http://blog.zfdang.com/wp-content/uploads/2014/09/snapshot3.jpg)
+
+#### 2.将此工具的图标拖至Mac时钟的左侧
+
+![image](http://blog.zfdang.com/wp-content/uploads/2014/09/snapshot1.jpg)
+
+## 声明
+#### 1.对使用本程序所造成的任何损失，本人不承担任何责任
+#### 2.使用了https://github.com/tanhaogg/Calendar的部分代码，在此表示感谢。如原作者觉不妥，请告知
+
 
 
