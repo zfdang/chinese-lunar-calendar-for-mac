@@ -10,11 +10,8 @@
 
 @interface CLCPopoverViewController : NSViewController
 {
-    NSPopover *popover;
 }
 
 @property (retain) NSPopover *popover;
-
-- (IBAction)dismissPopover:(id)sender;
 
 @end

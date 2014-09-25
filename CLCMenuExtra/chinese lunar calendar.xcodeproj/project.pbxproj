@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		691657AB19D3F8410086C6D9 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 691657A719D3F8410086C6D9 /* cloud.png */; };
+		691657AC19D3F8410086C6D9 /* cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 691657A819D3F8410086C6D9 /* cloud@2x.png */; };
+		691657AD19D3F8410086C6D9 /* cloudgrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 691657A919D3F8410086C6D9 /* cloudgrey.png */; };
+		691657AE19D3F8410086C6D9 /* cloudgrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 691657AA19D3F8410086C6D9 /* cloudgrey@2x.png */; };
 		69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD119D3B17D004AC6DD /* CLCCalendar.m */; };
 		69C45CD619D3B230004AC6DD /* CLCPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD419D3B230004AC6DD /* CLCPopoverViewController.m */; };
 		69C45CD719D3B230004AC6DD /* CLCPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69C45CD519D3B230004AC6DD /* CLCPopoverViewController.xib */; };
-		69C45CDA19D3B293004AC6DD /* CLCMenuExtraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD919D3B293004AC6DD /* CLCMenuExtraController.m */; };
 		69D8B52019D27A3E00A75B32 /* SystemUIPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */; };
 		69D8B52419D27AF900A75B32 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B52319D27AF900A75B32 /* Cocoa.framework */; };
 		69D8B53D19D290E400A75B32 /* CLCMenuExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */; };
@@ -18,13 +21,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		691657A719D3F8410086C6D9 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloud.png; path = CLCMenuExtra/Resources/cloud.png; sourceTree = "<group>"; };
+		691657A819D3F8410086C6D9 /* cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cloud@2x.png"; path = "CLCMenuExtra/Resources/cloud@2x.png"; sourceTree = "<group>"; };
+		691657A919D3F8410086C6D9 /* cloudgrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloudgrey.png; path = CLCMenuExtra/Resources/cloudgrey.png; sourceTree = "<group>"; };
+		691657AA19D3F8410086C6D9 /* cloudgrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cloudgrey@2x.png"; path = "CLCMenuExtra/Resources/cloudgrey@2x.png"; sourceTree = "<group>"; };
 		69C45CD019D3B17D004AC6DD /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCCalendar.h; path = CLCMenuExtra/CLCCalendar.h; sourceTree = "<group>"; };
 		69C45CD119D3B17D004AC6DD /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCCalendar.m; path = CLCMenuExtra/CLCCalendar.m; sourceTree = "<group>"; };
 		69C45CD319D3B230004AC6DD /* CLCPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCPopoverViewController.h; path = CLCMenuExtra/CLCPopoverViewController.h; sourceTree = "<group>"; };
 		69C45CD419D3B230004AC6DD /* CLCPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCPopoverViewController.m; path = CLCMenuExtra/CLCPopoverViewController.m; sourceTree = "<group>"; };
 		69C45CD519D3B230004AC6DD /* CLCPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLCPopoverViewController.xib; path = CLCMenuExtra/CLCPopoverViewController.xib; sourceTree = "<group>"; };
-		69C45CD819D3B293004AC6DD /* CLCMenuExtraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCMenuExtraController.h; path = CLCMenuExtra/CLCMenuExtraController.h; sourceTree = "<group>"; };
-		69C45CD919D3B293004AC6DD /* CLCMenuExtraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCMenuExtraController.m; path = CLCMenuExtra/CLCMenuExtraController.m; sourceTree = "<group>"; };
 		69D8B51519D278A900A75B32 /* CLCMenuExtra.menu */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLCMenuExtra.menu; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D8B51919D278A900A75B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SystemUIPlugin.framework; sourceTree = "<group>"; };
@@ -115,10 +120,9 @@
 				69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */,
 				69D8B53B19D290E400A75B32 /* CLCMenuExtraView.h */,
 				69D8B53C19D290E400A75B32 /* CLCMenuExtraView.m */,
-				69C45CD819D3B293004AC6DD /* CLCMenuExtraController.h */,
-				69C45CD919D3B293004AC6DD /* CLCMenuExtraController.m */,
 				69C45CD319D3B230004AC6DD /* CLCPopoverViewController.h */,
 				69C45CD419D3B230004AC6DD /* CLCPopoverViewController.m */,
+				69C45CD519D3B230004AC6DD /* CLCPopoverViewController.xib */,
 				69C45CD019D3B17D004AC6DD /* CLCCalendar.h */,
 				69C45CD119D3B17D004AC6DD /* CLCCalendar.m */,
 			);
@@ -128,7 +132,10 @@
 		69D8B53F19D2946300A75B32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				69C45CD519D3B230004AC6DD /* CLCPopoverViewController.xib */,
+				691657A719D3F8410086C6D9 /* cloud.png */,
+				691657A819D3F8410086C6D9 /* cloud@2x.png */,
+				691657A919D3F8410086C6D9 /* cloudgrey.png */,
+				691657AA19D3F8410086C6D9 /* cloudgrey@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -190,6 +197,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				69C45CD719D3B230004AC6DD /* CLCPopoverViewController.xib in Resources */,
+				691657AB19D3F8410086C6D9 /* cloud.png in Resources */,
+				691657AE19D3F8410086C6D9 /* cloudgrey@2x.png in Resources */,
+				691657AD19D3F8410086C6D9 /* cloudgrey.png in Resources */,
+				691657AC19D3F8410086C6D9 /* cloud@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +211,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69C45CDA19D3B293004AC6DD /* CLCMenuExtraController.m in Sources */,
 				69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */,
 				69C45CD619D3B230004AC6DD /* CLCPopoverViewController.m in Sources */,
 				69D8B53D19D290E400A75B32 /* CLCMenuExtra.m in Sources */,

@@ -28,8 +28,5 @@
 }
 
 
-- (IBAction)dismissPopover:(id)sender {
-    [self.popover performClose:sender];
-}
 
 @end

@@ -398,6 +398,7 @@
 				6950E43B19D31D5E005642FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6950E43C19D31D5E005642FF /* Build configuration list for PBXNativeTarget "CLCStatusItemTests" */ = {
 			isa = XCConfigurationList;
@@ -406,6 +407,7 @@
 				6950E43E19D31D5E005642FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

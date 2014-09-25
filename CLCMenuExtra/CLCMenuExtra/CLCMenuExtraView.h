@@ -9,7 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "NSMenuExtra.h"
 #import "NSMenuExtraView.h"
+@class CLCPopoverViewController;
 
 @interface CLCMenuExtraView : NSMenuExtraView
+{
+}
+
+@property(strong, nonatomic) CLCPopoverViewController *control;
+@property BOOL active;
 
 @end

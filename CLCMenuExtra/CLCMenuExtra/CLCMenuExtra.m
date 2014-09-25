@@ -8,10 +8,10 @@
 
 #import "CLCMenuExtra.h"
 #import "CLCMenuExtraView.h"
-#import "CLCMenuExtraController.h"
 
 
 @implementation CLCMenuExtra
+
 - (id)initWithBundle:(id)bundle
 {
     self = [super initWithBundle:bundle];
@@ -20,21 +20,39 @@
     
     // MenuExtraView
     theView = [[CLCMenuExtraView alloc] initWithFrame:[[self view] frame] menuExtra:self];
-    [self setView:theView];
-
-    // MenuExtraController
-    theControl = [[CLCMenuExtraController alloc] init];
-    [theControl setMenulet:self];
-    [self setAction:@selector(clickStatusItem)];
-    [self setTarget:theControl];
+    [theView setImage:[NSImage imageNamed:@"cloud"]];
+    [theView setAlternateImage:[NSImage imageNamed:@"cloudgrey"]];
+    [theView setActive:false];
     
+    [self setView:theView];
+    
+    // create menu, but we don't use menu in this app
+    // if you want to use menu, please also uncomment - (NSMenu *)menu
+//    theMenu = [[NSMenu alloc] initWithTitle: @""];
+//    [theMenu setAutoenablesItems: NO];
+//    [theMenu addItemWithTitle: @"Useless item 1"
+//                       action: nil
+//                keyEquivalent: @""];
+//    [theMenu addItem:[NSMenuItem separatorItem]];
+//     NSMenuItem *menuItem = [theMenu addItemWithTitle:@"Less useless item 2"
+//                                              action:nil
+//                                       keyEquivalent:@""];
+//    [menuItem setTarget:self];
+
+
     return self;
 }
 
+- (NSMenu *)menu
+{
+    //    return theMenu;
+    return nil;
+}
 
 
 - (void)dealloc
 {
 }
+
 
 @end
