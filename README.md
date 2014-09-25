@@ -3,7 +3,7 @@
 
 [农历日历](https://github.com/zfdang/chinese-lunar-calendar-for-mac/releases)
 
-## 功能和截图
+## 1. 功能和截图
 1.显示农历、公历的日历
 
 2.可以按月或者按年的方式改变日期，也可以快速回到当前日期
@@ -17,8 +17,8 @@
 ### 效果图如下
 ![image](http://blog.zfdang.com/wp-content/uploads/2014/09/snapshot2.jpg)
 
-## 建议使用方法
-#### 1.关闭Mac自带时钟的日期部分
+## 2. 建议使用方法
+#### 1.关闭Mac时钟的日期部分
 
 ![image](http://blog.zfdang.com/wp-content/uploads/2014/09/snapshot3.jpg)
 
@@ -26,8 +26,9 @@
 
 ![image](http://blog.zfdang.com/wp-content/uploads/2014/09/snapshot1.jpg)
 
-## 声明
-#### 1.对使用本程序所造成的任何损失，本人不承担任何责任
+## 3. 声明
+
+#### 1.在使用本程序过程中所造成的任何损失，本人不承担任何责任
 #### 2.使用了[Calendar](https://github.com/tanhaogg/Calendar)的部分代码，在此表示感谢。如原作者觉不妥，请告知
 
 
