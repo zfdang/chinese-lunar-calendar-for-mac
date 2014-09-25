@@ -9,14 +9,13 @@
 #import "CLCPopController.h"
 #import <WebKit/WebKit.h>
 
-
 @interface CLCPopController ()
 
 @end
 
 @implementation CLCPopController
 
-@synthesize  webview;
+@synthesize webView;
 
 - (void)viewDidLoad {
 //    [super viewDidLoad];
@@ -28,18 +27,14 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-        //刷新网页
-//        if (![[self popover] isShown])
-        {
-            NSString *resourcesPath = [[NSBundle mainBundle] resourcePath];
-            NSString *htmlPath = [resourcesPath stringByAppendingString:@"/calendarHTML/test.html"];
-            [[self.webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
-            [self.webview setDrawsBackground:NO];
-        }
-
     }
     
     return self;
+}
+
+
+- (IBAction)goSource:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/zfdang/chinese-lunar-calendar-for-mac"]];
 }
 
 

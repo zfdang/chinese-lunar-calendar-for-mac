@@ -9,6 +9,7 @@
 #import "CLCMenuExtraView.h"
 #import "CLCPopController.h"
 #import "CLCCalendar.h"
+#import <WebKit/WebKit.h>
 
 @interface CLCMenuExtraView()
 {
@@ -69,7 +70,18 @@
 //    
 //    NSRect frame = NSMakeRect(0, 0, width, height);
 //    self.frame = frame;
+    //刷新网页
+    if ([[self popover] isShown])
+    {
+        NSString *resourcesPath = [_menuExtra.bundle resourcePath];
+        NSString *htmlPath = [resourcesPath stringByAppendingString:@"/test.html"];
+        NSLog(@"updateViewFrame, htmlPath is %@", htmlPath);
+        WebView *webView = [(CLCPopController*)self.popover.contentViewController webView];
+        [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
+        [webView setDrawsBackground:NO];
+    }
     
+
     [self setNeedsDisplay:YES];
 }
 

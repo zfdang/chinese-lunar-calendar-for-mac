@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6985D80B19D4423F00343F35 /* CLCPopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985D80919D4423F00343F35 /* CLCPopController.m */; };
 		6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80A19D4423F00343F35 /* CLCPopController.xib */; };
-		6985D80E19D4539B00343F35 /* github.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80D19D4539B00343F35 /* github.png */; };
 		6985D82C19D45C1B00343F35 /* BtnCen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81019D45B4D00343F35 /* BtnCen.png */; };
 		6985D82D19D45C1B00343F35 /* BtnHCen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81119D45B4D00343F35 /* BtnHCen.png */; };
 		6985D82E19D45C1B00343F35 /* BtnHLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81219D45B4D00343F35 /* BtnHLeft.png */; };
@@ -24,6 +23,7 @@
 		6985D83719D45C1B00343F35 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81B19D45B4D00343F35 /* index.css */; };
 		6985D83819D45C1B00343F35 /* mdate.js in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81C19D45B4D00343F35 /* mdate.js */; };
 		6985D83919D45C1B00343F35 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 6985D81D19D45B4D00343F35 /* test.html */; };
+		6985D83B19D4737300343F35 /* project.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D83A19D4737300343F35 /* project.png */; };
 		69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD119D3B17D004AC6DD /* CLCCalendar.m */; };
 		69D8B52019D27A3E00A75B32 /* SystemUIPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */; };
 		69D8B52419D27AF900A75B32 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B52319D27AF900A75B32 /* Cocoa.framework */; };
@@ -35,7 +35,6 @@
 		6985D80819D4423F00343F35 /* CLCPopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCPopController.h; path = CLCMenuExtra/CLCPopController.h; sourceTree = "<group>"; };
 		6985D80919D4423F00343F35 /* CLCPopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCPopController.m; path = CLCMenuExtra/CLCPopController.m; sourceTree = "<group>"; };
 		6985D80A19D4423F00343F35 /* CLCPopController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLCPopController.xib; path = CLCMenuExtra/CLCPopController.xib; sourceTree = "<group>"; };
-		6985D80D19D4539B00343F35 /* github.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = github.png; path = CLCMenuExtra/Resources/github.png; sourceTree = "<group>"; };
 		6985D81019D45B4D00343F35 /* BtnCen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnCen.png; sourceTree = "<group>"; };
 		6985D81119D45B4D00343F35 /* BtnHCen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnHCen.png; sourceTree = "<group>"; };
 		6985D81219D45B4D00343F35 /* BtnHLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BtnHLeft.png; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		6985D81B19D45B4D00343F35 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
 		6985D81C19D45B4D00343F35 /* mdate.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mdate.js; sourceTree = "<group>"; };
 		6985D81D19D45B4D00343F35 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		6985D83A19D4737300343F35 /* project.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = project.png; path = CLCMenuExtra/Resources/project.png; sourceTree = "<group>"; };
 		69C45CD019D3B17D004AC6DD /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCCalendar.h; path = CLCMenuExtra/CLCCalendar.h; sourceTree = "<group>"; };
 		69C45CD119D3B17D004AC6DD /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCCalendar.m; path = CLCMenuExtra/CLCCalendar.m; sourceTree = "<group>"; };
 		69D8B51519D278A900A75B32 /* CLCMenuExtra.menu */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLCMenuExtra.menu; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,8 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				6985D80F19D45B4D00343F35 /* calendarHTML */,
-				6985D80D19D4539B00343F35 /* github.png */,
 				6985D80A19D4423F00343F35 /* CLCPopController.xib */,
+				6985D83A19D4737300343F35 /* project.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -243,6 +243,7 @@
 				6985D82E19D45C1B00343F35 /* BtnHLeft.png in Resources */,
 				6985D82F19D45C1B00343F35 /* BtnHLeftL.png in Resources */,
 				6985D83019D45C1B00343F35 /* BtnHRight.png in Resources */,
+				6985D83B19D4737300343F35 /* project.png in Resources */,
 				6985D83119D45C1B00343F35 /* BtnHRightR.png in Resources */,
 				6985D83219D45C1B00343F35 /* BtnLeft.png in Resources */,
 				6985D83319D45C1B00343F35 /* BtnLeftL.png in Resources */,
@@ -252,7 +253,6 @@
 				6985D83719D45C1B00343F35 /* index.css in Resources */,
 				6985D83819D45C1B00343F35 /* mdate.js in Resources */,
 				6985D83919D45C1B00343F35 /* test.html in Resources */,
-				6985D80E19D4539B00343F35 /* github.png in Resources */,
 				6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

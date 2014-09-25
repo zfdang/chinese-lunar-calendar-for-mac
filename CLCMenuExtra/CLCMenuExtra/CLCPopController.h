@@ -11,6 +11,7 @@
 
 @interface CLCPopController : NSViewController
 
-@property (weak) IBOutlet WebView *webview;
+@property (weak) IBOutlet WebView *webView;
+- (IBAction)goSource:(id)sender;
 
 @end
