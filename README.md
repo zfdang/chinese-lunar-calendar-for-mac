@@ -19,9 +19,9 @@ this bundle is using un-official NSMenuExtra API.
 This application has the same functionality with CLCMenuExtra, but it's using official NSStatusItem API. This means its location can't be changed with CMD+Drag.
 
 ## Simple Demo for MenuExtra
-You can use branch "MenuExtraDemo" to learn how to develop menuExtra app.
-It's a early stage of CLC.
-Branch Link: [MenuExtraDemo](https://github.com/zfdang/chinese-lunar-calendar-for-mac/tree/menuextrademo)
+if you want to learn how to develop menulet application, you can start with v0.1 release. It has a basic framework, but with full functionality:
+
+[v0.1 release](https://github.com/zfdang/chinese-lunar-calendar-for-mac/releases)
 
 ## Referrences
 http://duhanebel.wordpress.com/2010/04/02/nsmenuextra-how-to-work-with-undocumented-apis/
