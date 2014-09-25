@@ -7,7 +7,7 @@
 //
 
 #import "CLCMenuExtraView.h"
-#import "CLCPopoverViewController.h"
+#import "CLCPopController.h"
 #import "CLCCalendar.h"
 
 @interface CLCMenuExtraView()
@@ -20,7 +20,7 @@
 
 @implementation CLCMenuExtraView
 
-@synthesize control;
+@synthesize popover;
 @synthesize active;
 @synthesize calendar;
 
@@ -40,7 +40,7 @@
     // init the status item popup
     if(self.active)
     {
-        [[NSColor blueColor] set];
+        [[NSColor brownColor] set];
     } else {
         [[NSColor blackColor] set];
     }
@@ -84,21 +84,25 @@
     }
 }
 
+- (void) setupPopover
+{
+    if(! self.popover)
+    {
+        self.popover = [[NSPopover alloc] init];
+        self.popover.contentViewController = [[CLCPopController alloc]  initWithNibName:@"CLCPopController" bundle:_menuExtra.bundle];
+    }
+}
 
 - (void) showPopover
 {
     self.active = true;
     
-    if(!self.control)
-    {
-        self.control = [[CLCPopoverViewController alloc] initWithNibName:@"CLCPopoverViewController" bundle:nil];
-    }
-    if(self.control && self.control.popover)
-    {
-//        [self.control.popover showRelativeToRect:[self bounds] ofView:self preferredEdge:NSMaxYEdge];
-    }
-    
-    
+    [self setupPopover];
+
+    [self.popover showRelativeToRect:[self bounds]
+                              ofView:self
+                       preferredEdge:NSMinYEdge];
+
     // if user click area outside of our menulet, hide the popover
     _popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask handler:^(NSEvent* event) {
         [self hidePopover];
@@ -111,6 +115,8 @@
 - (void) hidePopover
 {
     self.active = false;
+    
+    [self.popover performClose:nil];
     
     // remove the monitor
     [NSEvent removeMonitor:_popoverTransiencyMonitor];

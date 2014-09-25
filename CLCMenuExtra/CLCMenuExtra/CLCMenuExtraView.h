@@ -16,7 +16,7 @@
 {
 }
 
-@property(strong, nonatomic) CLCPopoverViewController *control;
+@property(strong, nonatomic) NSPopover *popover;
 @property(strong, nonatomic) CLCCalendar *calendar;
 @property BOOL active;
 

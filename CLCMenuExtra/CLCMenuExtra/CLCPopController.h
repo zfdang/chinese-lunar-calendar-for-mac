@@ -1,5 +1,5 @@
 //
-//  CLCPopoverViewController.h
+//  CLCPopController.h
 //  chinese lunar calendar
 //
 //  Created by Zhengfa DANG on 9/25/14.
@@ -8,10 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface CLCPopoverViewController : NSViewController
-{
-}
-
-@property (retain) NSPopover *popover;
+@interface CLCPopController : NSViewController
 
 @end
