@@ -15,7 +15,7 @@
 5.开源，你可以根据自己的需要对软件做进一步的修改 
 
 ### 效果图如下
-![image](http://blog.zfdang.com/wp-content/uploads/2014/09/snapshot2.jpg)
+![image](http://blog.zfdang.com/wp-content/uploads/2014/09/Screen-Shot-2014-09-26-at-20.24.10.jpg)
 
 ## 2. 建议使用方法
 #### 1.关闭Mac时钟的日期部分
