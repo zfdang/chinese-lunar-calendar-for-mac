@@ -322,6 +322,7 @@
 				);
 				INFOPLIST_FILE = "chinese lunar calendar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = CLCMenuExtra;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = menu;
@@ -338,6 +339,7 @@
 				);
 				INFOPLIST_FILE = "chinese lunar calendar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = CLCMenuExtra;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = menu;
