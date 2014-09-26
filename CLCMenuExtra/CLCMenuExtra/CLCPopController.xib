@@ -14,17 +14,17 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="229" height="249"/>
+            <rect key="frame" x="0.0" y="0.0" width="430" height="410"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <webView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLn-XO-wV9">
-                    <rect key="frame" x="2" y="2" width="225" height="245"/>
+                    <rect key="frame" x="0.0" y="0.0" width="430" height="408"/>
                     <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                         <nil key="identifier"/>
                     </webPreferences>
                 </webView>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qfs-3c-g77">
-                    <rect key="frame" x="204" y="8" width="18" height="20"/>
+                    <rect key="frame" x="404" y="12" width="18" height="20"/>
                     <buttonCell key="cell" type="smallSquare" title=" " bezelStyle="smallSquare" image="project" imagePosition="overlaps" alignment="center" toolTip="Find Code in Github" imageScaling="proportionallyDown" inset="2" id="IPh-rk-99d">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -33,14 +33,6 @@
                         </connections>
                     </buttonCell>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VYz-0w-a7c">
-                    <rect key="frame" x="98" y="9" width="103" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="v1.0 by zfdang" id="znv-qF-THq">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
             </subviews>
             <point key="canvasLocation" x="4.5" y="158.5"/>
         </customView>

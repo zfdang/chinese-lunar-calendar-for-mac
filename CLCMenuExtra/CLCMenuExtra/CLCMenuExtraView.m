@@ -74,7 +74,7 @@
     if ([[self popover] isShown])
     {
         NSString *resourcesPath = [_menuExtra.bundle resourcePath];
-        NSString *htmlPath = [resourcesPath stringByAppendingString:@"/calendar.html"];
+        NSString *htmlPath = [resourcesPath stringByAppendingString:@"/calendar.htm"];
         NSLog(@"updateViewFrame, htmlPath is %@", htmlPath);
         WebView *webView = [(CLCPopController*)self.popover.contentViewController webView];
         [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
