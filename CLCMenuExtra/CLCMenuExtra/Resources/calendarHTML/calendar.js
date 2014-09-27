@@ -91,7 +91,7 @@
         "0910": "中国教师节",
         // "0914": "世界清洁地球日",
         // "0916": "国际臭氧层保护日",
-        "0918": "九·一八事变纪念日",
+        "0918": "丁丁生日",
         // "0920": "国际爱牙日",
         // "0927": "世界旅游日",
         // "0928": "孔子诞辰",
@@ -484,20 +484,27 @@
             X[g.solarMonth - 1].selected = true
         }
 
-        function f() {
+        function f() {  // change year / month to selected year / month
             var j = C.value;
             var g = X.value;
             _year = j;
             var i = new U(new Date(j, g - 1, 1));
+            // zfdang:更改年月时改变标题
+            var date_info = $("date");
+            _date_info = i.solarYear + "年" + i.solarMonth + "月";
+            date_info.innerHTML = _date_info;
+
+            var lunar_info = $("lunar_info");
+            _lunar_info = i.ganzhiYear + "年" + "[" + i.shengxiao + "] " + i.ganzhiMonth + "月";
+            lunar_info.innerHTML = _lunar_info;
+
             Q.init(i);
             N.draw();
             i = new U(new Date(j, 3, 1));
-            // _ganzhi = "农历" + i.ganzhiYear + "年" + "【" + i.shengxiao + "】";
-            // G.innerHTML = _ganzhi;
             var h = new U(new Date())
         }
 
-        function Z() {
+        function Z() { // 点击今日
             selYear = selMonth = selDay = 0;
             if (typeof(setTimes) != "undefined") {
                 setTimes("init")
@@ -565,19 +572,19 @@
         function e(g) {
             d(g.solarYear, g.solarMonth);
             f();
-            Y.onclick = Z;
+            Y.onclick = Z;  // back to today
             c.onclick = function() {
                 setYears(parseInt(C.value) - 1)
-            };
+            }; // -1 year
             l.onclick = function() {
                 setYears(parseInt(C.value) + 1)
-            };
+            }; // +1 year
             m.onclick = function() {
                 setMonths(parseInt(X.value) - 1)
-            };
+            }; // -1 month
             n.onclick = function() {
                 setMonths(parseInt(X.value) + 1)
-            }
+            } // +1 month
         }
         return {
             init: function(g) {
@@ -693,9 +700,9 @@
             if (b == true || b == "true") {
                 selYear = selMonth = selDay = 0;
                 var g = new U(new Date());
-                if (typeof(lmanac_2345) != "undefined") {
-                    lmanac_2345(g.solarMonth < 10 ? "0" + g.solarMonth : g.solarMonth, g.solarDate < 10 ? "0" + g.solarDate : g.solarDate)
-                }
+                // if (typeof(lmanac_2345) != "undefined") {
+                //     lmanac_2345(g.solarMonth < 10 ? "0" + g.solarMonth : g.solarMonth, g.solarDate < 10 ? "0" + g.solarDate : g.solarDate)
+                // }
                 if (typeof(setTimes) != "undefined") {
                     setTimes("init")
                 }
@@ -709,9 +716,9 @@
             if (typeof(changeDate) != "undefined") {
                 changeDate(selMonth, selDay, i.solarWeekDayInChinese)
             }
-            if (typeof(lmanac_2345) != "undefined") {
-                lmanac_2345(selMonth < 10 ? "0" + selMonth : selMonth, selDay < 10 ? "0" + selDay : selDay)
-            }
+            // if (typeof(lmanac_2345) != "undefined") {
+            //     lmanac_2345(selMonth < 10 ? "0" + selMonth : selMonth, selDay < 10 ? "0" + selDay : selDay)
+            // }
             Q.init(i);
             N.draw()
         }
@@ -746,17 +753,22 @@
             var c = "#{solarYear}年#{solarMonth}月#{solarDate}日<br />#{solarWeekDayInChinese}";
             c += "<br><b>#{lunarMonthInChinese}月#{lunarDateInChinese}</b>";
             c += "<br>#{ganzhiYear}年 #{ganzhiMonth}月 #{ganzhiDate}日";
-            var c1 = "(#{ganzhiYear}年 #{lunarMonthInChinese}月#{lunarDateInChinese})"
+            var lunar_day_info = "#{ganzhiYear}年[#{shengxiao}] #{lunarMonthInChinese}月#{lunarDateInChinese}"
+            var day_info = "#{solarYear}年#{solarMonth}月#{solarDate}日"
             var s = "#{lunarMonthInChinese}月#{lunarDateInChinese}日";
             s += " #{ganzhiYear}年 #{ganzhiMonth}月 #{ganzhiDate}日";
             if (a.solarFestival != "" || a.lunarFestival != "" || a.jieqi != "") {
                 c += "<br><b>#{jieqi} #{lunarFestival} #{solarFestival}</b>"
             }
             if (d) {
-                if (typeof(his_2345) != "undefined") {
-                    his_2345()
-                }
-                H.innerHTML = Y(c1, a)
+                // if (typeof(his_2345) != "undefined") {
+                //     his_2345()
+                // }
+                // 标题行的第二部分信息
+                H.innerHTML = Y(lunar_day_info, a);
+                // 标题行的第一部分信息
+                var date_info = $("date");
+                date_info.innerHTML = Y(day_info, a);
             } else {
                 C.innerHTML = Y(c, a);
                 _event = e || event;
