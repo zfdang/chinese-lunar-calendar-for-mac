@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="index.css"></link>
 </head>
 
-<body oncontextmenu="window.event.returnValue=false" ondragstart='return false' onselectstart ='return false' onselect='document.selection.empty()' oncopy='document.selection.empty()' onbeforecopy='return false' onmouseup='document.selection.empty()'>
+<body oncontextmenu="window.event.returnValue=false" ondragstart='return false' onselectstart ='return false'  onbeforecopy='return false'>
 
 <div class="calendarWcj">
 	<div class="calendarTitleBar">
@@ -45,7 +45,6 @@ document.oncontextmenu = function() {event.returnValue = false;}
 var arrArtdate=new Array('20100705','20100713');
 initial("ttdiv");
 </script>
-
 
 </body>
 </html>

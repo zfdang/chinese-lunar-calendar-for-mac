@@ -34,7 +34,7 @@
 
 
 - (IBAction)goSource:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/zfdang/chinese-lunar-calendar-for-mac"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://calendar.zfdang.com/"]];
 }
 
 
