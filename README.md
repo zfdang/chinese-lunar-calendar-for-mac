@@ -1,5 +1,5 @@
 # 1.MAC下的农历状态栏小工具
-## 项目说明及地址：
+## 功能说明、界面、使用方法见：
 
 ### [calendar.zfdang.com](http://calendar.zfdang.com)
 
