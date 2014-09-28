@@ -278,7 +278,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CLCLauncher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = Chinese_Lunar_Calendar;
+				PRODUCT_NAME = WanNianLi;
 			};
 			name = Debug;
 		};
@@ -289,7 +289,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CLCLauncher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = Chinese_Lunar_Calendar;
+				PRODUCT_NAME = WanNianLi;
 			};
 			name = Release;
 		};
