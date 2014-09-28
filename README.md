@@ -1,4 +1,4 @@
-# 1.MAC下的农历状态栏小工具
+# 1.MAC下的万年历状态栏小工具
 ## 功能说明、界面、使用方法见：
 
 ### [calendar.zfdang.com](http://calendar.zfdang.com)
