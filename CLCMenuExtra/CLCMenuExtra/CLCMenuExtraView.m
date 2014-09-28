@@ -13,8 +13,12 @@
 
 @interface CLCMenuExtraView()
 {
-    int status;
     id _popoverTransiencyMonitor;
+    NSRect upRect;
+    NSRect calRect;
+    
+    NSMutableParagraphStyle *style;
+    NSDictionary *attr;
 }
 @end
 
@@ -46,43 +50,47 @@
         [[NSColor blackColor] set];
     }
     
-    // to do: draw chinese & digits seperately; save attr for future usage
-    NSRect smallerRect = NSMakeRect(0, 4, rect.size.width - 2 , rect.size.height - 8);
-    [[NSBezierPath bezierPathWithRoundedRect:smallerRect xRadius:4 yRadius:4] fill];
-    
-    NSString *str = [NSString stringWithFormat:@"%d", [self.calendar getDay:nil]];
+    if(upRect.size.height == 0)
+    {
+        // init rect
+        upRect = NSMakeRect(2, rect.size.height - 4, rect.size.width - 4, 2);
+        calRect = NSMakeRect(2, 2, rect.size.width - 4, rect.size.height - 7);
+        
+        // init string drawing attr
+        style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setAlignment:kCTTextAlignmentCenter];
+        attr = [NSDictionary  dictionaryWithObjectsAndKeys:
+                              [NSColor whiteColor], NSForegroundColorAttributeName,
+                              [NSFont systemFontOfSize:11], NSFontAttributeName,
+                              style, NSParagraphStyleAttributeName,
+                              nil];
+    }
 
-    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    [style setAlignment:kCTTextAlignmentCenter];
-    NSDictionary *attr = [NSDictionary  dictionaryWithObjectsAndKeys:
-                            [NSColor whiteColor], NSForegroundColorAttributeName,
-                            [NSFont systemFontOfSize:11], NSFontAttributeName,
-                            style, NSParagraphStyleAttributeName,
-                            nil];
-    [str drawInRect:smallerRect withAttributes:attr];
+    // draw background of calendar icon
+    [[NSBezierPath bezierPathWithRect:upRect] fill];
+    [[NSBezierPath bezierPathWithRoundedRect:calRect xRadius:2 yRadius:2] fill];
+    
+    // draw date
+    NSString *str = [NSString stringWithFormat:@"%ld", [self.calendar getDay:nil]];
+    [str drawInRect:calRect withAttributes:attr];
 }
 
 
 - (void)updateViewFrame
 {
-//    CGFloat width = MAX(MAX(kMinViewWidth, self.alternateImage.size.width), self.image.size.width);
-//    CGFloat height = [NSStatusBar systemStatusBar].thickness;
-//    
-//    NSRect frame = NSMakeRect(0, 0, width, height);
-//    self.frame = frame;
-    //刷新网页
+    // load calendar html page
     if ([[self popover] isShown])
     {
         NSString *resourcesPath = [_menuExtra.bundle resourcePath];
         NSString *htmlPath = [resourcesPath stringByAppendingString:@"/calendar.htm"];
-        NSLog(@"updateViewFrame, htmlPath is %@", htmlPath);
+//        NSLog(@"updateViewFrame, htmlPath is %@", htmlPath);
         WebView *webView = [(CLCPopController*)self.popover.contentViewController webView];
         [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
         [webView setDrawsBackground:NO];
         [[[webView mainFrame] frameView] setAllowsScrolling:NO];
     }
     
-
+    // refresh
     [self setNeedsDisplay:YES];
 }
 

@@ -22,7 +22,7 @@
 -(void)awakeFromNib{
     // launch MenuCracker first
     NSString *menuExtraCrackerPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"MenuCracker.menu"];
-    NSLog(@" Path of menuCracker: %@", menuExtraCrackerPath);
+//    NSLog(@" Path of menuCracker: %@", menuExtraCrackerPath);
     CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)menuExtraCrackerPath, kCFURLPOSIXPathStyle, NO);
     // Do not check the return value as it is always going to return an error
     unsigned int outExtra;
@@ -31,7 +31,7 @@
     
     // launch our calender now
     NSString *menuExtraCLCPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"CLCMenuExtra.menu"];
-    NSLog(@" Path of menuCracker: %@", menuExtraCLCPath);
+//    NSLog(@" Path of menuCracker: %@", menuExtraCLCPath);
     url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)menuExtraCLCPath, kCFURLPOSIXPathStyle, NO);
     // Do not check the return value as it is always going to return an error
     CoreMenuExtraAddMenuExtra(url, 0, 0, nil, 0, &outExtra);

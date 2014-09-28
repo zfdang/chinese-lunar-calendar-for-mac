@@ -15,8 +15,7 @@
 
 @interface CLCMenuExtra : NSMenuExtra
 {
-    CLCMenuExtraView *theView;
-//    NSMenu *theMenu;
+    CLCMenuExtraView __strong *theView;
 }
 
 
