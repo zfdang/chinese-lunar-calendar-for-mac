@@ -20,7 +20,7 @@
 		6950E40C19D30611005642FF /* MenuCracker.menu */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MenuCracker.menu; path = CLCLauncher/MenuCracker/MenuCracker.menu; sourceTree = "<group>"; };
 		6950E41119D30D05005642FF /* CLCMenuExtra.menu */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CLCMenuExtra.menu; path = CLCLauncher/CLCMenuExtra/CLCMenuExtra.menu; sourceTree = "<group>"; };
 		6985D7D519D41F8B00343F35 /* calendar.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = calendar.icns; path = CLCLauncher/Resources/calendar.icns; sourceTree = "<group>"; };
-		69B6FCDA19D2B15100191D8D /* Chinese_Lunar_Calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chinese_Lunar_Calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		69B6FCDA19D2B15100191D8D /* WanNianLi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WanNianLi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B6FCDE19D2B15100191D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69B6FCDF19D2B15100191D8D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		69B6FCE119D2B15100191D8D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 		69B6FCDB19D2B15100191D8D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				69B6FCDA19D2B15100191D8D /* Chinese_Lunar_Calendar.app */,
+				69B6FCDA19D2B15100191D8D /* WanNianLi.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,7 +121,7 @@
 			);
 			name = CLCLauncher;
 			productName = CLCLauncher;
-			productReference = 69B6FCDA19D2B15100191D8D /* Chinese_Lunar_Calendar.app */;
+			productReference = 69B6FCDA19D2B15100191D8D /* WanNianLi.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

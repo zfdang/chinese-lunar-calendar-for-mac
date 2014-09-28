@@ -79,6 +79,7 @@
         WebView *webView = [(CLCPopController*)self.popover.contentViewController webView];
         [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
         [webView setDrawsBackground:NO];
+        [[[webView mainFrame] frameView] setAllowsScrolling:NO];
     }
     
 

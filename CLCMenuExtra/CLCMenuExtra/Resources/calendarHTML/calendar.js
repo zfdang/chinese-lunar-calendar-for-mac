@@ -660,15 +660,7 @@
                     _a.innerHTML = "<span><font " + h + ">" + c[j].solarDate + "</font></span><font " + _classIsRest + ">" + c[j].showInLunar + "</font>";
                     _a.className = c[j].isSel ? "active" : ((c[j].isToday && selDay == 0) ? "active" : "");
                     b.appendChild(_a);
-                    b.onmousemove = (function(d, b) {
-                        return function(a, f) {
-                            F.show({
-                                dateIndex: d,
-                                cell: this
-                            }, a)
-                        }
-                    })(j);
-                    b.onmousemove = (function(d, b) {
+                    b.onmousedown = (function(d, b) {
                         return function(a, f) {
                             F.show({
                                 dateIndex: d,
@@ -720,7 +712,7 @@
             //     lmanac_2345(selMonth < 10 ? "0" + selMonth : selMonth, selDay < 10 ? "0" + selDay : selDay)
             // }
             Q.init(i);
-            N.draw()
+            N.draw();
         }
         return {
             draw: function(G) {
@@ -770,10 +762,21 @@
                 var date_info = $("date");
                 date_info.innerHTML = Y(day_info, a);
             } else {
+                // 弹出信息框
                 C.innerHTML = Y(c, a);
                 _event = e || event;
-                C.style.top = (_event.clientY + 35 + document.documentElement.scrollTop - document.documentElement.clientTop) + "px";
-                C.style.left = (_event.clientX + document.documentElement.scrollLeft - document.documentElement.clientLeft) + "px";
+                // change div position, so it can be shown within the calendar's rect
+                // calendar's rect: 430 * 360
+                if (_event.clientY  > 200) {
+                    C.style.top = (_event.clientY - 150) + "px";
+                } else{
+                    C.style.top = (_event.clientY + 35) + "px";
+                };
+                if (_event.clientX  > 300) {
+                    C.style.left = (_event.clientX - 120) + "px";
+                } else{
+                    C.style.left = (_event.clientX) + "px";
+                };
                 C.style.width = "120px";
                 C.style.textAlign = "center";
                 C.style.height = "auto";

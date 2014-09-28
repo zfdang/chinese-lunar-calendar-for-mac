@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "69B6FCD919D2B15100191D8D"
-               BuildableName = "Chinese_Lunar_Calendar.app"
+               BuildableName = "WanNianLi.app"
                BlueprintName = "CLCLauncher"
                ReferencedContainer = "container:CLCLauncher.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "69B6FCD919D2B15100191D8D"
-            BuildableName = "Chinese_Lunar_Calendar.app"
+            BuildableName = "WanNianLi.app"
             BlueprintName = "CLCLauncher"
             ReferencedContainer = "container:CLCLauncher.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "69B6FCD919D2B15100191D8D"
-            BuildableName = "Chinese_Lunar_Calendar.app"
+            BuildableName = "WanNianLi.app"
             BlueprintName = "CLCLauncher"
             ReferencedContainer = "container:CLCLauncher.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "69B6FCD919D2B15100191D8D"
-            BuildableName = "Chinese_Lunar_Calendar.app"
+            BuildableName = "WanNianLi.app"
             BlueprintName = "CLCLauncher"
             ReferencedContainer = "container:CLCLauncher.xcodeproj">
          </BuildableReference>
