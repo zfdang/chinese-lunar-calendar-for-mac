@@ -2,7 +2,7 @@
 * @Author: zfdang
 * @Date:   2014-09-26 11:44:44
 * @Last Modified by:   zfdang
-* @Last Modified time: 2014-09-26 18:24:08
+* @Last Modified time: 2014-09-28 09:46:53
 */
 
 *{margin:0;padding:0}
@@ -19,7 +19,7 @@ a:hover{color:#f00;text-decoration:underline}
 .ltop span{display:block;text-align:center;width:420px;height:30px;line-height:25px;font-size:14px}
 .ltop p{margin:0;padding:0;text-align:center;font-size:12px;height:30px;line-height:30px}
 .lbuttom span{display:block;float:right;text-align:right;width:525px;line-height:25px;font-size:14px}
-.lbuttom p{float:left;margin:0;padding:0;text-align:left;font-size:12px;height:30px;line-height:30px}
+.lbuttom p{display:none;float:left;margin:0;padding:0;text-align:left;font-size:12px;height:30px;line-height:30px}
 .ldays{clear:both;width:420px;text-align:center}
 .ldays td{padding:1px 1px;_padding:1px 1px;height:46px;_height:44px;width:65px}
 .ldays .th{padding:0;height:18px;background:#eff8ff;font:18px "黑体";font-weight:normal;padding:2px 0 2px}

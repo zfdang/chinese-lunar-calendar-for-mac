@@ -100,19 +100,19 @@ function setTimes() {
     var f = _now.getSeconds() < 10 ? "0" + _now.getSeconds() : _now.getSeconds();
     var h = d + ":" + e + ":" + f;
     $("nowTime").innerHTML = h;
-    if (arguments[0] == "init") {
-        // 点击“今日”时，一次性设置阳历
-        var a = _now.getFullYear();
-        var b = _now.getMonth() + 1;
-        var c = _now.getDate();
-        var g = a + lang_default[2] + b + lang_default[3] + c + lang_default[4];
-        // var i = g + "&nbsp;" + lang_default[5] + _weeks.charAt(_now.getDay());
-        // var j = lang_default[6] + '<font class="fred"><b>';
-        // j += i;
-        // j += '</b></font><br />';
-        // $("lm_txt").innerHTML = lang_default[7];
-        $("date").innerHTML = g;
-    }
+    // if (arguments[0] == "init") {
+    //     // 点击“今日”时，一次性设置阳历
+    //     var a = _now.getFullYear();
+    //     var b = _now.getMonth() + 1;
+    //     var c = _now.getDate();
+    //     var g = a + lang_default[2] + b + lang_default[3] + c + lang_default[4];
+    //     // var i = g + "&nbsp;" + lang_default[5] + _weeks.charAt(_now.getDay());
+    //     // var j = lang_default[6] + '<font class="fred"><b>';
+    //     // j += i;
+    //     // j += '</b></font><br />';
+    //     // $("lm_txt").innerHTML = lang_default[7];
+    //     $("date").innerHTML = g;
+    // }
 }
 
 function loadJs(a) {
