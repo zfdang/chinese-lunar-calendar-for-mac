@@ -27,15 +27,15 @@
         return document.createElement(a)
     }
     var P = [19416, 19168, 42352, 21717, 53856, 55632, 91476, 22176, 39632, 21970, 19168, 42422, 42192, 53840, 119381, 46400, 54944, 44450, 38320, 84343, 18800, 42160, 46261, 27216, 27968, 109396, 11104, 38256, 21234, 18800, 25958, 54432, 59984, 28309, 23248, 11104, 100067, 37600, 116951, 51536, 54432, 120998, 46416, 22176, 107956, 9680, 37584, 53938, 43344, 46423, 27808, 46416, 86869, 19872, 42448, 83315, 21200, 43432, 59728, 27296, 44710, 43856, 19296, 43748, 42352, 21088, 62051, 55632, 23383, 22176, 38608, 19925, 19152, 42192, 54484, 53840, 54616, 46400, 46496, 103846, 38320, 18864, 43380, 42160, 45690, 27216, 27968, 44870, 43872, 38256, 19189, 18800, 25776, 29859, 59984, 27480, 21952, 43872, 38613, 37600, 51552, 55636, 54432, 55888, 30034, 22176, 43959, 9680, 37584, 51893, 43344, 46240, 47780, 44368, 21977, 19360, 42416, 86390, 21168, 43312, 31060, 27296, 44368, 23378, 19296, 42726, 42208, 53856, 60005, 54576, 23200, 30371, 38608, 19415, 19152, 42192, 118966, 53840, 54560, 56645, 46496, 22224, 21938, 18864, 42359, 42160, 43600, 111189, 27936, 44448];
-    var K = "甲乙丙丁戊己庚辛壬癸";
-    var J = "子丑寅卯辰巳午未申酉戌亥";
-    var O = "鼠牛虎兔龙蛇马羊猴鸡狗猪";
-    var L = ["小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至"];
+    var TIANGAN = "甲乙丙丁戊己庚辛壬癸";
+    var DIZHI = "子丑寅卯辰巳午未申酉戌亥";
+    var SHENGXIAO = "鼠牛虎兔龙蛇马羊猴鸡狗猪";
+    var JIEQI = ["小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至"];
     var D = [0, 21208, 43467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758];
-    var B = "日一二三四五六七八九十";
-    var H = ["正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "腊"];
-    var E = "初十廿卅";
-    var V = {
+    var WEEKDAY = "日一二三四五六七八九十";
+    var LUNARMONTH = ["正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "腊"];
+    var LUNARDAY = "初十廿卅";
+    var SOLARFESTIVAL = {
         "0101": "*1元旦节",
         // "0202": "世界湿地日",
         // "0210": "国际气象节",
@@ -137,7 +137,7 @@
         "1225": "圣诞节",
         // "1226": "毛泽东诞辰纪念"
     };
-    var T = {
+    var LUNARFESTIVAL = {
         "0101": "*2春节",
         "0115": "元宵节",
         "0505": "*1端午节",
@@ -147,10 +147,11 @@
         "1208": "腊八节",
         "0100": "除夕"
     };
-    var t = {
+    // 按照周几来定的节日
+    var OTHERFESTIVAL = {
         // "0109": "国际麻风日",
         // "0404": "世界儿童日",
-        "0502": "母亲节",
+        "0502": "母亲节", // 五月的第二个星期日
         // "0503": "全国助残日",
         "0603": "父亲节",
         // "0703": "被奴役国家周",
@@ -159,10 +160,10 @@
         // "0909": "世界海事日",
         // "1011": "国际住房日",
         // "1032": "国际减轻自然灾害日(减灾日)",
-        "1144": "感恩节",
+        "1144": "感恩节", // 感恩节--11月的第四个星期四
     };
 
-    function U(Y) {
+    function Calendar(Y) {
         function c(j, i) {
             var h = new Date((31556925974.7 * (j - 1900) + D[i] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
             return (h.getUTCDate())
@@ -177,7 +178,7 @@
         }
 
         function a(h) {
-            return (K.charAt(h % 10) + J.charAt(h % 12))
+            return (TIANGAN.charAt(h % 10) + DIZHI.charAt(h % 12))
         }
 
         function b(h) {
@@ -310,8 +311,8 @@
                     j = "三十";
                     break;
                 default:
-                    j = E.charAt(Math.floor(h / 10));
-                    j += B.charAt(h % 10)
+                    j = LUNARDAY.charAt(Math.floor(h / 10));
+                    j += WEEKDAY.charAt(h % 10)
             }
             return (j)
         }
@@ -332,13 +333,13 @@
         this.solarMonth = f(Y, "M");
         this.solarDate = f(Y, "d");
         this.solarWeekDay = Y.getDay();
-        this.solarWeekDayInChinese = "星期" + B.charAt(this.solarWeekDay);
+        this.solarWeekDayInChinese = "星期" + WEEKDAY.charAt(this.solarWeekDay);
         var X = new C(Y);
         this.lunarYear = X.year;
-        this.shengxiao = O.charAt((this.lunarYear - 4) % 12);
+        this.shengxiao = SHENGXIAO.charAt((this.lunarYear - 4) % 12);
         this.lunarMonth = X.month;
         this.lunarIsLeapMonth = X.isLeap;
-        this.lunarMonthInChinese = this.lunarIsLeapMonth ? "闰" + H[X.month - 1] : H[X.month - 1];
+        this.lunarMonthInChinese = this.lunarIsLeapMonth ? "闰" + LUNARMONTH[X.month - 1] : LUNARMONTH[X.month - 1];
         this.lunarDate = X.day;
         this.showInLunar = this.lunarDateInChinese = Z(this.lunarMonth, this.lunarDate);
         if (this.lunarDate == 1) {
@@ -361,17 +362,17 @@
         var r = (++q).toString().length > 1 ? q.toString() : "0" + q.toString();
         var s = r + this.week + (this.startWeek <= this.week ? this.seq + 1 : this.seq);
         if (c(this.solarYear, (this.solarMonth - 1) * 2) == f(Y, "d")) {
-            this.showInLunar = this.jieqi = L[(this.solarMonth - 1) * 2]
+            this.showInLunar = this.jieqi = JIEQI[(this.solarMonth - 1) * 2]
         }
         if (c(this.solarYear, (this.solarMonth - 1) * 2 + 1) == f(Y, "d")) {
-            this.showInLunar = this.jieqi = L[(this.solarMonth - 1) * 2 + 1]
+            this.showInLunar = this.jieqi = JIEQI[(this.solarMonth - 1) * 2 + 1]
         }
         if (this.showInLunar == "清明") {
             this.showInLunar = "清明节";
             this.restDays = 1;
             this.isRestDay = true
         }
-        this.solarFestival = V[f(Y, "MM") + f(Y, "dd")];
+        this.solarFestival = SOLARFESTIVAL[f(Y, "MM") + f(Y, "dd")];
         if (typeof this.solarFestival == "undefined") {
             this.solarFestival = ""
         } else {
@@ -382,7 +383,7 @@
             this.isRestDay = true
         }
         this.showInLunar = (this.solarFestival != "" && this.jieqi == "") ? this.solarFestival : this.showInLunar;
-        this.lunarFestival = T[this.lunarIsLeapMonth ? "00" : G(this.lunarMonth) + G(this.lunarDate)];
+        this.lunarFestival = LUNARFESTIVAL[this.lunarIsLeapMonth ? "00" : G(this.lunarMonth) + G(this.lunarDate)];
         if (typeof this.lunarFestival == "undefined") {
             this.lunarFestival = ""
         } else {
@@ -392,24 +393,24 @@
             }
             this.isRestDay = true
         } if (this.lunarMonth == 12 && this.lunarDate == e(this.lunarYear, 12)) {
-            this.lunarFestival = T["0100"] + " ";
+            this.lunarFestival = LUNARFESTIVAL["0100"] + " ";
             this.restDays = 1;
             this.isRestDay = true
         }
-        if (typeof(t[s]) != "undefined") {
+        if (typeof(OTHERFESTIVAL[s]) != "undefined") {
             this.lunarFestival += this.lunarFestival == "" ? "" : " ";
-            this.lunarFestival += t[s] + " ";
+            this.lunarFestival += OTHERFESTIVAL[s] + " ";
             this.isRestDay = true
         }
-        if (this.seq == this.weeks && typeof(t[s.substr(0, 3) + "9"]) != "undefined") {
+        if (this.seq == this.weeks && typeof(OTHERFESTIVAL[s.substr(0, 3) + "9"]) != "undefined") {
             this.lunarFestival += this.lunarFestival == "" ? "" : " ";
-            this.lunarFestival += t[s.substr(0, 3) + "9"] + " ";
+            this.lunarFestival += OTHERFESTIVAL[s.substr(0, 3) + "9"] + " ";
             this.isRestDay = true
         }
         this.showInLunar = (this.lunarFestival != "" && this.jieqi == "") ? this.lunarFestival : this.showInLunar;
         this.showInLunar = (this.showInLunar.length > 4) ? this.showInLunar.substr(0, 4) + ".." : this.showInLunar
     }
-    var Q = (function() {
+    var MonthData = (function() {
         var X = {};
         X.lines = 0;
         X.dateArray = new Array(42);
@@ -429,7 +430,7 @@
 
         function Z(a) {
             var f = 0;
-            var c = new U(new Date(a.solarYear, a.solarMonth - 1, 1));
+            var c = new Calendar(new Date(a.solarYear, a.solarMonth - 1, 1));
             var d = c.solarWeekDay;
             X.lines = Math.ceil((d + G(a.solarYear, a.solarMonth - 1)) / 7);
             for (var e = 0; e < X.dateArray.length; e++) {
@@ -440,10 +441,11 @@
                     c.isRest = true
                 }
                 if (d-- > 0 || c.solarMonth != a.solarMonth) {
-                    X.dateArray[e] = null;
+                    X.dateArray[e] = c;
+                    // X.dateArray[e] = null;
                     continue
                 }
-                var b = new U(new Date());
+                var b = new Calendar(new Date());
                 if (c.solarYear == b.solarYear && c.solarMonth == b.solarMonth && c.solarDate == b.solarDate) {
                     c.isToday = true
                 }
@@ -451,7 +453,7 @@
                     c.isSel = true
                 }
                 X.dateArray[e] = c;
-                c = new U(C(c.date, 1));
+                c = new Calendar(C(c.date, 1));
                 f--
             }
         }
@@ -464,7 +466,7 @@
             }
         }
     })();
-    var W = (function() {
+    var Navigator = (function() {
         // var G = $("ganzhi");
         var C = $("c_buttom").getElementsByTagName("SELECT")[0];
         var X = $("c_buttom").getElementsByTagName("SELECT")[1];
@@ -484,11 +486,11 @@
             X[g.solarMonth - 1].selected = true
         }
 
-        function f() {  // change year / month to selected year / month
+        function f() { // change year / month to selected year / month
             var j = C.value;
             var g = X.value;
             _year = j;
-            var i = new U(new Date(j, g - 1, 1));
+            var i = new Calendar(new Date(j, g - 1, 1));
             // zfdang:更改年月时改变标题
             var date_info = $("date");
             _date_info = i.solarYear + "年" + i.solarMonth + "月";
@@ -498,10 +500,10 @@
             _lunar_info = i.ganzhiYear + "年" + "[" + i.shengxiao + "] " + i.ganzhiMonth + "月";
             lunar_info.innerHTML = _lunar_info;
 
-            Q.init(i);
-            N.draw();
-            i = new U(new Date(j, 3, 1));
-            var h = new U(new Date())
+            MonthData.init(i);
+            MonthTable.draw();
+            i = new Calendar(new Date(j, 3, 1));
+            var h = new Calendar(new Date())
         }
 
         function Z() { // 点击今日
@@ -509,7 +511,7 @@
             if (typeof(setTimes) != "undefined") {
                 setTimes("init")
             }
-            var g = new U(new Date());
+            var g = new Calendar(new Date());
             _year = g.solarYear;
             if (typeof(lmanac_2345) != "undefined") {
                 lmanac_2345(g.solarMonth < 10 ? "0" + g.solarMonth : g.solarMonth, g.solarDate < 10 ? "0" + g.solarDate : g.solarDate)
@@ -519,8 +521,8 @@
             if (typeof(his_2345) != "undefined") {
                 his_2345()
             }
-            Q.init(g);
-            N.draw()
+            MonthData.init(g);
+            MonthTable.draw()
         }
 
         function setYears(a) {
@@ -572,7 +574,7 @@
         function e(g) {
             d(g.solarYear, g.solarMonth);
             f();
-            Y.onclick = Z;  // back to today
+            Y.onclick = Z; // back to today
             c.onclick = function() {
                 setYears(parseInt(C.value) - 1)
             }; // -1 year
@@ -595,9 +597,9 @@
             }
         }
     })();
-    var N = (function() {
+    var MonthTable = (function() {
         function C() {
-            var Z = Q.getJson();
+            var Z = MonthData.getJson();
             var c = Z.dateArray;
             $("cm").style.height = Z.lines * 38 + 2 + "px";
             if ($("loading")) {
@@ -681,7 +683,7 @@
         }
 
         function selectDay(a, b) {
-            var Z = Q.getJson();
+            var Z = MonthData.getJson();
             var c = Z.dateArray;
             var C = $("c_buttom").getElementsByTagName("SELECT")[0];
             var X = $("c_buttom").getElementsByTagName("SELECT")[1];
@@ -691,7 +693,7 @@
             selDay = a;
             if (b == true || b == "true") {
                 selYear = selMonth = selDay = 0;
-                var g = new U(new Date());
+                var g = new Calendar(new Date());
                 // if (typeof(lmanac_2345) != "undefined") {
                 //     lmanac_2345(g.solarMonth < 10 ? "0" + g.solarMonth : g.solarMonth, g.solarDate < 10 ? "0" + g.solarDate : g.solarDate)
                 // }
@@ -699,20 +701,20 @@
                     setTimes("init")
                 }
                 F.hide();
-                Q.init(g);
-                N.draw();
+                MonthData.init(g);
+                MonthTable.draw();
                 return true
             }
             F.hide();
-            var i = new U(new Date(selYear, selMonth - 1, selDay));
+            var i = new Calendar(new Date(selYear, selMonth - 1, selDay));
             if (typeof(changeDate) != "undefined") {
                 changeDate(selMonth, selDay, i.solarWeekDayInChinese)
             }
             // if (typeof(lmanac_2345) != "undefined") {
             //     lmanac_2345(selMonth < 10 ? "0" + selMonth : selMonth, selDay < 10 ? "0" + selDay : selDay)
             // }
-            Q.init(i);
-            N.draw();
+            MonthData.init(i);
+            MonthTable.draw();
         }
         return {
             draw: function(G) {
@@ -740,7 +742,7 @@
         }
 
         function G(b, e, d) {
-            var a = Q.getJson().dateArray[b.dateIndex];
+            var a = MonthData.getJson().dateArray[b.dateIndex];
             var Z = b.cell;
             var c = "#{solarYear}年#{solarMonth}月#{solarDate}日<br />#{solarWeekDayInChinese}";
             c += "<br><b>#{lunarMonthInChinese}月#{lunarDateInChinese}</b>";
@@ -767,14 +769,14 @@
                 _event = e || event;
                 // change div position, so it can be shown within the calendar's rect
                 // calendar's rect: 430 * 360
-                if (_event.clientY  > 200) {
+                if (_event.clientY > 200) {
                     C.style.top = (_event.clientY - 150) + "px";
-                } else{
+                } else {
                     C.style.top = (_event.clientY + 35) + "px";
                 };
-                if (_event.clientX  > 300) {
+                if (_event.clientX > 300) {
                     C.style.left = (_event.clientX - 120) + "px";
-                } else{
+                } else {
                     C.style.left = (_event.clientX) + "px";
                 };
                 C.style.width = "120px";
@@ -801,13 +803,13 @@
             }
         }
     })();
-    var A = new U(new Date());
+    var myCal = new Calendar(new Date());
     if (MzBrowser.ie) {
         window.attachEvent("onload", function() {
-            W.reset(A)
+            Navigator.reset(myCal)
         })
     }
-    W.init(A);
-    Q.init(A);
-    N.draw()
+    Navigator.init(myCal);
+    MonthData.init(myCal);
+    MonthTable.draw()
 })();
