@@ -670,6 +670,11 @@
                     _a.href = "javascript:void(0)";
                     _a.innerHTML = "<span><font " + h + ">" + c[j].solarDate + "</font></span><font " + _classIsRest + ">" + c[j].showInLunar + "</font>";
                     _a.className = c[j].isSel ? "active" : ((c[j].isToday && selDay == 0) ? "active" : "");
+                    if(!c[j].isCurrentMonth){
+                        // for dates not in current month, gray them
+                        _a.className = "grayed";
+                    }
+
                     b.appendChild(_a);
                     if(c[j].isCurrentMonth){
                         // only dates belong to current month are clickable

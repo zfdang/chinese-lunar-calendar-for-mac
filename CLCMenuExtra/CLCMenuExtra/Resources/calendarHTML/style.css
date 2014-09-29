@@ -2,7 +2,7 @@
 * @Author: zfdang
 * @Date:   2014-09-26 11:44:44
 * @Last Modified by:   zfdang
-* @Last Modified time: 2014-09-28 09:46:53
+* @Last Modified time: 2014-09-29 23:22:15
 */
 
 *{margin:0;padding:0}
@@ -27,6 +27,7 @@ a:hover{color:#f00;text-decoration:underline}
 .ldays td span{display:block;width:100%;_height:30px;line-height:35px;_line-height:30px;font:28px Tahoma;font-weight:bold;color:#000;cursor:pointer}
 .ldays td a:hover{background:#cdff3f;text-decoration:none}
 .ldays td a.active{background:#ffdf9c}
+.ldays td a.grayed{opacity: .2}
 /*IE6下样式*/
 .ldays td a font{font-size:12px;}
 .ldays td span font{font-size:22px;font-weight:bold;}
