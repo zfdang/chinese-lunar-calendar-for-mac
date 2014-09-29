@@ -44,7 +44,7 @@
         // "0303": "全国爱耳日",
         "0305": "学雷锋纪念日",
         "0308": "妇女节",
-        "0312": "植树节 孙中山逝世纪念日",
+        "0312": "植树节",
         // "0314": "国际警察日",
         "0315": "消费者权益日",
         // "0317": "中国国医节 国际航海日",
@@ -77,7 +77,7 @@
         // "0623": "国际奥林匹克日",
         // "0625": "全国土地日",
         "0626": "国际禁毒日",
-        "0701": "香港回归纪念日 中共诞辰 世界建筑日",
+        "0701": "中共诞辰 香港回归",
         // "0702": "国际体育记者日",
         "0707": "抗日战争纪念日",
         // "0711": "世界人口日",
@@ -85,7 +85,7 @@
         // "0730": "非洲妇女日",
         "0801": "建军节",
         // "0808": "中国男子节(爸爸节)",
-        "0815": "抗日战争胜利纪念",
+        "0815": "抗日战争胜利",
         // "0908": "国际扫盲日 国际新闻工作者日",
         // "0909": "毛泽东逝世纪念",
         "0910": "中国教师节",
@@ -95,14 +95,14 @@
         // "0920": "国际爱牙日",
         // "0927": "世界旅游日",
         // "0928": "孔子诞辰",
-        "1001": "*1国庆节 世界音乐日 国际老人节",
-        "1002": "*1国庆节假日 国际和平与民主自由斗争日",
+        "1001": "*1国庆节",
+        "1002": "*1国庆节假日",
         "1003": "*1国庆节假日",
         // "1004": "世界动物日",
         // "1006": "老人节",
         // "1008": "全国高血压日 世界视觉日",
         // "1009": "世界邮政日 万国邮联日",
-        "1010": "辛亥革命纪念日 世界精神卫生日",
+        "1010": "辛亥革命纪念日",
         // "1013": "世界保健日 国际教师节",
         // "1014": "世界标准日",
         // "1015": "国际盲人节(白手杖节)",
@@ -328,6 +328,7 @@
         this.isToday = false;
         this.isSel = false;
         this.isRestDay = false;
+        this.isCurrentMonth = false;
         this.isSolar = false;
         this.solarYear = f(Y, "yyyy");
         this.solarMonth = f(Y, "M");
@@ -415,15 +416,15 @@
         X.lines = 0;
         X.dateArray = new Array(42);
 
-        function Y(a) {
+        function isLeapYear(a) {
             return (((a % 4 === 0) && (a % 100 !== 0)) || (a % 400 === 0))
         }
 
-        function G(a, b) {
-            return [31, (Y(a) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][b]
+        function daysOfYearMonth(a, b) {
+            return [31, (isLeapYear(a) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][b]
         }
 
-        function C(a, b) {
+        function increaseDate(a, b) {
             a.setDate(a.getDate() + b);
             return a
         }
@@ -431,8 +432,10 @@
         function Z(a) {
             var f = 0;
             var c = new Calendar(new Date(a.solarYear, a.solarMonth - 1, 1));
-            var d = c.solarWeekDay;
-            X.lines = Math.ceil((d + G(a.solarYear, a.solarMonth - 1)) / 7);
+            var d = c.solarWeekDay;  // 当月第一天是星期几
+            X.lines = Math.ceil((d + daysOfYearMonth(a.solarYear, a.solarMonth - 1)) / 7);
+            // 当前月历的第一格，本月的第一天可能不是月历的第一格
+            c = new Calendar(increaseDate(c.date, -d));
             for (var e = 0; e < X.dateArray.length; e++) {
                 if (c.restDays != 0) {
                     f = c.restDays
@@ -440,10 +443,13 @@
                 if (f > 0) {
                     c.isRest = true
                 }
-                if (d-- > 0 || c.solarMonth != a.solarMonth) {
+                if (c.solarMonth != a.solarMonth) {
+                    // 月历中的某一天，但是不是当前月的
+                    // 在1号之前，或者月末之后的那些格
+                    c.isCurrentMonth = false;
                     X.dateArray[e] = c;
-                    // X.dateArray[e] = null;
-                    continue
+                } else {
+                    c.isCurrentMonth = true;
                 }
                 var b = new Calendar(new Date());
                 if (c.solarYear == b.solarYear && c.solarMonth == b.solarMonth && c.solarDate == b.solarDate) {
@@ -453,7 +459,7 @@
                     c.isSel = true
                 }
                 X.dateArray[e] = c;
-                c = new Calendar(C(c.date, 1));
+                c = new Calendar(increaseDate(c.date, 1));
                 f--
             }
         }
@@ -648,30 +654,36 @@
                     _a.setAttribute("date", c[j].solarDate);
                     _a.setAttribute("seq", j);
                     _a.setAttribute("isToday", c[j].isToday);
-                    _a.onclick = function(a) {
-                        var b = this.getAttribute("seq");
-                        selectDay(this.getAttribute("date"), this.getAttribute("isToday"));
-                        F.show({
-                            dateIndex: b,
-                            cell: this
-                        }, a, true);
-                        this.blur();
-                        return false
-                    };
+                    if(c[j].isCurrentMonth){
+                        // only dates belong to current month are clickable
+                        _a.onclick = function(a) {
+                            var b = this.getAttribute("seq");
+                            selectDay(this.getAttribute("date"), this.getAttribute("isToday"));
+                            F.show({
+                                dateIndex: b,
+                                cell: this
+                            }, a, true);
+                            this.blur();
+                            return false
+                        };
+                    }
                     _a.href = "javascript:void(0)";
                     _a.innerHTML = "<span><font " + h + ">" + c[j].solarDate + "</font></span><font " + _classIsRest + ">" + c[j].showInLunar + "</font>";
                     _a.className = c[j].isSel ? "active" : ((c[j].isToday && selDay == 0) ? "active" : "");
                     b.appendChild(_a);
-                    b.onmousedown = (function(d, b) {
-                        return function(a, f) {
-                            F.show({
-                                dateIndex: d,
-                                cell: this
-                            }, a)
+                    if(c[j].isCurrentMonth){
+                        // only dates belong to current month are clickable
+                        b.onmousedown = (function(d, b) {
+                            return function(a, f) {
+                                F.show({
+                                    dateIndex: d,
+                                    cell: this
+                                }, a)
+                            }
+                        })(j);
+                        b.onmouseout = function() {
+                            F.hide()
                         }
-                    })(j);
-                    b.onmouseout = function() {
-                        F.hide()
                     }
                 }
             }
@@ -741,7 +753,7 @@
             return e
         }
 
-        function G(b, e, d) {
+        function selectedDayInfo(b, e, d) {
             var a = MonthData.getJson().dateArray[b.dateIndex];
             var Z = b.cell;
             var c = "#{solarYear}年#{solarMonth}月#{solarDate}日<br />#{solarWeekDayInChinese}";
@@ -755,6 +767,7 @@
                 c += "<br><b>#{jieqi} #{lunarFestival} #{solarFestival}</b>"
             }
             if (d) {
+                // 日历标题栏的当日信息
                 // if (typeof(his_2345) != "undefined") {
                 //     his_2345()
                 // }
@@ -764,7 +777,7 @@
                 var date_info = $("date");
                 date_info.innerHTML = Y(day_info, a);
             } else {
-                // 弹出信息框
+                // 按下日历格时弹出的信息
                 C.innerHTML = Y(c, a);
                 _event = e || event;
                 // change div position, so it can be shown within the calendar's rect
@@ -793,7 +806,7 @@
         return {
             show: function(Z, a) {
                 var b = arguments[2] || false;
-                G(Z, a, b)
+                selectedDayInfo(Z, a, b)
             },
             hide: function() {
                 X()
