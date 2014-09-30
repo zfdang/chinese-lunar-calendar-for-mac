@@ -476,11 +476,11 @@
         // var G = $("ganzhi");
         var C = $("c_buttom").getElementsByTagName("SELECT")[0];
         var X = $("c_buttom").getElementsByTagName("SELECT")[1];
-        var c = $("c_buttom").getElementsByTagName("INPUT")[0];
-        var l = $("c_buttom").getElementsByTagName("INPUT")[3];
-        var m = $("c_buttom").getElementsByTagName("INPUT")[1];
-        var n = $("c_buttom").getElementsByTagName("INPUT")[2];
-        var Y = $("c_buttom").getElementsByTagName("INPUT")[4];
+        var c = $("c_buttom").getElementsByTagName("BUTTON")[0];
+        var l = $("c_buttom").getElementsByTagName("BUTTON")[3];
+        var m = $("c_buttom").getElementsByTagName("BUTTON")[1];
+        var n = $("c_buttom").getElementsByTagName("BUTTON")[2];
+        var Y = $("c_buttom").getElementsByTagName("BUTTON")[4];
 
         // function a(g) {
         //     _ganzhi = "农历" + g.ganzhiYear + "年" + "【" + g.shengxiao + "】";

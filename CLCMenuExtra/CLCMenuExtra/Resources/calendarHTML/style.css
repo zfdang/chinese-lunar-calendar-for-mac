@@ -2,7 +2,7 @@
 * @Author: zfdang
 * @Date:   2014-09-26 11:44:44
 * @Last Modified by:   zfdang
-* @Last Modified time: 2014-09-29 23:30:46
+* @Last Modified time: 2014-09-30 11:49:51
 */
 
 *{margin:0;padding:0}
@@ -15,10 +15,11 @@ a:hover{color:#f00;text-decoration:underline}
 .left{padding:2px 4px;width:420px;color:#5b5b5b;background:#fff 25px 15px no-repeat;border:#b0d3ee 1px solid}
 .ltop {text-align: center}
 .ltop .dayinfo{font-size:20px;color:#000000;}
-.ltop .lunar_dayinfo{font-size:20px;color:#ff0000;}
+.ltop .lunar_dayinfo{font-size:20px;color:#000000;}
 .ltop span{display:block;text-align:center;width:420px;height:30px;line-height:25px;font-size:14px}
 .ltop p{margin:0;padding:0;text-align:center;font-size:12px;height:30px;line-height:30px}
-.lbuttom span{display:block;float:right;text-align:right;width:525px;line-height:25px;font-size:14px}
+.lbuttom .copyright{display:block;float:left;text-align:left;line-height:25px;font-size:12px}
+.lbuttom .navigator{display:block;width:100%;float:right;text-align:right;line-height:25px;font-size:12px; background:#eff8ff}
 .lbuttom p{display:none;float:left;margin:0;padding:0;text-align:left;font-size:12px;height:30px;line-height:30px}
 .ldays{clear:both;width:420px;text-align:center}
 .ldays td{padding:1px 1px;_padding:1px 1px;height:46px;_height:44px;width:65px}

@@ -12,6 +12,10 @@
 		6919DC0719D576C500931B8C /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 6919DC0219D576C500931B8C /* index.js */; };
 		6919DC0819D576C500931B8C /* lunar.js in Resources */ = {isa = PBXBuildFile; fileRef = 6919DC0319D576C500931B8C /* lunar.js */; };
 		6919DC0919D576C500931B8C /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 6919DC0419D576C500931B8C /* style.css */; };
+		69350F4519DA562C0042E77A /* font-awesome.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 69350F4119DA562C0042E77A /* font-awesome.min.css */; };
+		69350F4619DA562C0042E77A /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69350F4219DA562C0042E77A /* fontawesome-webfont.ttf */; };
+		69350F4719DA562C0042E77A /* fontawesome-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 69350F4319DA562C0042E77A /* fontawesome-webfont.woff */; };
+		69350F4819DA562C0042E77A /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69350F4419DA562C0042E77A /* FontAwesome.otf */; };
 		6985D80B19D4423F00343F35 /* CLCPopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985D80919D4423F00343F35 /* CLCPopController.m */; };
 		6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80A19D4423F00343F35 /* CLCPopController.xib */; };
 		6985D83B19D4737300343F35 /* project.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D83A19D4737300343F35 /* project.png */; };
@@ -28,6 +32,10 @@
 		6919DC0219D576C500931B8C /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		6919DC0319D576C500931B8C /* lunar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lunar.js; sourceTree = "<group>"; };
 		6919DC0419D576C500931B8C /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		69350F4119DA562C0042E77A /* font-awesome.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "font-awesome.min.css"; sourceTree = "<group>"; };
+		69350F4219DA562C0042E77A /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		69350F4319DA562C0042E77A /* fontawesome-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff"; sourceTree = "<group>"; };
+		69350F4419DA562C0042E77A /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		6985D80819D4423F00343F35 /* CLCPopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCPopController.h; path = CLCMenuExtra/CLCPopController.h; sourceTree = "<group>"; };
 		6985D80919D4423F00343F35 /* CLCPopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCPopController.m; path = CLCMenuExtra/CLCPopController.m; sourceTree = "<group>"; };
 		6985D80A19D4423F00343F35 /* CLCPopController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLCPopController.xib; path = CLCMenuExtra/CLCPopController.xib; sourceTree = "<group>"; };
@@ -65,6 +73,10 @@
 			isa = PBXGroup;
 			children = (
 				6919DC0019D576C500931B8C /* calendar.htm */,
+				69350F4119DA562C0042E77A /* font-awesome.min.css */,
+				69350F4219DA562C0042E77A /* fontawesome-webfont.ttf */,
+				69350F4319DA562C0042E77A /* fontawesome-webfont.woff */,
+				69350F4419DA562C0042E77A /* FontAwesome.otf */,
 				6919DC0119D576C500931B8C /* calendar.js */,
 				6919DC0219D576C500931B8C /* index.js */,
 				6919DC0319D576C500931B8C /* lunar.js */,
@@ -211,8 +223,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69350F4719DA562C0042E77A /* fontawesome-webfont.woff in Resources */,
+				69350F4819DA562C0042E77A /* FontAwesome.otf in Resources */,
 				6919DC0719D576C500931B8C /* index.js in Resources */,
 				6919DC0619D576C500931B8C /* calendar.js in Resources */,
+				69350F4519DA562C0042E77A /* font-awesome.min.css in Resources */,
+				69350F4619DA562C0042E77A /* fontawesome-webfont.ttf in Resources */,
 				6919DC0919D576C500931B8C /* style.css in Resources */,
 				6919DC0519D576C500931B8C /* calendar.htm in Resources */,
 				6919DC0819D576C500931B8C /* lunar.js in Resources */,
