@@ -14,11 +14,11 @@
 @interface CLCMenuExtraView()
 {
     id _popoverTransiencyMonitor;
-    NSRect upRect;
     NSRect calRect;
     
     NSMutableParagraphStyle *style;
-    NSDictionary *attr;
+    
+    NSImage *imageIcon;
 }
 @end
 
@@ -43,36 +43,43 @@
 {
     
     // init the status item popup
-    if(self.active)
-    {
-        [[NSColor brownColor] set];
-    } else {
-        [[NSColor blackColor] set];
-    }
-    
-    if(upRect.size.height == 0)
+    if(calRect.size.height == 0)
     {
         // init rect
-        upRect = NSMakeRect(2, rect.size.height - 4, rect.size.width - 4, 2);
-        calRect = NSMakeRect(2, 2, rect.size.width - 4, rect.size.height - 7);
+        calRect = NSMakeRect(2, 2, rect.size.width - 4, rect.size.height - 9);
         
         // init string drawing attr
         style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         [style setAlignment:kCTTextAlignmentCenter];
-        attr = [NSDictionary  dictionaryWithObjectsAndKeys:
-                              [NSColor whiteColor], NSForegroundColorAttributeName,
-                              [NSFont systemFontOfSize:11], NSFontAttributeName,
-                              style, NSParagraphStyleAttributeName,
-                              nil];
+        
+        NSString *resourcesPath = [_menuExtra.bundle resourcePath];
+        NSString *iconPath = [resourcesPath stringByAppendingString:@"/icon.png"];
+        imageIcon = [[NSImage alloc]initWithContentsOfFile:iconPath];
     }
 
     // draw background of calendar icon
-    [[NSBezierPath bezierPathWithRect:upRect] fill];
-    [[NSBezierPath bezierPathWithRoundedRect:calRect xRadius:2 yRadius:2] fill];
-    
-    // draw date
-    NSString *str = [NSString stringWithFormat:@"%ld", [self.calendar getDay:nil]];
-    [str drawInRect:calRect withAttributes:attr];
+    [imageIcon drawInRect:rect];
+
+    // draw day of month
+    NSDictionary *attr;
+    if(self.active)
+    {
+        attr = [NSDictionary  dictionaryWithObjectsAndKeys:
+                [NSColor brownColor], NSForegroundColorAttributeName,
+                [NSFont systemFontOfSize:11], NSFontAttributeName,
+                style, NSParagraphStyleAttributeName,
+                nil];
+        [[NSColor blackColor] set];
+    } else {
+        attr = [NSDictionary  dictionaryWithObjectsAndKeys:
+                [NSColor blackColor], NSForegroundColorAttributeName,
+                [NSFont systemFontOfSize:11], NSFontAttributeName,
+                style, NSParagraphStyleAttributeName,
+                nil];
+        [[NSColor blackColor] set];
+    }
+    NSString *strDay = [NSString stringWithFormat:@"%ld", [self.calendar getDay:nil]];
+    [strDay drawInRect:calRect withAttributes:attr];
 }
 
 
