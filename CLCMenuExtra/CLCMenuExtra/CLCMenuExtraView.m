@@ -78,7 +78,7 @@
                 nil];
         [[NSColor blackColor] set];
     }
-    NSString *strDay = [NSString stringWithFormat:@"%ld", [self.calendar getDay:nil]];
+    NSString *strDay = [NSString stringWithFormat:@"%02ld", [self.calendar getDay:nil]];
     [strDay drawInRect:calRect withAttributes:attr];
 }
 
