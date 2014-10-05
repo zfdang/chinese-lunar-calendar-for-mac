@@ -46,7 +46,7 @@
     if(calRect.size.height == 0)
     {
         // init rect
-        calRect = NSMakeRect(2, 2, rect.size.width - 4, rect.size.height - 9);
+        calRect = NSMakeRect(2, 3, rect.size.width - 4, rect.size.height - 9);
         
         // init string drawing attr
         style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
