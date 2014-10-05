@@ -488,6 +488,7 @@
         // }
 
         function b(g) {
+            // update year/month select
             C[g.solarYear - 1901].selected = true;
             X[g.solarMonth - 1].selected = true
         }
@@ -508,8 +509,8 @@
 
             MonthData.init(i);
             MonthTable.draw();
-            i = new Calendar(new Date(j, 3, 1));
-            var h = new Calendar(new Date())
+            // i = new Calendar(new Date(j, 3, 1));
+            // var h = new Calendar(new Date())
         }
 
         function Z() { // 点击今日
@@ -519,14 +520,14 @@
             }
             var g = new Calendar(new Date());
             _year = g.solarYear;
-            if (typeof(lmanac_2345) != "undefined") {
-                lmanac_2345(g.solarMonth < 10 ? "0" + g.solarMonth : g.solarMonth, g.solarDate < 10 ? "0" + g.solarDate : g.solarDate)
-            }
+            // if (typeof(lmanac_2345) != "undefined") {
+            //     lmanac_2345(g.solarMonth < 10 ? "0" + g.solarMonth : g.solarMonth, g.solarDate < 10 ? "0" + g.solarDate : g.solarDate)
+            // }
             // a(g);
             b(g);
-            if (typeof(his_2345) != "undefined") {
-                his_2345()
-            }
+            // if (typeof(his_2345) != "undefined") {
+            //     his_2345()
+            // }
             MonthData.init(g);
             MonthTable.draw()
         }
@@ -559,6 +560,7 @@
         }
 
         function d(k, g) {
+            // init values & actions for year/month select
             for (var j = 1901; j < 2050; j++) {
                 var h = new Option(j, j);
                 if (j == k) {
@@ -578,6 +580,7 @@
         }
 
         function e(g) {
+            // init function for selects and buttons
             d(g.solarYear, g.solarMonth);
             f();
             Y.onclick = Z; // back to today
@@ -605,6 +608,7 @@
     })();
     var MonthTable = (function() {
         function C() {
+            // draw month table
             var Z = MonthData.getJson();
             var c = Z.dateArray;
             $("cm").style.height = Z.lines * 38 + 2 + "px";
@@ -642,7 +646,7 @@
                     } else if (c[j].isRestDay) {
                         _classIsRest = 'class="fgreen"'
                     }
-                    if (c[j].isToday) {
+                    if (c[j].isToday && c[j].isCurrentMonth) {
                         var H = $("lunar_info");
                         F.init(null, H);
                         F.show({
