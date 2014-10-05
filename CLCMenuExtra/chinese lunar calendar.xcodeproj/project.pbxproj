@@ -342,6 +342,7 @@
 				);
 				INFOPLIST_FILE = "chinese lunar calendar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = CLCMenuExtra;
 				SKIP_INSTALL = YES;
@@ -359,6 +360,7 @@
 				);
 				INFOPLIST_FILE = "chinese lunar calendar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = CLCMenuExtra;
 				SKIP_INSTALL = YES;

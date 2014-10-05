@@ -278,6 +278,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CLCLauncher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = WanNianLi;
 			};
 			name = Debug;
@@ -289,6 +290,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CLCLauncher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = WanNianLi;
 			};
 			name = Release;
