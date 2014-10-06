@@ -7,15 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6919DC0519D576C500931B8C /* calendar.htm in Resources */ = {isa = PBXBuildFile; fileRef = 6919DC0019D576C500931B8C /* calendar.htm */; };
-		6919DC0619D576C500931B8C /* calendar.js in Resources */ = {isa = PBXBuildFile; fileRef = 6919DC0119D576C500931B8C /* calendar.js */; };
-		6919DC0719D576C500931B8C /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 6919DC0219D576C500931B8C /* index.js */; };
-		6919DC0819D576C500931B8C /* lunar.js in Resources */ = {isa = PBXBuildFile; fileRef = 6919DC0319D576C500931B8C /* lunar.js */; };
-		6919DC0919D576C500931B8C /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 6919DC0419D576C500931B8C /* style.css */; };
-		69350F4519DA562C0042E77A /* font-awesome.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 69350F4119DA562C0042E77A /* font-awesome.min.css */; };
-		69350F4619DA562C0042E77A /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69350F4219DA562C0042E77A /* fontawesome-webfont.ttf */; };
-		69350F4719DA562C0042E77A /* fontawesome-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 69350F4319DA562C0042E77A /* fontawesome-webfont.woff */; };
-		69350F4819DA562C0042E77A /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69350F4419DA562C0042E77A /* FontAwesome.otf */; };
 		69854E7019DDD2B200A35ECC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 69854E6F19DDD2B200A35ECC /* icon.png */; };
 		6985D80B19D4423F00343F35 /* CLCPopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985D80919D4423F00343F35 /* CLCPopController.m */; };
 		6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80A19D4423F00343F35 /* CLCPopController.xib */; };
@@ -25,18 +16,18 @@
 		69D8B52419D27AF900A75B32 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B52319D27AF900A75B32 /* Cocoa.framework */; };
 		69D8B53D19D290E400A75B32 /* CLCMenuExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */; };
 		69D8B53E19D290E400A75B32 /* CLCMenuExtraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D8B53C19D290E400A75B32 /* CLCMenuExtraView.m */; };
+		69F7D1C219E281EE0049D5DA /* calendar.htm in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1B919E281EE0049D5DA /* calendar.htm */; };
+		69F7D1C319E281EE0049D5DA /* calendar.js in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1BA19E281EE0049D5DA /* calendar.js */; };
+		69F7D1C419E281EE0049D5DA /* font-awesome.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1BB19E281EE0049D5DA /* font-awesome.min.css */; };
+		69F7D1C519E281EE0049D5DA /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1BC19E281EE0049D5DA /* fontawesome-webfont.ttf */; };
+		69F7D1C619E281EE0049D5DA /* fontawesome-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1BD19E281EE0049D5DA /* fontawesome-webfont.woff */; };
+		69F7D1C719E281EE0049D5DA /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1BE19E281EE0049D5DA /* FontAwesome.otf */; };
+		69F7D1C819E281EE0049D5DA /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1BF19E281EE0049D5DA /* index.js */; };
+		69F7D1C919E281EE0049D5DA /* lunar.js in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1C019E281EE0049D5DA /* lunar.js */; };
+		69F7D1CA19E281EE0049D5DA /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D1C119E281EE0049D5DA /* style.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6919DC0019D576C500931B8C /* calendar.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = calendar.htm; sourceTree = "<group>"; };
-		6919DC0119D576C500931B8C /* calendar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = calendar.js; sourceTree = "<group>"; };
-		6919DC0219D576C500931B8C /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
-		6919DC0319D576C500931B8C /* lunar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lunar.js; sourceTree = "<group>"; };
-		6919DC0419D576C500931B8C /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
-		69350F4119DA562C0042E77A /* font-awesome.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "font-awesome.min.css"; sourceTree = "<group>"; };
-		69350F4219DA562C0042E77A /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
-		69350F4319DA562C0042E77A /* fontawesome-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff"; sourceTree = "<group>"; };
-		69350F4419DA562C0042E77A /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		69854E6F19DDD2B200A35ECC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = CLCMenuExtra/Resources/icon.png; sourceTree = "<group>"; };
 		6985D80819D4423F00343F35 /* CLCPopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCPopController.h; path = CLCMenuExtra/CLCPopController.h; sourceTree = "<group>"; };
 		6985D80919D4423F00343F35 /* CLCPopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCPopController.m; path = CLCMenuExtra/CLCPopController.m; sourceTree = "<group>"; };
@@ -56,6 +47,15 @@
 		69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCMenuExtra.m; path = CLCMenuExtra/CLCMenuExtra.m; sourceTree = "<group>"; };
 		69D8B53B19D290E400A75B32 /* CLCMenuExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCMenuExtraView.h; path = CLCMenuExtra/CLCMenuExtraView.h; sourceTree = "<group>"; };
 		69D8B53C19D290E400A75B32 /* CLCMenuExtraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCMenuExtraView.m; path = CLCMenuExtra/CLCMenuExtraView.m; sourceTree = "<group>"; };
+		69F7D1B919E281EE0049D5DA /* calendar.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = calendar.htm; path = CLCMenuExtra/Resources/vendors/calendar.htm; sourceTree = "<group>"; };
+		69F7D1BA19E281EE0049D5DA /* calendar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = calendar.js; path = CLCMenuExtra/Resources/vendors/calendar.js; sourceTree = "<group>"; };
+		69F7D1BB19E281EE0049D5DA /* font-awesome.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "font-awesome.min.css"; path = "CLCMenuExtra/Resources/vendors/font-awesome.min.css"; sourceTree = "<group>"; };
+		69F7D1BC19E281EE0049D5DA /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont.ttf"; path = "CLCMenuExtra/Resources/vendors/fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		69F7D1BD19E281EE0049D5DA /* fontawesome-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont.woff"; path = "CLCMenuExtra/Resources/vendors/fontawesome-webfont.woff"; sourceTree = "<group>"; };
+		69F7D1BE19E281EE0049D5DA /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.otf; path = CLCMenuExtra/Resources/vendors/FontAwesome.otf; sourceTree = "<group>"; };
+		69F7D1BF19E281EE0049D5DA /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.js; path = CLCMenuExtra/Resources/vendors/index.js; sourceTree = "<group>"; };
+		69F7D1C019E281EE0049D5DA /* lunar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lunar.js; path = CLCMenuExtra/Resources/vendors/lunar.js; sourceTree = "<group>"; };
+		69F7D1C119E281EE0049D5DA /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = CLCMenuExtra/Resources/vendors/style.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,23 +71,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6985D80F19D45B4D00343F35 /* calendarHTML */ = {
-			isa = PBXGroup;
-			children = (
-				6919DC0019D576C500931B8C /* calendar.htm */,
-				69350F4119DA562C0042E77A /* font-awesome.min.css */,
-				69350F4219DA562C0042E77A /* fontawesome-webfont.ttf */,
-				69350F4319DA562C0042E77A /* fontawesome-webfont.woff */,
-				69350F4419DA562C0042E77A /* FontAwesome.otf */,
-				6919DC0119D576C500931B8C /* calendar.js */,
-				6919DC0219D576C500931B8C /* index.js */,
-				6919DC0319D576C500931B8C /* lunar.js */,
-				6919DC0419D576C500931B8C /* style.css */,
-			);
-			name = calendarHTML;
-			path = CLCMenuExtra/Resources/calendarHTML;
-			sourceTree = "<group>";
-		};
 		69D8B50C19D278A900A75B32 = {
 			isa = PBXGroup;
 			children = (
@@ -162,12 +145,28 @@
 		69D8B53F19D2946300A75B32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6985D80F19D45B4D00343F35 /* calendarHTML */,
+				69F7D1B819E281DC0049D5DA /* vendors */,
 				6985D80A19D4423F00343F35 /* CLCPopController.xib */,
 				69854E6F19DDD2B200A35ECC /* icon.png */,
 				6985D83A19D4737300343F35 /* project.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		69F7D1B819E281DC0049D5DA /* vendors */ = {
+			isa = PBXGroup;
+			children = (
+				69F7D1B919E281EE0049D5DA /* calendar.htm */,
+				69F7D1BA19E281EE0049D5DA /* calendar.js */,
+				69F7D1BB19E281EE0049D5DA /* font-awesome.min.css */,
+				69F7D1BC19E281EE0049D5DA /* fontawesome-webfont.ttf */,
+				69F7D1BD19E281EE0049D5DA /* fontawesome-webfont.woff */,
+				69F7D1BE19E281EE0049D5DA /* FontAwesome.otf */,
+				69F7D1BF19E281EE0049D5DA /* index.js */,
+				69F7D1C019E281EE0049D5DA /* lunar.js */,
+				69F7D1C119E281EE0049D5DA /* style.css */,
+			);
+			name = vendors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,18 +225,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69350F4719DA562C0042E77A /* fontawesome-webfont.woff in Resources */,
-				69350F4819DA562C0042E77A /* FontAwesome.otf in Resources */,
-				6919DC0719D576C500931B8C /* index.js in Resources */,
-				6919DC0619D576C500931B8C /* calendar.js in Resources */,
-				69350F4519DA562C0042E77A /* font-awesome.min.css in Resources */,
-				69350F4619DA562C0042E77A /* fontawesome-webfont.ttf in Resources */,
-				6919DC0919D576C500931B8C /* style.css in Resources */,
-				6919DC0519D576C500931B8C /* calendar.htm in Resources */,
+				69F7D1C419E281EE0049D5DA /* font-awesome.min.css in Resources */,
+				69F7D1CA19E281EE0049D5DA /* style.css in Resources */,
 				69854E7019DDD2B200A35ECC /* icon.png in Resources */,
-				6919DC0819D576C500931B8C /* lunar.js in Resources */,
+				69F7D1C619E281EE0049D5DA /* fontawesome-webfont.woff in Resources */,
+				69F7D1C919E281EE0049D5DA /* lunar.js in Resources */,
+				69F7D1C519E281EE0049D5DA /* fontawesome-webfont.ttf in Resources */,
+				69F7D1C219E281EE0049D5DA /* calendar.htm in Resources */,
+				69F7D1C819E281EE0049D5DA /* index.js in Resources */,
+				69F7D1C719E281EE0049D5DA /* FontAwesome.otf in Resources */,
 				6985D83B19D4737300343F35 /* project.png in Resources */,
 				6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */,
+				69F7D1C319E281EE0049D5DA /* calendar.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
