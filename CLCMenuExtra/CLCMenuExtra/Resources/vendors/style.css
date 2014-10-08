@@ -2,10 +2,10 @@
 * @Author: zfdang
 * @Date:   2014-09-26 11:44:44
 * @Last Modified by:   zfdang
-* @Last Modified time: 2014-09-30 11:49:51
+* @Last Modified time: 2014-10-08 18:08:58
 */
 
-*{margin:0;padding:0}
+*{margin:0;padding:0;font-family:"STXihei";}
 p,span,b,input{margin:0;padding:0}
 body{background:#eff8ff;font-size:12px}
 a{color:#155788;text-decoration:none}
@@ -23,9 +23,9 @@ a:hover{color:#f00;text-decoration:underline}
 .lbuttom p{display:none;float:left;margin:0;padding:0;text-align:left;font-size:12px;height:30px;line-height:30px}
 .ldays{clear:both;width:420px;text-align:center}
 .ldays td{padding:1px 1px;_padding:1px 1px;height:46px;_height:44px;width:65px}
-.ldays .th{padding:0;height:18px;background:#eff8ff;font:18px "黑体";font-weight:normal;padding:2px 0 2px}
+.ldays .th{padding:0;height:18px;background:#eff8ff;font-size:18px;font-weight:normal;padding:2px 0 2px}
 .ldays td a{display:block;font-size:12px;text-decoration:none;color:#555}
-.ldays td span{display:block;width:100%;_height:30px;line-height:35px;_line-height:30px;font:28px Tahoma;font-weight:bold;color:#000;cursor:pointer}
+.ldays td span{display:block;width:100%;_height:30px;line-height:35px;_line-height:30px;font-size:28px;font-weight:bold;color:#000;cursor:pointer}
 .ldays td a:hover{background:#cdff3f;text-decoration:none}
 .ldays td a.active{background:#ffdf9c}
 .ldays td a.grayed{opacity: .2}

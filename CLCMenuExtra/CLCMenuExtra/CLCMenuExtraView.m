@@ -66,14 +66,14 @@
     {
         attr = [NSDictionary  dictionaryWithObjectsAndKeys:
                 [NSColor brownColor], NSForegroundColorAttributeName,
-                [NSFont fontWithName:@"Helvetica" size:11], NSFontAttributeName,
+                [NSFont fontWithName:@"STXihei" size:11], NSFontAttributeName,
                 style, NSParagraphStyleAttributeName,
                 nil];
         [[NSColor blackColor] set];
     } else {
         attr = [NSDictionary  dictionaryWithObjectsAndKeys:
                 [NSColor blackColor], NSForegroundColorAttributeName,
-                [NSFont fontWithName:@"Helvetica" size:11], NSFontAttributeName,
+                [NSFont fontWithName:@"STXihei" size:11], NSFontAttributeName,
                 style, NSParagraphStyleAttributeName,
                 nil];
         [[NSColor blackColor] set];
