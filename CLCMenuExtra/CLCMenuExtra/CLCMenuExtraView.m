@@ -58,7 +58,14 @@
     }
 
     // draw background of calendar icon
-    [imageIcon drawInRect:rect];
+    // the following method only availalbe after 10.9
+    //    [imageIcon drawInRect:rect];
+
+    // Available in OS X v10.6 and later.
+    [imageIcon drawInRect:rect
+                 fromRect:NSMakeRect(0,0,[imageIcon size].width, [imageIcon size].height)
+                operation:NSCompositeSourceOver
+                 fraction:1.0];
 
     // draw day of month
     NSDictionary *attr;
