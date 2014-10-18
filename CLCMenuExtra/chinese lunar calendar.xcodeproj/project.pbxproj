@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		69854E7019DDD2B200A35ECC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 69854E6F19DDD2B200A35ECC /* icon.png */; };
+		6985697119F1F9F1002EB18E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6985697019F1F9F1002EB18E /* WebKit.framework */; };
 		6985D80B19D4423F00343F35 /* CLCPopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985D80919D4423F00343F35 /* CLCPopController.m */; };
 		6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80A19D4423F00343F35 /* CLCPopController.xib */; };
 		6985D83B19D4737300343F35 /* project.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D83A19D4737300343F35 /* project.png */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		69854E6F19DDD2B200A35ECC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = CLCMenuExtra/Resources/icon.png; sourceTree = "<group>"; };
+		6985697019F1F9F1002EB18E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6985D80819D4423F00343F35 /* CLCPopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCPopController.h; path = CLCMenuExtra/CLCPopController.h; sourceTree = "<group>"; };
 		6985D80919D4423F00343F35 /* CLCPopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCPopController.m; path = CLCMenuExtra/CLCPopController.m; sourceTree = "<group>"; };
 		6985D80A19D4423F00343F35 /* CLCPopController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLCPopController.xib; path = CLCMenuExtra/CLCPopController.xib; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6985697119F1F9F1002EB18E /* WebKit.framework in Frameworks */,
 				69D8B52419D27AF900A75B32 /* Cocoa.framework in Frameworks */,
 				69D8B52019D27A3E00A75B32 /* SystemUIPlugin.framework in Frameworks */,
 			);
@@ -109,6 +112,7 @@
 		69D8B52119D27A9800A75B32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6985697019F1F9F1002EB18E /* WebKit.framework */,
 				69D8B52319D27AF900A75B32 /* Cocoa.framework */,
 				69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */,
 			);

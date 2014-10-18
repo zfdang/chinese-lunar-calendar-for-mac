@@ -111,7 +111,7 @@
 
 - (void)mouseDown:(id)arg1
 {
-    if( !self.active )
+    if( !self.popover.shown )
     {
         [self showPopover];
     } else {
@@ -125,6 +125,7 @@
     {
         self.popover = [[NSPopover alloc] init];
         self.popover.contentViewController = [[CLCPopController alloc]  initWithNibName:@"CLCPopController" bundle:_menuExtra.bundle];
+        self.popover.animates = NO;
     }
 }
 
