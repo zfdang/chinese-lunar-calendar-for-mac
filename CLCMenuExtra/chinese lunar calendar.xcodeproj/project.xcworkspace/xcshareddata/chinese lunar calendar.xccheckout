@@ -14,11 +14,11 @@
 		<string>https://github.com/zfdang/chinese-lunar-calendar-for-mac.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>chinese lunar calendar.xcodeproj</string>
+	<string>CLCMenuExtra/chinese lunar calendar.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F23E437AF9DE1E2FD0E62073964052E547338CB1</key>
-		<string>../..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/zfdang/chinese-lunar-calendar-for-mac.git</string>
