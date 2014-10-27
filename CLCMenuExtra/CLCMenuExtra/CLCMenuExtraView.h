@@ -20,4 +20,5 @@
 @property(strong, nonatomic) CLCCalendar *calendar;
 @property BOOL active;
 
+- (void) updateDateIcon;
 @end

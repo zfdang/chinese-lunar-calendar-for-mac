@@ -19,6 +19,8 @@
     NSMutableParagraphStyle *style;
     
     NSImage *imageIcon;
+
+    long iToday;
 }
 @end
 
@@ -35,6 +37,13 @@
     self = [super initWithFrame:arg1 menuExtra:arg2];
     
     self.calendar = [[CLCCalendar alloc] init];
+
+    // create timer to refresh icon every 5 seconds
+    [NSTimer scheduledTimerWithTimeInterval:5
+                                     target:self
+                                   selector:@selector(updateDateIcon)
+                                   userInfo:nil
+                                    repeats:YES];
     return self;
 }
 
@@ -85,7 +94,8 @@
                 nil];
         [[NSColor blackColor] set];
     }
-    NSString *strDay = [NSString stringWithFormat:@"%02ld", [self.calendar getDay:nil]];
+    iToday = [self.calendar getDay:nil];
+    NSString *strDay = [NSString stringWithFormat:@"%02ld", iToday];
     [strDay drawInRect:calRect withAttributes:attr];
 }
 
@@ -108,6 +118,14 @@
     [self setNeedsDisplay:YES];
 }
 
+- (void) updateDateIcon
+{
+    long d = [self.calendar getDay:nil];
+    if(d != iToday){
+        [self updateViewFrame];
+    }
+//    NSLog(@"update date icon");
+}
 
 - (void)mouseDown:(id)arg1
 {
