@@ -78,7 +78,7 @@
 
     // draw day of month
     NSDictionary *attr;
-    if(self.active)
+    if(self.popover.shown)
     {
         attr = [NSDictionary  dictionaryWithObjectsAndKeys:
                 [NSColor brownColor], NSForegroundColorAttributeName,
@@ -145,7 +145,7 @@
         self.popover.contentViewController = [[CLCPopController alloc]  initWithNibName:@"CLCPopController" bundle:_menuExtra.bundle];
         self.popover.animates = NO;
         // The system will close the popover when the user interacts with a user interface element outside the popover.
-        self.popover.behavior = NSPopoverBehaviorTransient;
+//        self.popover.behavior = NSPopoverBehaviorTransient;
     }
 }
 
@@ -160,10 +160,10 @@
                        preferredEdge:NSMinYEdge];
 
     // if user click area outside of our menulet, hide the popover
-//    _popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask
-//                                                                       handler:^(NSEvent* event) {
-//        [self hidePopover];
-//    }];
+    _popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask
+                                                                       handler:^(NSEvent* event) {
+        [self hidePopover];
+    }];
     
     // repaint
     [self updateViewFrame];
@@ -176,7 +176,7 @@
     [self.popover performClose:nil];
     
     // remove the monitor
-//    [NSEvent removeMonitor:_popoverTransiencyMonitor];
+    [NSEvent removeMonitor:_popoverTransiencyMonitor];
 
     // repaint
     [self updateViewFrame];

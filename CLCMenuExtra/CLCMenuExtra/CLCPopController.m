@@ -38,7 +38,7 @@
 }
 
 - (void)keyDown:(NSEvent *)theEvent {
-    NSLog(@"%d", [theEvent keyCode]);
+//    NSLog(@"%d", [theEvent keyCode]);
     switch ([theEvent keyCode]) {
         case 123:  // left arrow, previous year
             [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName(\"BUTTON\")[0].click(); "];
