@@ -164,9 +164,6 @@ a.button span {
 #view-on-github span {
   background: transparent url(../images/octocat-icon.png) 12px 50% no-repeat;
 }
-#view-on-github {
-  margin-right: 0;
-}
 
 code, pre {
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal;
