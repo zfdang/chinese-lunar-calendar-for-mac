@@ -12,7 +12,7 @@
 @class CLCPopoverViewController;
 @class CLCCalendar;
 
-@interface CLCMenuExtraView : NSMenuExtraView
+@interface CLCMenuExtraView : NSMenuExtraView <NSPopoverDelegate>
 {
 }
 

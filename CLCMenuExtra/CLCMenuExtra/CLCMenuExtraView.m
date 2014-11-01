@@ -59,7 +59,7 @@
         
         // init string drawing attr
         style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-        [style setAlignment:kCTTextAlignmentCenter];
+        [style setAlignment:NSCenterTextAlignment];
         
         NSString *resourcesPath = [_menuExtra.bundle resourcePath];
         NSString *iconPath = [resourcesPath stringByAppendingString:@"/icon.png"];
@@ -145,7 +145,8 @@
         self.popover.contentViewController = [[CLCPopController alloc]  initWithNibName:@"CLCPopController" bundle:_menuExtra.bundle];
         self.popover.animates = NO;
         // The system will close the popover when the user interacts with a user interface element outside the popover.
-//        self.popover.behavior = NSPopoverBehaviorTransient;
+        self.popover.behavior = NSPopoverBehaviorTransient;
+        self.popover.delegate = self;
     }
 }
 
@@ -160,10 +161,11 @@
                        preferredEdge:NSMinYEdge];
 
     // if user click area outside of our menulet, hide the popover
-    _popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask
-                                                                       handler:^(NSEvent* event) {
-        [self hidePopover];
-    }];
+    // we use popover.behavior for this purpose
+//    _popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask
+//                                                                       handler:^(NSEvent* event) {
+//        [self hidePopover];
+//    }];
     
     // repaint
     [self updateViewFrame];
@@ -176,11 +178,16 @@
     [self.popover performClose:nil];
     
     // remove the monitor
-    [NSEvent removeMonitor:_popoverTransiencyMonitor];
+//    [NSEvent removeMonitor:_popoverTransiencyMonitor];
 
     // repaint
     [self updateViewFrame];
 }
 
+
+// methods from NSPopoverDelegate
+- (void)popoverDidClose:(NSNotification *)notification{
+    [self updateViewFrame];
+}
 
 @end
