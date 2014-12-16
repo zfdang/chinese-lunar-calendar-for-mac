@@ -27,6 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        [self.goSourceButton setRefusesFirstResponder:TRUE];
     }
     
     return self;

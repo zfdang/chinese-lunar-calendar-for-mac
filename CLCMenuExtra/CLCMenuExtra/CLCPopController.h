@@ -13,5 +13,6 @@
 
 @property (weak) IBOutlet WebView *webView;
 - (IBAction)goSource:(id)sender;
+@property (weak) IBOutlet NSButton *goSourceButton;
 
 @end
