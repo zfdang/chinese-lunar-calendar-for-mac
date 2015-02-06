@@ -26,12 +26,34 @@
     function $c(a) {
         return document.createElement(a)
     }
-    var P = [19416, 19168, 42352, 21717, 53856, 55632, 91476, 22176, 39632, 21970, 19168, 42422, 42192, 53840, 119381, 46400, 54944, 44450, 38320, 84343, 18800, 42160, 46261, 27216, 27968, 109396, 11104, 38256, 21234, 18800, 25958, 54432, 59984, 28309, 23248, 11104, 100067, 37600, 116951, 51536, 54432, 120998, 46416, 22176, 107956, 9680, 37584, 53938, 43344, 46423, 27808, 46416, 86869, 19872, 42448, 83315, 21200, 43432, 59728, 27296, 44710, 43856, 19296, 43748, 42352, 21088, 62051, 55632, 23383, 22176, 38608, 19925, 19152, 42192, 54484, 53840, 54616, 46400, 46496, 103846, 38320, 18864, 43380, 42160, 45690, 27216, 27968, 44870, 43872, 38256, 19189, 18800, 25776, 29859, 59984, 27480, 21952, 43872, 38613, 37600, 51552, 55636, 54432, 55888, 30034, 22176, 43959, 9680, 37584, 51893, 43344, 46240, 47780, 44368, 21977, 19360, 42416, 86390, 21168, 43312, 31060, 27296, 44368, 23378, 19296, 42726, 42208, 53856, 60005, 54576, 23200, 30371, 38608, 19415, 19152, 42192, 118966, 53840, 54560, 56645, 46496, 22224, 21938, 18864, 42359, 42160, 43600, 111189, 27936, 44448];
+
+    // 公历年对应的农历数据,每年5字节, 下面对bits的解释不一定正确
+    // 格式第一字节BIT7-4 位表示闰月月份,值为0 为无闰月,BIT3-0 对应农历第1-4 月的大小
+    // 第二字节BIT7-0 对应农历第5-12 月大小,
+    // 第三字节BIT7 表示农历第13 个月大小 月份对应的位为1 表示本农历月大(30 天),为0 表示小(29 天)
+    // 第三字节BIT6-5 表示春节的公历月份,BIT4-0 表示春节的公历日期
+    var P = new Array(
+    0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
+    0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,
+    0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,
+    0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,
+    0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557,
+    0x06ca0,0x0b550,0x15355,0x04da0,0x0a5d0,0x14573,0x052d0,0x0a9a8,0x0e950,0x06aa0,
+    0x0aea6,0x0ab50,0x04b60,0x0aae4,0x0a570,0x05260,0x0f263,0x0d950,0x05b57,0x056a0,
+    0x096d0,0x04dd5,0x04ad0,0x0a4d0,0x0d4d4,0x0d250,0x0d558,0x0b540,0x0b5a0,0x195a6,
+    0x095b0,0x049b0,0x0a974,0x0a4b0,0x0b27a,0x06a50,0x06d40,0x0af46,0x0ab60,0x09570,
+    0x04af5,0x04970,0x064b0,0x074a3,0x0ea50,0x06b58,0x055c0,0x0ab60,0x096d5,0x092e0,
+    0x0c960,0x0d954,0x0d4a0,0x0da50,0x07552,0x056a0,0x0abb7,0x025d0,0x092d0,0x0cab5,
+    0x0a950,0x0b4a0,0x0baa4,0x0ad50,0x055d9,0x04ba0,0x0a5b0,0x15176,0x052b0,0x0a930,
+    0x07954,0x06aa0,0x0ad50,0x05b52,0x04b60,0x0a6e6,0x0a4e0,0x0d260,0x0ea65,0x0d530,
+    0x05aa0,0x076a3,0x096d0,0x04bd7,0x04ad0,0x0a4d0,0x1d0b6,0x0d250,0x0d520,0x0dd45,
+    0x0b5a0,0x056d0,0x055b2,0x049b0,0x0a577,0x0a4b0,0x0aa50,0x1b255,0x06d20,0x0ada0);
+
     var TIANGAN = "甲乙丙丁戊己庚辛壬癸";
     var DIZHI = "子丑寅卯辰巳午未申酉戌亥";
     var SHENGXIAO = "鼠牛虎兔龙蛇马羊猴鸡狗猪";
     var JIEQI = ["小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至"];
-    var D = [0, 21208, 43467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758];
+    var solarTermInfo = [0,21208,42467,63836,85337,107014,128867,150921,173149,195551,218072,240693,263343,285989,308563,331033,353350,375494,397447,419210,440795,462224,483532,504758];
     var WEEKDAY = "日一二三四五六七八九十";
     var LUNARMONTH = ["正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "腊"];
     var LUNARDAY = "初十廿卅";
@@ -167,39 +189,45 @@
     };
 
     function Calendar(Y) {
-        function c(j, i) {
-            var h = new Date((31556925974.7 * (j - 1900) + D[i] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+        // 计算节气，某年的第n个节气为几日(从0小寒起算)
+        function solarTerm(y, n) {
+            var h = new Date((31556925974.7 * (y - 1900) + solarTermInfo[n] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
             return (h.getUTCDate())
         }
 
-        function d(k) {
+        // 传回农历y年的总天数
+        function d(y) {
             var h, j = 348;
-            for (h = 0x8000; h > 8; h >>= 1) {
-                j += (P[k - 1900] & h) ? 1 : 0
+            for (h = 0x8000; h > 0x8; h >>= 1) {
+                j += (P[y - 1900] & h) ? 1 : 0
             }
-            return (j + b(k))
+            return (j + b(y))
+        }
+
+        // 传回农历y年闰月的天数
+        function b(y) {
+            if (g(y)) {
+                return ((P[y - 1900] & 0x10000) ? 30 : 29)
+            } else {
+                return (0)
+            }
+        }
+
+        // 传回农历y年闰哪个月 1-12, 没闰传回 0
+        function g(y) {
+            return (P[y - 1900] & 0xf)
+        }
+
+        // 传回农历y年m月的总天数
+        function e(y, m) {
+            return ((P[y - 1900] & (0x10000 >> m)) ? 30 : 29)
         }
 
         function a(h) {
             return (TIANGAN.charAt(h % 10) + DIZHI.charAt(h % 12))
         }
 
-        function b(h) {
-            if (g(h)) {
-                return ((P[h - 1900] & 65536) ? 30 : 29)
-            } else {
-                return (0)
-            }
-        }
-
-        function g(h) {
-            return (P[h - 1900] & 15)
-        }
-
-        function e(i, h) {
-            return ((P[i - 1900] & (65536 >> h)) ? 30 : 29)
-        }
-
+        // 算出农历
         function C(m) {
             var k, j = 0,
                 h = 0;
@@ -219,7 +247,7 @@
             }
             this.year = k;
             this.yearCyl = k - 1864;
-            j = g(k);
+            j = g(k); //闰哪个月
             this.isLeap = false;
             for (k = 1; k < 13 && n > 0; k++) {
                 if (j > 0 && k == (j + 1) && this.isLeap == false) {
@@ -258,6 +286,7 @@
             return h < 10 ? "0" + h : h
         }
 
+        // get date digit by specific format
         function f(i, j) {
             var h = i;
             return j.replace(/dd?d?d?|MM?M?M?|yy?y?y?/g, function(k) {
@@ -276,6 +305,7 @@
                 }
             })
         };
+
         Date.prototype.getLastDay = function(a) {
             _date = new Date(a.valueOf());
             var a = _date.getDate();
@@ -324,9 +354,10 @@
             return (((a % 4 === 0) && (a % 100 !== 0)) || (a % 400 === 0))
         }
 
-        function getDays(a, b) {
-            return [31, (R(a) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][b]
+        function getDays(iYear, iMonth) {
+            return [31, (R(iYear) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][iMonth]
         }
+
         this.date = Y;
         this.isToday = false;
         this.isSel = false;
@@ -365,10 +396,11 @@
         this.weeks = Math.floor((this.startWeek + this.allDays - 1) / 7);
         var r = (++q).toString().length > 1 ? q.toString() : "0" + q.toString();
         var s = r + this.week + (this.startWeek <= this.week ? this.seq + 1 : this.seq);
-        if (c(this.solarYear, (this.solarMonth - 1) * 2) == f(Y, "d")) {
+        // 计算节气，每个月有2个节气
+        if (solarTerm(this.solarYear, (this.solarMonth - 1) * 2) == f(Y, "d")) {
             this.showInLunar = this.jieqi = JIEQI[(this.solarMonth - 1) * 2]
         }
-        if (c(this.solarYear, (this.solarMonth - 1) * 2 + 1) == f(Y, "d")) {
+        if (solarTerm(this.solarYear, (this.solarMonth - 1) * 2 + 1) == f(Y, "d")) {
             this.showInLunar = this.jieqi = JIEQI[(this.solarMonth - 1) * 2 + 1]
         }
         if (this.showInLunar == "清明") {
