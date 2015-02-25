@@ -58,7 +58,7 @@
     var LUNARMONTH = ["正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "腊"];
     var LUNARDAY = "初十廿卅";
     var SOLARFESTIVAL = {
-        "0101": "*1元旦节",
+        "0101": "元旦",
         // "0202": "世界湿地日",
         // "0210": "国际气象节",
         "0214": "情人节",
@@ -81,7 +81,7 @@
         // "0422": "世界地球日",
         // "0423": "世界图书和版权日",
         // "0424": "亚非新闻工作者日",
-        "0501": "*1劳动节",
+        "0501": "劳动节",
         "0504": "青年节",
         // "0505": "碘缺乏病防治日",
         "0508": "世界红十字日",
@@ -117,9 +117,9 @@
         // "0920": "国际爱牙日",
         // "0927": "世界旅游日",
         // "0928": "孔子诞辰",
-        "1001": "*1国庆节",
-        "1002": "*1国庆节假日",
-        "1003": "*1国庆节假日",
+        "1001": "国庆节",
+        // "1002": "国庆节假日",
+        // "1003": "国庆节假日",
         // "1004": "世界动物日",
         // "1006": "老人节",
         // "1008": "全国高血压日 世界视觉日",
@@ -159,19 +159,21 @@
         "1225": "圣诞节",
         // "1226": "毛泽东诞辰纪念"
     };
+
     var LUNARFESTIVAL = {
-        "0101": "*2春节",
+        "0101": "春节",
         "0115": "元宵节",
         "0403": "姐姐生日",
-        "0505": "*1端午节",
+        "0505": "端午节",
         "0707": "情人节",
-        "0815": "*1中秋节",
+        "0815": "中秋节",
         "0822": "妈妈生日",
         "0909": "重阳节",
         "1101": "爸爸生日",
         "1208": "腊八节",
         "0100": "除夕"
     };
+
     // 按照周几来定的节日
     var OTHERFESTIVAL = {
         // "0109": "国际麻风日",
@@ -186,6 +188,87 @@
         // "1011": "国际住房日",
         // "1032": "国际减轻自然灾害日(减灾日)",
         "1144": "感恩节", // 感恩节--11月的第四个星期四
+    };
+
+    // 国务院公布的假期调整方案
+    // 假日为"+"，工作日为"-"
+    var HOLIDAYADJUSTMENT = {
+        // 2014年的假期调整方案
+        // http://www.gov.cn/zwgk/2013-12/11/content_2546204.htm
+        // 一、元旦：1月1日放假1天。
+        "20140101": "+",
+        // 二、春节：1月31日至2月6日放假调休，共7天。1月26日（星期日）、2月8日（星期六）上班。
+        "20140126": "-",
+        "20140131": "+",
+        "20140201": "+",
+        "20140202": "+",
+        "20140203": "+",
+        "20140204": "+",
+        "20140205": "+",
+        "20140206": "+",
+        "20140208": "-",
+        // 三、清明节：4月5日放假，4月7日（星期一）补休。
+        "20140405": "+",
+        "20140406": "+",
+        "20140407": "+",
+        // 四、劳动节：5月1日至3日放假调休，共3天。5月4日（星期日）上班。
+        "20140501": "+",
+        "20140502": "+",
+        "20140503": "+",
+        "20140504": "-",
+        // 五、端午节：6月2日放假，与周末连休。
+        "20140602": "+",
+        // 六、中秋节：9月8日放假，与周末连休。
+        "20140908": "+",
+        // 七、国庆节：10月1日至7日放假调休，共7天。9月28日（星期日）、10月11日（星期六）上班。
+        "20140928": "-",
+        "20141001": "+",
+        "20141002": "+",
+        "20141003": "+",
+        "20141004": "+",
+        "20141005": "+",
+        "20141006": "+",
+        "20141007": "+",
+        "20141011": "-",
+        // 2015年的假期调整方案
+        // http://www.gov.cn/zhengce/content/2014-12/16/content_9302.htm
+        // 元旦：1月1日至3日放假调休，共3天。1月4日（星期日）上班
+        "20150101": "+",
+        "20150102": "+",
+        "20150103": "+",
+        "20150104": "-",
+        // 春节：2月18日至24日放假调休，共7天。2月15日（星期日）、2月28日（星期六）上班
+        "20150215": "-",
+        "20150218": "+",
+        "20150219": "+",
+        "20150220": "+",
+        "20150221": "+",
+        "20150222": "+",
+        "20150223": "+",
+        "20150224": "+",
+        "20150228": "-",
+        // 清明节：4月5日放假，4月6日（星期一）补休
+        "20150405": "+",
+        "20150406": "+",
+        // 劳动节：5月1日放假，与周末连休
+        "20150501": "+",
+        "20150502": "+",
+        "20150503": "+",
+        // 端午节：6月20日放假，6月22日（星期一）补休
+        "20150620": "+",
+        "20150621": "+",
+        "20150622": "+",
+        // 中秋节：9月27日放假
+        "20150927": "+",
+        // 国庆节：10月1日至7日放假调休，共7天。10月10日（星期六）上班
+        "20151001": "+",
+        "20151002": "+",
+        "20151003": "+",
+        "20151004": "+",
+        "20151005": "+",
+        "20151006": "+",
+        "20151007": "+",
+        "20151010": "-",
     };
 
     function Calendar(Y) {
@@ -361,7 +444,6 @@
         this.date = Y;
         this.isToday = false;
         this.isSel = false;
-        this.isRestDay = false;
         this.isCurrentMonth = false;
         this.isSolar = false;
         this.solarYear = f(Y, "yyyy");
@@ -376,15 +458,11 @@
         this.lunarIsLeapMonth = X.isLeap;
         this.lunarMonthInChinese = this.lunarIsLeapMonth ? "闰" + LUNARMONTH[X.month - 1] : LUNARMONTH[X.month - 1];
         this.lunarDate = X.day;
-        this.showInLunar = this.lunarDateInChinese = Z(this.lunarMonth, this.lunarDate);
-        if (this.lunarDate == 1) {
-            this.showInLunar = this.lunarMonthInChinese + "月"
-        }
+        this.lunarDateInChinese = Z(this.lunarMonth, this.lunarDate);
         this.ganzhiYear = a(X.yearCyl);
         this.ganzhiMonth = a(X.monCyl);
         this.ganzhiDate = a(X.dayCyl++);
         this.jieqi = "";
-        this.restDays = 0;
         var o = new Date(this.date.valueOf());
         var p = Y.getDate();
         var q = Y.getMonth();
@@ -396,56 +474,77 @@
         this.weeks = Math.floor((this.startWeek + this.allDays - 1) / 7);
         var r = (++q).toString().length > 1 ? q.toString() : "0" + q.toString();
         var s = r + this.week + (this.startWeek <= this.week ? this.seq + 1 : this.seq);
+
         // 计算节气，每个月有2个节气
         if (solarTerm(this.solarYear, (this.solarMonth - 1) * 2) == f(Y, "d")) {
-            this.showInLunar = this.jieqi = JIEQI[(this.solarMonth - 1) * 2]
+            this.jieqi = JIEQI[(this.solarMonth - 1) * 2]
         }
         if (solarTerm(this.solarYear, (this.solarMonth - 1) * 2 + 1) == f(Y, "d")) {
-            this.showInLunar = this.jieqi = JIEQI[(this.solarMonth - 1) * 2 + 1]
+            this.jieqi = JIEQI[(this.solarMonth - 1) * 2 + 1]
         }
-        if (this.showInLunar == "清明") {
-            this.showInLunar = "清明节";
-            this.restDays = 1;
-            this.isRestDay = true
-        }
+
+        // 计算阳历的节日
         this.solarFestival = SOLARFESTIVAL[f(Y, "MM") + f(Y, "dd")];
         if (typeof this.solarFestival == "undefined") {
             this.solarFestival = ""
-        } else {
-            if (/\*(\d)/.test(this.solarFestival)) {
-                this.restDays = parseInt(RegExp.$1);
-                this.solarFestival = this.solarFestival.replace(/\*\d/, "")
-            }
-            this.isRestDay = true
         }
-        this.showInLunar = (this.solarFestival != "" && this.jieqi == "") ? this.solarFestival : this.showInLunar;
+
+        // 农历的节日
         this.lunarFestival = LUNARFESTIVAL[this.lunarIsLeapMonth ? "00" : G(this.lunarMonth) + G(this.lunarDate)];
         if (typeof this.lunarFestival == "undefined") {
             this.lunarFestival = ""
-        } else {
-            if (/\*(\d)/.test(this.lunarFestival)) {
-                this.restDays = (this.restDays > parseInt(RegExp.$1)) ? this.restDays : parseInt(RegExp.$1);
-                this.lunarFestival = this.lunarFestival.replace(/\*\d/, "")
-            }
-            this.isRestDay = true
-        } if (this.lunarMonth == 12 && this.lunarDate == e(this.lunarYear, 12)) {
-            this.lunarFestival = LUNARFESTIVAL["0100"] + " ";
-            this.restDays = 1;
-            this.isRestDay = true
         }
+        // 除夕，最后一天
+        if (this.lunarMonth == 12 && this.lunarDate == e(this.lunarYear, 12)) {
+            this.lunarFestival = LUNARFESTIVAL["0100"];
+        }
+
+        // 按照第几个周几类约定的节日, 没有单独的变量，放到了农历日期的后面
         if (typeof(OTHERFESTIVAL[s]) != "undefined") {
+            // “第几个周几”形式的假期
             this.lunarFestival += this.lunarFestival == "" ? "" : " ";
-            this.lunarFestival += OTHERFESTIVAL[s] + " ";
-            this.isRestDay = true
+            this.lunarFestival += OTHERFESTIVAL[s];
         }
         if (this.seq == this.weeks && typeof(OTHERFESTIVAL[s.substr(0, 3) + "9"]) != "undefined") {
+            // “最后一个周几”形式的假期
             this.lunarFestival += this.lunarFestival == "" ? "" : " ";
             this.lunarFestival += OTHERFESTIVAL[s.substr(0, 3) + "9"] + " ";
-            this.isRestDay = true
         }
-        this.showInLunar = (this.lunarFestival != "" && this.jieqi == "") ? this.lunarFestival : this.showInLunar;
+
+        // 中国的调休
+        // 如果是假日，则为"+"; 如果是工作日，则显示为"-"; 如果没有调整，则为""
+        this.adjusted = HOLIDAYADJUSTMENT[f(Y, "yyyy") + f(Y, "MM") + f(Y, "dd")];
+        if (typeof this.adjusted == "undefined") {
+            this.adjusted = ""
+        }
+
+        // 计算农历显示区 显示的内容
+        this.showInLunar = "";
+        if (this.lunarFestival != "") {
+            this.showInLunar = this.lunarFestival;
+        }
+        if (this.solarFestival != "") {
+            this.showInLunar += this.showInLunar == "" ? "" : " ";
+            this.showInLunar += this.solarFestival;
+        }
+        if (this.jieqi != "") {
+            this.showInLunar += this.showInLunar == "" ? "" : " ";
+            this.showInLunar += this.jieqi;
+        }
+        if (this.showInLunar == "") {
+            // 没有任何一个节日或者节气, 显示农历日期
+            // 农历日期的显示，如果是月初第一天，则显示月份
+            if (this.lunarDate == 1) {
+                this.showInLunar = this.lunarMonthInChinese + "月"
+            } else {
+                this.showInLunar = this.lunarDateInChinese;
+            }
+        }
+
+        // 限制字符长度
         this.showInLunar = (this.showInLunar.length > 4) ? this.showInLunar.substr(0, 4) + ".." : this.showInLunar
     }
+
     var MonthData = (function() {
         var X = {};
         X.lines = 0;
@@ -471,15 +570,10 @@
             X.lines = Math.ceil((d + daysOfYearMonth(a.solarYear, a.solarMonth - 1)) / 7);
             // 当前月历的第一格，本月的第一天可能不是月历的第一格
             c = new Calendar(increaseDate(c.date, -d));
+            // 计算当前月历中的每一格日期
             for (var e = 0; e < X.dateArray.length; e++) {
-                if (c.restDays != 0) {
-                    f = c.restDays
-                }
-                if (f > 0) {
-                    c.isRest = true
-                }
                 if (c.solarMonth != a.solarMonth) {
-                    // 月历中的某一天，但是不是当前月的
+                    // 月历中的某一天，但是不是当前月的，上个月月末的几天和下个月月初的几天
                     // 在1号之前，或者月末之后的那些格
                     c.isCurrentMonth = false;
                     X.dateArray[e] = c;
@@ -667,20 +761,26 @@
                     if (c[j] == null) {
                         continue
                     }
-                    var h = '',
-                        _classIsRest = '';
-                    if (j % 7 > 5 || j % 7 < 1) {
-                        h = 'class="fred"'
-                    } else if (c[j] && c[j].restDays > 0) {
-                        h = 'class="fred"'
+
+                    // 确定日期格的颜色，有两个颜色：数字日期的颜色，节日信息的颜色
+                    var h = '', _classIsRest = '';
+
+                    // 首先确定农历字体的颜色
+                    if (c[j].lunarFestival != "" || c[j].adjusted == "+") {
+                        // 如果有农历节日或者是调休的假期，则显示红色
+                        _classIsRest = 'class="fred"';
+                    } else if (c[j].jieqi != "") {
+                        // 如果有节气，则显示蓝色
+                        _classIsRest = 'class="fblue"';
                     }
-                    if (c[j].jieqi != "") {
-                        _classIsRest = 'class="fblue"'
-                    } else if (c[j].isRestDay && c[j].restDays > 0) {
-                        _classIsRest = 'class="fred"'
-                    } else if (c[j].isRestDay) {
-                        _classIsRest = 'class="fgreen"'
+
+                    // 再确定数字日期的颜色
+                    if (c[j].adjusted == "+" ||
+                        ((j % 7 > 5 || j % 7 < 1) && c[j].adjusted != "-")) {
+                        // 调休，或者周末但是不调休，为红色
+                        h = 'class="fred"';
                     }
+
                     if (c[j].isToday && c[j].isCurrentMonth) {
                         var H = $("lunar_info");
                         F.init(null, H);
