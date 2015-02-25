@@ -13,6 +13,10 @@
 
 @property (weak) IBOutlet WebView *webView;
 - (IBAction)goSource:(id)sender;
-@property (weak) IBOutlet NSButton *goSourceButton;
+@property (weak) IBOutlet NSButton *showAboutMenu;
+@property (strong) IBOutlet NSMenu *aboutMenu;
+- (IBAction)showHelp:(id)sender;
+- (IBAction)showVersion:(id)sender;
+- (IBAction)contactAuthoer:(id)sender;
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
@@ -8,7 +8,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CLCPopController">
             <connections>
-                <outlet property="goSourceButton" destination="Qfs-3c-g77" id="Web-Ni-N9I"/>
+                <outlet property="aboutMenu" destination="15X-LA-H45" id="bh0-Xq-Pxi"/>
+                <outlet property="showAboutMenu" destination="Qfs-3c-g77" id="W3Q-BJ-0fO"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
                 <outlet property="webView" destination="nLn-XO-wV9" id="98u-Fj-V9r"/>
             </connections>
@@ -26,8 +27,8 @@
                     </webPreferences>
                 </webView>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qfs-3c-g77">
-                    <rect key="frame" x="407" y="355" width="18" height="18"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="project" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="IPh-rk-99d">
+                    <rect key="frame" x="27" y="9" width="18" height="18"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="about" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="IPh-rk-99d">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -38,8 +39,32 @@
             </subviews>
             <point key="canvasLocation" x="16.5" y="182.5"/>
         </customView>
+        <menu id="15X-LA-H45" userLabel="AboutMenu">
+            <items>
+                <menuItem title="使用帮助" id="VWM-O9-K9y">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showHelp:" target="-2" id="wpD-oj-pOz"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="c3q-Gr-cze"/>
+                <menuItem title="Build: 2015-02-25" id="BIW-iE-pNp">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showVersion:" target="-2" id="MIn-7w-Rpk"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="© zfdang" id="wof-tl-Olp">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="contactAuthoer:" target="-2" id="qeC-WJ-9Ui"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="3.5" y="511.5"/>
+        </menu>
     </objects>
     <resources>
-        <image name="project" width="386" height="386"/>
+        <image name="about" width="225" height="225"/>
     </resources>
 </document>

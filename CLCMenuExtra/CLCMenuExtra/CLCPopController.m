@@ -27,7 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-        [self.goSourceButton setRefusesFirstResponder:TRUE];
+        [self.showAboutMenu setRefusesFirstResponder:TRUE];
     }
     
     return self;
@@ -35,8 +35,35 @@
 
 
 - (IBAction)goSource:(id)sender {
+    NSRect frame = [(NSButton *)sender frame];
+    NSPoint menuOrigin = [[(NSButton *)sender superview] convertPoint:NSMakePoint(frame.origin.x, frame.origin.y) toView:nil];
+
+    NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
+                                         location:menuOrigin
+                                    modifierFlags:NSLeftMouseDownMask
+                                        timestamp:0
+                                     windowNumber:[[(NSButton *)sender window] windowNumber]
+                                          context:[[(NSButton *)sender window] graphicsContext]
+                                      eventNumber:0
+                                       clickCount:1
+                                         pressure:1];
+
+    // show about pop menu now
+    [NSMenu popUpContextMenu:self.aboutMenu withEvent:event forView:(NSButton *)sender];
+}
+
+- (IBAction)showHelp:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://calendar.zfdang.com"]];
 }
+
+- (IBAction)showVersion:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md"]];
+}
+
+- (IBAction)contactAuthoer:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"mailto:me@zfdang.com?subject=About%20Chinese%20Lunar%20Calendar%20for%20MAC"]];
+}
+
 
 - (void)keyDown:(NSEvent *)theEvent {
 //    NSLog(@"%d", [theEvent keyCode]);
