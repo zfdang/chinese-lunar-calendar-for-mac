@@ -13,6 +13,7 @@
 		6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80A19D4423F00343F35 /* CLCPopController.xib */; };
 		6985D83B19D4737300343F35 /* project.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D83A19D4737300343F35 /* project.png */; };
 		69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD119D3B17D004AC6DD /* CLCCalendar.m */; };
+		69C740CB1A9F4898003318DC /* holidays.js in Resources */ = {isa = PBXBuildFile; fileRef = 69C740CA1A9F4898003318DC /* holidays.js */; };
 		69C7D2111A9D670A00C5C7FC /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 69C7D2101A9D670A00C5C7FC /* about.png */; };
 		69D8B52019D27A3E00A75B32 /* SystemUIPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */; };
 		69D8B52419D27AF900A75B32 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D8B52319D27AF900A75B32 /* Cocoa.framework */; };
@@ -37,6 +38,7 @@
 		6985D83A19D4737300343F35 /* project.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = project.png; path = CLCMenuExtra/Resources/project.png; sourceTree = "<group>"; };
 		69C45CD019D3B17D004AC6DD /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCCalendar.h; path = CLCMenuExtra/CLCCalendar.h; sourceTree = "<group>"; };
 		69C45CD119D3B17D004AC6DD /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCCalendar.m; path = CLCMenuExtra/CLCCalendar.m; sourceTree = "<group>"; };
+		69C740CA1A9F4898003318DC /* holidays.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = holidays.js; path = CLCMenuExtra/Resources/vendors/holidays.js; sourceTree = "<group>"; };
 		69C7D2101A9D670A00C5C7FC /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about.png; path = CLCMenuExtra/Resources/about.png; sourceTree = "<group>"; };
 		69D8B51519D278A900A75B32 /* CLCMenuExtra.menu */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLCMenuExtra.menu; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D8B51919D278A900A75B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				69F7D1B919E281EE0049D5DA /* calendar.htm */,
 				69F7D1BA19E281EE0049D5DA /* calendar.js */,
+				69C740CA1A9F4898003318DC /* holidays.js */,
 				69F7D1BB19E281EE0049D5DA /* font-awesome.min.css */,
 				69F7D1BC19E281EE0049D5DA /* fontawesome-webfont.ttf */,
 				69F7D1BD19E281EE0049D5DA /* fontawesome-webfont.woff */,
@@ -239,6 +242,7 @@
 				69F7D1C719E281EE0049D5DA /* FontAwesome.otf in Resources */,
 				6985D83B19D4737300343F35 /* project.png in Resources */,
 				69C7D2111A9D670A00C5C7FC /* about.png in Resources */,
+				69C740CB1A9F4898003318DC /* holidays.js in Resources */,
 				6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */,
 				69F7D1C319E281EE0049D5DA /* calendar.js in Resources */,
 			);
