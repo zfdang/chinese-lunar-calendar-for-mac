@@ -820,7 +820,7 @@
             var s = "#{lunarMonthInChinese}月#{lunarDateInChinese}日";
             s += " #{ganzhiYear}年 #{ganzhiMonth}月 #{ganzhiDate}日";
             if (a.solarFestival != "" || a.lunarFestival != "" || a.jieqi != "") {
-                c += "<br><b>#{jieqi} #{lunarFestival} #{solarFestival}</b>"
+                c += "<br><b>#{lunarFestival} #{solarFestival} #{jieqi}</b>"
             }
             if (d) {
                 // 日历标题栏的当日信息
