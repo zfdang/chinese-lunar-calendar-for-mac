@@ -34,7 +34,7 @@
 }
 
 
-- (IBAction)goSource:(id)sender {
+- (IBAction)showMenu:(id)sender {
     NSRect frame = [(NSButton *)sender frame];
     NSPoint menuOrigin = [[(NSButton *)sender superview] convertPoint:NSMakePoint(frame.origin.x, frame.origin.y) toView:nil];
 
