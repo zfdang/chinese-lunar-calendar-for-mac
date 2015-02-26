@@ -565,9 +565,6 @@
 
         function Z() { // 点击今日
             selYear = selMonth = selDay = 0;
-            if (typeof(setTimes) != "undefined") {
-                setTimes("init")
-            }
             var g = new Calendar(new Date());
             _year = g.solarYear;
             // if (typeof(lmanac_2345) != "undefined") {
@@ -771,12 +768,6 @@
             if (b == true || b == "true") {
                 selYear = selMonth = selDay = 0;
                 var g = new Calendar(new Date());
-                // if (typeof(lmanac_2345) != "undefined") {
-                //     lmanac_2345(g.solarMonth < 10 ? "0" + g.solarMonth : g.solarMonth, g.solarDate < 10 ? "0" + g.solarDate : g.solarDate)
-                // }
-                if (typeof(setTimes) != "undefined") {
-                    setTimes("init")
-                }
                 F.hide();
                 MonthData.init(g);
                 MonthTable.draw();
