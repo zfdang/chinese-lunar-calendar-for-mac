@@ -12,6 +12,7 @@
 @interface UpdateWindowController ()
 @property (strong) NSString *appSupportDir;
 - (NSString*) readVersion:(NSString*) file;
+- (void) update_delayed;
 @end
 
 @implementation UpdateWindowController
@@ -65,7 +66,7 @@
         self.remoteVersion.stringValue = [self readVersion:@"holidays.new.js"];
         [self.remoteVersion setHidden:NO];
 
-        if([self.remoteVersion.stringValue compare:self.localVersion.stringValue] == NSOrderedSame ){
+        if([self.remoteVersion.stringValue compare:self.localVersion.stringValue] != NSOrderedSame ){
             // two versions are the same
             [self.closeButton setHidden:NO];
         } else {
@@ -78,7 +79,7 @@
 }
 
 - (IBAction)update:(id)sender {
-    self.localVersion.stringValue = @"";
+    [self.localVersion setHidden:YES];
 
     // 1. start progressbar2 animation
     [self.progressBar2 setHidden:NO];
@@ -99,19 +100,24 @@
     }
 
     // sleep
-    [NSThread sleepForTimeInterval:1];
+    //    [NSThread sleepForTimeInterval:1];
+    [self performSelector:@selector(update_delayed) withObject:nil afterDelay:1.0f];
+}
 
+- (void) update_delayed {
     // stop progressbar2 animation
     [self.progressBar2 stopAnimation:nil];
     [self.progressBar2 setHidden:YES];
 
     // update localversion and show it again
     self.localVersion.stringValue = [self readVersion:@"holidays.js"];
+    [self.localVersion setHidden:NO];
 
     // switch buttons
     [self.updateButton setHidden:YES];
     [self.closeButton setHidden:NO];
 }
+
 - (IBAction)close:(id)sender {
     [self close];
 }
