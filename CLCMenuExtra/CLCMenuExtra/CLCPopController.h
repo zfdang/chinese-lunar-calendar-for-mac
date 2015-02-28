@@ -18,5 +18,6 @@
 - (IBAction)showHelp:(id)sender;
 - (IBAction)showVersion:(id)sender;
 - (IBAction)contactAuthoer:(id)sender;
+- (IBAction)updateHolidays:(id)sender;
 
 @end

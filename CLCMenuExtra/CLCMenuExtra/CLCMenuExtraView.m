@@ -21,6 +21,8 @@
     NSImage *imageIcon;
 
     long iToday;
+
+    NSString *calendarURL;
 }
 @end
 
@@ -44,6 +46,75 @@
                                    selector:@selector(updateDateIcon)
                                    userInfo:nil
                                     repeats:YES];
+
+    // prepare calendarURL
+    // source directory in app package
+    NSString *sourceDir = [_menuExtra.bundle resourcePath];
+    calendarURL = [sourceDir stringByAppendingPathComponent:@"calendar.htm"];
+
+    // find application support directory: "~/Library/Application Support/"
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    if([paths count] == 1){
+        // app support directory for calendar: "~/Library/Application Support/com.zfdang.calendar"
+        NSString *appSupportDir = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"com.zfdang.calendar"];
+
+        // create app support directory if necessary
+        BOOL isDir = NO;
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if(!([fm fileExistsAtPath:appSupportDir isDirectory:&isDir] && isDir)){
+            NSLog(@"create app support folder: %@", appSupportDir);
+            [fm createDirectoryAtPath:appSupportDir withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+
+        // find VERISON in source and support separately
+        int supportVersion = 0;
+        NSFileHandle *vFile = [NSFileHandle fileHandleForReadingAtPath:[appSupportDir stringByAppendingPathComponent:@"VERSION"]];
+        if (vFile != nil){
+            NSString *data = [[NSString alloc] initWithData:[vFile readDataToEndOfFile] encoding:NSASCIIStringEncoding];
+            supportVersion = [data intValue];
+            [vFile closeFile];
+        }
+
+        int sourceVersion = 0;
+        vFile = [NSFileHandle fileHandleForReadingAtPath:[sourceDir stringByAppendingPathComponent:@"VERSION"]];
+        if (vFile != nil){
+            NSString *data = [[NSString alloc] initWithData:[vFile readDataToEndOfFile] encoding:NSASCIIStringEncoding];
+            sourceVersion = [data intValue];
+            [vFile closeFile];
+        }
+
+        NSLog(@"versions source = %d, support = %d", sourceVersion, supportVersion);
+        // copy calendar files from source directory if necessary
+        if(sourceVersion > supportVersion){
+            NSLog(@"copy all files from %@ to %@", sourceDir, appSupportDir);
+            NSArray *files = [fm contentsOfDirectoryAtPath:sourceDir error:nil];
+            for (NSString *file in files) {
+                NSString *sourceFile = [sourceDir stringByAppendingPathComponent:file];
+                NSString *destFile = [appSupportDir stringByAppendingPathComponent:file];
+                NSLog(@"file %@", file);
+                if ([fm isReadableFileAtPath:sourceFile] )
+                    [fm copyItemAtPath:sourceFile toPath:destFile error:nil];
+            }
+        } else {
+            NSLog(@"version ok, skip copying files");
+        }
+
+        // check version in support folder again
+        vFile = [NSFileHandle fileHandleForReadingAtPath:[appSupportDir stringByAppendingPathComponent:@"VERSION"]];
+        if (vFile != nil){
+            NSString *data = [[NSString alloc] initWithData:[vFile readDataToEndOfFile] encoding:NSASCIIStringEncoding];
+            supportVersion = [data intValue];
+            [vFile closeFile];
+        }
+
+        // if version in support folder is OK, we will use calendar.htm in support folder
+        if(supportVersion > 0){
+            calendarURL = [appSupportDir stringByAppendingPathComponent:@"calendar.htm"];
+        }
+    } // if([paths count] == 1)
+
+    NSLog(@"final calendar URL: %@", calendarURL);
+
     return self;
 }
 
@@ -105,11 +176,11 @@
     // load calendar html page
     if ([[self popover] isShown])
     {
-        NSString *resourcesPath = [_menuExtra.bundle resourcePath];
-        NSString *htmlPath = [resourcesPath stringByAppendingString:@"/calendar.htm"];
-//        NSLog(@"updateViewFrame, htmlPath is %@", htmlPath);
+//        NSString *resourcesPath = [_menuExtra.bundle resourcePath];
+//        NSString *htmlPath = [resourcesPath stringByAppendingString:@"/calendar.htm"];
+//        NSLog(@"updateViewFrame, calendar URL is %@", calendarURL);
         WebView *webView = [(CLCPopController*)self.popover.contentViewController webView];
-        [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
+        [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:calendarURL]]];
         [webView setDrawsBackground:NO];
         [[[webView mainFrame] frameView] setAllowsScrolling:NO];
     }

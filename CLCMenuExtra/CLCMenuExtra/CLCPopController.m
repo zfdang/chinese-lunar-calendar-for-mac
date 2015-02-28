@@ -40,7 +40,7 @@
 
     NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
                                          location:menuOrigin
-                                    modifierFlags:NSLeftMouseDownMask
+                                    modifierFlags:0
                                         timestamp:0
                                      windowNumber:[[(NSButton *)sender window] windowNumber]
                                           context:[[(NSButton *)sender window] graphicsContext]
@@ -62,6 +62,9 @@
 
 - (IBAction)contactAuthoer:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"mailto:me@zfdang.com?subject=About%20Chinese%20Lunar%20Calendar%20for%20MAC"]];
+}
+
+- (IBAction)updateHolidays:(id)sender {
 }
 
 

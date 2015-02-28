@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		697D8F151AA1C9170039D2B4 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 697D8F141AA1C9170039D2B4 /* VERSION */; };
 		69854E7019DDD2B200A35ECC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 69854E6F19DDD2B200A35ECC /* icon.png */; };
 		6985697119F1F9F1002EB18E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6985697019F1F9F1002EB18E /* WebKit.framework */; };
 		6985D80B19D4423F00343F35 /* CLCPopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985D80919D4423F00343F35 /* CLCPopController.m */; };
 		6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6985D80A19D4423F00343F35 /* CLCPopController.xib */; };
-		6985D83B19D4737300343F35 /* project.png in Resources */ = {isa = PBXBuildFile; fileRef = 6985D83A19D4737300343F35 /* project.png */; };
 		69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD119D3B17D004AC6DD /* CLCCalendar.m */; };
 		69C740CB1A9F4898003318DC /* holidays.js in Resources */ = {isa = PBXBuildFile; fileRef = 69C740CA1A9F4898003318DC /* holidays.js */; };
 		69C7D2111A9D670A00C5C7FC /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 69C7D2101A9D670A00C5C7FC /* about.png */; };
@@ -30,12 +30,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		697D8F141AA1C9170039D2B4 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = VERSION; path = CLCMenuExtra/Resources/vendors/VERSION; sourceTree = "<group>"; };
 		69854E6F19DDD2B200A35ECC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = CLCMenuExtra/Resources/icon.png; sourceTree = "<group>"; };
 		6985697019F1F9F1002EB18E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6985D80819D4423F00343F35 /* CLCPopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCPopController.h; path = CLCMenuExtra/CLCPopController.h; sourceTree = "<group>"; };
 		6985D80919D4423F00343F35 /* CLCPopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCPopController.m; path = CLCMenuExtra/CLCPopController.m; sourceTree = "<group>"; };
 		6985D80A19D4423F00343F35 /* CLCPopController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLCPopController.xib; path = CLCMenuExtra/CLCPopController.xib; sourceTree = "<group>"; };
-		6985D83A19D4737300343F35 /* project.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = project.png; path = CLCMenuExtra/Resources/project.png; sourceTree = "<group>"; };
 		69C45CD019D3B17D004AC6DD /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCCalendar.h; path = CLCMenuExtra/CLCCalendar.h; sourceTree = "<group>"; };
 		69C45CD119D3B17D004AC6DD /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCCalendar.m; path = CLCMenuExtra/CLCCalendar.m; sourceTree = "<group>"; };
 		69C740CA1A9F4898003318DC /* holidays.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = holidays.js; path = CLCMenuExtra/Resources/vendors/holidays.js; sourceTree = "<group>"; };
@@ -155,7 +155,6 @@
 				6985D80A19D4423F00343F35 /* CLCPopController.xib */,
 				69C7D2101A9D670A00C5C7FC /* about.png */,
 				69854E6F19DDD2B200A35ECC /* icon.png */,
-				6985D83A19D4737300343F35 /* project.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -164,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				69F7D1B919E281EE0049D5DA /* calendar.htm */,
+				697D8F141AA1C9170039D2B4 /* VERSION */,
 				69F7D1BA19E281EE0049D5DA /* calendar.js */,
 				69C740CA1A9F4898003318DC /* holidays.js */,
 				69F7D1BB19E281EE0049D5DA /* font-awesome.min.css */,
@@ -233,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69F7D1C419E281EE0049D5DA /* font-awesome.min.css in Resources */,
+				697D8F151AA1C9170039D2B4 /* VERSION in Resources */,
 				69F7D1CA19E281EE0049D5DA /* style.css in Resources */,
 				69854E7019DDD2B200A35ECC /* icon.png in Resources */,
 				69F7D1C619E281EE0049D5DA /* fontawesome-webfont.woff in Resources */,
@@ -240,7 +241,6 @@
 				69F7D1C219E281EE0049D5DA /* calendar.htm in Resources */,
 				69F7D1C819E281EE0049D5DA /* index.js in Resources */,
 				69F7D1C719E281EE0049D5DA /* FontAwesome.otf in Resources */,
-				6985D83B19D4737300343F35 /* project.png in Resources */,
 				69C7D2111A9D670A00C5C7FC /* about.png in Resources */,
 				69C740CB1A9F4898003318DC /* holidays.js in Resources */,
 				6985D80C19D4423F00343F35 /* CLCPopController.xib in Resources */,
