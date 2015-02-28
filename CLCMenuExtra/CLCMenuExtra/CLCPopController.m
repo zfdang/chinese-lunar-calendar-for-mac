@@ -68,7 +68,8 @@
 
 - (IBAction)updateHolidays:(id)sender {
     self.updateWindow = [[UpdateWindowController alloc] initWithWindowNibName:@"UpdateWindowController"];
-    [[self.updateWindow window] setLevel:kCGModalPanelWindowLevel];
+//    [[self.updateWindow window] setLevel:kCGDesktopWindowLevelKey];
+    [NSApp activateIgnoringOtherApps:YES];
     [self.updateWindow showWindow:self];
 }
 

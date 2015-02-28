@@ -9,10 +9,15 @@
 #import <Cocoa/Cocoa.h>
 
 @interface UpdateWindowController : NSWindowController
-@property (weak) IBOutlet NSProgressIndicator *progressBar;
+@property (weak) IBOutlet NSProgressIndicator *progressBar1;
+@property (weak) IBOutlet NSProgressIndicator *progressBar2;
+
 @property (weak) IBOutlet NSTextField *remoteVersion;
 @property (weak) IBOutlet NSTextField *localVersion;
+
 @property (weak) IBOutlet NSButton *updateButton;
 - (IBAction)update:(id)sender;
+@property (weak) IBOutlet NSButton *closeButton;
+- (IBAction)close:(id)sender;
 
 @end

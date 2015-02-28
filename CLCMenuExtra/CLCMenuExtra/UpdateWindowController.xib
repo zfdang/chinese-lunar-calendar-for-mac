@@ -7,8 +7,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="UpdateWindowController">
             <connections>
+                <outlet property="closeButton" destination="Z3b-K3-7FT" id="kOb-s5-ard"/>
                 <outlet property="localVersion" destination="VEW-xB-lGL" id="Tmu-mg-vQn"/>
-                <outlet property="progressBar" destination="iM7-s9-lnt" id="9Nv-VT-YlR"/>
+                <outlet property="progressBar1" destination="iM7-s9-lnt" id="mVs-w2-fOd"/>
+                <outlet property="progressBar2" destination="kiH-u9-TCJ" id="CJH-7W-cA1"/>
                 <outlet property="remoteVersion" destination="YjO-q5-Xt1" id="B7A-Q7-At5"/>
                 <outlet property="updateButton" destination="nC2-tv-t9v" id="aEy-p4-6Il"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -24,6 +26,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="309" height="169"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g94-P2-aHo">
+                        <rect key="frame" x="39" y="3" width="233" height="62"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="假日信息指国务院发布的年度节假日调整信息，包括工作日放假和周末调整为工作日。" id="gGM-71-7Qu">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gf6-qk-LZX">
                         <rect key="frame" x="49" y="132" width="69" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="当前版本：" id="7Ue-2N-72w">
@@ -66,7 +76,7 @@
                         <rect key="frame" x="159" y="99" width="16" height="16"/>
                     </progressIndicator>
                     <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nC2-tv-t9v">
-                        <rect key="frame" x="218" y="90" width="66" height="32"/>
+                        <rect key="frame" x="218" y="108" width="70" height="32"/>
                         <buttonCell key="cell" type="push" title="更新" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8yH-FP-WVA">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="13" name="STHeitiSC-Light"/>
@@ -75,14 +85,19 @@
                             <action selector="update:" target="-2" id="q5a-Nz-nhg"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g94-P2-aHo">
-                        <rect key="frame" x="39" y="3" width="233" height="62"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="假日信息指国务院发布的年度节假日调整信息，包括工作日放假和周末调整为工作日。" id="gGM-71-7Qu">
+                    <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="kiH-u9-TCJ">
+                        <rect key="frame" x="159" y="132" width="16" height="16"/>
+                    </progressIndicator>
+                    <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z3b-K3-7FT">
+                        <rect key="frame" x="218" y="108" width="70" height="32"/>
+                        <buttonCell key="cell" type="push" title=" 关闭" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IMe-3Q-yxI">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
+                        </buttonCell>
+                        <connections>
+                            <action selector="close:" target="-2" id="1gj-ja-8la"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>
