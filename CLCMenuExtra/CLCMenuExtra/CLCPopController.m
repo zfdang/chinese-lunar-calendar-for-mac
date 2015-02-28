@@ -7,11 +7,13 @@
 //
 
 #import "CLCPopController.h"
+#import "UpdateWindowController.h"
 #import <WebKit/WebKit.h>
 
 @interface CLCPopController ()
-
+    @property (strong) UpdateWindowController *updateWindow;
 @end
+
 
 @implementation CLCPopController
 
@@ -65,6 +67,9 @@
 }
 
 - (IBAction)updateHolidays:(id)sender {
+    self.updateWindow = [[UpdateWindowController alloc] initWithWindowNibName:@"UpdateWindowController"];
+    [[self.updateWindow window] setLevel:kCGModalPanelWindowLevel];
+    [self.updateWindow showWindow:self];
 }
 
 
