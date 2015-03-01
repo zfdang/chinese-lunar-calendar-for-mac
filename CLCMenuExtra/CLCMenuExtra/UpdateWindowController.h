@@ -14,6 +14,7 @@
 
 @property (weak) IBOutlet NSTextField *remoteVersion;
 @property (weak) IBOutlet NSTextField *localVersion;
+@property (weak) IBOutlet NSTextField *txtHoliday;
 
 @property (weak) IBOutlet NSButton *updateButton;
 - (IBAction)update:(id)sender;

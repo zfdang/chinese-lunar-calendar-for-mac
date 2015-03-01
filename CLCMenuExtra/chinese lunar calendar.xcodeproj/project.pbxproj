@@ -23,6 +23,7 @@
 		69A80A441AA21F0000924AFD /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A80A391AA21F0000924AFD /* AFURLRequestSerialization.m */; };
 		69A80A451AA21F0000924AFD /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A80A3B1AA21F0000924AFD /* AFURLResponseSerialization.m */; };
 		69A80A461AA21F0000924AFD /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A80A3D1AA21F0000924AFD /* AFURLSessionManager.m */; };
+		69A80A491AA2B0AC00924AFD /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A80A481AA2B0AC00924AFD /* NSAttributedString+Hyperlink.m */; };
 		69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C45CD119D3B17D004AC6DD /* CLCCalendar.m */; };
 		69C740CB1A9F4898003318DC /* holidays.js in Resources */ = {isa = PBXBuildFile; fileRef = 69C740CA1A9F4898003318DC /* holidays.js */; };
 		69C7D2111A9D670A00C5C7FC /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 69C7D2101A9D670A00C5C7FC /* about.png */; };
@@ -69,6 +70,8 @@
 		69A80A3B1AA21F0000924AFD /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		69A80A3C1AA21F0000924AFD /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		69A80A3D1AA21F0000924AFD /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		69A80A471AA2B0AC00924AFD /* NSAttributedString+Hyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAttributedString+Hyperlink.h"; path = "CLCMenuExtra/NSAttributedString+Hyperlink.h"; sourceTree = "<group>"; };
+		69A80A481AA2B0AC00924AFD /* NSAttributedString+Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAttributedString+Hyperlink.m"; path = "CLCMenuExtra/NSAttributedString+Hyperlink.m"; sourceTree = "<group>"; };
 		69C45CD019D3B17D004AC6DD /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCCalendar.h; path = CLCMenuExtra/CLCCalendar.h; sourceTree = "<group>"; };
 		69C45CD119D3B17D004AC6DD /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCCalendar.m; path = CLCMenuExtra/CLCCalendar.m; sourceTree = "<group>"; };
 		69C740CA1A9F4898003318DC /* holidays.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = holidays.js; path = CLCMenuExtra/Resources/vendors/holidays.js; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 				69D8B53C19D290E400A75B32 /* CLCMenuExtraView.m */,
 				69A80A251AA1FEE500924AFD /* UpdateWindowController.h */,
 				69A80A261AA1FEE500924AFD /* UpdateWindowController.m */,
+				69A80A471AA2B0AC00924AFD /* NSAttributedString+Hyperlink.h */,
+				69A80A481AA2B0AC00924AFD /* NSAttributedString+Hyperlink.m */,
 				6985D80819D4423F00343F35 /* CLCPopController.h */,
 				6985D80919D4423F00343F35 /* CLCPopController.m */,
 				69C45CD019D3B17D004AC6DD /* CLCCalendar.h */,
@@ -326,6 +331,7 @@
 				69A80A461AA21F0000924AFD /* AFURLSessionManager.m in Sources */,
 				69A80A441AA21F0000924AFD /* AFURLRequestSerialization.m in Sources */,
 				69A80A281AA1FEE500924AFD /* UpdateWindowController.m in Sources */,
+				69A80A491AA2B0AC00924AFD /* NSAttributedString+Hyperlink.m in Sources */,
 				69A80A451AA21F0000924AFD /* AFURLResponseSerialization.m in Sources */,
 				69C45CD219D3B17D004AC6DD /* CLCCalendar.m in Sources */,
 				69D8B53D19D290E400A75B32 /* CLCMenuExtra.m in Sources */,

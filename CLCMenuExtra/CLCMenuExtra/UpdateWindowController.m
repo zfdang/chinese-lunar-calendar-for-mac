@@ -8,27 +8,53 @@
 
 #import "UpdateWindowController.h"
 #import "AFURLSessionManager.h"
+#import "NSAttributedString+Hyperlink.h"
 
 @interface UpdateWindowController ()
+
 @property (strong) NSString *appSupportDir;
 - (NSString*) readVersion:(NSString*) file;
 - (void) update_delayed;
+
 @end
 
 @implementation UpdateWindowController
 
-- (NSString*) readVersion:(NSString*) file{
-    NSFileHandle *vFile = [NSFileHandle fileHandleForReadingAtPath:[self.appSupportDir stringByAppendingPathComponent:file]];
-    if (vFile != nil){
-        NSString *data = [[NSString alloc] initWithData:[vFile readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-        [vFile closeFile];
+- (NSString*) readVersion:(NSString*) file {
+    NSError *error;
+    NSString* fileContents = [NSString stringWithContentsOfFile:[self.appSupportDir stringByAppendingPathComponent:file]
+                                                       encoding:NSUTF8StringEncoding
+                                                          error:&error];
+    if(fileContents != nil) {
+        // separate by new line
+        NSArray* allLinedStrings = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+
+        // find first line
+        if([allLinedStrings count] > 0){
+            NSString* firstLine = [allLinedStrings objectAtIndex:0];
+            NSString* version = [[[firstLine stringByReplacingOccurrencesOfString:@"/" withString:@""]
+                                  stringByReplacingOccurrencesOfString:@"Version:" withString:@""]
+                                 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//            NSLog(@"%@: version = [%@]", file, version);
+            return version;
+        }
+    } else {
+        NSLog(@"Failed to read file: %@", [error localizedDescription]);
     }
 
-    return @"2015-03-01";
+    return @"0";
 }
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+
+    // add hyperlink to textview
+    [self.txtHoliday setAllowsEditingTextAttributes: YES];
+    [self.txtHoliday setSelectable: YES];
+    NSURL* url = [NSURL URLWithString:@"https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/CLCMenuExtra/CLCMenuExtra/Resources/vendors/holidays.js"];
+    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] init];
+    [string appendAttributedString: [NSAttributedString hyperlinkFromString:@"holidays.js" withURL:url]];
+    [self.txtHoliday setAttributedStringValue: string];
     
     // 0. initialize appSupportDir
     // find app support directory: "~/Library/Application Support/com.zfdang.calendar"
@@ -52,27 +78,30 @@
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         // download file URL
         NSString *downloadFile = [self.appSupportDir stringByAppendingPathComponent:@"holidays.new.js"];
-//        NSLog(@"destination file: %@", downloadFile);
         return [NSURL fileURLWithPath:downloadFile];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        // complete handler
-//        NSLog(@"File downloaded to: %@", filePath);
+            // complete handler
+            if(error != nil) {
+                NSLog(@"Failed to download file: %@", [error localizedDescription]);
+            } else {
+                NSLog(@"File downloaded to: %@", filePath);
+            }
 
-        // stop progressbar1 animation
-        [self.progressBar1 stopAnimation:nil];
-        [self.progressBar1 setHidden:YES];
+            // stop progressbar1 animation
+            [self.progressBar1 stopAnimation:nil];
+            [self.progressBar1 setHidden:YES];
 
-        // read remote version
-        self.remoteVersion.stringValue = [self readVersion:@"holidays.new.js"];
-        [self.remoteVersion setHidden:NO];
+            // read remote version
+            self.remoteVersion.stringValue = [self readVersion:@"holidays.new.js"];
+            [self.remoteVersion setHidden:NO];
 
-        if([self.remoteVersion.stringValue compare:self.localVersion.stringValue] != NSOrderedSame ){
-            // two versions are the same
-            [self.closeButton setHidden:NO];
-        } else {
-            // two versions are different
-            [self.updateButton setHidden:NO];
-        }
+            // enable buttons
+            if([self.remoteVersion.stringValue compare:self.localVersion.stringValue options:NSNumericSearch] == NSOrderedDescending ){
+                // remote version is bigger than local version
+                [self.updateButton setHidden:NO];
+            } else {
+                [self.closeButton setHidden:NO];
+            }
     }];
 
     [downloadTask resume];
@@ -99,8 +128,7 @@
         NSLog(@"Unable to move file: %@", [error localizedDescription]);
     }
 
-    // sleep
-    //    [NSThread sleepForTimeInterval:1];
+    // sleep 1s, then execute the rest part; to make this action feels better
     [self performSelector:@selector(update_delayed) withObject:nil afterDelay:1.0f];
 }
 
