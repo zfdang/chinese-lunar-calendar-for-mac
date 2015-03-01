@@ -29,7 +29,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // remove blue shadow of NSButton
-        [self.showAboutMenu.cell setFocusRingType:NSFocusRingTypeNone];
+        [[self view] setFocusRingType:NSFocusRingTypeNone];
+//        [self.showAboutMenu setRefusesFirstResponder:TRUE];
     }
 
     return self;
