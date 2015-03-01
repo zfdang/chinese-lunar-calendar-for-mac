@@ -28,10 +28,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
-        [self.showAboutMenu setRefusesFirstResponder:TRUE];
+        // remove blue shadow of NSButton
+        [self.showAboutMenu.cell setFocusRingType:NSFocusRingTypeNone];
     }
-    
+
     return self;
 }
 
