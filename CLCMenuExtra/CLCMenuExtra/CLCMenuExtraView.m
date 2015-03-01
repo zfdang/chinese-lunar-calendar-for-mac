@@ -24,6 +24,9 @@
 
     NSString *calendarURL;
 }
+
+- (int) readVersion: (NSString*) filename;
+
 @end
 
 
@@ -33,6 +36,21 @@
 @synthesize active;
 @synthesize calendar;
 
+- (int) readVersion:(NSString*) filename
+{
+    int version = 0;
+    NSFileHandle *vFile = [NSFileHandle fileHandleForReadingAtPath:filename];
+    if (vFile != nil) {
+        NSString *data = [[NSString alloc] initWithData:[vFile readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+        version = [data intValue];
+        [vFile closeFile];
+    } else {
+        NSLog(@"Failed to read version in file: %@", filename);
+    }
+    NSLog(@"Version %d in %@", version, filename);
+
+    return version;
+}
 
 - (id)initWithFrame:(CGRect)arg1 menuExtra:(id)arg2
 {
@@ -67,23 +85,10 @@
         }
 
         // find VERISON in source and support separately
-        int supportVersion = 0;
-        NSFileHandle *vFile = [NSFileHandle fileHandleForReadingAtPath:[appSupportDir stringByAppendingPathComponent:@"VERSION"]];
-        if (vFile != nil){
-            NSString *data = [[NSString alloc] initWithData:[vFile readDataToEndOfFile] encoding:NSASCIIStringEncoding];
-            supportVersion = [data intValue];
-            [vFile closeFile];
-        }
+        int supportVersion = [self readVersion:[appSupportDir stringByAppendingPathComponent:@"VERSION"]];
+        int sourceVersion = [self readVersion:[sourceDir stringByAppendingPathComponent:@"VERSION"]];
+        NSLog(@"Versions: source = %d, support = %d", sourceVersion, supportVersion);
 
-        int sourceVersion = 0;
-        vFile = [NSFileHandle fileHandleForReadingAtPath:[sourceDir stringByAppendingPathComponent:@"VERSION"]];
-        if (vFile != nil){
-            NSString *data = [[NSString alloc] initWithData:[vFile readDataToEndOfFile] encoding:NSASCIIStringEncoding];
-            sourceVersion = [data intValue];
-            [vFile closeFile];
-        }
-
-        NSLog(@"versions source = %d, support = %d", sourceVersion, supportVersion);
         // copy calendar files from source directory if necessary
         if(sourceVersion > supportVersion){
             NSLog(@"copy all files from %@ to %@", sourceDir, appSupportDir);
@@ -96,16 +101,11 @@
                     [fm copyItemAtPath:sourceFile toPath:destFile error:nil];
             }
         } else {
-            NSLog(@"version ok, skip copying files");
+            NSLog(@"version in support dir is ok, skip copying files");
         }
 
         // check version in support folder again
-        vFile = [NSFileHandle fileHandleForReadingAtPath:[appSupportDir stringByAppendingPathComponent:@"VERSION"]];
-        if (vFile != nil){
-            NSString *data = [[NSString alloc] initWithData:[vFile readDataToEndOfFile] encoding:NSASCIIStringEncoding];
-            supportVersion = [data intValue];
-            [vFile closeFile];
-        }
+        supportVersion = [self readVersion:[appSupportDir stringByAppendingPathComponent:@"VERSION"]];
 
         // if version in support folder is OK, we will use calendar.htm in support folder
         if(supportVersion > 0){
@@ -113,7 +113,7 @@
         }
     } // if([paths count] == 1)
 
-    NSLog(@"final calendar URL: %@", calendarURL);
+    NSLog(@"Calendar URL: %@", calendarURL);
 
     return self;
 }
