@@ -12,6 +12,9 @@
 
 @interface CLCPopController ()
     @property (strong) UpdateWindowController *updateWindow;
+
+- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
+
 @end
 
 
@@ -32,11 +35,17 @@
         [[self view] setFocusRingType:NSFocusRingTypeNone];
         [self.showAboutMenu setFocusRingType:NSFocusRingTypeNone];
         [self.showAboutMenu setRefusesFirstResponder:TRUE];
+
+        // disable right click menu
+        [self.webView setUIDelegate:self];
     }
 
     return self;
 }
 
+- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems {
+    return nil;
+}
 
 - (IBAction)showMenu:(id)sender {
     NSRect frame = [(NSButton *)sender frame];
