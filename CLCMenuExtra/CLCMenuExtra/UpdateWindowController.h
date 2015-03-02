@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class WebView;
 
 @interface UpdateWindowController : NSWindowController
 @property (weak) IBOutlet NSProgressIndicator *progressBar1;
@@ -20,5 +21,7 @@
 - (IBAction)update:(id)sender;
 @property (weak) IBOutlet NSButton *closeButton;
 - (IBAction)close:(id)sender;
+
+@property (weak) WebView *webView;
 
 @end

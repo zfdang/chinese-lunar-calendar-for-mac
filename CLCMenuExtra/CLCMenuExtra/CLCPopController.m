@@ -70,7 +70,7 @@
 
 - (IBAction)updateHolidays:(id)sender {
     self.updateWindow = [[UpdateWindowController alloc] initWithWindowNibName:@"UpdateWindowController"];
-//    [[self.updateWindow window] setLevel:kCGDesktopWindowLevelKey];
+    [self.updateWindow setWebView:self.webView];
     [NSApp activateIgnoringOtherApps:YES];
     [self.updateWindow showWindow:self];
 }

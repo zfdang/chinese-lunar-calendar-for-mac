@@ -9,6 +9,7 @@
 #import "UpdateWindowController.h"
 #import "AFURLSessionManager.h"
 #import "NSAttributedString+Hyperlink.h"
+#import <WebKit/WebKit.h>
 
 @interface UpdateWindowController ()
 
@@ -19,6 +20,8 @@
 @end
 
 @implementation UpdateWindowController
+
+@synthesize webView;
 
 - (NSString*) readVersion:(NSString*) file {
     NSError *error;
@@ -144,6 +147,9 @@
     // switch buttons
     [self.updateButton setHidden:YES];
     [self.closeButton setHidden:NO];
+
+    // reload webview
+    [self.webView reloadFromOrigin:nil];
 }
 
 - (IBAction)close:(id)sender {
