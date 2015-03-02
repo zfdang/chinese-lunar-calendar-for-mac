@@ -17,7 +17,7 @@
 @property (strong) IBOutlet NSMenu *aboutMenu;
 - (IBAction)showHelp:(id)sender;
 - (IBAction)showVersion:(id)sender;
-- (IBAction)contactAuthoer:(id)sender;
+- (IBAction)contactAuthor:(id)sender;
 - (IBAction)updateHolidays:(id)sender;
 
 @end

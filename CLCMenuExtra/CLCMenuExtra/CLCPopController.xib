@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="6254"/>
     </dependencies>
@@ -63,7 +62,7 @@
                 <menuItem title="© zfdang" id="wof-tl-Olp">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="contactAuthoer:" target="-2" id="qeC-WJ-9Ui"/>
+                        <action selector="contactAuthor:" target="-2" id="SL3-8c-QEO"/>
                     </connections>
                 </menuItem>
             </items>

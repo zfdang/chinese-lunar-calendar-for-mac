@@ -30,7 +30,8 @@
     if (self) {
         // remove blue shadow of NSButton
         [[self view] setFocusRingType:NSFocusRingTypeNone];
-//        [self.showAboutMenu setRefusesFirstResponder:TRUE];
+        [self.showAboutMenu setFocusRingType:NSFocusRingTypeNone];
+        [self.showAboutMenu setRefusesFirstResponder:TRUE];
     }
 
     return self;
@@ -63,7 +64,7 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md"]];
 }
 
-- (IBAction)contactAuthoer:(id)sender {
+- (IBAction)contactAuthor:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"mailto:me@zfdang.com?subject=About%20Chinese%20Lunar%20Calendar%20for%20MAC"]];
 }
 
