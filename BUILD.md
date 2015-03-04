@@ -1,5 +1,10 @@
 # 版本历史
 
+## 2015-03-05
+* 将节日信息单独放到了festivals.js中，方便个人增加自己的提醒信息. 
+`vim ~/Library/Application\ Support/com.zfdang.calendar/festivals.js`
+格式直接参考js里已有节日即可
+
 ## 2015-03-01
 * 将日历资料放到Application Support目录下，从而可以在线更新假日信息
 * 增加更新假日信息的功能

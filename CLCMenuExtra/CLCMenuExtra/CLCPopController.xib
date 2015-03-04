@@ -54,7 +54,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="c3q-Gr-cze"/>
-                <menuItem title="版本: 2015-03-01" id="BIW-iE-pNp">
+                <menuItem title="版本: 2015-03-05" id="BIW-iE-pNp">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showVersion:" target="-2" id="MIn-7w-Rpk"/>

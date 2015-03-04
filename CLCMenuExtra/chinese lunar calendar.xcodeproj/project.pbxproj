@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6962C9F01AA6B9AC0023CBE2 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6962C9EF1AA6B9AC0023CBE2 /* readme.txt */; };
+		6962C9F21AA6BE520023CBE2 /* festivals.js in Resources */ = {isa = PBXBuildFile; fileRef = 6962C9F11AA6BE520023CBE2 /* festivals.js */; };
 		697D8F151AA1C9170039D2B4 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 697D8F141AA1C9170039D2B4 /* VERSION */; };
 		69854E7019DDD2B200A35ECC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 69854E6F19DDD2B200A35ECC /* icon.png */; };
 		6985697119F1F9F1002EB18E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6985697019F1F9F1002EB18E /* WebKit.framework */; };
@@ -42,6 +44,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6962C9EC1AA6B9AC0023CBE2 /* NSMenuExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMenuExtra.h; sourceTree = "<group>"; };
+		6962C9ED1AA6B9AC0023CBE2 /* NSMenuExtraAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMenuExtraAnimationView.h; sourceTree = "<group>"; };
+		6962C9EE1AA6B9AC0023CBE2 /* NSMenuExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMenuExtraView.h; sourceTree = "<group>"; };
+		6962C9EF1AA6B9AC0023CBE2 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		6962C9F11AA6BE520023CBE2 /* festivals.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = festivals.js; path = CLCMenuExtra/Resources/vendors/festivals.js; sourceTree = "<group>"; };
 		697D8F141AA1C9170039D2B4 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = VERSION; path = CLCMenuExtra/Resources/vendors/VERSION; sourceTree = "<group>"; };
 		69854E6F19DDD2B200A35ECC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = CLCMenuExtra/Resources/icon.png; sourceTree = "<group>"; };
 		6985697019F1F9F1002EB18E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -80,10 +87,6 @@
 		69D8B51919D278A900A75B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69D8B51F19D27A3E00A75B32 /* SystemUIPlugin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SystemUIPlugin.framework; sourceTree = "<group>"; };
 		69D8B52319D27AF900A75B32 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		69D8B53419D290DB00A75B32 /* NSMenuExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMenuExtra.h; path = NSMenuExtra/NSMenuExtra.h; sourceTree = "<group>"; };
-		69D8B53519D290DB00A75B32 /* NSMenuExtraAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMenuExtraAnimationView.h; path = NSMenuExtra/NSMenuExtraAnimationView.h; sourceTree = "<group>"; };
-		69D8B53619D290DB00A75B32 /* NSMenuExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMenuExtraView.h; path = NSMenuExtra/NSMenuExtraView.h; sourceTree = "<group>"; };
-		69D8B53719D290DB00A75B32 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = NSMenuExtra/readme.txt; sourceTree = "<group>"; };
 		69D8B53919D290E400A75B32 /* CLCMenuExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCMenuExtra.h; path = CLCMenuExtra/CLCMenuExtra.h; sourceTree = "<group>"; };
 		69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCMenuExtra.m; path = CLCMenuExtra/CLCMenuExtra.m; sourceTree = "<group>"; };
 		69D8B53B19D290E400A75B32 /* CLCMenuExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCMenuExtraView.h; path = CLCMenuExtra/CLCMenuExtraView.h; sourceTree = "<group>"; };
@@ -112,6 +115,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6962C9EB1AA6B9AC0023CBE2 /* NSMenuExtra */ = {
+			isa = PBXGroup;
+			children = (
+				6962C9EC1AA6B9AC0023CBE2 /* NSMenuExtra.h */,
+				6962C9ED1AA6B9AC0023CBE2 /* NSMenuExtraAnimationView.h */,
+				6962C9EE1AA6B9AC0023CBE2 /* NSMenuExtraView.h */,
+				6962C9EF1AA6B9AC0023CBE2 /* readme.txt */,
+			);
+			name = NSMenuExtra;
+			path = CLCMenuExtra/NSMenuExtra;
+			sourceTree = "<group>";
+		};
 		69A80A2A1AA21F0000924AFD /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,22 +199,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		69D8B52A19D27ECF00A75B32 /* NSMenuExtra */ = {
-			isa = PBXGroup;
-			children = (
-				69D8B53419D290DB00A75B32 /* NSMenuExtra.h */,
-				69D8B53519D290DB00A75B32 /* NSMenuExtraAnimationView.h */,
-				69D8B53619D290DB00A75B32 /* NSMenuExtraView.h */,
-				69D8B53719D290DB00A75B32 /* readme.txt */,
-			);
-			name = NSMenuExtra;
-			sourceTree = "<group>";
-		};
 		69D8B52D19D27F4D00A75B32 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				6962C9EB1AA6B9AC0023CBE2 /* NSMenuExtra */,
 				69A80A2A1AA21F0000924AFD /* AFNetworking */,
-				69D8B52A19D27ECF00A75B32 /* NSMenuExtra */,
 				69D8B53919D290E400A75B32 /* CLCMenuExtra.h */,
 				69D8B53A19D290E400A75B32 /* CLCMenuExtra.m */,
 				69D8B53B19D290E400A75B32 /* CLCMenuExtraView.h */,
@@ -233,6 +237,7 @@
 			children = (
 				69F7D1B919E281EE0049D5DA /* calendar.htm */,
 				697D8F141AA1C9170039D2B4 /* VERSION */,
+				6962C9F11AA6BE520023CBE2 /* festivals.js */,
 				69F7D1BA19E281EE0049D5DA /* calendar.js */,
 				69C740CA1A9F4898003318DC /* holidays.js */,
 				69F7D1BB19E281EE0049D5DA /* font-awesome.min.css */,
@@ -301,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6962C9F01AA6B9AC0023CBE2 /* readme.txt in Resources */,
 				69F7D1C419E281EE0049D5DA /* font-awesome.min.css in Resources */,
 				697D8F151AA1C9170039D2B4 /* VERSION in Resources */,
 				69F7D1CA19E281EE0049D5DA /* style.css in Resources */,
@@ -308,6 +314,7 @@
 				69F7D1C619E281EE0049D5DA /* fontawesome-webfont.woff in Resources */,
 				69F7D1C519E281EE0049D5DA /* fontawesome-webfont.ttf in Resources */,
 				69F7D1C219E281EE0049D5DA /* calendar.htm in Resources */,
+				6962C9F21AA6BE520023CBE2 /* festivals.js in Resources */,
 				69F7D1C819E281EE0049D5DA /* index.js in Resources */,
 				69A80A291AA1FEE500924AFD /* UpdateWindowController.xib in Resources */,
 				69F7D1C719E281EE0049D5DA /* FontAwesome.otf in Resources */,

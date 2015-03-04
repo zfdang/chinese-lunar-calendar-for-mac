@@ -96,9 +96,11 @@
             for (NSString *file in files) {
                 NSString *sourceFile = [sourceDir stringByAppendingPathComponent:file];
                 NSString *destFile = [appSupportDir stringByAppendingPathComponent:file];
-                NSLog(@"file %@", file);
-                if ([fm isReadableFileAtPath:sourceFile] )
+                NSLog(@"Copy file %@", file);
+                if ([fm isReadableFileAtPath:sourceFile] ) {
+                    [fm removeItemAtPath:destFile error:nil];
                     [fm copyItemAtPath:sourceFile toPath:destFile error:nil];
+                }
             }
         } else {
             NSLog(@"version in support dir is ok, skip copying files");
