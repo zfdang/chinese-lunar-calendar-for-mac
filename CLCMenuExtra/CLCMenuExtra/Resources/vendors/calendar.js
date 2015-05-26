@@ -156,7 +156,7 @@
         }
 
         function G(h) {
-            return h < 10 ? "0" + h : h
+            return h < 10 ? "0" + h : "" + h
         }
 
         // get date digit by specific format
