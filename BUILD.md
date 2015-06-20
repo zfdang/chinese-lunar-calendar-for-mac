@@ -1,5 +1,9 @@
 # 版本历史
 
+## 2015-06-20
+* 修正了更新节日信息时的一个bug
+* 增加了9月3日的抗日战争胜利日的节日
+
 ## 2015-03-05
 * 将节日信息单独放到了festivals.js中，方便个人增加自己的提醒信息. 
 `vim ~/Library/Application\ Support/com.zfdang.calendar/festivals.js`
