@@ -1,4 +1,4 @@
-﻿// Version: 20150605
+﻿// Version: 20150620
 // 国务院公布的假期调整方案
 // 假日为"+"，工作日为"-"
 var HOLIDAYADJUSTMENT = {
