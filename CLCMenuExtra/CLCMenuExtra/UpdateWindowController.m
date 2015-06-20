@@ -73,7 +73,7 @@
     self.localVersion.stringValue = [self readVersion:@"holidays.js"];
 
     // 3. start async task to download holidays.js, and save it as holidays.new.js
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURL *URL = [NSURL URLWithString:@"https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/CLCMenuExtra/CLCMenuExtra/Resources/vendors/holidays.js"];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
@@ -81,6 +81,10 @@
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         // download file URL
         NSString *downloadFile = [self.appSupportDir stringByAppendingPathComponent:@"holidays.new.js"];
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if ([fm isReadableFileAtPath:downloadFile] ) {
+            [fm removeItemAtPath:downloadFile error:nil];
+        }
         return [NSURL fileURLWithPath:downloadFile];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
             // complete handler
