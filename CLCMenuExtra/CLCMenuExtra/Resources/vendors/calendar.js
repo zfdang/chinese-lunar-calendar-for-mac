@@ -273,6 +273,12 @@
             this.jieqi = JIEQI[(this.solarMonth - 1) * 2 + 1]
         }
 
+        // 当天有没有特殊事件
+        this.specialEvent = CALENDAR_EVENTS[f(Y, "yyyy") + f(Y, "MM") + f(Y, "dd")];
+        if (typeof this.specialEvent == "undefined") {
+            this.specialEvent = ""
+        }
+
         // 计算阳历的节日
         this.solarFestival = SOLARFESTIVAL[f(Y, "MM") + f(Y, "dd")];
         if (typeof this.solarFestival == "undefined") {
@@ -310,8 +316,12 @@
 
         // 计算农历显示区 显示的内容
         this.showInLunar = "";
+        if (this.specialEvent != "") {
+            this.showInLunar = this.specialEvent;
+        }
         if (this.lunarFestival != "") {
-            this.showInLunar = this.lunarFestival;
+            this.showInLunar += this.showInLunar == "" ? "" : " ";
+            this.showInLunar += this.lunarFestival;
         }
         if (this.solarFestival != "") {
             this.showInLunar += this.showInLunar == "" ? "" : " ";
@@ -688,8 +698,8 @@
             var day_info = "#{solarYear}年#{solarMonth}月#{solarDate}日"
             var s = "#{lunarMonthInChinese}月#{lunarDateInChinese}日";
             s += " #{ganzhiYear}年 #{ganzhiMonth}月 #{ganzhiDate}日";
-            if (a.solarFestival != "" || a.lunarFestival != "" || a.jieqi != "") {
-                c += "<br><b>#{lunarFestival} #{solarFestival} #{jieqi}</b>"
+            if (a.specialEvent != "" || a.solarFestival != "" || a.lunarFestival != "" || a.jieqi != "") {
+                c += "<br><b>#{specialEvent} #{lunarFestival} #{solarFestival} #{jieqi}</b>"
             }
             if (d) {
                 // 日历标题栏的当日信息

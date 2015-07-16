@@ -236,10 +236,10 @@
 			isa = PBXGroup;
 			children = (
 				69F7D1B919E281EE0049D5DA /* calendar.htm */,
-				697D8F141AA1C9170039D2B4 /* VERSION */,
-				6962C9F11AA6BE520023CBE2 /* festivals.js */,
 				69F7D1BA19E281EE0049D5DA /* calendar.js */,
 				69C740CA1A9F4898003318DC /* holidays.js */,
+				6962C9F11AA6BE520023CBE2 /* festivals.js */,
+				697D8F141AA1C9170039D2B4 /* VERSION */,
 				69F7D1BB19E281EE0049D5DA /* font-awesome.min.css */,
 				69F7D1BC19E281EE0049D5DA /* fontawesome-webfont.ttf */,
 				69F7D1BD19E281EE0049D5DA /* fontawesome-webfont.woff */,
