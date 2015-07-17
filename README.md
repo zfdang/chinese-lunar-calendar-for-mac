@@ -31,3 +31,8 @@ https://github.com/aschuch/AXStatusItemPopup
 
 http://sourceforge.net/projects/menucracker/
 
+# 5. Update Holidays.js
+
+>$ curl -o ~/Library/Application\ Support/com.zfdang.calendar/holidays.js https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/freewheel/CLCMenuExtra/CLCMenuExtra/Resources/vendors/holidays.js
+
+>$ sudo killall SystemUIServer
