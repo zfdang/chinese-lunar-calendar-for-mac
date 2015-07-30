@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+<title>万年历</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" href="font-awesome.min.css">
+<script language="javascript" type="text/javascript" src="index.js"></script>
+</head>
+
+<body>
+
+	<!-- calendar start -->
+    <div class="left">
+        <div class="ltop" id="c_top">
+            <p>
+                <font id="date" class="dayinfo">2012年9月18日</font><font class="dayinfo">  </font><font id="lunar_info" class="lunar_dayinfo">壬辰年[龙] 八月初三</font>
+            </p>
+        </div>
+        <div id="loading" style="clear:both;padding-top:150px;height:242px;text-align:center">程序加载中...</div>
+    	<table border="0" id="cm" cellspacing="0" cellpadding="0" class="ldays">
+        </table>
+		<div id="bm"></div>
+        <div class="lbuttom" id="c_buttom">
+            <span class="navigator">公历:
+            <select></select>&nbsp;年&nbsp;
+            <select></select>&nbsp;月&nbsp;
+            <button><i class="fa fa-fast-backward"></i>上年</button>
+            <button><i class="fa fa-step-backward"></i>上月</button>
+            <button>下月<i class="fa fa-step-forward"></i></button>
+            <button>下年<i class="fa fa-fast-forward"></i></button>
+            <button><i class="fa fa-undo">今日</i></button>
+            &nbsp;&nbsp;&nbsp;
+            </span>
+        </div>
+    </div>
+	<!-- calendar end -->
+
+<script language="javascript" type="text/javascript" src="holidays.js"></script>
+<script language="javascript" type="text/javascript" src="festivals.js"></script>
+<script language="javascript" type="text/javascript" src="calendar.js"></script>
+
+</body>
+</html>

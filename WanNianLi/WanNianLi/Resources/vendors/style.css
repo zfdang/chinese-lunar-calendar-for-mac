@@ -1,0 +1,63 @@
+/* 
+* @Author: zfdang
+* @Date:   2014-09-26 11:44:44
+* @Last Modified by:   zfdang
+* @Last Modified time: 2014-10-08 18:08:58
+*/
+
+*{margin:0;padding:0;font-family:"STHeiti";}
+p,span,b,input{margin:0;padding:0}
+body{background:#eff8ff;font-size:12px}
+a{color:#155788;text-decoration:none}
+a:hover{color:#f00;text-decoration:underline}
+.content{margin:0 auto;}
+.left,.right{float:left;height:100%}
+.left{padding:2px 4px;width:420px;color:#5b5b5b;background:#fff 25px 15px no-repeat;border:#b0d3ee 1px solid}
+.ltop {text-align: center}
+.ltop .dayinfo{font-size:20px;color:#000000;}
+.ltop .lunar_dayinfo{font-size:20px;color:#000000;}
+.ltop span{display:block;text-align:center;width:420px;height:30px;line-height:25px;font-size:14px}
+.ltop p{margin:0;padding:0;text-align:center;font-size:12px;height:30px;line-height:30px}
+.lbuttom .copyright{display:block;float:left;text-align:left;line-height:25px;font-size:12px}
+.lbuttom .navigator{display:block;width:100%;float:right;text-align:right;line-height:25px;font-size:12px; background:#eff8ff}
+.lbuttom p{display:none;float:left;margin:0;padding:0;text-align:left;font-size:12px;height:30px;line-height:30px}
+.ldays{clear:both;width:420px;text-align:center}
+.ldays td{padding:1px 1px;_padding:1px 1px;height:46px;_height:44px;width:65px}
+.ldays .th{padding:0;height:18px;background:#eff8ff;font-size:18px;font-weight:normal;padding:2px 0 2px}
+.ldays td a{display:block;font-size:12px;text-decoration:none;color:#555}
+.ldays td span{display:block;width:100%;_height:30px;line-height:35px;_line-height:30px;font-size:28px;font-weight:bold;color:#000;cursor:pointer}
+.ldays td a:hover{background:#cdff3f;text-decoration:none}
+.ldays td a.active{background:#ffdf9c}
+.ldays td a.grayed{opacity: .2}
+/*IE6下样式*/
+.ldays td a font{font-size:12px;}
+.ldays td span font{font-size:22px;font-weight:bold;}
+/*IE6下样式结束*/
+.lnotice{margin-top:9px;line-height:20px}
+.right{margin-left:13px;width:360px}
+.rtop,.rtime{clear:both;margin-bottom:10px;height:100px;border:#b0d3ee 1px solid}
+.rtime{height:40px}
+.rtime b{font-size:12px;font:Verdana;color:#036ebe}
+.rtop span,.rtime span,.rbottom span{display:block;width:336px;padding:5px 10px;border:#fff 1px solid;background:#fff url(img/bg.gif) top repeat-x;line-height:30px}
+.rtop span{height:88px}
+.rtime span{height:28px}
+.rtop span div,.rtime span div{float:left;_margin-top:10px;height:20px;width:160px}
+.rbottom{clear:both;background:#fff;border:#b0d3ee 1px solid;height:360px}
+.rbottom p{clear:both;line-height:20px}
+p.luck,p.bad,p.ch,p.s{padding-left:28px;color:#616161;background:url(img/yi.gif) 0px 3px no-repeat}
+p.bad,p.ch,p.s{padding-top:7px;background:url(img/ji.gif) 0px 8px no-repeat}
+p.ch{background-image:url(img/chong.gif)}
+p.s{background-image:url(img/sha.gif)}
+p.jr{margin:0;padding:10px 0;text-align:center}
+.fred{color:#ff0000}
+.fgreen{color:#008000}
+.fblue{color:#005aff}
+.center{clear:both;margin:0;width:938px;border:#b0d3ee 1px solid}
+.center td{padding:8px}
+.bgblue{background:#d5ecfd}
+#fd{display:none;position:absolute;border:1px solid #dddddf;background:#feffcd;padding:10px;line-height:21px;width:150px}
+#fd b{font-weight:normal;color:#c60a00}
+.xzys{margin-top:10px;padding:10px;width:918px;border:#b0d3ee 1px solid;background:#fff;font-size:12px}
+.xzys h1{ text-align:center;font-size:16px;color:#036ebe;line-height:30px}
+.xzys b{line-height:25px;color:red}
+.xzys p{line-height:25px}
