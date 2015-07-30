@@ -22,6 +22,7 @@
         // Install status item into the menu bar
         _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
         _statusItemView = [[StatusItemView alloc] initWithStatusItem:_statusItem];
+        // use hardcoded image as calendar background
         _statusItemView.image = [NSImage imageNamed:@"background"];
 //        _statusItemView.action = @selector(togglePanel:);
     }
