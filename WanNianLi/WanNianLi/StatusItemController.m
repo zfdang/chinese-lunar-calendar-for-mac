@@ -23,7 +23,6 @@
         _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
         _statusItemView = [[StatusItemView alloc] initWithStatusItem:_statusItem];
         _statusItemView.image = [NSImage imageNamed:@"background"];
-        _statusItemView.alternateImage = [NSImage imageNamed:@"StatusHighlighted"];
 //        _statusItemView.action = @selector(togglePanel:);
     }
     return self;

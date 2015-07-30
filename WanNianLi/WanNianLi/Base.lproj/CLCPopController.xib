@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CLCPopController">
             <connections>
-                <outlet property="aboutMenu" destination="15X-LA-H45" id="bh0-Xq-Pxi"/>
-                <outlet property="showAboutMenu" destination="Qfs-3c-g77" id="W3Q-BJ-0fO"/>
-                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
-                <outlet property="webView" destination="nLn-XO-wV9" id="98u-Fj-V9r"/>
+                <outlet property="aboutMenu" destination="15X-LA-H45" id="GqZ-ig-hKx"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="aop-h5-oLN"/>
+                <outlet property="webView" destination="nLn-XO-wV9" id="o46-Ez-WmF"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -32,7 +30,7 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
-                            <action selector="showMenu:" target="-2" id="ifu-qd-WqN"/>
+                            <action selector="showMenu:" target="-2" id="cVq-Eu-mEA"/>
                         </connections>
                     </buttonCell>
                 </button>
@@ -44,30 +42,37 @@
                 <menuItem title="使用帮助" id="VWM-O9-K9y">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="showHelp:" target="-2" id="wpD-oj-pOz"/>
+                        <action selector="showHelp:" target="-2" id="w89-h1-4cr"/>
                     </connections>
                 </menuItem>
                 <menuItem title="更新假日信息" id="Y6J-xv-lTd">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="updateHolidays:" target="-2" id="6zS-db-siT"/>
+                        <action selector="updateHolidays:" target="-2" id="DRJ-qi-3oy"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="c3q-Gr-cze"/>
                 <menuItem title="版本: 2015-07-18" id="BIW-iE-pNp" userLabel="版本: 2015-07-18">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="showVersion:" target="-2" id="MIn-7w-Rpk"/>
+                        <action selector="showVersion:" target="-2" id="CUZ-5Z-laM"/>
                     </connections>
                 </menuItem>
                 <menuItem title="© zfdang" id="wof-tl-Olp">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="contactAuthor:" target="-2" id="SL3-8c-QEO"/>
+                        <action selector="contactAuthor:" target="-2" id="OSd-T2-fUK"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="hfz-Hl-hLY"/>
+                <menuItem title="退出" id="uAS-jc-oMz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="quitApp:" target="-2" id="lo1-xf-KMa"/>
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="3.5" y="511.5"/>
+            <point key="canvasLocation" x="11.5" y="494.5"/>
         </menu>
     </objects>
     <resources>

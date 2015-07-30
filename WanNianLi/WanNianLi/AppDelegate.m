@@ -20,19 +20,14 @@
     // https://github.com/potionfactory/LetsMove
     // move app into application folder ?
     // PFMoveToApplicationsFolderIfNecessary();
+
+    // Install icon into the menu bar
+    self.statusItemController = [[StatusItemController alloc] init];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
 }
 
-
-- (void)awakeFromNib
-{
-    // Install icon into the menu bar
-    self.statusItemController = [[StatusItemController alloc] init];
-//    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-//    _statusItem.image = [NSImage imageNamed:@"background"];
-}
 
 @end

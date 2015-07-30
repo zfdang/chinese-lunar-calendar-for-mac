@@ -8,15 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-// Protocol to handle StatusItem actions
-@protocol StatusItemActionProtocol <NSObject>
 
-@optional
-- (void)leftClickOnStatusItem;
-- (void)rightClickOnStatusItem;
-
-@end
-
+@class CLCPopController;
+@class CLCCalendar;
 
 
 // StatusItemView: customized view to show icon in menubar
@@ -24,27 +18,23 @@
     BOOL _isHighlighted;
 
     NSImage *_image;
-    NSImage *_alternateImage;
-    NSMenu *_menu;
-    NSMenu *_rightMenu;
 }
 
 @property (nonatomic, strong, readonly) NSStatusItem *statusItem;
 
 @property (nonatomic, retain) NSImage *image;
-@property (nonatomic, retain) NSImage *alternateImage;
-@property (nonatomic, retain) NSMenu *menu;
-@property (nonatomic, retain) NSMenu *rightMenu;
+
 
 @property (nonatomic, setter = setHighlighted:) BOOL isHighlighted;
-@property (nonatomic, unsafe_unretained) id<StatusItemActionProtocol> delegate;
+
+@property(strong, nonatomic) NSPopover *popover;
+@property(strong, nonatomic) CLCCalendar *calendar;
+@property BOOL active;
+
 
 
 - (id)initWithStatusItem:(NSStatusItem *)statusItem;
 
--(void)popUpMenu;               //pops up the currently stored menu
--(void)popUpRightMenu;          //if right menu is set, pops up right menu
--(void)popUpMenu:(NSMenu*)menu; //pops up the passed menu
-
+- (void) updateDateIcon;
 
 @end

@@ -10,7 +10,6 @@
 		69B0F6121B69EF7A00A75D21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6111B69EF7A00A75D21 /* AppDelegate.m */; };
 		69B0F6141B69EF7A00A75D21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6131B69EF7A00A75D21 /* main.m */; };
 		69B0F6161B69EF7A00A75D21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B0F6151B69EF7A00A75D21 /* Images.xcassets */; };
-		69B0F6191B69EF7A00A75D21 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B0F6171B69EF7A00A75D21 /* MainMenu.xib */; };
 		69B0F6251B69EF7A00A75D21 /* WanNianLiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6241B69EF7A00A75D21 /* WanNianLiTests.m */; };
 		69B0F6351B69EFA100A75D21 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6301B69EFA100A75D21 /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		69B0F6361B69EFA100A75D21 /* StatusItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6321B69EFA100A75D21 /* StatusItemController.m */; };
@@ -24,12 +23,28 @@
 		69B0F6521B6A592C00A75D21 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6471B6A592C00A75D21 /* AFURLRequestSerialization.m */; };
 		69B0F6531B6A592C00A75D21 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6491B6A592C00A75D21 /* AFURLResponseSerialization.m */; };
 		69B0F6541B6A592C00A75D21 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F64B1B6A592C00A75D21 /* AFURLSessionManager.m */; };
-		69B0F6591B6A593700A75D21 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B0F6551B6A593700A75D21 /* CLCPopController.xib */; };
-		69B0F65A1B6A593700A75D21 /* UpdateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B0F6571B6A593700A75D21 /* UpdateWindowController.xib */; };
 		69B0F6611B6A594700A75D21 /* CLCPopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F65B1B6A594700A75D21 /* CLCPopController.m */; };
 		69B0F6631B6A594700A75D21 /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F65E1B6A594700A75D21 /* NSAttributedString+Hyperlink.m */; };
 		69B0F6641B6A594700A75D21 /* UpdateWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6601B6A594700A75D21 /* UpdateWindowController.m */; };
 		69B0F66B1B6A59F600A75D21 /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F66A1B6A59F600A75D21 /* CLCCalendar.m */; };
+		69E73BB11B6A82CC00AA4D52 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA21B6A82CC00AA4D52 /* about.png */; };
+		69E73BB21B6A82CC00AA4D52 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA31B6A82CC00AA4D52 /* icon.png */; };
+		69E73BB31B6A82CC00AA4D52 /* calendar.htm in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA51B6A82CC00AA4D52 /* calendar.htm */; };
+		69E73BB41B6A82CC00AA4D52 /* calendar.js in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA61B6A82CC00AA4D52 /* calendar.js */; };
+		69E73BB51B6A82CC00AA4D52 /* festivals.js in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA71B6A82CC00AA4D52 /* festivals.js */; };
+		69E73BB61B6A82CC00AA4D52 /* font-awesome.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA81B6A82CC00AA4D52 /* font-awesome.min.css */; };
+		69E73BB71B6A82CC00AA4D52 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA91B6A82CC00AA4D52 /* fontawesome-webfont.ttf */; };
+		69E73BB81B6A82CC00AA4D52 /* fontawesome-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BAA1B6A82CC00AA4D52 /* fontawesome-webfont.woff */; };
+		69E73BB91B6A82CC00AA4D52 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BAB1B6A82CC00AA4D52 /* FontAwesome.otf */; };
+		69E73BBA1B6A82CC00AA4D52 /* holidays.js in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BAC1B6A82CC00AA4D52 /* holidays.js */; };
+		69E73BBB1B6A82CC00AA4D52 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BAD1B6A82CC00AA4D52 /* index.js */; };
+		69E73BBC1B6A82CC00AA4D52 /* reference.html in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BAE1B6A82CC00AA4D52 /* reference.html */; };
+		69E73BBD1B6A82CC00AA4D52 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BAF1B6A82CC00AA4D52 /* style.css */; };
+		69E73BBE1B6A82CC00AA4D52 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BB01B6A82CC00AA4D52 /* VERSION */; };
+		69E73BC71B6A830400AA4D52 /* CLCPopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BBF1B6A830400AA4D52 /* CLCPopController.xib */; };
+		69E73BCA1B6A830400AA4D52 /* UpdateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BC51B6A830400AA4D52 /* UpdateWindowController.xib */; };
+		69E73BCD1B6A857A00AA4D52 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E73BCC1B6A857A00AA4D52 /* WebKit.framework */; };
+		69E73BD01B6A887200AA4D52 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BCE1B6A887200AA4D52 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +64,6 @@
 		69B0F6111B69EF7A00A75D21 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		69B0F6131B69EF7A00A75D21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		69B0F6151B69EF7A00A75D21 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		69B0F6181B69EF7A00A75D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		69B0F61E1B69EF7A00A75D21 /* WanNianLiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WanNianLiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B0F6231B69EF7A00A75D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69B0F6241B69EF7A00A75D21 /* WanNianLiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WanNianLiTests.m; sourceTree = "<group>"; };
@@ -78,8 +92,6 @@
 		69B0F6491B6A592C00A75D21 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		69B0F64A1B6A592C00A75D21 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		69B0F64B1B6A592C00A75D21 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		69B0F6561B6A593700A75D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CLCPopController.xib; sourceTree = "<group>"; };
-		69B0F6581B6A593700A75D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UpdateWindowController.xib; sourceTree = "<group>"; };
 		69B0F65B1B6A594700A75D21 /* CLCPopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCPopController.m; sourceTree = "<group>"; };
 		69B0F65D1B6A594700A75D21 /* NSAttributedString+Hyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Hyperlink.h"; sourceTree = "<group>"; };
 		69B0F65E1B6A594700A75D21 /* NSAttributedString+Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Hyperlink.m"; sourceTree = "<group>"; };
@@ -88,6 +100,24 @@
 		69B0F6651B6A597600A75D21 /* CLCPopController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCPopController.h; sourceTree = "<group>"; };
 		69B0F6691B6A59F600A75D21 /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCCalendar.h; sourceTree = "<group>"; };
 		69B0F66A1B6A59F600A75D21 /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCCalendar.m; sourceTree = "<group>"; };
+		69E73BA21B6A82CC00AA4D52 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
+		69E73BA31B6A82CC00AA4D52 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		69E73BA51B6A82CC00AA4D52 /* calendar.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = calendar.htm; sourceTree = "<group>"; };
+		69E73BA61B6A82CC00AA4D52 /* calendar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = calendar.js; sourceTree = "<group>"; };
+		69E73BA71B6A82CC00AA4D52 /* festivals.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = festivals.js; sourceTree = "<group>"; };
+		69E73BA81B6A82CC00AA4D52 /* font-awesome.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "font-awesome.min.css"; sourceTree = "<group>"; };
+		69E73BA91B6A82CC00AA4D52 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		69E73BAA1B6A82CC00AA4D52 /* fontawesome-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff"; sourceTree = "<group>"; };
+		69E73BAB1B6A82CC00AA4D52 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		69E73BAC1B6A82CC00AA4D52 /* holidays.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = holidays.js; sourceTree = "<group>"; };
+		69E73BAD1B6A82CC00AA4D52 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		69E73BAE1B6A82CC00AA4D52 /* reference.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = reference.html; sourceTree = "<group>"; };
+		69E73BAF1B6A82CC00AA4D52 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		69E73BB01B6A82CC00AA4D52 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		69E73BC01B6A830400AA4D52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CLCPopController.xib; sourceTree = "<group>"; };
+		69E73BC61B6A830400AA4D52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UpdateWindowController.xib; sourceTree = "<group>"; };
+		69E73BCC1B6A857A00AA4D52 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		69E73BCF1B6A887200AA4D52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69E73BCD1B6A857A00AA4D52 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +142,7 @@
 		69B0F6021B69EF7A00A75D21 = {
 			isa = PBXGroup;
 			children = (
+				69E73BCC1B6A857A00AA4D52 /* WebKit.framework */,
 				69B0F60D1B69EF7A00A75D21 /* WanNianLi */,
 				69B0F6211B69EF7A00A75D21 /* WanNianLiTests */,
 				69B0F60C1B69EF7A00A75D21 /* Products */,
@@ -129,6 +161,8 @@
 		69B0F60D1B69EF7A00A75D21 /* WanNianLi */ = {
 			isa = PBXGroup;
 			children = (
+				69E73BCB1B6A831000AA4D52 /* xib */,
+				69E73BA11B6A82CC00AA4D52 /* Resources */,
 				69B0F6381B6A592C00A75D21 /* AFNetworking */,
 				69B0F62E1B69EFA100A75D21 /* Utils */,
 				69B0F6311B69EFA100A75D21 /* StatusItemController.h */,
@@ -146,9 +180,6 @@
 				69B0F6691B6A59F600A75D21 /* CLCCalendar.h */,
 				69B0F66A1B6A59F600A75D21 /* CLCCalendar.m */,
 				69B0F6151B69EF7A00A75D21 /* Images.xcassets */,
-				69B0F6551B6A593700A75D21 /* CLCPopController.xib */,
-				69B0F6571B6A593700A75D21 /* UpdateWindowController.xib */,
-				69B0F6171B69EF7A00A75D21 /* MainMenu.xib */,
 				69B0F60E1B69EF7A00A75D21 /* Supporting Files */,
 			);
 			path = WanNianLi;
@@ -213,6 +244,45 @@
 				69B0F64B1B6A592C00A75D21 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		69E73BA11B6A82CC00AA4D52 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				69E73BA21B6A82CC00AA4D52 /* about.png */,
+				69E73BA31B6A82CC00AA4D52 /* icon.png */,
+				69E73BA41B6A82CC00AA4D52 /* vendors */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		69E73BA41B6A82CC00AA4D52 /* vendors */ = {
+			isa = PBXGroup;
+			children = (
+				69E73BA51B6A82CC00AA4D52 /* calendar.htm */,
+				69E73BA61B6A82CC00AA4D52 /* calendar.js */,
+				69E73BA71B6A82CC00AA4D52 /* festivals.js */,
+				69E73BA81B6A82CC00AA4D52 /* font-awesome.min.css */,
+				69E73BA91B6A82CC00AA4D52 /* fontawesome-webfont.ttf */,
+				69E73BAA1B6A82CC00AA4D52 /* fontawesome-webfont.woff */,
+				69E73BAB1B6A82CC00AA4D52 /* FontAwesome.otf */,
+				69E73BAC1B6A82CC00AA4D52 /* holidays.js */,
+				69E73BAD1B6A82CC00AA4D52 /* index.js */,
+				69E73BAE1B6A82CC00AA4D52 /* reference.html */,
+				69E73BAF1B6A82CC00AA4D52 /* style.css */,
+				69E73BB01B6A82CC00AA4D52 /* VERSION */,
+			);
+			path = vendors;
+			sourceTree = "<group>";
+		};
+		69E73BCB1B6A831000AA4D52 /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				69E73BBF1B6A830400AA4D52 /* CLCPopController.xib */,
+				69E73BC51B6A830400AA4D52 /* UpdateWindowController.xib */,
+				69E73BCE1B6A887200AA4D52 /* MainMenu.xib */,
+			);
+			name = xib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,10 +365,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69B0F6591B6A593700A75D21 /* CLCPopController.xib in Resources */,
+				69E73BBA1B6A82CC00AA4D52 /* holidays.js in Resources */,
+				69E73BBD1B6A82CC00AA4D52 /* style.css in Resources */,
+				69E73BB41B6A82CC00AA4D52 /* calendar.js in Resources */,
+				69E73BB21B6A82CC00AA4D52 /* icon.png in Resources */,
 				69B0F6161B69EF7A00A75D21 /* Images.xcassets in Resources */,
-				69B0F65A1B6A593700A75D21 /* UpdateWindowController.xib in Resources */,
-				69B0F6191B69EF7A00A75D21 /* MainMenu.xib in Resources */,
+				69E73BBE1B6A82CC00AA4D52 /* VERSION in Resources */,
+				69E73BB31B6A82CC00AA4D52 /* calendar.htm in Resources */,
+				69E73BBC1B6A82CC00AA4D52 /* reference.html in Resources */,
+				69E73BB61B6A82CC00AA4D52 /* font-awesome.min.css in Resources */,
+				69E73BB81B6A82CC00AA4D52 /* fontawesome-webfont.woff in Resources */,
+				69E73BBB1B6A82CC00AA4D52 /* index.js in Resources */,
+				69E73BCA1B6A830400AA4D52 /* UpdateWindowController.xib in Resources */,
+				69E73BC71B6A830400AA4D52 /* CLCPopController.xib in Resources */,
+				69E73BB91B6A82CC00AA4D52 /* FontAwesome.otf in Resources */,
+				69E73BB71B6A82CC00AA4D52 /* fontawesome-webfont.ttf in Resources */,
+				69E73BB51B6A82CC00AA4D52 /* festivals.js in Resources */,
+				69E73BB11B6A82CC00AA4D52 /* about.png in Resources */,
+				69E73BD01B6A887200AA4D52 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,28 +440,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		69B0F6171B69EF7A00A75D21 /* MainMenu.xib */ = {
+		69E73BBF1B6A830400AA4D52 /* CLCPopController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				69B0F6181B69EF7A00A75D21 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		69B0F6551B6A593700A75D21 /* CLCPopController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				69B0F6561B6A593700A75D21 /* Base */,
+				69E73BC01B6A830400AA4D52 /* Base */,
 			);
 			name = CLCPopController.xib;
 			sourceTree = "<group>";
 		};
-		69B0F6571B6A593700A75D21 /* UpdateWindowController.xib */ = {
+		69E73BC51B6A830400AA4D52 /* UpdateWindowController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				69B0F6581B6A593700A75D21 /* Base */,
+				69E73BC61B6A830400AA4D52 /* Base */,
 			);
 			name = UpdateWindowController.xib;
+			sourceTree = "<group>";
+		};
+		69E73BCE1B6A887200AA4D52 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69E73BCF1B6A887200AA4D52 /* Base */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -539,6 +623,7 @@
 				69B0F62A1B69EF7A00A75D21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		69B0F62B1B69EF7A00A75D21 /* Build configuration list for PBXNativeTarget "WanNianLiTests" */ = {
 			isa = XCConfigurationList;
@@ -547,6 +632,7 @@
 				69B0F62D1B69EF7A00A75D21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

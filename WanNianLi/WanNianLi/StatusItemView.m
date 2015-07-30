@@ -7,6 +7,10 @@
 //
 
 #import "StatusItemView.h"
+#import "CLCPopController.h"
+#import "CLCCalendar.h"
+#import <WebKit/WebKit.h>
+
 
 @implementation StatusItemView
 {
@@ -14,14 +18,12 @@
     BOOL _isRightMenuOn;
 
     NSMutableParagraphStyle *_style;
+    long iToday;
 }
 
 @synthesize statusItem = _statusItem;
 
 @synthesize image = _image;
-@synthesize alternateImage = _alternateImage;
-@synthesize menu = _menu;
-@synthesize rightMenu = _rightMenu;
 
 
 
@@ -36,7 +38,18 @@
         _statusItem = statusItem;
         _statusItem.view = self;
     }
+    
+    self.calendar = [[CLCCalendar alloc] init];
     return self;
+}
+
+- (void) updateDateIcon
+{
+    long d = [self.calendar getDay:nil];
+    if(d != iToday){
+        [self setNeedsDisplay:YES];
+    }
+    //    NSLog(@"update date icon");
 }
 
 
@@ -70,26 +83,11 @@
             nil];
     [[NSColor blackColor] set];
 
-//    iToday = 30;
-    NSString *strDay = [NSString stringWithFormat:@"%02ld", 30];
+    iToday = [self.calendar getDay:nil];
+    NSString *strDay = [NSString stringWithFormat:@"%02ld", iToday];
     NSRect calRect = NSMakeRect(2, 3, self.bounds.size.width - 4, self.bounds.size.height - 9);
 
     [strDay drawInRect:calRect withAttributes:attr];
-    
-    
-//    BOOL highlighted = _isMouseDown || _isMenuVisible;
-//    
-//    // Draw status bar background, highlighted if menu is showing
-//    [_statusItem drawStatusBarBackgroundInRect:[self bounds] withHighlight:highlighted];
-//    
-//    NSRect imageRect = NSInsetRect(self.bounds, RHStatusItemViewImageHPadding, RHStatusItemViewImageVPadding);
-//    imageRect.origin.y++; //move it up one pix
-//    
-//    if (highlighted){
-//        [self.alternateImage drawInRect:imageRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
-//    } else {
-//        [self.image drawInRect:imageRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
-//    }
 }
 
 - (NSRect) getCenteredRect:(NSSize)srcSize bounds:(NSRect)boundRect {
@@ -131,16 +129,6 @@
     }
 }
 
-- (void)setAlternateImage:(NSImage *)newImage
-{
-    if (_alternateImage != newImage) {
-        _alternateImage = newImage;
-        if (self.isHighlighted) {
-            [self setNeedsDisplay:YES];
-        }
-    }
-}
-
 
 #pragma mark -
 
@@ -156,12 +144,13 @@
 // Left Mouse Down, trigger left click action
 -(void)mouseDown:(NSEvent *)theEvent {
     NSLog(@"left mouse Down");
-    _isLeftMenuOn = YES;
-    if(self.delegate && [self.delegate respondsToSelector:@selector(leftClickOnStatusItem)] ){
-        [self.delegate leftClickOnStatusItem];
+    if( !self.popover.shown )
+    {
+        [self showPopover];
     } else {
-        [self popUpMenu];
+        [self hidePopover];
     }
+
     [self setNeedsDisplay:YES];
 }
 
@@ -173,47 +162,60 @@
     NSLog(@"right mouse Down");
     self.isHighlighted = !self.isHighlighted;
     _isRightMenuOn = YES;
-    if(self.delegate && [self.delegate respondsToSelector:@selector(rightClickOnStatusItem)] ){
-        [self.delegate rightClickOnStatusItem];
-    } else {
-        [self popUpRightMenu];
-    }
     [self setNeedsDisplay:YES];
 }
 
 
-#pragma mark - Menu showing
--(void)popUpMenu{
-    [self popUpMenu:self.menu];
-}
-
--(void)popUpRightMenu{
-    [self popUpMenu:self.rightMenu];
-}
-
--(void)popUpMenu:(NSMenu*)menu{
-    if (menu){
-        //register for menu did open and close notifications
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuWillOpen:) name:NSMenuDidBeginTrackingNotification object:menu];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidClose:) name:NSMenuDidEndTrackingNotification object:menu];
-        
-        [_statusItem popUpStatusItemMenu:menu];
+- (void) setupPopover
+{
+    if(! self.popover)
+    {
+        self.popover = [[NSPopover alloc] init];
+        self.popover.contentViewController = [[CLCPopController alloc]  initWithNibName:@"CLCPopController" bundle:nil];
+        self.popover.animates = NO;
+        // The system will close the popover when the user interacts with a user interface element outside the popover.
+        self.popover.behavior = NSPopoverBehaviorTransient;
+        self.popover.delegate = self;
     }
 }
 
+- (void) showPopover
+{
+    self.active = true;
+    
+    [self setupPopover];
+    
+    [self.popover showRelativeToRect:[self bounds]
+                              ofView:self
+                       preferredEdge:NSMinYEdge];
+    
+    // if user click area outside of our menulet, hide the popover
+    // we use popover.behavior for this purpose
+    //    _popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask
+    //                                                                       handler:^(NSEvent* event) {
+    //        [self hidePopover];
+    //    }];
+    
+    // repaint
+//    [self updateViewFrame];
+}
 
-#pragma mark - NSMenuDidBeginTrackingNotification
--(void)menuWillOpen:(NSNotification *)notification{
-    [self setNeedsDisplay:YES];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSMenuDidBeginTrackingNotification object:notification.object];
+- (void) hidePopover
+{
+    self.active = false;
+    
+    [self.popover performClose:nil];
+    
+    // remove the monitor
+    //    [NSEvent removeMonitor:_popoverTransiencyMonitor];
+    
+    // repaint
+//    [self updateViewFrame];
 }
 
 
-#pragma mark - NSMenuDidEndTrackingNotification
--(void)menuDidClose:(NSNotification *)notification{
-    [self setNeedsDisplay:YES];
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSMenuDidEndTrackingNotification object:notification.object];
+// methods from NSPopoverDelegate
+- (void)popoverDidClose:(NSNotification *)notification{
+//    [self updateViewFrame];
 }
-
 @end

@@ -23,7 +23,7 @@
 @synthesize webView;
 
 - (void)viewDidLoad {
-//    [super viewDidLoad];
+    [super viewDidLoad];
     // Do view setup here.
 }
 
@@ -82,6 +82,10 @@
     [self.updateWindow setWebView:self.webView];
     [NSApp activateIgnoringOtherApps:YES];
     [self.updateWindow showWindow:self];
+}
+
+- (IBAction)quitApp:(id)sender {
+    [NSApp terminate:self];
 }
 
 
