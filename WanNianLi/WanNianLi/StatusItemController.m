@@ -21,10 +21,10 @@
     if (self) {
         // Install status item into the menu bar
         _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
+        // create custom view for status item
         _statusItemView = [[StatusItemView alloc] initWithStatusItem:_statusItem];
         // use hardcoded image as calendar background
-        _statusItemView.image = [NSImage imageNamed:@"background"];
-//        _statusItemView.action = @selector(togglePanel:);
+        _statusItemView.image = [NSImage imageNamed:@"calendarIcon"];
     }
     return self;
 }
@@ -33,27 +33,5 @@
 {
     [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
 }
-
-
-#pragma mark -
-#pragma mark Public accessors
-
-- (NSStatusItem *)statusItem
-{
-    return self.statusItemView.statusItem;
-}
-
-#pragma mark -
-
-- (BOOL)hasActiveIcon
-{
-    return self.statusItemView.isHighlighted;
-}
-
-- (void)setHasActiveIcon:(BOOL)flag
-{
-    self.statusItemView.isHighlighted = flag;
-}
-
 
 @end

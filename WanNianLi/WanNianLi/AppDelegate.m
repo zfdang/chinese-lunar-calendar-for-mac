@@ -19,7 +19,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // https://github.com/potionfactory/LetsMove
     // move app into application folder ?
-    // PFMoveToApplicationsFolderIfNecessary();
+    //PFMoveToApplicationsFolderIfNecessary();
 
     // Install icon into the menu bar
     self.statusItemController = [[StatusItemController alloc] init];

@@ -13,10 +13,8 @@
 
 @interface StatusItemController : NSObject
 {
-    StatusItemView *_statusItemView;
 }
 
-@property (nonatomic) BOOL hasActiveIcon;
 @property (nonatomic, strong, readonly) NSStatusItem *statusItem;
 @property (nonatomic, strong, readonly) StatusItemView *statusItemView;
 

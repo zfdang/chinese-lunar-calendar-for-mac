@@ -14,26 +14,19 @@
 
 @implementation StatusItemView
 {
-    BOOL _isLeftMenuOn;
-    BOOL _isRightMenuOn;
-
+    NSString *calendarURL;
     NSMutableParagraphStyle *_style;
     long iToday;
-    NSString *calendarURL;
+    
+    NSEvent *_popoverTransiencyMonitor;
 }
 
 @synthesize statusItem = _statusItem;
-
 @synthesize image = _image;
-
 
 
 - (id)initWithStatusItem:(NSStatusItem *)statusItem
 {
-//    CGFloat itemWidth = [statusItem length];
-//    CGFloat itemHeight = [[NSStatusBar systemStatusBar] thickness];
-//    NSRect itemRect = NSMakeRect(0.0, 0.0, itemWidth, itemHeight);
-
     self = [super initWithFrame:NSZeroRect];
     if (self != nil) {
         _statusItem = statusItem;
@@ -42,6 +35,14 @@
     
     self.calendar = [[CLCCalendar alloc] init];
     [self initCalendarResources];
+    
+    // create timer to refresh icon every 5 seconds
+    [NSTimer scheduledTimerWithTimeInterval:5
+                                     target:self
+                                   selector:@selector(updateDateIcon)
+                                   userInfo:nil
+                                    repeats:YES];
+
     return self;
 }
 
@@ -61,16 +62,8 @@
     return version;
 }
 
+// copy calendar resources from app package to personal folder
 - (void) initCalendarResources {
-    self.calendar = [[CLCCalendar alloc] init];
-    
-    // create timer to refresh icon every 5 seconds
-    [NSTimer scheduledTimerWithTimeInterval:5
-                                     target:self
-                                   selector:@selector(updateDateIcon)
-                                   userInfo:nil
-                                    repeats:YES];
-    
     // prepare calendarURL
     // source directory in app package
     NSString *sourceDir = [[NSBundle mainBundle] resourcePath];
@@ -122,7 +115,6 @@
     } // if([paths count] == 1)
     
     NSLog(@"Calendar URL: %@", calendarURL);
-    
 }
 
 
@@ -132,13 +124,13 @@
     if(d != iToday){
         [self setNeedsDisplay:YES];
     }
-    //    NSLog(@"update date icon");
+    NSLog(@"update date icon");
 }
 
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [self.statusItem drawStatusBarBackgroundInRect:dirtyRect withHighlight:self.isHighlighted];
+    [self.statusItem drawStatusBarBackgroundInRect:dirtyRect withHighlight:self.active];
     
     NSRect destRect = [self getCenteredRect:self.image.size bounds:self.bounds];
     // destRect = NSInsetRect(destRect, 1, 0);
@@ -194,14 +186,6 @@
 
 #pragma mark - Accessors
 
-
-- (void)setHighlighted:(BOOL)newFlag
-{
-    if (_isHighlighted == newFlag) return;
-    _isHighlighted = newFlag;
-    [self setNeedsDisplay:YES];
-}
-
 - (void)setImage:(NSImage *)newImage
 {
     if (_image != newImage) {
@@ -216,27 +200,34 @@
 // Left Mouse Down, trigger left click action
 -(void)mouseDown:(NSEvent *)theEvent {
     NSLog(@"left mouse Down");
+    [self togglePopover];
+}
+
+- (void)mouseUp:(NSEvent *)event {
+    NSLog(@"left mouse Up");
+}
+
+// Right Mouse Down, trigger right click action
+-(void)rightMouseDown:(NSEvent *)theEvent{
+    NSLog(@"right mouse Down");
+    [self togglePopover];
+}
+
+-(void)rightMouseUp:(NSEvent *)theEvent{
+    NSLog(@"right mouse Up");
+}
+
+
+// show or hide popover, and update calendar icon in menubar
+- (void) togglePopover {
     if( !self.popover.shown )
     {
         [self showPopover];
     } else {
         [self hidePopover];
     }
-
     [self setNeedsDisplay:YES];
 }
-
-- (void)mouseUp:(NSEvent *)event {
-}
-
-// Right Mouse Down, trigger right click action
--(void)rightMouseDown:(NSEvent *)theEvent{
-    NSLog(@"right mouse Down");
-    self.isHighlighted = !self.isHighlighted;
-    _isRightMenuOn = YES;
-    [self setNeedsDisplay:YES];
-}
-
 
 - (void) setupPopover
 {
@@ -244,9 +235,10 @@
     {
         self.popover = [[NSPopover alloc] init];
         self.popover.contentViewController = [[CLCPopController alloc]  initWithNibName:@"CLCPopController" bundle:nil];
-        self.popover.animates = NO;
+        self.popover.animates = YES;
         // The system will close the popover when the user interacts with a user interface element outside the popover.
-        self.popover.behavior = NSPopoverBehaviorTransient;
+        // it seems this does not work well
+        // self.popover.behavior = NSPopoverBehaviorTransient;
         self.popover.delegate = self;
     }
 }
@@ -262,11 +254,14 @@
                        preferredEdge:NSMinYEdge];
     
     // if user click area outside of our menulet, hide the popover
-    // we use popover.behavior for this purpose
-    //    _popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask
-    //                                                                       handler:^(NSEvent* event) {
-    //        [self hidePopover];
-    //    }];
+    _popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask
+                                                                           handler:^(NSEvent* event)
+    {
+        [self hidePopover];
+        [self setNeedsDisplay:YES];
+        [NSEvent removeMonitor:_popoverTransiencyMonitor];
+        _popoverTransiencyMonitor = nil;
+    }];
     
     // repaint
     [self updateViewFrame];
@@ -275,20 +270,13 @@
 - (void) hidePopover
 {
     self.active = false;
-    
     [self.popover performClose:nil];
-    
-    // remove the monitor
-    //    [NSEvent removeMonitor:_popoverTransiencyMonitor];
-    
-    // repaint
-//    [self updateViewFrame];
 }
 
 
 // methods from NSPopoverDelegate
 - (void)popoverDidClose:(NSNotification *)notification{
-//    [self updateViewFrame];
+
 }
 
 - (void)updateViewFrame

@@ -12,8 +12,10 @@
 @interface CLCPopController : NSViewController
 
 @property (weak) IBOutlet WebView *webView;
+@property (weak) IBOutlet NSButton *menuButton;
+
 @property (strong) IBOutlet NSMenu *aboutMenu;
-@property (weak) IBOutlet NSButton *showAboutMenu;
+
 
 - (IBAction)showMenu:(id)sender;
 - (IBAction)showHelp:(id)sender;

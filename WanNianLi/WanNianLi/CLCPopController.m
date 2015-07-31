@@ -33,8 +33,8 @@
     if (self) {
         // remove blue shadow of NSButton
         [[self view] setFocusRingType:NSFocusRingTypeNone];
-        [self.showAboutMenu setFocusRingType:NSFocusRingTypeNone];
-        [self.showAboutMenu setRefusesFirstResponder:TRUE];
+        [self.menuButton setFocusRingType:NSFocusRingTypeNone];
+        [self.menuButton setRefusesFirstResponder:TRUE];
 
         // disable right click menu
         [self.webView setUIDelegate:self];

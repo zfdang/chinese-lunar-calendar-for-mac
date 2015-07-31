@@ -14,18 +14,13 @@
 
 
 // StatusItemView: customized view to show icon in menubar
-@interface StatusItemView : NSControl {
-    BOOL _isHighlighted;
-
-    NSImage *_image;
+@interface StatusItemView : NSControl <NSPopoverDelegate> {
 }
 
 @property (nonatomic, strong, readonly) NSStatusItem *statusItem;
 
 @property (nonatomic, retain) NSImage *image;
 
-
-@property (nonatomic, setter = setHighlighted:) BOOL isHighlighted;
 
 @property(strong, nonatomic) NSPopover *popover;
 @property(strong, nonatomic) CLCCalendar *calendar;
@@ -35,6 +30,7 @@
 
 - (id)initWithStatusItem:(NSStatusItem *)statusItem;
 
+- (NSRect) getCenteredRect:(NSSize)srcSize bounds:(NSRect)boundRect;
 - (void) updateDateIcon;
 
 @end
