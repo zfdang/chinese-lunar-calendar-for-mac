@@ -45,6 +45,7 @@
 		69E73BCA1B6A830400AA4D52 /* UpdateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BC51B6A830400AA4D52 /* UpdateWindowController.xib */; };
 		69E73BCD1B6A857A00AA4D52 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E73BCC1B6A857A00AA4D52 /* WebKit.framework */; };
 		69E73BD01B6A887200AA4D52 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BCE1B6A887200AA4D52 /* MainMenu.xib */; };
+		69E73BD21B6B03D700AA4D52 /* wannianli.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BD11B6B03D700AA4D52 /* wannianli.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		69E73BC61B6A830400AA4D52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UpdateWindowController.xib; sourceTree = "<group>"; };
 		69E73BCC1B6A857A00AA4D52 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		69E73BCF1B6A887200AA4D52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		69E73BD11B6B03D700AA4D52 /* wannianli.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = wannianli.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 		69E73BA11B6A82CC00AA4D52 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				69E73BD11B6B03D700AA4D52 /* wannianli.icns */,
 				69E73BA21B6A82CC00AA4D52 /* about.png */,
 				69E73BA31B6A82CC00AA4D52 /* icon.png */,
 				69E73BA41B6A82CC00AA4D52 /* vendors */,
@@ -375,6 +378,7 @@
 				69E73BBC1B6A82CC00AA4D52 /* reference.html in Resources */,
 				69E73BB61B6A82CC00AA4D52 /* font-awesome.min.css in Resources */,
 				69E73BB81B6A82CC00AA4D52 /* fontawesome-webfont.woff in Resources */,
+				69E73BD21B6B03D700AA4D52 /* wannianli.icns in Resources */,
 				69E73BBB1B6A82CC00AA4D52 /* index.js in Resources */,
 				69E73BCA1B6A830400AA4D52 /* UpdateWindowController.xib in Resources */,
 				69E73BC71B6A830400AA4D52 /* CLCPopController.xib in Resources */,
