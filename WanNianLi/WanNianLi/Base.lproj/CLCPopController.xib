@@ -8,6 +8,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="CLCPopController">
             <connections>
                 <outlet property="aboutMenu" destination="15X-LA-H45" id="GqZ-ig-hKx"/>
+                <outlet property="autoStartMenuItem" destination="6Eq-R8-rZD" id="1Ve-PO-qyn"/>
+                <outlet property="calendarTopMenuItem" destination="IzP-zD-SyT" id="aCv-Bc-FF8"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="aop-h5-oLN"/>
                 <outlet property="webView" destination="nLn-XO-wV9" id="o46-Ez-WmF"/>
             </connections>
@@ -39,6 +41,19 @@
         </customView>
         <menu id="15X-LA-H45" userLabel="AboutMenu">
             <items>
+                <menuItem title="窗口保持最前" id="IzP-zD-SyT">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="toggleCalendarTop:" target="-2" id="BHt-wO-xJs"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="自动启动" id="6Eq-R8-rZD">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="toggleAutoStart:" target="-2" id="aJc-6k-b1Z"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="5rg-Bx-rgX"/>
                 <menuItem title="使用帮助" id="VWM-O9-K9y">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>

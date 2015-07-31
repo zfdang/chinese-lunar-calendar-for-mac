@@ -51,7 +51,7 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
 
-    NSURL* holidayURL = [NSURL URLWithString:@"https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/CLCMenuExtra/CLCMenuExtra/Resources/vendors/holidays.js"];
+    NSURL* holidayURL = [NSURL URLWithString:@"https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/WanNianLi/WanNianLi/Resources/vendors/holidays.js"];
 
     // add hyperlink to textview
     [self.txtHoliday setAllowsEditingTextAttributes: YES];

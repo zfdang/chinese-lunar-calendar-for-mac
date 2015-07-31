@@ -28,6 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    
+    [self.calendarTopMenuItem setOnStateImage:[NSImage imageNamed:@"checked"]];
+    [self.autoStartMenuItem setOnStateImage:[NSImage imageNamed:@"checked"]];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -48,6 +51,22 @@
 
 - (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems {
     return nil;
+}
+
+- (IBAction)toggleCalendarTop:(id)sender {
+    if(self.calendarTopMenuItem.state == NSOffState) {
+        [self.calendarTopMenuItem setState:NSOnState];
+    } else {
+        [self.calendarTopMenuItem setState:NSOffState];
+    }
+}
+
+- (IBAction)toggleAutoStart:(id)sender {
+    if(self.autoStartMenuItem.state == NSOffState) {
+        [self.autoStartMenuItem setState:NSOnState];
+    } else {
+        [self.autoStartMenuItem setState:NSOffState];
+    }
 }
 
 - (IBAction)showMenu:(id)sender {

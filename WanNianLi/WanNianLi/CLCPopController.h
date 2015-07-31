@@ -15,7 +15,12 @@
 @property (weak) IBOutlet NSButton *menuButton;
 
 @property (strong) IBOutlet NSMenu *aboutMenu;
+@property (weak) IBOutlet NSMenuItem *calendarTopMenuItem;
+@property (weak) IBOutlet NSMenuItem *autoStartMenuItem;
 
+
+- (IBAction)toggleCalendarTop:(id)sender;
+- (IBAction)toggleAutoStart:(id)sender;
 
 - (IBAction)showMenu:(id)sender;
 - (IBAction)showHelp:(id)sender;

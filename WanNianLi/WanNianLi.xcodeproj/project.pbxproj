@@ -28,7 +28,6 @@
 		69B0F6641B6A594700A75D21 /* UpdateWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6601B6A594700A75D21 /* UpdateWindowController.m */; };
 		69B0F66B1B6A59F600A75D21 /* CLCCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F66A1B6A59F600A75D21 /* CLCCalendar.m */; };
 		69E73BB11B6A82CC00AA4D52 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA21B6A82CC00AA4D52 /* about.png */; };
-		69E73BB21B6A82CC00AA4D52 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA31B6A82CC00AA4D52 /* icon.png */; };
 		69E73BB31B6A82CC00AA4D52 /* calendar.htm in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA51B6A82CC00AA4D52 /* calendar.htm */; };
 		69E73BB41B6A82CC00AA4D52 /* calendar.js in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA61B6A82CC00AA4D52 /* calendar.js */; };
 		69E73BB51B6A82CC00AA4D52 /* festivals.js in Resources */ = {isa = PBXBuildFile; fileRef = 69E73BA71B6A82CC00AA4D52 /* festivals.js */; };
@@ -102,7 +101,6 @@
 		69B0F6691B6A59F600A75D21 /* CLCCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCCalendar.h; sourceTree = "<group>"; };
 		69B0F66A1B6A59F600A75D21 /* CLCCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCCalendar.m; sourceTree = "<group>"; };
 		69E73BA21B6A82CC00AA4D52 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
-		69E73BA31B6A82CC00AA4D52 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		69E73BA51B6A82CC00AA4D52 /* calendar.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = calendar.htm; sourceTree = "<group>"; };
 		69E73BA61B6A82CC00AA4D52 /* calendar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = calendar.js; sourceTree = "<group>"; };
 		69E73BA71B6A82CC00AA4D52 /* festivals.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = festivals.js; sourceTree = "<group>"; };
@@ -253,7 +251,6 @@
 			children = (
 				69E73BD11B6B03D700AA4D52 /* wannianli.icns */,
 				69E73BA21B6A82CC00AA4D52 /* about.png */,
-				69E73BA31B6A82CC00AA4D52 /* icon.png */,
 				69E73BA41B6A82CC00AA4D52 /* vendors */,
 			);
 			path = Resources;
@@ -371,7 +368,6 @@
 				69E73BBA1B6A82CC00AA4D52 /* holidays.js in Resources */,
 				69E73BBD1B6A82CC00AA4D52 /* style.css in Resources */,
 				69E73BB41B6A82CC00AA4D52 /* calendar.js in Resources */,
-				69E73BB21B6A82CC00AA4D52 /* icon.png in Resources */,
 				69B0F6161B69EF7A00A75D21 /* Images.xcassets in Resources */,
 				69E73BBE1B6A82CC00AA4D52 /* VERSION in Resources */,
 				69E73BB31B6A82CC00AA4D52 /* calendar.htm in Resources */,
