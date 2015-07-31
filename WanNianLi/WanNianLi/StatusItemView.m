@@ -124,7 +124,7 @@
     if(d != iToday){
         [self setNeedsDisplay:YES];
     }
-    NSLog(@"update date icon");
+//    NSLog(@"update date icon");
 }
 
 
@@ -199,22 +199,22 @@
 
 // Left Mouse Down, trigger left click action
 -(void)mouseDown:(NSEvent *)theEvent {
-    NSLog(@"left mouse Down");
+//    NSLog(@"left mouse Down");
     [self togglePopover];
 }
 
 - (void)mouseUp:(NSEvent *)event {
-    NSLog(@"left mouse Up");
+//    NSLog(@"left mouse Up");
 }
 
 // Right Mouse Down, trigger right click action
 -(void)rightMouseDown:(NSEvent *)theEvent{
-    NSLog(@"right mouse Down");
+//    NSLog(@"right mouse Down");
     [self togglePopover];
 }
 
 -(void)rightMouseUp:(NSEvent *)theEvent{
-    NSLog(@"right mouse Up");
+//    NSLog(@"right mouse Up");
 }
 
 

@@ -52,13 +52,13 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="c3q-Gr-cze"/>
-                <menuItem title="版本: 2015-07-18" id="BIW-iE-pNp" userLabel="版本: 2015-07-18">
+                <menuItem title="版本: 2015-07-31" id="BIW-iE-pNp" userLabel="版本: 2015-07-18">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showVersion:" target="-2" id="CUZ-5Z-laM"/>
                     </connections>
                 </menuItem>
-                <menuItem title="© zfdang" id="wof-tl-Olp">
+                <menuItem title="万年历 © zfdang" id="wof-tl-Olp">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="contactAuthor:" target="-2" id="OSd-T2-fUK"/>

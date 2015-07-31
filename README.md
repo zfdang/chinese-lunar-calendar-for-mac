@@ -4,27 +4,28 @@
 ### [calendar.zfdang.com](http://calendar.zfdang.com)
 
 # 2.Code Explanation
-This is a MenuExtra app which shows a simple chinese lunar calendar.
+This is a menubar app which shows a simple chinese lunar calendar for OSX.
 
-You can use CMD+Drag to move the location of this item.
+There are two different implementations for this app:
 
-there are three projects in this application.
+### 2.1. WanNianLi
+this project is using the official NSStatusItem to implement the menubar app.
+Its posittion in the icon bar can't be moved.
 
-### 2.1. CLCLauncher
-this application is a agent application, which launch "MenuCracker.menu" & "CLCMenuExtra.menu"
+### 2.2. CLCLauncher + CLCMenuExtra
+these two projects are using the un-official NSMenuExtra (hacking way) to implement the menubar app. 
+The calendar icon works in the same way with system's icon. You can use CMD+Drag to move it or remove it.
+
+CLCLauncher: this project is a agent application, which launch "MenuCracker.menu" & "CLCMenuExtra.menu"
 
 It dependens on MenuCracker.menu and CLCMenuExtra.menu (these two bundles will be packed into CLCLauncher.app as resources)
 
-### 2.2. CLCMenuExtra
-This bundle finishs the actual functionality.
+
+CLCMenuExtra: this project finishs the actual functionality.
 this bundle is using un-official NSMenuExtra API.
 
-# 3.Simple Demo for MenuExtra
-if you want to learn how to develop menulet application, you can start with v0.1 release. It has a basic framework, but with full functionality:
 
-[v0.1 release](https://github.com/zfdang/chinese-lunar-calendar-for-mac/releases)
-
-# 4.Referrences
+# 3.Referrences
 http://duhanebel.wordpress.com/2010/04/02/nsmenuextra-how-to-work-with-undocumented-apis/
 
 https://github.com/aschuch/AXStatusItemPopup
