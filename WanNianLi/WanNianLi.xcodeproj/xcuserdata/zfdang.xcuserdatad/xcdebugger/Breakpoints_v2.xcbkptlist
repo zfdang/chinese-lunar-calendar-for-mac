@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WanNianLi/CLCPopController.m"
-            timestampString = "459955355.004549"
+            timestampString = "460004536.054532"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "-initWithNibName:bundle:"
             landmarkType = "5">
          </BreakpointContent>

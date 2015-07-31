@@ -238,7 +238,7 @@
         self.popover.animates = YES;
         // The system will close the popover when the user interacts with a user interface element outside the popover.
         // it seems this does not work well
-        // self.popover.behavior = NSPopoverBehaviorTransient;
+//        self.popover.behavior = NSPopoverBehaviorTransient;
         self.popover.delegate = self;
     }
 }
@@ -262,9 +262,13 @@
         [NSEvent removeMonitor:_popoverTransiencyMonitor];
         _popoverTransiencyMonitor = nil;
     }];
-    
+
     // repaint
     [self updateViewFrame];
+
+    // activate the calendar view
+    // 这个应该是可配置的，有些人可能更喜欢popover不干扰其他窗口
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (void) hidePopover

@@ -33,4 +33,7 @@
 - (NSRect) getCenteredRect:(NSSize)srcSize bounds:(NSRect)boundRect;
 - (void) updateDateIcon;
 
+- (void) showPopover;
+- (void) hidePopover;
+
 @end

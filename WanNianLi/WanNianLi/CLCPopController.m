@@ -9,6 +9,9 @@
 #import "CLCPopController.h"
 #import "UpdateWindowController.h"
 #import <WebKit/WebKit.h>
+#import "AppDelegate.h"
+#import "StatusItemController.h"
+#import "StatusItemView.h"
 
 @interface CLCPopController ()
     @property (strong) UpdateWindowController *updateWindow;
@@ -78,6 +81,11 @@
 }
 
 - (IBAction)updateHolidays:(id)sender {
+    // get instance of StatusItemView
+    StatusItemController *controller = [(AppDelegate *)[[NSApplication sharedApplication] delegate] statusItemController];
+    [controller.statusItemView hidePopover];
+    [controller.statusItemView setNeedsDisplay:YES];
+
     self.updateWindow = [[UpdateWindowController alloc] initWithWindowNibName:@"UpdateWindowController"];
     [self.updateWindow setWebView:self.webView];
     [NSApp activateIgnoringOtherApps:YES];
