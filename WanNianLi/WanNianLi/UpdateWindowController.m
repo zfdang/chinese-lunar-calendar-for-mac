@@ -51,12 +51,13 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
 
+    NSURL* holidayURL = [NSURL URLWithString:@"https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/CLCMenuExtra/CLCMenuExtra/Resources/vendors/holidays.js"];
+
     // add hyperlink to textview
     [self.txtHoliday setAllowsEditingTextAttributes: YES];
     [self.txtHoliday setSelectable: YES];
-    NSURL* url = [NSURL URLWithString:@"https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/CLCMenuExtra/CLCMenuExtra/Resources/vendors/holidays.js"];
     NSMutableAttributedString* string = [[NSMutableAttributedString alloc] init];
-    [string appendAttributedString: [NSAttributedString hyperlinkFromString:@"holidays.js" withURL:url]];
+    [string appendAttributedString: [NSAttributedString hyperlinkFromString:@"holidays.js" withURL:holidayURL]];
     [self.txtHoliday setAttributedStringValue: string];
     
     // 0. initialize appSupportDir
@@ -75,8 +76,7 @@
     // 3. start async task to download holidays.js, and save it as holidays.new.js
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURL *URL = [NSURL URLWithString:@"https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/CLCMenuExtra/CLCMenuExtra/Resources/vendors/holidays.js"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:holidayURL];
 
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         // download file URL
