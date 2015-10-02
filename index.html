@@ -27,7 +27,11 @@
           <a href="WanNianLi.app.zip" id="download-app" class="button"><span>下载程序(官方API版本)</span></a>
           <a href="WanNianLi.app-old.zip" id="download-app" class="button"><span>下载程序(OS<=10.10.4)</span></a>
         </section>
-<h4>注意: 升级到OSX 10.11的同学，请使用官方API的版本。使用NSMenuExtra版本的将无法在10.11上打开。具体区别请看下面的说明。</h4>
+<h4>注意: 升级到OSX 10.11的同学，请使用官方API的版本。使用NSMenuExtra版本的将无法在10.11上打开。具体区别请看下面的说明:</h4>
+<p>There are in fact two types of such menu bar items, one known as NSMenuExtra's and another known as NSStatusItem's. The former are loaded and displayed by SystemUIServer, a process provided by the system. The latter can be displayed by any app written by any developer. One good thing about the former is that you can rearrange them by ⌘-dragging the menu items. I have no idea why ⌘-dragging is not provided for the latter by the system.</p>
+<p>Anyway, due to this better behavior of NSMenuExtra's, people often wanted to write their own. In fact until and including OS X 10.1, Apple allowed it. But since 10.2, Apple had a code that blocked SystemUIServer to load non-system-provided NSMenuExtra's. But until Yosemite, there was a known way to work around it, available as an open-source code as MenuCracker. MenuMeters used this to inject their own NSMenuExtra's to SystemUIServer; in fact MenuMeters' author is one of the main authors of MenuCracker.</p>
+
+<p>Essentially, until Yosemite, SystemUIServer had a fixed list of allowed NSMenuExtras. MenuCracker was an NSMenuExtra that pretended to be one of those allowed ones, which, once loaded inside SystemUIServer, removed these checks, so that more NSMenuExtras can be loaded without any problem. In El Capitan, Apple added a more stringent check of the allowed NSMenuExtra's, and MenuCracker no longer works.</p>
 <br>
         <section id="main_content">
 
