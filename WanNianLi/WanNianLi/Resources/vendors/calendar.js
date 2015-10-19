@@ -104,8 +104,10 @@
         function C(m) {
             var k, j = 0,
                 h = 0;
-            var l = new Date(1900, 0, 31);
-            var n = (m - l) / 86400000;
+            // var l = new Date(1900, 0, 31);
+            var startDate = new Date(Date.UTC(1900, 0, 31));
+            var newDate = new Date(Date.UTC(m.getFullYear(), m.getMonth(), m.getDate()));
+            var n = (newDate - startDate) / 86400000;
             this.dayCyl = n + 40;
             this.monCyl = 14;
             for (k = 1900; k < 2050 && n > 0; k++) {
