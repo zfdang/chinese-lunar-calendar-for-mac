@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "StatusItemController.h"
 #import "StatusItemView.h"
+#import "NSApplication+MXUtilities.h"
+
 
 @interface CLCPopController ()
     @property (strong) UpdateWindowController *updateWindow;
@@ -44,6 +46,13 @@
 
         // disable right click menu
         [self.webView setUIDelegate:self];
+        
+        BOOL isAutoStart =  [NSApplication sharedApplication].launchAtLogin;
+        if(isAutoStart) {
+            [self.autoStartMenuItem setState:NSOnState];
+        } else  {
+            [self.autoStartMenuItem setState:NSOffState];
+        }
     }
 
     return self;
@@ -61,10 +70,13 @@
     }
 }
 
+
 - (IBAction)toggleAutoStart:(id)sender {
     if(self.autoStartMenuItem.state == NSOffState) {
+        [[NSApplication sharedApplication] setLaunchAtLogin:YES];
         [self.autoStartMenuItem setState:NSOnState];
     } else {
+        [[NSApplication sharedApplication] setLaunchAtLogin:NO];
         [self.autoStartMenuItem setState:NSOffState];
     }
 }

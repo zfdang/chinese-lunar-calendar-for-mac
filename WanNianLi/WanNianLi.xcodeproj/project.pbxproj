@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		698F42D31BD4E37F0094053B /* NSApplication+MXUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 698F42D21BD4E37F0094053B /* NSApplication+MXUtilities.m */; settings = {ASSET_TAGS = (); }; };
 		69B0F6121B69EF7A00A75D21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6111B69EF7A00A75D21 /* AppDelegate.m */; };
 		69B0F6141B69EF7A00A75D21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6131B69EF7A00A75D21 /* main.m */; };
 		69B0F6161B69EF7A00A75D21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B0F6151B69EF7A00A75D21 /* Images.xcassets */; };
@@ -58,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		698F42D11BD4E37F0094053B /* NSApplication+MXUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+MXUtilities.h"; sourceTree = "<group>"; };
+		698F42D21BD4E37F0094053B /* NSApplication+MXUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+MXUtilities.m"; sourceTree = "<group>"; };
 		69B0F60B1B69EF7A00A75D21 /* WanNianLi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WanNianLi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B0F60F1B69EF7A00A75D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69B0F6101B69EF7A00A75D21 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				69B0F6341B69EFA100A75D21 /* StatusItemView.m */,
 				69B0F6101B69EF7A00A75D21 /* AppDelegate.h */,
 				69B0F6111B69EF7A00A75D21 /* AppDelegate.m */,
+				698F42D11BD4E37F0094053B /* NSApplication+MXUtilities.h */,
+				698F42D21BD4E37F0094053B /* NSApplication+MXUtilities.m */,
 				69B0F6651B6A597600A75D21 /* CLCPopController.h */,
 				69B0F65B1B6A594700A75D21 /* CLCPopController.m */,
 				69B0F65D1B6A594700A75D21 /* NSAttributedString+Hyperlink.h */,
@@ -404,6 +409,7 @@
 				69B0F64C1B6A592C00A75D21 /* AFHTTPRequestOperation.m in Sources */,
 				69B0F6611B6A594700A75D21 /* CLCPopController.m in Sources */,
 				69B0F64F1B6A592C00A75D21 /* AFNetworkReachabilityManager.m in Sources */,
+				698F42D31BD4E37F0094053B /* NSApplication+MXUtilities.m in Sources */,
 				69B0F6541B6A592C00A75D21 /* AFURLSessionManager.m in Sources */,
 				69B0F6521B6A592C00A75D21 /* AFURLRequestSerialization.m in Sources */,
 				69B0F6361B69EFA100A75D21 /* StatusItemController.m in Sources */,

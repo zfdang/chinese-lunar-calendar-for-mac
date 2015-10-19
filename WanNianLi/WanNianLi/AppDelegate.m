@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "StatusItemController.h"
+#import "PFMoveApplication.h"
 
 @interface AppDelegate ()
 
