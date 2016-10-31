@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		698F42D31BD4E37F0094053B /* NSApplication+MXUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 698F42D21BD4E37F0094053B /* NSApplication+MXUtilities.m */; settings = {ASSET_TAGS = (); }; };
+		698F42D31BD4E37F0094053B /* NSApplication+MXUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 698F42D21BD4E37F0094053B /* NSApplication+MXUtilities.m */; };
 		69B0F6121B69EF7A00A75D21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6111B69EF7A00A75D21 /* AppDelegate.m */; };
 		69B0F6141B69EF7A00A75D21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6131B69EF7A00A75D21 /* main.m */; };
 		69B0F6161B69EF7A00A75D21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B0F6151B69EF7A00A75D21 /* Images.xcassets */; };
@@ -334,7 +334,7 @@
 		69B0F6031B69EF7A00A75D21 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Zhengfa;
 				TargetAttributes = {
 					69B0F60A1B69EF7A00A75D21 = {
@@ -486,8 +486,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -530,8 +532,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
