@@ -242,19 +242,14 @@
             // "中文显示测试" => "中文显示.."
             var maxLength = 4;
             if(escape(input).indexOf("%u") < 0) {
-                // no chinese char, set max to 8
+                // no chinese char, set max to 6
                 maxLength = 6;
-                if(input.length <= maxLength) {
-                    return input;
-                } else {
-                    return input.substr(0, maxLength) + "..";
-                }
+            }
+
+            if(input.length <= maxLength) {
+                return input;
             } else {
-                if(input.length <= maxLength) {
-                    return input;
-                } else {
-                    return input.substr(0, maxLength) + "..";
-                }
+                return input.substr(0, maxLength) + "..";
             }
         }
 
