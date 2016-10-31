@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
     window["MzBrowser"] = {};
     (function() {
         if (MzBrowser.platform) return;
@@ -233,6 +233,31 @@
             return [31, (R(iYear) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][iMonth]
         }
 
+        function getShortString(input) {
+            // limit to 6 pure english char, or 4 pure chinese char
+            // mixed chinese & english are considered as all chinese
+            // "123456" => "123456"
+            // "123456789" => "123456.."
+            // "中文显示" => "中文显示"
+            // "中文显示测试" => "中文显示.."
+            var maxLength = 4;
+            if(escape(input).indexOf("%u") < 0) {
+                // no chinese char, set max to 8
+                maxLength = 6;
+                if(input.length <= maxLength) {
+                    return input;
+                } else {
+                    return input.substr(0, maxLength) + "..";
+                }
+            } else {
+                if(input.length <= maxLength) {
+                    return input;
+                } else {
+                    return input.substr(0, maxLength) + "..";
+                }
+            }
+        }
+
         this.date = Y;
         this.isToday = false;
         this.isSel = false;
@@ -344,7 +369,7 @@
         }
 
         // 限制字符长度
-        this.showInLunar = (this.showInLunar.length > 4) ? this.showInLunar.substr(0, 4) + ".." : this.showInLunar
+        this.showInLunar = getShortString(this.showInLunar);
     }
 
     var MonthData = (function() {
