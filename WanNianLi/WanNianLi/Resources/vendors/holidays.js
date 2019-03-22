@@ -1,4 +1,4 @@
-﻿// Version: 20181206
+﻿// Version: 20190322
 // 国务院公布的假期调整方案
 // 假日为"+"，工作日为"-"
 var HOLIDAYADJUSTMENT = {
