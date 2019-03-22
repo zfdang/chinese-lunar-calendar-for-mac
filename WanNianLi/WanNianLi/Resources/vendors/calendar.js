@@ -401,8 +401,8 @@
             this.jieqi = JIEQI[(this.solarMonth - 1) * 2 + 1]
         }
 
-        // 当天有没有特殊事件
-        this.specialEvent = CALENDAR_EVENTS[f(Y, "yyyy") + f(Y, "MM") + f(Y, "dd")];
+        // 当天有没有特殊事件, 在events.js中定义
+        this.specialEvent = SPECIFIC_EVENTS[f(Y, "yyyy") + f(Y, "MM") + f(Y, "dd")];
         if (typeof this.specialEvent == "undefined") {
             this.specialEvent = ""
         }

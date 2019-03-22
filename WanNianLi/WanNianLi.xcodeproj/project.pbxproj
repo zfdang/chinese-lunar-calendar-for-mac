@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69360C7E2244CE49002D0E3E /* events.js in Resources */ = {isa = PBXBuildFile; fileRef = 69360C7D2244CE49002D0E3E /* events.js */; };
 		698F42D31BD4E37F0094053B /* NSApplication+MXUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 698F42D21BD4E37F0094053B /* NSApplication+MXUtilities.m */; };
 		69B0F6121B69EF7A00A75D21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6111B69EF7A00A75D21 /* AppDelegate.m */; };
 		69B0F6141B69EF7A00A75D21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6131B69EF7A00A75D21 /* main.m */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		69360C7D2244CE49002D0E3E /* events.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = events.js; sourceTree = "<group>"; };
 		698F42D11BD4E37F0094053B /* NSApplication+MXUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+MXUtilities.h"; sourceTree = "<group>"; };
 		698F42D21BD4E37F0094053B /* NSApplication+MXUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+MXUtilities.m"; sourceTree = "<group>"; };
 		69B0F60B1B69EF7A00A75D21 /* WanNianLi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WanNianLi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +266,7 @@
 		69E73BA41B6A82CC00AA4D52 /* vendors */ = {
 			isa = PBXGroup;
 			children = (
+				69360C7D2244CE49002D0E3E /* events.js */,
 				69E73BA51B6A82CC00AA4D52 /* calendar.htm */,
 				69E73BA61B6A82CC00AA4D52 /* calendar.js */,
 				69E73BA71B6A82CC00AA4D52 /* festivals.js */,
@@ -376,6 +379,7 @@
 				69B0F6161B69EF7A00A75D21 /* Images.xcassets in Resources */,
 				69E73BBE1B6A82CC00AA4D52 /* VERSION in Resources */,
 				69E73BB31B6A82CC00AA4D52 /* calendar.htm in Resources */,
+				69360C7E2244CE49002D0E3E /* events.js in Resources */,
 				69E73BBC1B6A82CC00AA4D52 /* reference.html in Resources */,
 				69E73BB61B6A82CC00AA4D52 /* font-awesome.min.css in Resources */,
 				69E73BB81B6A82CC00AA4D52 /* fontawesome-webfont.woff in Resources */,

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="12121"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -63,7 +64,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="c3q-Gr-cze"/>
-                <menuItem title="版本: 2017-12-22" id="BIW-iE-pNp" userLabel="版本:">
+                <menuItem title="版本: 2019-03-22" id="BIW-iE-pNp" userLabel="版本:">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showVersion:" target="-2" id="CUZ-5Z-laM"/>
