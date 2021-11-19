@@ -10,7 +10,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Mac下的万年历状态栏小工具</title>
+    <title>MacOS下的万年历状态栏小工具</title>
   </head>
 
   <body>
@@ -19,7 +19,7 @@
 
         <header>
           <h1>Mac下的万年历状态栏小工具</h1>
-          <h2>Chinese Lunar Calendar for Mac in MenuBar</h2>
+          <h2>MenuBar Chinese Lunar Calendar for MacOS</h2>
         </header>
 
         <section id="downloads" class="clearfix">
@@ -27,12 +27,7 @@
           <a href="WanNianLi.app-intel.zip" id="download-app" class="button"><span>下载程序(Intel版)</span></a>
           <a href="WanNianLi.app-u.zip" id="download-app" class="button"><span>下载程序(Universal版)</span></a>
         </section>
-<h4>注意: 升级到OSX 10.11的同学，请使用官方API的版本。使用NSMenuExtra版本的将无法在10.11上打开。具体区别请看下面的说明:</h4>
-
-<p>There are in fact two types of such menu bar items, one known as NSMenuExtra's and another known as NSStatusItem's. The former are loaded and displayed by SystemUIServer, a process provided by the system. The latter can be displayed by any app written by any developer. One good thing about the former is that you can rearrange them by ⌘-dragging the menu items.</p>
-<p>Anyway, due to this better behavior of NSMenuExtra's, people often wanted to write their own. In fact until and including OS X 10.1, Apple allowed it. But since 10.2, Apple had a code that blocked SystemUIServer to load non-system-provided NSMenuExtra's. But until Yosemite, there was a known way to work around it, available as an open-source code as MenuCracker. WanNianLi used this to inject their own NSMenuExtra's to SystemUIServer.</p>
-
-<p>Essentially, until Yosemite, SystemUIServer had a fixed list of allowed NSMenuExtras. MenuCracker was an NSMenuExtra that pretended to be one of those allowed ones, which, once loaded inside SystemUIServer, removed these checks, so that more NSMenuExtras can be loaded without any problem. In OSX 10.11 El Capitan, Apple added a more stringent check of the allowed NSMenuExtra's, and MenuCracker no longer works.</p>
+<h4>注意: 使用ARM系统的，请下载Universal版程序；Intel系统的，两个版本的程序都可以使用；
 <br>
         <section id="main_content">
 
@@ -52,10 +47,11 @@
   <li>支持键盘控制日历: ←上一年, →下一年，↑上一月，↓下一月，↵回今日</li>
   <li>点击选择某一天，长按显示更详细的信息</li>
   <li>支持国内的假期调整：周末上班或者工作日放假; 支持在线更新假期调整方案，一般在年末的时候需要更新一次</li>
-  <li>支持增加属于个人的农历、公历节日（vim ~/Library/Application\ Support/com.zfdang.calendar/festivals.js)。节日每年会重复。</li>
-  <li>支持增加指定日子的事件（vim ~/Library/Application\ Support/com.zfdang.calendar/events.js SPECIFIC_EVENTS)。事件是一次性的，不会按年重复。</li>
-  <li>可设置开机自启动</li>
-  <li>兼容OS X 10.8, 10.9, 10.10, 10.11</li>
+  <li>支持增加属于个人的农历、公历节日（vim ~/Library/Application\ Support/com.zfdang.calendar/festivals.js)。节日每年会重复；</li>
+  <li>支持增加指定日子的事件（vim ~/Library/Application\ Support/com.zfdang.calendar/events.js SPECIFIC_EVENTS)。事件是一次性的，不会按年重复；</li>
+  <li>按下COMMAND键，同时用鼠标拖动可以改变图标位置；</li>
+  <li>可设置开机自启动；</li>
+  <li>兼容Intel版和ARM版的系统</li>
   <li>开源</li>
 </ui>
 <br> 
