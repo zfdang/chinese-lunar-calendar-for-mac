@@ -64,9 +64,11 @@ struct CalendarView: View {
         }
         .onChange(of: displayYear) { _ in
             loadCalendarDays()
+            selectFirstOfMonth()
         }
         .onChange(of: displayMonth) { _ in
             loadCalendarDays()
+            selectFirstOfMonth()
         }
     }
     
@@ -152,6 +154,11 @@ struct CalendarView: View {
     
     private func selectToday() {
         selectedDay = calendarDays.first { $0.isToday }
+    }
+    
+    private func selectFirstOfMonth() {
+        // Select the first day of the current display month
+        selectedDay = calendarDays.first { $0.solarMonth == displayMonth && $0.solarDay == 1 }
     }
     
     private func selectDay(_ day: CalendarDay) {
