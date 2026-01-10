@@ -453,8 +453,8 @@ struct LunarCalendar {
             lunarMonthName: (lunar.isLeapMonth ? "闰" : "") + monthName(lunar.month),
             lunarDayName: dayName(lunar.day),
             solarTerm: solarTerm(for: date),
-            solarFestival: FestivalData.solarFestival(month: solarMonth, day: solarDay),
-            lunarFestival: FestivalData.lunarFestival(month: lunar.month, day: lunar.day, isLeapMonth: lunar.isLeapMonth)
+            solarFestival: FestivalData.shared.solarFestival(month: solarMonth, day: solarDay),
+            lunarFestival: FestivalData.shared.lunarFestival(month: lunar.month, day: lunar.day, isLeapMonth: lunar.isLeapMonth)
         )
     }
     

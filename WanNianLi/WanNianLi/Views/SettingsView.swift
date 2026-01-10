@@ -9,11 +9,54 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var appState: AppState
+    @ObservedObject private var festivalData = FestivalData.shared
     
     var body: some View {
         Form {
             Section("General") {
                 Toggle("Launch at Login", isOn: $appState.launchAtLogin)
+            }
+            
+            Section("Festival Data") {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Festival Database")
+                        if let date = festivalData.lastUpdateDate {
+                            Text("Last updated: \(date.formatted(date: .abbreviated, time: .shortened))")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        } else {
+                            Text("Using default data")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    Button("Update Now") {
+                        Task {
+                            await festivalData.updateFromRemote()
+                        }
+                    }
+                    .disabled(festivalData.isLoading)
+                }
+                
+                if festivalData.isLoading {
+                    HStack {
+                        ProgressView()
+                            .scaleEffect(0.8)
+                        Text("Updating...")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                if let error = festivalData.updateError {
+                    Text("Error: \(error)")
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
             }
             
             Section("Links") {
@@ -47,7 +90,7 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 400, height: 300)
+        .frame(width: 400, height: 380)
     }
 }
 

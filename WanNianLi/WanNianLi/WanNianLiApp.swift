@@ -11,6 +11,7 @@ import ServiceManagement
 @main
 struct WanNianLiApp: App {
     @StateObject private var appState = AppState()
+    @StateObject private var statusBarManager = StatusBarManager()
     
     var body: some Scene {
         // Menu bar app using MenuBarExtra (macOS 13+)
@@ -18,7 +19,7 @@ struct WanNianLiApp: App {
             ContentView()
                 .environmentObject(appState)
         } label: {
-            StatusBarLabel()
+            Image(nsImage: statusBarManager.statusBarImage)
         }
         .menuBarExtraStyle(.window)
         
@@ -27,6 +28,75 @@ struct WanNianLiApp: App {
             SettingsView()
                 .environmentObject(appState)
         }
+    }
+}
+
+// MARK: - Status Bar Manager
+
+/// Manages the status bar icon with date overlay
+class StatusBarManager: ObservableObject {
+    @Published var statusBarImage: NSImage
+    
+    private var timer: Timer?
+    private var currentDay: Int = 0
+    
+    init() {
+        statusBarImage = NSImage()
+        updateIcon()
+        startTimer()
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            self?.updateIcon()
+        }
+    }
+    
+    func updateIcon() {
+        let newDay = Calendar.current.component(.day, from: Date())
+        if newDay != currentDay {
+            currentDay = newDay
+            statusBarImage = createStatusBarImage(day: currentDay)
+        }
+    }
+    
+    private func createStatusBarImage(day: Int) -> NSImage {
+        // Load base calendar icon
+        guard let baseImage = NSImage(named: "calendarIcon") else {
+            return NSImage()
+        }
+        
+        // Create a larger image for better visibility
+        let size = NSSize(width: 22, height: 22)
+        let image = NSImage(size: size, flipped: false) { rect in
+            // Draw base icon (it should already have the calendar frame)
+            baseImage.draw(in: rect)
+            
+            // Draw day number in black, positioned in calendar body (below the hooks)
+            let dayString = String(format: "%02d", day)
+            let font = NSFont.monospacedDigitSystemFont(ofSize: 11, weight: .semibold)
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: font,
+                .foregroundColor: NSColor.black
+            ]
+            
+            // Position text in the calendar body area (lower part of icon)
+            let textSize = dayString.size(withAttributes: attributes)
+            let textRect = NSRect(
+                x: (rect.width - textSize.width) / 2,
+                y: 1,  // Lower position to center in white area
+                width: textSize.width,
+                height: textSize.height
+            )
+            
+            dayString.draw(in: textRect, withAttributes: attributes)
+            
+            return true
+        }
+        
+        // Don't use template mode - we want our custom colors
+        image.isTemplate = false
+        return image
     }
 }
 
@@ -72,26 +142,6 @@ class AppState: ObservableObject {
             } catch {
                 print("Failed to update launch at login: \(error)")
             }
-        }
-    }
-}
-
-// MARK: - Status Bar Label
-
-/// Menu bar icon with calendar frame and date number
-struct StatusBarLabel: View {
-    @State private var currentDay: Int = Calendar.current.component(.day, from: Date())
-    
-    let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
-    
-    var body: some View {
-        Image("calendarIcon")
-            .renderingMode(.template)
-        Text("\(currentDay)")
-            .font(.system(size: 9, weight: .bold, design: .rounded))
-            .monospacedDigit()
-        .onReceive(timer) { _ in
-            currentDay = Calendar.current.component(.day, from: Date())
         }
     }
 }

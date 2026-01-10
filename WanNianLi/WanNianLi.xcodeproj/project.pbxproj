@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,21 +20,9 @@
 		697CDC382F11E2D700732FE3 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CDC0F2F11E2D700732FE3 /* CalendarDayCell.swift */; };
 		697CDC3C2F11E2D700732FE3 /* CalendarDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CDC102F11E2D700732FE3 /* CalendarDetailView.swift */; };
 		69B0F6161B69EF7A00A75D21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B0F6151B69EF7A00A75D21 /* Images.xcassets */; };
-		69B0F6251B69EF7A00A75D21 /* WanNianLiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B0F6241B69EF7A00A75D21 /* WanNianLiTests.m */; };
 		69D8F6822F11ECEA00F5DB95 /* WanNianLiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D8F6812F11ECEA00F5DB95 /* WanNianLiApp.swift */; };
 		69D8F6842F11EF1900F5DB95 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D8F6832F11EF1900F5DB95 /* SettingsView.swift */; };
-		69E73BCD1B6A857A00AA4D52 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E73BCC1B6A857A00AA4D52 /* WebKit.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		69B0F61F1B69EF7A00A75D21 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 69B0F6031B69EF7A00A75D21 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 69B0F60A1B69EF7A00A75D21;
-			remoteInfo = WanNianLi;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		697CDBF22F11E2D700732FE3 /* FestivalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalData.swift; sourceTree = "<group>"; };
@@ -52,24 +40,12 @@
 		69B0F60B1B69EF7A00A75D21 /* WanNianLi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WanNianLi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B0F60F1B69EF7A00A75D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69B0F6151B69EF7A00A75D21 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		69B0F61E1B69EF7A00A75D21 /* WanNianLiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WanNianLiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		69B0F6231B69EF7A00A75D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		69B0F6241B69EF7A00A75D21 /* WanNianLiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WanNianLiTests.m; sourceTree = "<group>"; };
 		69D8F6812F11ECEA00F5DB95 /* WanNianLiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WanNianLiApp.swift; sourceTree = "<group>"; };
 		69D8F6832F11EF1900F5DB95 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		69E73BCC1B6A857A00AA4D52 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		69B0F6081B69EF7A00A75D21 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				69E73BCD1B6A857A00AA4D52 /* WebKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		69B0F61B1B69EF7A00A75D21 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -95,11 +71,11 @@
 		697CDC132F11E2D700732FE3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				69D8F6832F11EF1900F5DB95 /* SettingsView.swift */,
 				697CDC0F2F11E2D700732FE3 /* CalendarDayCell.swift */,
 				697CDC102F11E2D700732FE3 /* CalendarDetailView.swift */,
 				697CDC112F11E2D700732FE3 /* CalendarHeaderView.swift */,
 				697CDC122F11E2D700732FE3 /* CalendarView.swift */,
+				69D8F6832F11EF1900F5DB95 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -107,9 +83,7 @@
 		69B0F6021B69EF7A00A75D21 = {
 			isa = PBXGroup;
 			children = (
-				69E73BCC1B6A857A00AA4D52 /* WebKit.framework */,
 				69B0F60D1B69EF7A00A75D21 /* WanNianLi */,
-				69B0F6211B69EF7A00A75D21 /* WanNianLiTests */,
 				69B0F60C1B69EF7A00A75D21 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -118,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				69B0F60B1B69EF7A00A75D21 /* WanNianLi.app */,
-				69B0F61E1B69EF7A00A75D21 /* WanNianLiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,40 +99,15 @@
 		69B0F60D1B69EF7A00A75D21 /* WanNianLi */ = {
 			isa = PBXGroup;
 			children = (
+				69D8F6812F11ECEA00F5DB95 /* WanNianLiApp.swift */,
 				697CDBF22F11E2D700732FE3 /* FestivalData.swift */,
 				697CDBF32F11E2D700732FE3 /* LunarCalendar.swift */,
-				69D8F6812F11ECEA00F5DB95 /* WanNianLiApp.swift */,
-				697CDBFA2F11E2D700732FE3 /* Materials */,
 				697CDC132F11E2D700732FE3 /* Views */,
+				697CDBFA2F11E2D700732FE3 /* Materials */,
 				69B0F6151B69EF7A00A75D21 /* Images.xcassets */,
-				69B0F60E1B69EF7A00A75D21 /* Supporting Files */,
-			);
-			path = WanNianLi;
-			sourceTree = "<group>";
-		};
-		69B0F60E1B69EF7A00A75D21 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
 				69B0F60F1B69EF7A00A75D21 /* Info.plist */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		69B0F6211B69EF7A00A75D21 /* WanNianLiTests */ = {
-			isa = PBXGroup;
-			children = (
-				69B0F6241B69EF7A00A75D21 /* WanNianLiTests.m */,
-				69B0F6221B69EF7A00A75D21 /* Supporting Files */,
-			);
-			path = WanNianLiTests;
-			sourceTree = "<group>";
-		};
-		69B0F6221B69EF7A00A75D21 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				69B0F6231B69EF7A00A75D21 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			path = WanNianLi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,48 +130,30 @@
 			productReference = 69B0F60B1B69EF7A00A75D21 /* WanNianLi.app */;
 			productType = "com.apple.product-type.application";
 		};
-		69B0F61D1B69EF7A00A75D21 /* WanNianLiTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 69B0F62B1B69EF7A00A75D21 /* Build configuration list for PBXNativeTarget "WanNianLiTests" */;
-			buildPhases = (
-				69B0F61A1B69EF7A00A75D21 /* Sources */,
-				69B0F61B1B69EF7A00A75D21 /* Frameworks */,
-				69B0F61C1B69EF7A00A75D21 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				69B0F6201B69EF7A00A75D21 /* PBXTargetDependency */,
-			);
-			name = WanNianLiTests;
-			productName = WanNianLiTests;
-			productReference = 69B0F61E1B69EF7A00A75D21 /* WanNianLiTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		69B0F6031B69EF7A00A75D21 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
 				ORGANIZATIONNAME = Zhengfa;
 				TargetAttributes = {
 					69B0F60A1B69EF7A00A75D21 = {
-						CreatedOnToolsVersion = 6.4;
-					};
-					69B0F61D1B69EF7A00A75D21 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 69B0F60A1B69EF7A00A75D21;
+						CreatedOnToolsVersion = 16.0;
+						LastSwiftMigration = 1600;
 					};
 				};
 			};
 			buildConfigurationList = 69B0F6061B69EF7A00A75D21 /* Build configuration list for PBXProject "WanNianLi" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 				Base,
 			);
 			mainGroup = 69B0F6021B69EF7A00A75D21;
@@ -232,7 +162,6 @@
 			projectRoot = "";
 			targets = (
 				69B0F60A1B69EF7A00A75D21 /* WanNianLi */,
-				69B0F61D1B69EF7A00A75D21 /* WanNianLiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -252,13 +181,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		69B0F61C1B69EF7A00A75D21 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -266,62 +188,59 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				697CDC2D2F11E2D700732FE3 /* CalendarHeaderView.swift in Sources */,
-				697CDC2E2F11E2D700732FE3 /* FestivalData.swift in Sources */,
-				697CDC332F11E2D700732FE3 /* CalendarView.swift in Sources */,
-				69D8F6842F11EF1900F5DB95 /* SettingsView.swift in Sources */,
-				697CDC362F11E2D700732FE3 /* LunarCalendar.swift in Sources */,
-				697CDC382F11E2D700732FE3 /* CalendarDayCell.swift in Sources */,
 				69D8F6822F11ECEA00F5DB95 /* WanNianLiApp.swift in Sources */,
+				697CDC2E2F11E2D700732FE3 /* FestivalData.swift in Sources */,
+				697CDC362F11E2D700732FE3 /* LunarCalendar.swift in Sources */,
+				697CDC2D2F11E2D700732FE3 /* CalendarHeaderView.swift in Sources */,
+				697CDC332F11E2D700732FE3 /* CalendarView.swift in Sources */,
+				697CDC382F11E2D700732FE3 /* CalendarDayCell.swift in Sources */,
 				697CDC3C2F11E2D700732FE3 /* CalendarDetailView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		69B0F61A1B69EF7A00A75D21 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				69B0F6251B69EF7A00A75D21 /* WanNianLiTests.m in Sources */,
+				69D8F6842F11EF1900F5DB95 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		69B0F6201B69EF7A00A75D21 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 69B0F60A1B69EF7A00A75D21 /* WanNianLi */;
-			targetProxy = 69B0F61F1B69EF7A00A75D21 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		69B0F6261B69EF7A00A75D21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -329,17 +248,20 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -347,29 +269,42 @@
 		69B0F6271B69EF7A00A75D21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -377,9 +312,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -388,12 +326,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 20211115;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WanNianLi/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				INFOPLIST_KEY_CFBundleDisplayName = WanNianLi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Zhengfa. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zfdang.WanNianLi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -401,50 +351,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 20211115;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WanNianLi/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				INFOPLIST_KEY_CFBundleDisplayName = WanNianLi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Zhengfa. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zfdang.WanNianLi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		69B0F62C1B69EF7A00A75D21 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WanNianLiTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zfdang.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WanNianLi.app/Contents/MacOS/WanNianLi";
-			};
-			name = Debug;
-		};
-		69B0F62D1B69EF7A00A75D21 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WanNianLiTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zfdang.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WanNianLi.app/Contents/MacOS/WanNianLi";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -465,15 +389,6 @@
 			buildConfigurations = (
 				69B0F6291B69EF7A00A75D21 /* Debug */,
 				69B0F62A1B69EF7A00A75D21 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		69B0F62B1B69EF7A00A75D21 /* Build configuration list for PBXNativeTarget "WanNianLiTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				69B0F62C1B69EF7A00A75D21 /* Debug */,
-				69B0F62D1B69EF7A00A75D21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

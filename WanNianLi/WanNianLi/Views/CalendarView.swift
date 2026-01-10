@@ -51,6 +51,13 @@ struct CalendarView: View {
                 .padding(.vertical, 6)
         }
         .background(Color(NSColor.windowBackgroundColor))
+        .background(KeyboardHandler(
+            onLeft: previousMonth,
+            onRight: nextMonth,
+            onUp: previousYear,
+            onDown: nextYear,
+            onReturn: goToToday
+        ))
         .onAppear {
             loadCalendarDays()
             selectToday()
@@ -98,7 +105,7 @@ struct CalendarView: View {
         calendarDays.first { $0.isToday }
     }
     
-    // MARK: - Methods
+    // MARK: - Navigation Methods
     
     private func loadCalendarDays() {
         calendarDays = LunarCalendar.monthData(year: displayYear, month: displayMonth)
@@ -111,6 +118,36 @@ struct CalendarView: View {
         displayYear = components.year!
         displayMonth = components.month!
         selectToday()
+    }
+    
+    private func previousMonth() {
+        if displayMonth > 1 {
+            displayMonth -= 1
+        } else if displayYear > 1901 {
+            displayYear -= 1
+            displayMonth = 12
+        }
+    }
+    
+    private func nextMonth() {
+        if displayMonth < 12 {
+            displayMonth += 1
+        } else if displayYear < 2049 {
+            displayYear += 1
+            displayMonth = 1
+        }
+    }
+    
+    private func previousYear() {
+        if displayYear > 1901 {
+            displayYear -= 1
+        }
+    }
+    
+    private func nextYear() {
+        if displayYear < 2049 {
+            displayYear += 1
+        }
     }
     
     private func selectToday() {
@@ -126,6 +163,53 @@ struct CalendarView: View {
         return day.solarYear == selected.solarYear &&
                day.solarMonth == selected.solarMonth &&
                day.solarDay == selected.solarDay
+    }
+}
+
+// MARK: - Keyboard Handler
+
+/// NSViewRepresentable to handle keyboard events
+struct KeyboardHandler: NSViewRepresentable {
+    let onLeft: () -> Void
+    let onRight: () -> Void
+    let onUp: () -> Void
+    let onDown: () -> Void
+    let onReturn: () -> Void
+    
+    func makeNSView(context: Context) -> KeyHandlerView {
+        let view = KeyHandlerView()
+        view.onLeft = onLeft
+        view.onRight = onRight
+        view.onUp = onUp
+        view.onDown = onDown
+        view.onReturn = onReturn
+        DispatchQueue.main.async {
+            view.window?.makeFirstResponder(view)
+        }
+        return view
+    }
+    
+    func updateNSView(_ nsView: KeyHandlerView, context: Context) {}
+    
+    class KeyHandlerView: NSView {
+        var onLeft: (() -> Void)?
+        var onRight: (() -> Void)?
+        var onUp: (() -> Void)?
+        var onDown: (() -> Void)?
+        var onReturn: (() -> Void)?
+        
+        override var acceptsFirstResponder: Bool { true }
+        
+        override func keyDown(with event: NSEvent) {
+            switch event.keyCode {
+            case 123: onLeft?()    // Left arrow - previous month
+            case 124: onRight?()   // Right arrow - next month
+            case 125: onDown?()    // Down arrow - next year
+            case 126: onUp?()      // Up arrow - previous year
+            case 36: onReturn?()   // Return - go to today
+            default: super.keyDown(with: event)
+            }
+        }
     }
 }
 
