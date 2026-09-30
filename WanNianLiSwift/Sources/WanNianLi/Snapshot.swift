@@ -27,6 +27,16 @@ enum Snapshot {
             RunLoop.current.run(until: Date().addingTimeInterval(0.2))
             save(view, to: dir.appendingPathComponent("calendar-\(name).png"))
         }
+        // 自定义日期窗口（选中第一项）
+        let events = NSHostingView(rootView: CustomEventsView(store: DataStore.shared,
+                                                              selection: DataStore.shared.customEvents.first?.id))
+        events.frame.size = NSSize(width: 680, height: 440)
+        let window = NSWindow(contentRect: events.frame, styleMask: .borderless, backing: .buffered, defer: false)
+        window.contentView = events
+        events.layoutSubtreeIfNeeded()
+        RunLoop.current.run(until: Date().addingTimeInterval(0.3))
+        save(events, to: dir.appendingPathComponent("custom-events.png"))
+
         let icon = NSImageView(image: MenuBarIcon.image(day: SolarDate.today.day))
         icon.frame = NSRect(x: 0, y: 0, width: 20, height: 18)
         save(icon, to: dir.appendingPathComponent("icon.png"))

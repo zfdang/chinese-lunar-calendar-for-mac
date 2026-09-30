@@ -7,12 +7,10 @@ public struct CalendarDay: Hashable, Sendable {
     public let lunar: LunarDate
 
     public let solarTerm: String
-    public let specialEvent: String
-    public let solarFestival: String
-    /// 农历节日，以及"第几个星期几"类节日
-    public let lunarFestival: String
-    /// 调休："+" 放假，"-" 上班，"" 无调整
-    public let adjustment: String
+    /// 当天的节日和事件（内置节日 + 自定义事件）
+    public let events: [DayEvent]
+    /// 调休安排，nil 表示没有调整
+    public let holiday: HolidayDay?
     /// 日期格中数字下方显示的文字
     public let shortText: String
 
@@ -21,32 +19,10 @@ public struct CalendarDay: Hashable, Sendable {
         weekday = date.weekday
         lunar = LunarCalendar.lunar(for: date)
         solarTerm = LunarCalendar.solarTerm(on: date)
-        specialEvent = data.specificEvents[date.key] ?? ""
-        solarFestival = data.solarFestivals[date.monthDayKey] ?? ""
-        adjustment = data.holidayAdjustments[date.key] ?? ""
+        events = data.events(on: date, lunar: lunar)
+        holiday = data.holidays[date.key]
 
-        var festival = lunar.isLeap ? "" : data.lunarFestivals[String(format: "%02d%02d", lunar.month, lunar.day)] ?? ""
-        if lunar.month == 12 && LunarCalendar.isLunarNewYearsEve(date) {
-            festival = data.lunarFestivals["0100"] ?? ""
-        }
-        // "某月第几个星期几"类节日
-        let firstWeekday = SolarDate(year: date.year, month: date.month, day: 1).weekday
-        let daysInMonth = SolarDate.daysInMonth(year: date.year, month: date.month)
-        let row = (firstWeekday + date.day - 1) / 7
-        let prefix = String(format: "%02d%d", date.month, weekday)
-        let nth = firstWeekday <= weekday ? row + 1 : row
-        if let name = data.weekdayFestivals[prefix + String(nth)] {
-            festival += festival.isEmpty ? name : " " + name
-        }
-        // 当月最后一个星期几
-        if date.day + 7 > daysInMonth, let name = data.weekdayFestivals[prefix + "9"] {
-            festival += festival.isEmpty ? name : " " + name
-        }
-        lunarFestival = festival
-
-        var text = [specialEvent, lunarFestival, solarFestival, solarTerm]
-            .filter { !$0.isEmpty }
-            .joined(separator: " ")
+        var text = (events.map(\.name) + [solarTerm]).filter { !$0.isEmpty }.joined(separator: " ")
         if text.isEmpty {
             // 没有节日或节气时显示农历日期，初一显示月份
             text = lunar.day == 1
@@ -70,8 +46,14 @@ public struct CalendarDay: Hashable, Sendable {
     // MARK: - 显示用文字
 
     public var isWeekend: Bool { weekday == 0 || weekday == 6 }
+    /// 调休放假
+    public var isOffDay: Bool { holiday?.isOffDay == true }
+    /// 调休上班
+    public var isMakeupWorkday: Bool { holiday?.isOffDay == false }
     /// 数字显示为红色：调休放假，或者没有调成工作日的周末
-    public var isRestDay: Bool { adjustment == "+" || (isWeekend && adjustment != "-") }
+    public var isRestDay: Bool { isOffDay || (isWeekend && !isMakeupWorkday) }
+    /// 有需要醒目显示的节日或事件
+    public var hasHighlightedEvent: Bool { events.contains(where: \.highlight) }
     public var lunarMonthName: String { LunarCalendar.monthName(lunar.month, isLeap: lunar.isLeap) }
     public var lunarDayName: String { LunarCalendar.dayName(lunar.day) }
     /// 年干支，以春节为界（与生肖一致，用于标题）
@@ -87,9 +69,9 @@ public struct CalendarDay: Hashable, Sendable {
     public var solarText: String { "\(date.year)年\(date.month)月\(date.day)日" }
     /// 例如 "丙午年[马] 八月十九"
     public var lunarText: String { "\(ganZhiYear)年[\(shengXiao)] \(lunarMonthName)月\(lunarDayName)" }
-    /// 当天所有的节日、节气、事件
+    /// 当天所有的节日、事件和节气
     public var allEvents: String {
-        [specialEvent, lunarFestival, solarFestival, solarTerm].filter { !$0.isEmpty }.joined(separator: " ")
+        (events.map(\.name) + [solarTerm]).filter { !$0.isEmpty }.joined(separator: " ")
     }
 }
 

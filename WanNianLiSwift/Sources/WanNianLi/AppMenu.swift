@@ -1,4 +1,5 @@
 import AppKit
+import LunarCore
 import ServiceManagement
 import SwiftUI
 
@@ -44,6 +45,8 @@ final class AppMenu: ObservableObject {
 
     /// 选择"更新假日信息"时调用
     var onUpdateHolidays: () -> Void = {}
+    /// 选择"自定义日期"时调用
+    var onEditCustomEvents: () -> Void = {}
 
     @Published private(set) var launchAtLogin = AppMenu.isLoginItemEnabled
     @Published var appearance = AppearanceMode.saved {
@@ -90,6 +93,7 @@ final class AppMenu: ObservableObject {
 
 private struct AppMenuButton: View {
     @ObservedObject var menu: AppMenu
+    @ObservedObject var store = DataStore.shared
 
     var body: some View {
         Menu {
@@ -97,6 +101,14 @@ private struct AppMenuButton: View {
             Picker("外观", selection: $menu.appearance) {
                 ForEach(AppearanceMode.allCases) { Text($0.title).tag($0) }
             }
+            Menu("显示节日") {
+                ForEach(FestivalCategory.allCases) { category in
+                    Toggle(category.title, isOn: Binding(
+                        get: { !store.hiddenCategories.contains(category) },
+                        set: { store.setCategory(category, visible: $0) }))
+                }
+            }
+            Button("自定义日期…") { menu.onEditCustomEvents() }
             Divider()
             Button("使用帮助") { NSWorkspace.shared.open(AppMenu.helpURL) }
             Button("更新假日信息…") { menu.onUpdateHolidays() }

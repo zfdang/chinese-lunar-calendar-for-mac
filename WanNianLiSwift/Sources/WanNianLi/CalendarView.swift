@@ -141,7 +141,7 @@ struct CalendarView: View {
     }
 
     private func lunarColor(_ day: CalendarDay) -> AnyShapeStyle {
-        if !day.lunarFestival.isEmpty || day.adjustment == "+" { return AnyShapeStyle(Palette.red) }
+        if day.hasHighlightedEvent || day.isOffDay { return AnyShapeStyle(Palette.red) }
         if !day.solarTerm.isEmpty { return AnyShapeStyle(Palette.blue) }
         return AnyShapeStyle(Palette.secondaryText)
     }
@@ -221,8 +221,8 @@ struct DetailPanel: View {
                 if !day.allEvents.isEmpty {
                     Text(day.allEvents)
                         .font(.system(size: 12))
-                        .foregroundStyle(day.lunarFestival.isEmpty && day.solarFestival.isEmpty
-                                         && day.specialEvent.isEmpty ? Palette.blue : Palette.red)
+                        .foregroundStyle(day.hasHighlightedEvent ? Palette.red
+                                         : day.events.isEmpty ? Palette.blue : Color.primary)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(2)
                 }
@@ -234,12 +234,10 @@ struct DetailPanel: View {
         .background(RoundedRectangle(cornerRadius: 8).fill(Palette.panel))
     }
 
-    /// 调休标记：放假 / 上班
+    /// 调休标记，例如"春节 放假"、"春节 调休上班"
     private var adjustmentTag: (text: String, color: Color)? {
-        switch day.adjustment {
-        case "+": return ("放假", Palette.red)
-        case "-": return ("上班", Palette.secondaryText)
-        default: return nil
-        }
+        guard let holiday = day.holiday else { return nil }
+        let name = holiday.name.isEmpty ? "" : holiday.name + " "
+        return holiday.isOffDay ? (name + "放假", Palette.red) : (name + "调休上班", Palette.secondaryText)
     }
 }

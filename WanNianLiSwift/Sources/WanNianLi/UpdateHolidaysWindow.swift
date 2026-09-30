@@ -2,7 +2,7 @@ import AppKit
 import LunarCore
 import SwiftUI
 
-/// "更新假日信息"窗口：下载最新的 holidays.js，版本更新时允许替换本地文件
+/// "更新假日信息"窗口：下载最新的 holidays.json，版本更新时保存到本地
 @MainActor
 final class UpdateHolidaysModel: ObservableObject {
     enum State: Equatable {
@@ -27,22 +27,13 @@ final class UpdateHolidaysModel: ObservableObject {
 
     func check() async {
         state = .checking
-        localVersion = store.localHolidaysVersion
+        localVersion = store.holidaysVersion
         remoteVersion = ""
         do {
-            let request = URLRequest(url: DataStore.holidaysRemoteURL, cachePolicy: .reloadIgnoringLocalCacheData)
-            let (data, response) = try await URLSession.shared.data(for: request)
-            if let http = response as? HTTPURLResponse, http.statusCode != 200 {
-                throw URLError(.badServerResponse)
-            }
-            let text = String(decoding: data, as: UTF8.self)
-            // 确认下载的是有效的假日数据，避免错误页面覆盖本地文件
-            guard !JSDataParser.object(named: "HOLIDAYADJUSTMENT", in: text).isEmpty else {
-                throw URLError(.cannotParseResponse)
-            }
-            downloaded = data
-            remoteVersion = JSDataParser.version(in: text)
-            state = JSDataParser.isVersion(remoteVersion, newerThan: localVersion) ? .updateAvailable : .upToDate
+            let (content, remote) = try await store.fetchRemoteHolidays()
+            downloaded = content
+            remoteVersion = remote.version
+            state = remote.isNewer(than: store.holidays) ? .updateAvailable : .upToDate
         } catch {
             state = .failed(error.localizedDescription)
         }
@@ -54,8 +45,8 @@ final class UpdateHolidaysModel: ObservableObject {
         // 稍作停顿，让用户感知到更新过程
         try? await Task.sleep(nanoseconds: 1_000_000_000)
         do {
-            try store.replaceHolidays(with: downloaded)
-            localVersion = store.localHolidaysVersion
+            try store.saveHolidays(downloaded)
+            localVersion = store.holidaysVersion
             state = .updated
         } catch {
             state = .failed(error.localizedDescription)
@@ -111,7 +102,7 @@ struct UpdateHolidaysView: View {
                 .fixedSize(horizontal: false, vertical: true)
             HStack(spacing: 2) {
                 Text("查看最新假日信息：")
-                Link("holidays.js", destination: DataStore.holidaysRemoteURL)
+                Link("holidays.json", destination: DataStore.holidaysRemoteURL)
             }
             .font(.callout)
         }

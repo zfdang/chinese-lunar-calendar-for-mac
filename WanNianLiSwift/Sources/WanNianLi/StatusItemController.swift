@@ -15,6 +15,7 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
     private var timer: Timer?
     private var keyMonitor: Any?
     private var updateWindow: UpdateHolidaysWindowController?
+    private var customEventsWindow: CustomEventsWindowController?
     private var lastClosed = Date.distantPast
 
     override init() {
@@ -22,6 +23,7 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         super.init()
 
         menu.onUpdateHolidays = { [weak self] in self?.showUpdateWindow() }
+        menu.onEditCustomEvents = { [weak self] in self?.showCustomEventsWindow() }
 
         if let button = statusItem.button {
             button.target = self
@@ -71,8 +73,7 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
 
     private func showPopover() {
         guard let button = statusItem.button else { return }
-        // 每次打开时重新读取数据（用户可能修改了 festivals.js / events.js），并回到今天
-        store.reload()
+        // 每次打开时回到今天
         model.showToday()
         refreshIcon()
 
@@ -137,6 +138,20 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         }
         if !moved { NSSound.beep() }
         return true
+    }
+
+    // MARK: - 自定义日期
+
+    private func showCustomEventsWindow() {
+        popover.performClose(nil)
+        if customEventsWindow == nil {
+            customEventsWindow = CustomEventsWindowController(store: store) { [weak self] in
+                self?.customEventsWindow = nil
+            }
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        customEventsWindow?.showWindow(nil)
+        customEventsWindow?.window?.makeKeyAndOrderFront(nil)
     }
 
     // MARK: - 更新假日信息

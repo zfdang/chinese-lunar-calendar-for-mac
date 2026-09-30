@@ -8,6 +8,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         AppearanceMode.saved.apply()
         MoveToApplications.promptIfNecessary()
         statusItemController = StatusItemController()
+        DataStore.shared.startAutomaticHolidayUpdates()
     }
 }
 
