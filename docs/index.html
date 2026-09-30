@@ -1,110 +1,302 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <!-- <link href='https://fonts.useso.com/css?family=Chivo:900' rel='stylesheet' type='text/css'> -->
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>MacOS下的万年历状态栏小工具</title>
-  </head>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>万年历 · Mac 菜单栏农历日历</title>
+  <meta name="description" content="Mac 菜单栏上的农历万年历：农历、节气、节日、国务院调休安排、自定义生日纪念日。原生 Swift 开发，免费开源。">
+  <meta name="theme-color" content="#c4473d">
+  <style>
+    :root {
+      --bg: #f6f5f3;
+      --surface: #ffffff;
+      --surface-2: #f0eeeb;
+      --text: #1f1d1b;
+      --text-2: #5f5a55;
+      --border: #e4e0db;
+      --accent: #c4473d;
+      --accent-hover: #ad3c33;
+      --accent-soft: #f8e5e2;
+      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #161514;
+        --surface: #211f1e;
+        --surface-2: #2a2826;
+        --text: #f2efec;
+        --text-2: #aaa39c;
+        --border: #36322f;
+        --accent: #e0766b;
+        --accent-hover: #ea8a80;
+        --accent-soft: #3a2422;
+        --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 6px;
+    }
+    pre { margin: 10px 0 0; overflow-x: auto; }
+    pre code { display: inline-block; padding: 8px 12px; white-space: pre; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 
-  <body>
-    <div id="container">
-      <div class="inner">
+    /* 顶部 */
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text); }
+    .brand:hover { text-decoration: none; }
+    .nav-links { display: flex; gap: 20px; font-size: 15px; }
+    .nav-links a { color: var(--text-2); }
 
-        <header>
-          <h1>Mac下的万年历状态栏小工具</h1>
-          <h2>MenuBar Chinese Lunar Calendar for MacOS</h2>
-        </header>
+    .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 40px 0 64px; }
+    .hero h1 { font-size: 46px; line-height: 1.15; margin: 0 0 16px; letter-spacing: -.5px; }
+    .hero h1 span { color: var(--accent); }
+    .hero .lead { font-size: 18px; color: var(--text-2); margin: 0 0 28px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 12px; font-weight: 600; font-size: 16px;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      transition: background .15s, transform .15s;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); background: var(--surface-2); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent-hover); }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .meta { margin-top: 16px; font-size: 14px; color: var(--text-2); }
+    .meta a { color: var(--text-2); text-decoration: underline; }
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/" id="view-on-github" class="button"><span>源代码@Github</span></a>
-          <a href="WanNianLiSwift-AppleSilicon.zip" id="download-app" class="button"><span>下载 4.1.2 (Apple 芯片)</span></a>
-          <a href="WanNianLiSwift-Intel.zip" id="download-app" class="button"><span>下载 4.1.2 (Intel 芯片)</span></a>
-        </section>
-<h4>最新版本 4.1.2：原生 Swift 重写，需要 macOS 13 或更新版本。M1/M2/M3/M4 等 Apple 芯片的 Mac 请下载“Apple 芯片”版，Intel 芯片的 Mac 请下载“Intel 芯片”版。
-<br>
-使用 macOS 12 或更早版本的，请下载<a href="WanNianLi.app-u.zip">旧版程序（Universal）</a>。
-所有版本也可以在 <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/releases">GitHub Releases</a> 下载。</h4>
-<br>
-        <section id="main_content">
+    .shot { display: flex; justify-content: center; }
+    .shot img {
+      display: block; width: 100%; max-width: 440px; height: auto;
+      border-radius: 14px; box-shadow: var(--shadow); border: 1px solid var(--border);
+    }
+    .shot .dark-shot { display: none; }
+    @media (prefers-color-scheme: dark) {
+      .shot .light-shot { display: none; }
+      .shot .dark-shot { display: block; }
+    }
 
-<h3>1.界面</h3>
-<br>
-<img src="images/calendar-light.png" style="width:450px" alt="万年历（日间模式）">
-<img src="images/calendar-dark.png" style="width:450px" alt="万年历（夜间模式）">
-<br>
-<br>
-<h4>更新历史:<A href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md">BUILD.md</A></h4>
-<br>
+    /* 分节 */
+    section { padding: 56px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    h2 { font-size: 30px; margin: 0 0 8px; letter-spacing: -.3px; }
+    .sub { color: var(--text-2); margin: 0 0 32px; }
 
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px;
+    }
+    .card .icon {
+      width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent); margin-bottom: 14px;
+    }
+    .card .icon svg { width: 22px; height: 22px; }
+    .card h3 { font-size: 17px; margin: 0 0 6px; }
+    .card p { margin: 0; color: var(--text-2); font-size: 15px; }
 
-<h3>2.功能</h3>
-<ul>
-  <li>菜单栏图标显示当天日期，从状态栏快速弹出含农历、节日、节气的万年历</li>
-  <li>点击任意日期，下方显示公历、农历、干支、生肖、节日以及放假 / 调休信息</li>
-  <li>可以按(前/后)(年/月)的方式改变日期，也可以直接选择年月；支持 1901–2099 年</li>
-  <li>支持键盘控制日历: ←上一年, →下一年，↑上一月，↓下一月，↵回今日</li>
-  <li>支持国内的假期调整：周末上班或者工作日放假；假期安排每周自动检查更新，也可以在菜单中手动更新</li>
-  <li>自定义日期：生日、纪念日等，支持每年农历、每年公历、每年某月第几个星期几、某一天；可以导入 / 导出</li>
-  <li>内置节日按分类（传统节日、公历节日、西方节日、纪念日）显示或隐藏</li>
-  <li>外观：跟随系统 / 日间模式 / 夜间模式</li>
-  <li>农历使用系统自带的中国历法计算，与香港天文台公布的 1921–2099 年对照表完全一致</li>
-  <li>按下 COMMAND 键，同时用鼠标拖动可以改变图标位置；可设置开机自启动</li>
-  <li>开源</li>
-</ul>
-<br>
-<img src="images/custom-events.png" style="width:600px" alt="自定义日期">
-<br>
-<br>
-<h4>遇到“无法打开”或“无法验证开发者”的错误: 在“访达”中按住 Control 点按应用并选择“打开”；或者在终端中执行
-<code>xattr -cr /Applications/WanNianLiSwift.app</code>。也可以参看<A href="http://sspai.com/27638">Mac基础教程-如何打开身份不明开发者的应用程序</A></h4>
-<br>
+    .split { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: center; }
+    /* 截图外框：统一的圆角、边框和阴影；窗口截图加上 macOS 风格的标题栏 */
+    .window { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); background: var(--surface); }
+    .window .titlebar {
+      height: 34px; display: flex; align-items: center; gap: 8px; padding: 0 14px;
+      background: var(--surface-2); border-bottom: 1px solid var(--border);
+      font-size: 13px; color: var(--text-2); position: relative;
+    }
+    .window .titlebar i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+    .window .titlebar i:nth-child(1) { background: #ff5f57; }
+    .window .titlebar i:nth-child(2) { background: #febc2e; }
+    .window .titlebar i:nth-child(3) { background: #28c840; }
+    .window .titlebar span { position: absolute; left: 0; right: 0; text-align: center; pointer-events: none; }
+    .window img { display: block; width: 100%; height: auto; }
+    .split ul { padding-left: 20px; margin: 16px 0 0; color: var(--text-2); }
+    .split li { margin-bottom: 6px; }
 
-<h3>3.视频介绍@Youku</h3>
-<br>
-<iframe height=498 width=510 src="http://player.youku.com/embed/XODIxNDQyNjYw" frameborder=0 allowfullscreen></iframe>
-<br>
-<br>
+    .steps { counter-reset: step; display: grid; gap: 16px; }
+    .step { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px 20px 64px; position: relative; }
+    .step::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 20px; top: 20px; width: 28px; height: 28px; border-radius: 50%;
+      background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; display: grid; place-items: center;
+    }
+    .step h3 { margin: 0 0 4px; font-size: 17px; }
+    .step p { margin: 0; color: var(--text-2); font-size: 15px; }
 
-<h3>4.建议使用方法</h3>
-<ol>
-  <li>调整Mac的时钟设置，在状态栏中隐藏日期信息，保留时间和星期</li>
-<img src="setting.jpg" style="width:450px" alt="">
-  <li>将本程序的图标拖至Mac时钟的左侧</li>
-</ol>
-<br>
+    footer { border-top: 1px solid var(--border); padding: 32px 0 48px; color: var(--text-2); font-size: 14px; }
+    footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+    footer a { color: var(--text-2); text-decoration: underline; }
 
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 16px 0 40px; }
+      .hero h1 { font-size: 36px; }
+      .features { grid-template-columns: 1fr 1fr; }
+      .split { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      .nav-links { display: none; }
+      .hero h1 { font-size: 30px; }
+      .features { grid-template-columns: 1fr; }
+      .btn { width: 100%; justify-content: center; }
+      section { padding: 40px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="#">
+        <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+          <rect x="1.5" y="3" width="27" height="25.5" rx="6" fill="#fff" stroke="#c4473d" stroke-width="2"/>
+          <path d="M1.5 9 V9 a6 6 0 0 1 6 -6 h15 a6 6 0 0 1 6 6 V10 H1.5 Z" fill="#c4473d"/>
+          <text id="logo-day" x="15" y="23.5" text-anchor="middle" font-size="12" font-weight="700" fill="#1f1d1b"
+                font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif">30</text>
+        </svg>
+        万年历
+      </a>
+      <div class="nav-links">
+        <a href="#features">功能</a>
+        <a href="#install">安装</a>
+        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md">更新历史</a>
+        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac">GitHub</a>
+      </div>
+    </nav>
 
-<h3>5.声明</h3>
-<ul>
-  <li>#include &lt;disclaimer.h&gt;</li>
-  <li>如商用，须征得本人同意</li>
-</ul>
+    <header class="hero">
+      <div>
+        <h1>Mac 菜单栏上的<br><span>农历万年历</span></h1>
+        <p class="lead">点一下菜单栏，农历、节气、节日和国务院放假安排一目了然。还能记下家人的农历生日和各种纪念日。</p>
+        <div class="buttons">
+          <a class="btn primary" href="WanNianLiSwift-AppleSilicon.zip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+            下载（Apple 芯片）
+          </a>
+          <a class="btn" href="WanNianLiSwift-Intel.zip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+            下载（Intel 芯片）
+          </a>
+        </div>
+        <p class="meta">
+          版本 4.1.2 · 需要 macOS 13 或更新版本 · 免费开源<br>
+          不确定选哪个？点左上角 <span aria-label="苹果菜单">&#63743;</span> →“关于本机”，“芯片”一栏写着 Apple M 系列就选 Apple 芯片版。<br>
+          macOS 12 及更早版本请下载 <a href="WanNianLi.app-u.zip">旧版程序</a>
+        </p>
+      </div>
+      <div class="shot">
+        <img class="light-shot" src="images/calendar-light.png" alt="万年历弹出窗口截图（日间模式）" width="464" height="469">
+        <img class="dark-shot" src="images/calendar-dark.png" alt="万年历弹出窗口截图（夜间模式）" width="464" height="469">
+      </div>
+    </header>
+  </div>
 
-        </section>
+  <div class="wrap">
+    <section id="features">
+      <h2>功能</h2>
+      <p class="sub">原生 Swift 开发，轻巧、省电，与系统外观融为一体。</p>
+      <div class="features">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+          <h3>菜单栏随时查看</h3>
+          <p>图标显示今天的日期，点击弹出月历。每个日期下方显示农历、节日或节气。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2"/><path d="M16 3h5v5"/></svg></div>
+          <h3>准确的农历</h3>
+          <p>使用系统自带的中国历法计算，与香港天文台 1921–2099 年对照表逐日核对一致。显示干支、生肖、二十四节气。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4h11l-1 4h6v9H9l1-4H4"/></svg></div>
+          <h3>放假与调休</h3>
+          <p>按国务院公布的安排标出放假和调休上班的日子，每周自动检查更新。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+          <h3>生日与纪念日</h3>
+          <p>支持每年农历、每年公历、某月第几个星期几和单次日期，可以导入、导出。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div>
+          <h3>日间 / 夜间模式</h3>
+          <p>跟随系统，或者固定为日间、夜间模式。内置节日可以按分类显示或隐藏。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></div>
+          <h3>键盘操作</h3>
+          <p>← → 切换年份，↑ ↓ 切换月份，回车回到今天。可设置开机自动启动。</p>
+        </div>
+      </div>
+    </section>
 
-        <footer>
-          Chinese-lunar-calendar-for-mac is maintained by <a href="https://github.com/zfdang">zfdang</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+    <section>
+      <div class="split">
+        <div>
+          <h2>记住重要的日子</h2>
+          <p class="sub" style="margin-bottom:0">家人的农历生日每年都在不同的公历日期，交给万年历来记。</p>
+          <ul>
+            <li>在设置菜单中打开“自定义日期”添加</li>
+            <li>自动算出下一次是哪一天</li>
+            <li>可以用红色醒目显示</li>
+            <li>导出为文件备份，换电脑时再导入</li>
+          </ul>
+        </div>
+        <div class="window">
+          <div class="titlebar"><i></i><i></i><i></i><span>自定义日期</span></div>
+          <picture>
+            <source srcset="images/custom-events-dark.png" media="(prefers-color-scheme: dark)">
+            <img src="images/custom-events.png" alt="自定义日期窗口截图" width="680" height="440" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </section>
 
+    <section id="install">
+      <h2>安装</h2>
+      <p class="sub">下载后解压，把 WanNianLiSwift 拖到“应用程序”文件夹即可。</p>
+      <div class="steps">
+        <div class="step">
+          <h3>第一次打开</h3>
+          <p>程序没有经过 Apple 公证。如果提示“无法验证开发者”，在“访达”中按住 Control 点按程序，选择“打开”；或者在终端中执行：</p>
+          <pre><code>xattr -cr /Applications/WanNianLiSwift.app</code></pre>
+        </div>
+        <div class="step">
+          <h3>调整系统时钟（推荐）</h3>
+          <p>在“系统设置 → 控制中心 → 时钟选项”中，把“显示日期”设为“永不”，只保留时间和星期，菜单栏会更简洁。</p>
+        </div>
+        <div class="step">
+          <h3>调整图标位置</h3>
+          <p>按住 Command 键拖动菜单栏图标，把它放到时钟的左边。</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap row">
+      <div>万年历由 <a href="https://github.com/zfdang">zfdang</a> 开发并开源 · 如商用，须征得作者同意</div>
+      <div>
+        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac">源代码</a> ·
+        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/releases">所有版本</a> ·
+        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md">更新历史</a>
       </div>
     </div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  </footer>
 
-  ga('create', 'UA-6920954-7', 'auto');
-  ga('send', 'pageview');
-
-</script>  
+  <script>
+    // 标志中显示今天的日期
+    document.getElementById("logo-day").textContent = new Date().getDate();
+  </script>
 </body>
 </html>
