@@ -6,7 +6,7 @@
 #   - 检查每个安装包的架构、版本号和签名
 #   - 复制为 docs/WanNianLiSwift-AppleSilicon.zip、docs/WanNianLiSwift-Intel.zip（文件名固定，网页链接不变）
 #   - 更新 docs/version.json（网页上显示的版本号）
-# 之后提交 docs/ 的改动并合并到 master 即可。需要 gh（GitHub CLI）。
+# 之后提交 docs/ 的改动并合并到 master 即可。只能在 macOS 上运行（用到 ditto、lipo、codesign、BSD sed），需要 gh（GitHub CLI）。
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 
@@ -50,6 +50,8 @@ cat > docs/version.json <<JSON
 JSON
 # 网页中的后备版本号（version.json 读取失败时显示）
 sed -i '' -E "s#(<span class=\"app-version\">)[^<]*(</span>)#\1$VERSION\2#g" docs/index.html
+grep -q "<span class=\"app-version\">$VERSION</span>" docs/index.html ||
+    { echo "docs/index.html: <span class=\"app-version\"> not found, update the fallback version by hand" >&2; exit 1; }
 
 echo "Website updated to $VERSION. Review and commit:"
 git status --short docs/

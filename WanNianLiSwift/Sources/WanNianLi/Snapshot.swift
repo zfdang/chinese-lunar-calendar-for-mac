@@ -6,7 +6,12 @@ import SwiftUI
 @MainActor
 enum Snapshot {
     static func run(arguments: [String]) {
-        let dir = URL(fileURLWithPath: arguments[0], isDirectory: true)
+        guard let path = arguments.first, !path.hasPrefix("-") else {
+            FileHandle.standardError.write(Data("usage: WanNianLi --snapshot <目录> [yyyyMMdd]\n".utf8))
+            exit(1)
+        }
+        let dir = URL(fileURLWithPath: path, isDirectory: true)
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         let model = CalendarViewModel(store: DataStore.shared)
         if arguments.count > 1, let key = Int(arguments[1]) {
             model.setYear(key / 10000)

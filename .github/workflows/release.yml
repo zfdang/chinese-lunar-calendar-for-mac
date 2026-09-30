@@ -17,14 +17,20 @@ on:
 permissions:
   contents: write
 
+# 同一分支 / PR 的新提交会取消还在运行的旧构建；tag 的发布构建不会被取消
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
 jobs:
   # 农历结果来自系统的 ICU，会随 macOS 版本变化，所以在多个版本上校验基准数据。
   # （应用最低支持 macOS 13，但 GitHub 已不再提供 macOS 13 的 runner。）
+  # 固定版本而不用 macos-latest：latest 目前就是 macos-15，重复跑没有意义；有新版本时在这里添加。
   test:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-14, macos-15, macos-latest]
+        os: [macos-14, macos-15]
     runs-on: ${{ matrix.os }}
     defaults:
       run:

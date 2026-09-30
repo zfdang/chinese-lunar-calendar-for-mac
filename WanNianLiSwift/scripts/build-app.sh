@@ -4,7 +4,7 @@
 #
 # 用法: scripts/build-app.sh [universal|arm64|x86_64]    （默认 universal）
 #   生成 build/WanNianLiSwift.app 和 build/WanNianLiSwift[-版本]-<Universal|AppleSilicon|Intel>.zip
-#   环境变量 VERSION（可选）：设置应用的版本号，例如 VERSION=4.1
+#   环境变量 VERSION（可选）：设置应用的版本号，例如 VERSION=4.1；不设置时使用最近的 git tag
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -49,7 +49,7 @@ fi
 # ad-hoc 签名；发布时可替换为 Developer ID 签名
 codesign --force --sign - "$APP"
 
-ZIP="WanNianLiSwift${VERSION:+-$VERSION}-$SUFFIX.zip"
+ZIP="WanNianLiSwift${PLIST_VERSION:+-$PLIST_VERSION}-$SUFFIX.zip"
 rm -f "build/$ZIP"
 (cd build && ditto -c -k --keepParent WanNianLiSwift.app "$ZIP")
 lipo -info "$APP/Contents/MacOS/WanNianLiSwift"
