@@ -18,9 +18,17 @@ enum Palette {
     static let red = dynamic(light: 0xC4473D, dark: 0xE27D72)
     static let blue = dynamic(light: 0x2F6BC4, dark: 0x74A7E8)
     static let accent = Color.accentColor
+    /// 日历背景：不透明，避免系统半透明材质降低对比度
+    static let background = dynamic(light: 0xFFFFFF, dark: 0x1E1E20)
+    static let nsBackground = NSColor(name: nil) { appearance in
+        appearance.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua
+            ? NSColor(srgbRed: 0x1E / 255.0, green: 0x1E / 255.0, blue: 0x20 / 255.0, alpha: 1) : .white
+    }
+    /// 次要文字（农历日期等），比系统 secondary 颜色更深，提高对比度
+    static let secondaryText = dynamic(light: 0x55555A, dark: 0xB4B4B9)
     /// 标题栏、详细信息面板等区域的底色
-    static let panel = Color.primary.opacity(0.05)
-    static let hovered = Color.primary.opacity(0.08)
+    static let panel = dynamic(light: 0xF2F3F5, dark: 0x2B2B2E)
+    static let hovered = dynamic(light: 0xE9EAED, dark: 0x343438)
     static let selected = Color.accentColor.opacity(0.18)
 }
 
@@ -60,7 +68,7 @@ struct CalendarView: View {
                 .font(.system(size: 17, weight: .semibold))
             Text(title.lunar)
                 .font(.system(size: 15))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Palette.secondaryText)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 34)
@@ -71,7 +79,7 @@ struct CalendarView: View {
             ForEach(0..<7, id: \.self) { i in
                 Text(Self.weekdays[i])
                     .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(i == 0 || i == 6 ? AnyShapeStyle(Palette.red) : AnyShapeStyle(.secondary))
+                    .foregroundStyle(i == 0 || i == 6 ? Palette.red : Palette.secondaryText)
                     .frame(width: Self.cellSize.width, height: 26)
             }
         }
@@ -134,7 +142,7 @@ struct CalendarView: View {
     private func lunarColor(_ day: CalendarDay) -> AnyShapeStyle {
         if !day.lunarFestival.isEmpty || day.adjustment == "+" { return AnyShapeStyle(Palette.red) }
         if !day.solarTerm.isEmpty { return AnyShapeStyle(Palette.blue) }
-        return AnyShapeStyle(.secondary)
+        return AnyShapeStyle(Palette.secondaryText)
     }
 
     // MARK: - 底部导航栏
@@ -197,7 +205,7 @@ struct DetailPanel: View {
                     .font(.system(size: 13, weight: .semibold))
                 Text("农历\(day.lunarMonthName)月\(day.lunarDayName)　\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日　属\(day.shengXiao)")
                     .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Palette.secondaryText)
             }
             Spacer(minLength: 0)
             VStack(alignment: .trailing, spacing: 3) {
@@ -229,7 +237,7 @@ struct DetailPanel: View {
     private var adjustmentTag: (text: String, color: Color)? {
         switch day.adjustment {
         case "+": return ("放假", Palette.red)
-        case "-": return ("上班", Color.secondary)
+        case "-": return ("上班", Palette.secondaryText)
         default: return nil
         }
     }

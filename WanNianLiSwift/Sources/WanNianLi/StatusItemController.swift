@@ -39,6 +39,8 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         refreshIcon()
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
                                                name: NSApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAppearance),
+                                               name: AppearanceMode.didChange, object: nil)
         // 每 5 秒检查一次日期是否变化
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
             MainActor.assumeIsolated { self?.refreshIcon() }
@@ -74,6 +76,7 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         model.showToday()
         refreshIcon()
 
+        updateAppearance()
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         button.highlight(true)
         NSApp.activate(ignoringOtherApps: true)
@@ -90,6 +93,24 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
     // 否则方向键、回车无法控制日历
     func popoverDidShow(_ notification: Notification) {
         popover.contentViewController?.view.window?.makeKey()
+        installOpaqueBackground()
+    }
+
+    /// 弹出窗口默认跟随菜单栏按钮的外观，而不是 NSApp.appearance，这里显式设置
+    @objc private func updateAppearance() {
+        popover.appearance = NSApp.appearance ?? NSApp.effectiveAppearance
+        popover.contentViewController?.view.window?.contentView?.superview?.subviews
+            .filter { $0 is PopoverBackgroundView }
+            .forEach { $0.needsDisplay = true }
+    }
+
+    /// 把弹出窗口（包括箭头部分）的半透明材质换成不透明背景
+    private func installOpaqueBackground() {
+        guard let frameView = popover.contentViewController?.view.window?.contentView?.superview,
+              !frameView.subviews.contains(where: { $0 is PopoverBackgroundView }) else { return }
+        let background = PopoverBackgroundView(frame: frameView.bounds)
+        background.autoresizingMask = [.width, .height]
+        frameView.addSubview(background, positioned: .below, relativeTo: nil)
     }
 
     @objc private func applicationDidBecomeActive() {
@@ -133,3 +154,11 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
     }
 }
 
+
+/// 弹出窗口的不透明背景
+private final class PopoverBackgroundView: NSView {
+    override func draw(_ dirtyRect: NSRect) {
+        Palette.nsBackground.setFill()
+        bounds.fill()
+    }
+}

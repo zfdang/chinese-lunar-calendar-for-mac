@@ -17,6 +17,7 @@ enum AppearanceMode: String, CaseIterable, Identifiable {
     }
 
     private static let key = "appearance"
+    static let didChange = Notification.Name("WanNianLiAppearanceDidChange")
 
     static var saved: AppearanceMode {
         UserDefaults.standard.string(forKey: key).flatMap(AppearanceMode.init) ?? .system
@@ -30,6 +31,7 @@ enum AppearanceMode: String, CaseIterable, Identifiable {
         case .light: NSApp.appearance = NSAppearance(named: .aqua)
         case .dark: NSApp.appearance = NSAppearance(named: .darkAqua)
         }
+        NotificationCenter.default.post(name: Self.didChange, object: nil)
     }
 }
 
