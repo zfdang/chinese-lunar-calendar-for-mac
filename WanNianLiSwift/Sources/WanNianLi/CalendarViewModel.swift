@@ -81,9 +81,12 @@ final class CalendarViewModel: ObservableObject {
         grid = MonthGrid(year: year, month: month, data: store.data)
     }
 
-    /// 点击日期：点击今天会清除选中，回到默认状态
+    /// 点击日期：点击今天会清除选中，回到默认状态；点击上月或下月的日期时切换到该月
     func select(_ day: CalendarDay) {
         selected = day.date == today ? nil : day.date
+        if !grid.isInMonth(day) && Self.years.contains(day.date.year) {
+            show(year: day.date.year, month: day.date.month)
+        }
     }
 
     // MARK: - 显示

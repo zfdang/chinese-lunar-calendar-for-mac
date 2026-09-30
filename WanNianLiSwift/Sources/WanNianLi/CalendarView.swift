@@ -109,7 +109,7 @@ struct CalendarView: View {
 
         let background: Color = isToday ? Palette.accent
             : isSelected ? Palette.selected
-            : (inMonth && hovered == index) ? Palette.hovered
+            : hovered == index ? Palette.hovered
             : .clear
 
         return VStack(spacing: 1) {
@@ -128,10 +128,11 @@ struct CalendarView: View {
         .opacity(inMonth ? 1 : 0.3)
         .contentShape(Rectangle())
         .onHover { inside in
-            if inMonth { hovered = inside ? index : (hovered == index ? nil : hovered) }
+            hovered = inside ? index : (hovered == index ? nil : hovered)
         }
         .onTapGesture {
-            if inMonth { model.select(day) }
+            hovered = nil
+            model.select(day)
         }
     }
 
