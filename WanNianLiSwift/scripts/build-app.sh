@@ -30,7 +30,9 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 lipo -create -output "$APP/Contents/MacOS/WanNianLiSwift" "${BINARIES[@]}"
 cp Resources/Info.plist "$APP/Contents/"
 cp Resources/AppIcon.icns "$APP/Contents/Resources/"
-cp -R Resources/calendar-data "$APP/Contents/Resources/"
+# 调休安排与 GitHub Pages 共用一份：docs/data/holidays.json
+mkdir -p "$APP/Contents/Resources/calendar-data"
+cp ../docs/data/holidays.json "$APP/Contents/Resources/calendar-data/"
 
 if [ -n "${VERSION:-}" ]; then
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" "$APP/Contents/Info.plist"

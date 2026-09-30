@@ -10,8 +10,15 @@ import LunarCore
 final class DataStore: ObservableObject {
     static let shared = DataStore()
 
-    /// 在线更新调休安排的地址
-    static let holidaysRemoteURL = URL(string: "https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/WanNianLiSwift/Resources/calendar-data/holidays.json")!
+    /// 在线更新调休安排的地址，按顺序尝试：
+    /// 1. GitHub Pages（calendar.zfdang.com，通过 Cloudflare，国内更容易访问）
+    /// 2. GitHub raw（备用）
+    /// 两者都来自仓库中的 docs/data/holidays.json
+    static let holidaysRemoteURLs = [
+        URL(string: "https://calendar.zfdang.com/data/holidays.json")!,
+        URL(string: "https://raw.githubusercontent.com/zfdang/chinese-lunar-calendar-for-mac/master/docs/data/holidays.json")!,
+    ]
+    static var holidaysRemoteURL: URL { holidaysRemoteURLs[0] }
 
     /// 自动检查更新的间隔
     private static let autoCheckInterval: TimeInterval = 7 * 24 * 3600
@@ -59,7 +66,7 @@ final class DataStore: ObservableObject {
         // 开发时（swift run）直接使用源码目录中的数据
         candidates.append(URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-            .appendingPathComponent("Resources/calendar-data/holidays.json"))
+            .deletingLastPathComponent().appendingPathComponent("docs/data/holidays.json"))
         #endif
         return candidates.compactMap { $0 }.first { FileManager.default.fileExists(atPath: $0.path) }
     }
@@ -77,16 +84,26 @@ final class DataStore: ObservableObject {
 
     var holidaysVersion: String { holidays?.version ?? "0" }
 
-    /// 下载最新的调休安排；返回下载到的内容（不保存）
+    /// 下载最新的调休安排；依次尝试各个地址，返回第一个成功下载的内容（不保存）
     func fetchRemoteHolidays() async throws -> (content: Data, holidays: HolidayData) {
-        let request = URLRequest(url: Self.holidaysRemoteURL, cachePolicy: .reloadIgnoringLocalCacheData)
-        let (content, response) = try await URLSession.shared.data(for: request)
-        if let http = response as? HTTPURLResponse, http.statusCode != 200 {
-            throw URLError(.badServerResponse)
+        var lastError: Error = URLError(.cannotConnectToHost)
+        for url in Self.holidaysRemoteURLs {
+            do {
+                var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
+                request.timeoutInterval = 15
+                let (content, response) = try await URLSession.shared.data(for: request)
+                if let http = response as? HTTPURLResponse, http.statusCode != 200 {
+                    throw URLError(.badServerResponse)
+                }
+                guard let holidays = HolidayData.decode(content) else { throw URLError(.cannotParseResponse) }
+                UserDefaults.standard.set(Date(), forKey: Self.lastCheckKey)
+                return (content, holidays)
+            } catch {
+                NSLog("WanNianLi: failed to download \(url): \(error.localizedDescription)")
+                lastError = error
+            }
         }
-        guard let holidays = HolidayData.decode(content) else { throw URLError(.cannotParseResponse) }
-        UserDefaults.standard.set(Date(), forKey: Self.lastCheckKey)
-        return (content, holidays)
+        throw lastError
     }
 
     func saveHolidays(_ content: Data) throws {
