@@ -74,23 +74,23 @@ swift run WanNianLi                # 开发时直接运行
 
 ## 发布
 
-推送 tag 即可发布，GitHub Actions（`.github/workflows/release.yml`）会构建 Apple Silicon 和 Intel 两个版本，并创建 GitHub Release：
+完整流程见仓库根目录的 [RELEASE.md](../RELEASE.md)。推送 tag 即可发布，GitHub Actions（`.github/workflows/release.yml`）会构建 Apple Silicon 和 Intel 两个版本，并创建 GitHub Release：
 
 ```bash
 git tag v4.1 && git push origin v4.1
 ```
 
-版本号取自 tag（去掉开头的 `v`）。Pull request 中修改了 `WanNianLiSwift/` 时也会自动构建（只上传为 Actions artifact，不发布）。
+版本号取自 tag（去掉开头的 `v`；本地构建时取最近的 tag）。发布后用 `scripts/publish-website.sh <tag>` 更新网站上的下载文件。Pull request 中修改了 `WanNianLiSwift/` 时也会自动构建（只上传为 Actions artifact，不发布）。
 应用只做了 ad-hoc 签名、没有公证，用户第一次打开时需要按住 Control 点按并选择"打开"。
 
 ## 测试
 
 ```bash
 ./scripts/check-golden.sh      # 自检 + 与基准数据对比（CI 中每次构建都会运行）
-./scripts/verify-lunar.sh      # 与香港天文台对照表逐日比较（需要网络）
+./scripts/verify-lunar.sh      # 与香港天文台对照表逐日比较（需要网络；不再依赖旧版目录）
 ```
 
-- `Tests/lunar-golden-1901-2099.txt`：1901–2099 年每个农历月的初一、每个节气、每年一天的日干支。已与香港天文台 1921–2099 年的数据核对一致。
+- `Tests/lunar-golden-1900-2100.txt`：1900–2100 年每个农历月的初一和月长、每个节气、每年一天的日干支。1921–2099 年已与香港天文台的数据核对一致。CI 在多个 macOS 版本上运行这项检查。
   农历日期来自系统的 ICU，如果 macOS 更新改变了计算结果，`check-golden.sh` 会失败；确认新结果正确后用 `check-golden.sh --update` 更新基准数据。
 - `lunar-dump --selftest`：自定义事件文件的读写、旧版 js 的导入、节日规则等自检。
 
@@ -138,5 +138,5 @@ Sources/
     MoveToApplications    移动到"应用程序"文件夹
   lunar-dump/         导出每日计算结果、基准数据，运行自检
 Tests/
-  lunar-golden-1901-2099.txt  农历基准数据
+  lunar-golden-1900-2100.txt  农历基准数据
 ```

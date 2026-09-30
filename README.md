@@ -1,7 +1,7 @@
 # 1.MAC下的状态栏万年历
 ## 功能说明、界面、使用方法见：
 
-### [calendar.zfdang.com](http://calendar.zfdang.com)
+### [calendar.zfdang.com](https://calendar.zfdang.com)
 
 # 2.Code Explanation
 This is a menubar app which shows a simple chinese lunar calendar for OSX.
@@ -37,3 +37,8 @@ https://github.com/aschuch/AXStatusItemPopup
 
 http://sourceforge.net/projects/menucracker/
 
+
+# 4.License
+[MIT](LICENSE)。旧版目录中的第三方组件使用各自的许可证（AFNetworking: MIT，MenuCracker: Artistic License）。
+
+更新历史见 [CHANGELOG.md](CHANGELOG.md)，发布流程见 [RELEASE.md](RELEASE.md)。

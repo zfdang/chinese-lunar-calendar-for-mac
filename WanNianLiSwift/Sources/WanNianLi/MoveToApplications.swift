@@ -5,14 +5,16 @@ import AppKit
 enum MoveToApplications {
     private static let suppressKey = "moveToApplicationsFolderAlertSuppress"
 
-    static func promptIfNecessary() {
+    /// 返回 true 表示应用已移动，正在退出并从新位置重新启动
+    @discardableResult
+    static func promptIfNecessary() -> Bool {
         let bundleURL = Bundle.main.bundleURL.resolvingSymlinksInPath()
         guard bundleURL.pathExtension == "app",
-              !UserDefaults.standard.bool(forKey: suppressKey) else { return }
+              !UserDefaults.standard.bool(forKey: suppressKey) else { return false }
 
         let applicationDirs = FileManager.default.urls(for: .applicationDirectory, in: [.localDomainMask, .userDomainMask])
         if applicationDirs.contains(where: { bundleURL.path.hasPrefix($0.resolvingSymlinksInPath().path + "/") }) {
-            return
+            return false
         }
 
         let alert = NSAlert()
@@ -28,7 +30,7 @@ enum MoveToApplications {
         if alert.suppressionButton?.state == .on {
             UserDefaults.standard.set(true, forKey: suppressKey)
         }
-        guard response == .alertFirstButtonReturn else { return }
+        guard response == .alertFirstButtonReturn else { return false }
 
         let fm = FileManager.default
         let destination = URL(fileURLWithPath: "/Applications").appendingPathComponent(bundleURL.lastPathComponent)
@@ -37,7 +39,7 @@ enum MoveToApplications {
         let running = NSRunningApplication.runningApplications(withBundleIdentifier: Bundle.main.bundleIdentifier ?? "")
         if running.contains(where: { $0.processIdentifier != getpid() && $0.bundleURL?.resolvingSymlinksInPath() == destination.resolvingSymlinksInPath() }) {
             showError("“应用程序”文件夹中的万年历正在运行，请先退出它再试。")
-            return
+            return false
         }
 
         // 先复制到临时名称，成功后再替换，失败时不会丢失已安装的版本
@@ -53,7 +55,7 @@ enum MoveToApplications {
         } catch {
             try? fm.removeItem(at: staging)
             showError(error.localizedDescription)
-            return
+            return false
         }
         // 原位置的副本放到废纸篓（从只读磁盘映像或 App Translocation 运行时会失败，忽略即可）
         try? fm.trashItem(at: bundleURL, resultingItemURL: nil)
@@ -65,6 +67,7 @@ enum MoveToApplications {
                               destination.path, String(getpid())]
         try? relaunch.run()
         NSApp.terminate(nil)
+        return true
     }
 
     private static func showError(_ message: String) {

@@ -39,8 +39,8 @@ enum AppearanceMode: String, CaseIterable, Identifiable {
 /// 日历左下角的设置菜单
 @MainActor
 final class AppMenu: ObservableObject {
-    static let helpURL = URL(string: "http://calendar.zfdang.com")!
-    static let changelogURL = URL(string: "https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md")!
+    static let helpURL = URL(string: "https://calendar.zfdang.com")!
+    static let changelogURL = URL(string: "https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/CHANGELOG.md")!
     static let contactURL = URL(string: "mailto:me@zfdang.com?subject=About%20Chinese%20Lunar%20Calendar%20for%20MAC")!
 
     /// 选择"更新假日信息"时调用

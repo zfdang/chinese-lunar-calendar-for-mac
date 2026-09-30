@@ -3,7 +3,8 @@ import LunarCore
 
 /// 管理日历数据：调休安排（holidays.json）、内置节日的显示设置、自定义事件（custom-events.json）。
 ///
-/// 数据保存在 "~/Library/Application Support/com.zfdang.calendar" 中：
+/// 数据保存在 "~/Library/Application Support/com.zfdang.calendar" 中（沿用旧版应用的目录，以便迁移旧数据；
+/// 注意与 Bundle ID com.zfdang.WanNianLiSwift 不同。如果以后要与旧版彻底分开，需要做一次数据目录迁移）：
 /// - holidays.json：在线更新下载的调休安排（比内置版本新时才使用）
 /// - custom-events.json：用户自定义的日期、节日和事件
 @MainActor
@@ -85,7 +86,8 @@ final class DataStore: ObservableObject {
         }
     }
 
-    var holidaysVersion: String { holidays?.version ?? "0" }
+    /// 用于显示的版本号，没有数据时显示"—"
+    var holidaysVersion: String { holidays?.version ?? "—" }
 
     /// 下载最新的调休安排；依次尝试各个地址，返回第一个成功下载的内容（不保存）
     func fetchRemoteHolidays() async throws -> (content: Data, holidays: HolidayData) {
