@@ -61,9 +61,23 @@
 
 ```bash
 cd WanNianLiSwift
-./scripts/build-app.sh          # 生成 build/WanNianLiSwift.app 和 build/WanNianLiSwift.app.zip（universal）
-swift run WanNianLi             # 开发时直接运行
+./scripts/build-app.sh             # universal，生成 build/WanNianLiSwift.app 和 build/WanNianLiSwift-Universal.zip
+./scripts/build-app.sh arm64       # 只构建 Apple Silicon 版本
+./scripts/build-app.sh x86_64      # 只构建 Intel 版本
+VERSION=4.1 ./scripts/build-app.sh # 指定版本号
+swift run WanNianLi                # 开发时直接运行
 ```
+
+## 发布
+
+推送 tag 即可发布，GitHub Actions（`.github/workflows/release.yml`）会构建 Apple Silicon 和 Intel 两个版本，并创建 GitHub Release：
+
+```bash
+git tag v4.1 && git push origin v4.1
+```
+
+版本号取自 tag（去掉开头的 `v`）。Pull request 中修改了 `WanNianLiSwift/` 时也会自动构建（只上传为 Actions artifact，不发布）。
+应用只做了 ad-hoc 签名、没有公证，用户第一次打开时需要按住 Control 点按并选择"打开"。
 
 ## 验证农历计算
 

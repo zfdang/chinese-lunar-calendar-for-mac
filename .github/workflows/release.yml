@@ -1,0 +1,81 @@
+# 构建 WanNianLiSwift（原生 Swift 版万年历）
+# - 推送 tag：构建 Apple Silicon 和 Intel 两个版本，发布到 GitHub Release
+# - Pull request / 手动运行：只构建，结果作为 Actions artifact 上传
+name: Build & Release
+
+on:
+  push:
+    tags: ["*"]
+  pull_request:
+    paths:
+      - "WanNianLiSwift/**"
+      - ".github/workflows/release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    defaults:
+      run:
+        working-directory: WanNianLiSwift
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Toolchain
+        run: swift --version
+
+      - name: Version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="dev-${GITHUB_SHA::7}"
+          fi
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "Version: $VERSION"
+
+      - name: Build Apple Silicon
+        run: ./scripts/build-app.sh arm64
+
+      - name: Build Intel
+        run: ./scripts/build-app.sh x86_64
+
+      - name: Check
+        run: |
+          ls -l build/*.zip
+          for zip in build/*.zip; do
+            dir=$(mktemp -d)
+            ditto -x -k "$zip" "$dir"
+            echo "$zip: $(lipo -archs "$dir/WanNianLiSwift.app/Contents/MacOS/WanNianLiSwift")," \
+                 "version $(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$dir/WanNianLiSwift.app/Contents/Info.plist")"
+            codesign --verify "$dir/WanNianLiSwift.app"
+          done
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: WanNianLiSwift-${{ env.VERSION }}
+          path: WanNianLiSwift/build/*.zip
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > "$RUNNER_TEMP/notes.md" <<NOTES
+          万年历 Swift 版 ${GITHUB_REF_NAME}（需要 macOS 13 或更新版本）
+
+          - **WanNianLiSwift-${VERSION}-AppleSilicon.zip**：M 系列芯片的 Mac
+          - **WanNianLiSwift-${VERSION}-Intel.zip**：Intel 芯片的 Mac
+
+          应用未经过 Apple 公证。第一次打开时如果提示无法验证开发者，请在 Finder 中按住 Control 点按应用并选择"打开"，
+          或者在终端中执行：\`xattr -cr /Applications/WanNianLiSwift.app\`
+          NOTES
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" build/*.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" build/*.zip --title "万年历 Swift ${GITHUB_REF_NAME}" --notes-file "$RUNNER_TEMP/notes.md"
+          fi
