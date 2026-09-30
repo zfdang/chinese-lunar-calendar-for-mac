@@ -2,9 +2,9 @@ import AppKit
 import LunarCore
 import SwiftUI
 
-/// 日历使用的颜色，同时适配浅色和深色模式
+/// 日历使用的颜色，自动适配浅色 / 深色模式
 enum Palette {
-    private static func dynamic(_ light: UInt32, _ dark: UInt32) -> Color {
+    private static func dynamic(light: UInt32, dark: UInt32) -> Color {
         func color(_ hex: UInt32) -> NSColor {
             NSColor(srgbRed: CGFloat((hex >> 16) & 0xff) / 255, green: CGFloat((hex >> 8) & 0xff) / 255,
                     blue: CGFloat(hex & 0xff) / 255, alpha: 1)
@@ -14,47 +14,54 @@ enum Palette {
         })
     }
 
-    static let bar = dynamic(0xeff8ff, 0x22303d)
-    static let red = dynamic(0xff0000, 0xff6259)
-    static let blue = dynamic(0x005aff, 0x64a0ff)
-    static let highlighted = dynamic(0xffdf9c, 0x6e5522)
-    static let hovered = dynamic(0xcdff3f, 0x3f5a17)
-    static let lunarText = dynamic(0x555555, 0xb4b4b4)
-    static let cardBackground = dynamic(0xfeffcd, 0x3a3a2a)
-    static let cardBorder = dynamic(0xdddddf, 0x5a5a4a)
+    /// 节假日红色：比系统红色柔和，避免刺眼
+    static let red = dynamic(light: 0xC4473D, dark: 0xE27D72)
+    static let blue = dynamic(light: 0x2F6BC4, dark: 0x74A7E8)
+    static let accent = Color.accentColor
+    /// 标题栏、详细信息面板等区域的底色
+    static let panel = Color.primary.opacity(0.05)
+    static let hovered = Color.primary.opacity(0.08)
+    static let selected = Color.accentColor.opacity(0.18)
 }
 
 struct CalendarView: View {
     @ObservedObject var model: CalendarViewModel
     let menu: AppMenu
 
-    static let cellSize = CGSize(width: 64, height: 48)
+    static let cellSize = CGSize(width: 64, height: 50)
     private static let weekdays = Array("日一二三四五六").map(String.init)
 
     @State private var hovered: Int?
-    @State private var pressed: Int?
-    @State private var detailShown: Int?
 
     var body: some View {
         VStack(spacing: 0) {
             titleBar
             weekdayBar
             grid
+            DetailPanel(day: model.detailDay)
+                .padding(.top, 6)
+            Divider()
+                .padding(.top, 8)
             navigationBar
         }
         .frame(width: Self.cellSize.width * 7)
-        .padding(6)
+        .padding(.horizontal, 8)
+        .padding(.top, 6)
+        .padding(.bottom, 4)
+        .onDisappear { hovered = nil }
     }
 
     // MARK: - 标题
 
     private var titleBar: some View {
         let title = model.title
-        return HStack(spacing: 14) {
+        return HStack(spacing: 12) {
             Text(title.solar)
+                .font(.system(size: 17, weight: .semibold))
             Text(title.lunar)
+                .font(.system(size: 15))
+                .foregroundStyle(.secondary)
         }
-        .font(.system(size: 18))
         .frame(maxWidth: .infinity)
         .frame(height: 34)
     }
@@ -63,12 +70,13 @@ struct CalendarView: View {
         HStack(spacing: 0) {
             ForEach(0..<7, id: \.self) { i in
                 Text(Self.weekdays[i])
-                    .font(.system(size: 15))
-                    .foregroundStyle(i == 0 || i == 6 ? Palette.red : Color.primary)
-                    .frame(width: Self.cellSize.width, height: 24)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(i == 0 || i == 6 ? AnyShapeStyle(Palette.red) : AnyShapeStyle(.secondary))
+                    .frame(width: Self.cellSize.width, height: 26)
             }
         }
-        .background(Palette.bar)
+        .background(RoundedRectangle(cornerRadius: 6).fill(Palette.panel))
+        .padding(.bottom, 2)
     }
 
     // MARK: - 日期格
@@ -84,84 +92,49 @@ struct CalendarView: View {
                 }
             }
         }
-        // 弹出窗口关闭时手势可能被取消而收不到 onEnded，这里清理按下状态
-        .onDisappear {
-            pressed = nil
-            detailShown = nil
-            hovered = nil
-        }
-        .overlay(alignment: .topLeading) {
-            if let index = detailShown {
-                DetailCard(day: days[index])
-                    .position(detailPosition(for: index))
-                    .allowsHitTesting(false)
-            }
-        }
     }
 
     private func cell(index: Int, day: CalendarDay) -> some View {
         let inMonth = model.grid.isInMonth(day)
-        let background: Color = !inMonth ? .clear
-            : hovered == index ? Palette.hovered
-            : model.isHighlighted(day) ? Palette.highlighted
+        let isToday = inMonth && day.date == model.today
+        let isSelected = inMonth && !isToday && model.isHighlighted(day)
+
+        let background: Color = isToday ? Palette.accent
+            : isSelected ? Palette.selected
+            : (inMonth && hovered == index) ? Palette.hovered
             : .clear
 
-        return VStack(spacing: 0) {
+        return VStack(spacing: 1) {
             Text("\(day.date.day)")
-                .font(.system(size: 26))
-                .foregroundStyle(day.isRestDay ? Palette.red : Color.primary)
+                .font(.system(size: 22, weight: isToday ? .semibold : .regular))
+                .foregroundStyle(isToday ? AnyShapeStyle(.white) : dayColor(day))
             Text(day.shortText)
-                .font(.system(size: 12))
-                .foregroundStyle(lunarColor(day))
+                .font(.system(size: 11))
+                .foregroundStyle(isToday ? AnyShapeStyle(.white.opacity(0.9)) : lunarColor(day))
                 .lineLimit(1)
         }
-        .frame(width: Self.cellSize.width - 2, height: Self.cellSize.height - 2)
-        .background(RoundedRectangle(cornerRadius: 4).fill(background))
+        .frame(width: Self.cellSize.width - 4, height: Self.cellSize.height - 4)
+        .background(RoundedRectangle(cornerRadius: 8).fill(background))
+        .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(isSelected ? Palette.accent.opacity(0.7) : .clear))
         .frame(width: Self.cellSize.width, height: Self.cellSize.height)
-        .opacity(inMonth ? 1 : 0.2)
+        .opacity(inMonth ? 1 : 0.3)
         .contentShape(Rectangle())
         .onHover { inside in
             if inMonth { hovered = inside ? index : (hovered == index ? nil : hovered) }
         }
-        .gesture(inMonth ? pressGesture(index: index, day: day) : nil)
+        .onTapGesture {
+            if inMonth { model.select(day) }
+        }
     }
 
-    /// 单击选中日期；按住不放时显示详细信息
-    private func pressGesture(index: Int, day: CalendarDay) -> some Gesture {
-        DragGesture(minimumDistance: 0)
-            .onChanged { _ in
-                guard pressed != index else { return }
-                pressed = index
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    if pressed == index { detailShown = index }
-                }
-            }
-            .onEnded { value in
-                pressed = nil
-                detailShown = nil
-                let size = Self.cellSize
-                if CGRect(origin: .zero, size: size).contains(value.location) {
-                    model.select(day)
-                }
-            }
+    private func dayColor(_ day: CalendarDay) -> AnyShapeStyle {
+        day.isRestDay ? AnyShapeStyle(Palette.red) : AnyShapeStyle(.primary)
     }
 
-    private func lunarColor(_ day: CalendarDay) -> Color {
-        if !day.lunarFestival.isEmpty || day.adjustment == "+" { return Palette.red }
-        if !day.solarTerm.isEmpty { return Palette.blue }
-        return Palette.lunarText
-    }
-
-    /// 详细信息卡片的位置：尽量显示在日期格下方，靠下的行显示在上方
-    private func detailPosition(for index: Int) -> CGPoint {
-        let (row, col) = (index / 7, index % 7)
-        let size = Self.cellSize
-        let halfWidth = DetailCard.width / 2 + 2
-        let x = min(max((CGFloat(col) + 0.5) * size.width, halfWidth), size.width * 7 - halfWidth)
-        let y = row < 3
-            ? CGFloat(row + 1) * size.height + DetailCard.height / 2
-            : CGFloat(row) * size.height - DetailCard.height / 2
-        return CGPoint(x: x, y: y)
+    private func lunarColor(_ day: CalendarDay) -> AnyShapeStyle {
+        if !day.lunarFestival.isEmpty || day.adjustment == "+" { return AnyShapeStyle(Palette.red) }
+        if !day.solarTerm.isEmpty { return AnyShapeStyle(Palette.blue) }
+        return AnyShapeStyle(.secondary)
     }
 
     // MARK: - 底部导航栏
@@ -196,9 +169,7 @@ struct CalendarView: View {
         }
         .font(.system(size: 12))
         .controlSize(.small)
-        .padding(.horizontal, 4)
-        .frame(height: 30)
-        .background(Palette.bar)
+        .frame(height: 32)
     }
 
     private func navButton(_ title: String, icon: String, trailing: Bool = false, help: String,
@@ -215,30 +186,51 @@ struct CalendarView: View {
     }
 }
 
-/// 按住日期格时显示的详细信息
-struct DetailCard: View {
+/// 选中日期（默认今天）的详细信息
+struct DetailPanel: View {
     let day: CalendarDay
-    static let width: CGFloat = 132
-    static let height: CGFloat = 96
 
     var body: some View {
-        VStack(spacing: 2) {
-            Text(day.solarText)
-            Text(day.weekdayName)
-            Text("\(day.lunarMonthName)月\(day.lunarDayName)").bold()
-            Text("\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日")
-            if !day.allEvents.isEmpty {
-                Text(day.allEvents).bold().foregroundStyle(Palette.red)
+        HStack(alignment: .center, spacing: 12) {
+            VStack(alignment: .leading, spacing: 3) {
+                Text("\(day.solarText)  \(day.weekdayName)")
+                    .font(.system(size: 13, weight: .semibold))
+                Text("农历\(day.lunarMonthName)月\(day.lunarDayName)　\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日　属\(day.shengXiao)")
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+            VStack(alignment: .trailing, spacing: 3) {
+                if let tag = adjustmentTag {
+                    Text(tag.text)
+                        .font(.system(size: 11))
+                        .foregroundStyle(tag.color)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 1)
+                        .background(Capsule().fill(tag.color.opacity(0.15)))
+                }
+                if !day.allEvents.isEmpty {
+                    Text(day.allEvents)
+                        .font(.system(size: 12))
+                        .foregroundStyle(day.lunarFestival.isEmpty && day.solarFestival.isEmpty
+                                         && day.specialEvent.isEmpty ? Palette.blue : Palette.red)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
+                }
             }
         }
-        .font(.system(size: 12))
-        .multilineTextAlignment(.center)
-        .padding(6)
-        .frame(width: Self.width)
-        .frame(minHeight: Self.height)
-        .fixedSize(horizontal: false, vertical: true)
-        .background(RoundedRectangle(cornerRadius: 6).fill(Palette.cardBackground))
-        .overlay(RoundedRectangle(cornerRadius: 6).stroke(Palette.cardBorder))
-        .shadow(radius: 3, y: 1)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .frame(maxWidth: .infinity, minHeight: 50)
+        .background(RoundedRectangle(cornerRadius: 8).fill(Palette.panel))
+    }
+
+    /// 调休标记：放假 / 上班
+    private var adjustmentTag: (text: String, color: Color)? {
+        switch day.adjustment {
+        case "+": return ("放假", Palette.red)
+        case "-": return ("上班", Color.secondary)
+        default: return nil
+        }
     }
 }

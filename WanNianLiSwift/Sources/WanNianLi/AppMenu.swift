@@ -2,6 +2,37 @@ import AppKit
 import ServiceManagement
 import SwiftUI
 
+/// 外观：跟随系统 / 日间模式 / 夜间模式
+enum AppearanceMode: String, CaseIterable, Identifiable {
+    case system, light, dark
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .system: return "跟随系统"
+        case .light: return "日间模式"
+        case .dark: return "夜间模式"
+        }
+    }
+
+    private static let key = "appearance"
+
+    static var saved: AppearanceMode {
+        UserDefaults.standard.string(forKey: key).flatMap(AppearanceMode.init) ?? .system
+    }
+
+    @MainActor
+    func apply() {
+        UserDefaults.standard.set(rawValue, forKey: Self.key)
+        switch self {
+        case .system: NSApp.appearance = nil
+        case .light: NSApp.appearance = NSAppearance(named: .aqua)
+        case .dark: NSApp.appearance = NSAppearance(named: .darkAqua)
+        }
+    }
+}
+
 /// 日历左下角的设置菜单
 @MainActor
 final class AppMenu: ObservableObject {
@@ -13,6 +44,9 @@ final class AppMenu: ObservableObject {
     var onUpdateHolidays: () -> Void = {}
 
     @Published private(set) var launchAtLogin = AppMenu.isLoginItemEnabled
+    @Published var appearance = AppearanceMode.saved {
+        didSet { appearance.apply() }
+    }
 
     /// 已注册为登录项（包括等待用户在系统设置中批准的情况）
     private static var isLoginItemEnabled: Bool {
@@ -58,6 +92,9 @@ private struct AppMenuButton: View {
     var body: some View {
         Menu {
             Toggle("自动启动", isOn: Binding(get: { menu.launchAtLogin }, set: { menu.setLaunchAtLogin($0) }))
+            Picker("外观", selection: $menu.appearance) {
+                ForEach(AppearanceMode.allCases) { Text($0.title).tag($0) }
+            }
             Divider()
             Button("使用帮助") { NSWorkspace.shared.open(AppMenu.helpURL) }
             Button("更新假日信息…") { menu.onUpdateHolidays() }

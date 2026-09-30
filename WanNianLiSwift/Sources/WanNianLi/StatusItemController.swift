@@ -37,6 +37,8 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         popover.delegate = self
 
         refreshIcon()
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
+                                               name: NSApplication.didBecomeActiveNotification, object: nil)
         // 每 5 秒检查一次日期是否变化
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
             MainActor.assumeIsolated { self?.refreshIcon() }
@@ -84,6 +86,16 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         }
     }
 
+    // 应用激活是异步的，弹出窗口显示时可能还没激活，这里再次让它成为键盘焦点窗口，
+    // 否则方向键、回车无法控制日历
+    func popoverDidShow(_ notification: Notification) {
+        popover.contentViewController?.view.window?.makeKey()
+    }
+
+    @objc private func applicationDidBecomeActive() {
+        if popover.isShown { popover.contentViewController?.view.window?.makeKey() }
+    }
+
     func popoverDidClose(_ notification: Notification) {
         lastClosed = Date()
         statusItem.button?.highlight(false)
@@ -120,3 +132,4 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         updateWindow?.window?.makeKeyAndOrderFront(nil)
     }
 }
+

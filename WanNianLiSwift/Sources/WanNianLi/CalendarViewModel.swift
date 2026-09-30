@@ -93,6 +93,12 @@ final class CalendarViewModel: ObservableObject {
         day.date == (selected ?? today)
     }
 
+    /// 详细信息面板显示的日期：选中的日期，没有选中时为今天
+    var detailDay: CalendarDay {
+        let date = selected ?? today
+        return grid.days.first { $0.date == date } ?? CalendarDay(date: date, data: store.data)
+    }
+
     /// 标题栏的两部分文字
     var title: (solar: String, lunar: String) {
         let visible = grid.days.filter { grid.isInMonth($0) }
