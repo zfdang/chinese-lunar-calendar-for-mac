@@ -5,6 +5,13 @@ public enum LegacyImporter {
     /// 内置节日在旧版中使用的名称
     private static let legacyNames = ["七夕": "情人节"]
 
+    static let objectNames = ["SOLARFESTIVAL", "LUNARFESTIVAL", "OTHERFESTIVAL", "SPECIFIC_EVENTS"]
+
+    /// 文本中是否包含旧版 festivals.js / events.js 的数据
+    public static func recognizes(_ js: String) -> Bool {
+        objectNames.contains { JSDataParser.objectBody(named: $0, in: js) != nil }
+    }
+
     /// 解析 js 文本，返回其中不属于内置节日的条目
     public static func customEvents(festivalsJS: String, eventsJS: String) -> [CustomEvent] {
         var result: [CustomEvent] = []
@@ -51,12 +58,7 @@ public enum LegacyImporter {
 /// 解析旧版 js 数据文件中形如 `var NAME = { "key": "value", ... };` 的对象
 public enum JSDataParser {
     public static func object(named name: String, in source: String) -> [String: String] {
-        let code = stripComments(source)
-        guard let declaration = code.range(of: #"\bvar\s+\#(name)\s*=\s*\{"#, options: .regularExpression),
-              let end = code[declaration.upperBound...].firstIndex(of: "}") else {
-            return [:]
-        }
-        let body = String(code[declaration.upperBound..<end])
+        guard let body = objectBody(named: name, in: source) else { return [:] }
         let pattern = try! NSRegularExpression(pattern: #"(["'])(.*?)\1\s*:\s*(["'])(.*?)\3"#)
         var result: [String: String] = [:]
         let ns = body as NSString
@@ -64,6 +66,31 @@ public enum JSDataParser {
             result[ns.substring(with: match.range(at: 2))] = ns.substring(with: match.range(at: 4))
         }
         return result
+    }
+
+    /// `var NAME = { ... }` 花括号之间的内容；找结尾时跳过字符串中的 "}"
+    static func objectBody(named name: String, in source: String) -> String? {
+        let code = stripComments(source)
+        guard let declaration = code.range(of: #"\b(var|let|const)\s+\#(name)\s*=\s*\{"#, options: .regularExpression) else {
+            return nil
+        }
+        var quote: Character?
+        var escaped = false
+        var index = declaration.upperBound
+        while index < code.endIndex {
+            let c = code[index]
+            if let q = quote {
+                if escaped { escaped = false }
+                else if c == "\\" { escaped = true }
+                else if c == q || c.isNewline { quote = nil }
+            } else if c == "\"" || c == "'" {
+                quote = c
+            } else if c == "}" {
+                return String(code[declaration.upperBound..<index])
+            }
+            index = code.index(after: index)
+        }
+        return nil
     }
 
     /// 去掉 // 和 /* */ 注释（忽略字符串内部的内容）

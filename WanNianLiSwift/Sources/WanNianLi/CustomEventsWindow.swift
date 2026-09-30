@@ -25,8 +25,8 @@ struct CustomEventsView: View {
             Divider()
 
             Group {
-                if let id = selection, store.customEvents.contains(where: { $0.id == id }) {
-                    EventEditor(event: binding(for: id))
+                if let id = selection, let event = store.customEvents.first(where: { $0.id == id }) {
+                    EventEditor(event: event) { store.upsert($0) }
                         .id(id)
                 } else {
                     VStack(spacing: 8) {
@@ -60,12 +60,6 @@ struct CustomEventsView: View {
         .buttonStyle(.bordered)
         .controlSize(.small)
         .padding(8)
-    }
-
-    private func binding(for id: UUID) -> Binding<CustomEvent> {
-        Binding(
-            get: { store.customEvents.first { $0.id == id } ?? CustomEvent(id: id, name: "", rule: .solar(month: 1, day: 1)) },
-            set: { store.upsert($0) })
     }
 
     private func add() {
@@ -142,9 +136,18 @@ private struct EventRow: View {
     }
 }
 
-/// 编辑一个自定义日期
+/// 编辑一个自定义日期。
+/// 修改先保存在草稿中，停止输入 0.4 秒后（或者关闭编辑器时）才写入文件，避免每输入一个字都保存一次
 private struct EventEditor: View {
-    @Binding var event: CustomEvent
+    let save: (CustomEvent) -> Void
+    @State private var event: CustomEvent
+    @State private var saveTask: Task<Void, Never>?
+    @State private var nextOccurrence: String?
+
+    init(event: CustomEvent, save: @escaping (CustomEvent) -> Void) {
+        self.save = save
+        _event = State(initialValue: event)
+    }
 
     enum Kind: String, CaseIterable, Identifiable {
         case lunar, solar, weekday, once
@@ -176,6 +179,26 @@ private struct EventEditor: View {
             }
         }
         .formStyle(.grouped)
+        .onChange(of: event) { _ in scheduleSave() }
+        .onDisappear { flush() }
+        // 只在日期规则变化时重新计算"下一次"
+        .task(id: event.rule) { nextOccurrence = Self.nextOccurrence(of: event.rule) }
+    }
+
+    private func scheduleSave() {
+        saveTask?.cancel()
+        saveTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 400_000_000)
+            guard !Task.isCancelled else { return }
+            save(event)
+        }
+    }
+
+    private func flush() {
+        guard let task = saveTask else { return }
+        task.cancel()
+        saveTask = nil
+        save(event)
     }
 
     @ViewBuilder
@@ -207,11 +230,12 @@ private struct EventEditor: View {
             }
         case let .once(y, m, d):
             DatePicker("日期", selection: Binding(
-                get: { Calendar.current.date(from: DateComponents(year: y, month: m, day: d)) ?? Date() },
+                get: { Calendar.localGregorian.date(from: DateComponents(year: y, month: m, day: d)) ?? Date() },
                 set: {
-                    let c = Calendar.current.dateComponents([.year, .month, .day], from: $0)
+                    let c = Calendar.localGregorian.dateComponents([.year, .month, .day], from: $0)
                     event.rule = .once(year: c.year!, month: c.month!, day: c.day!)
                 }), displayedComponents: .date)
+            .environment(\.calendar, Calendar.localGregorian)
         case .lunarNewYearsEve:
             EmptyView()
         }
@@ -244,8 +268,8 @@ private struct EventEditor: View {
     }
 
     /// 从今天起的下一次日期（最多查找 2 年）
-    private var nextOccurrence: String? {
-        let data = CalendarData(holidays: nil, festivals: [], customEvents: [CustomEvent(name: "x", rule: event.rule)])
+    private static func nextOccurrence(of rule: DateRule) -> String? {
+        let data = CalendarData(holidays: nil, festivals: [], customEvents: [CustomEvent(name: "x", rule: rule)])
         let today = SolarDate.today
         for offset in 0..<(366 * 2) {
             let date = today.adding(days: offset)

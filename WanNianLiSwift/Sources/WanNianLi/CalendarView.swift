@@ -56,6 +56,7 @@ struct CalendarView: View {
         .padding(.horizontal, 8)
         .padding(.top, 6)
         .padding(.bottom, 4)
+        .background(Palette.background)
         .onDisappear { hovered = nil }
     }
 

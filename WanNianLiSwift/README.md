@@ -40,6 +40,10 @@
 | 内置节日 | `Sources/LunarCore/Festivals.swift` | 分为传统节日、公历节日、西方节日、纪念日，可在"显示节日"中按分类隐藏 |
 | 自定义日期 | `~/Library/Application Support/com.zfdang.calendar/custom-events.json` | 在"自定义日期"窗口中编辑，可导入 / 导出 |
 
+新旧两个版本共用 `~/Library/Application Support/com.zfdang.calendar/` 目录，但自定义日期的格式不同：新版只在第一次运行时从旧版的
+festivals.js / events.js 导入一次，之后两边各自独立。如果之后又修改了旧版的文件，可以在"自定义日期"窗口中再导入一次（已存在的条目会自动跳过）。
+如果 custom-events.json 无法读取，程序会把它备份为 `custom-events.broken-<时间>.json` 并提示，不会覆盖原来的内容。
+
 `holidays.json` 格式：
 
 ```json
@@ -78,6 +82,17 @@ git tag v4.1 && git push origin v4.1
 
 版本号取自 tag（去掉开头的 `v`）。Pull request 中修改了 `WanNianLiSwift/` 时也会自动构建（只上传为 Actions artifact，不发布）。
 应用只做了 ad-hoc 签名、没有公证，用户第一次打开时需要按住 Control 点按并选择"打开"。
+
+## 测试
+
+```bash
+./scripts/check-golden.sh      # 自检 + 与基准数据对比（CI 中每次构建都会运行）
+./scripts/verify-lunar.sh      # 与香港天文台对照表逐日比较（需要网络）
+```
+
+- `Tests/lunar-golden-1901-2099.txt`：1901–2099 年每个农历月的初一、每个节气、每年一天的日干支。已与香港天文台 1921–2099 年的数据核对一致。
+  农历日期来自系统的 ICU，如果 macOS 更新改变了计算结果，`check-golden.sh` 会失败；确认新结果正确后用 `check-golden.sh --update` 更新基准数据。
+- `lunar-dump --selftest`：自定义事件文件的读写、旧版 js 的导入、节日规则等自检。
 
 ## 验证农历计算
 
@@ -121,5 +136,7 @@ Sources/
     CustomEventsWindow    自定义日期（添加、编辑、导入、导出）
     DataStore             数据文件管理
     MoveToApplications    移动到"应用程序"文件夹
-  lunar-dump/         导出每日计算结果，用于验证
+  lunar-dump/         导出每日计算结果、基准数据，运行自检
+Tests/
+  lunar-golden-1901-2099.txt  农历基准数据
 ```

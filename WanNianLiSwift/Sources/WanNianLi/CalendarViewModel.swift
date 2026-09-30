@@ -2,10 +2,20 @@ import Combine
 import Foundation
 import LunarCore
 
+extension Calendar {
+    /// 本地时区的公历。不能用 Calendar.current：用户可能在系统设置中选择了佛历、和历等
+    static var localGregorian: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .current
+        calendar.locale = Locale(identifier: "zh_CN")
+        return calendar
+    }
+}
+
 extension SolarDate {
     /// 本地时区的今天
     static var today: SolarDate {
-        let c = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        let c = Calendar.localGregorian.dateComponents([.year, .month, .day], from: Date())
         return SolarDate(year: c.year!, month: c.month!, day: c.day!)
     }
 }

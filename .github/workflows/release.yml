@@ -28,6 +28,9 @@ jobs:
       - name: Toolchain
         run: swift --version
 
+      - name: Test lunar calendar
+        run: ./scripts/check-golden.sh
+
       - name: Version
         run: |
           if [[ "$GITHUB_REF" == refs/tags/* ]]; then
