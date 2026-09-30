@@ -70,10 +70,20 @@ public struct CustomEvent: Codable, Hashable, Identifiable, Sendable {
 
 /// 自定义事件文件（custom-events.json / 导出文件）的格式
 public struct CustomEventsFile: Codable, Sendable {
-    public var version = 1
+    /// 文件格式版本，缺省为 1
+    public var version: Int
     public var events: [CustomEvent]
 
     public init(events: [CustomEvent]) {
+        version = 1
         self.events = events
+    }
+
+    private enum CodingKeys: String, CodingKey { case version, events }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        version = try container.decodeIfPresent(Int.self, forKey: .version) ?? 1
+        events = try container.decode([CustomEvent].self, forKey: .events)
     }
 }

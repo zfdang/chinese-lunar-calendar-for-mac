@@ -9,6 +9,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         MoveToApplications.promptIfNecessary()
         statusItemController = StatusItemController()
         DataStore.shared.startAutomaticHolidayUpdates()
+        if let warning = DataStore.shared.loadWarning {
+            let alert = NSAlert()
+            alert.messageText = "万年历"
+            alert.informativeText = warning
+            alert.runModal()
+        }
     }
 }
 

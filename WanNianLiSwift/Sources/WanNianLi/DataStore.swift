@@ -32,6 +32,9 @@ final class DataStore: ObservableObject {
 
     let supportDirectory: URL
     private var autoCheckTimer: Timer?
+    /// 启动时读取数据遇到的问题，需要提示用户
+    private(set) var loadWarning: String?
+    private var customEventsReadOnly = false
 
     private init() {
         if let override = ProcessInfo.processInfo.environment["WANNIANLI_DATA_DIR"] {
@@ -148,7 +151,18 @@ final class DataStore: ObservableObject {
             return
         }
         if FileManager.default.fileExists(atPath: customEventsFile.path) {
-            NSLog("WanNianLi: custom-events.json cannot be parsed, keeping it untouched")
+            // 文件损坏：先备份，之后的保存不会覆盖用户原来的数据
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd-HHmmss"
+            let backup = supportDirectory.appendingPathComponent("custom-events.broken-\(formatter.string(from: Date())).json")
+            do {
+                try FileManager.default.moveItem(at: customEventsFile, to: backup)
+                loadWarning = "自定义日期文件无法读取，已备份为 \(backup.lastPathComponent)（位于 \(supportDirectory.path)）。"
+            } catch {
+                loadWarning = "自定义日期文件无法读取，也无法备份：\(error.localizedDescription)"
+                customEventsReadOnly = true
+            }
+            NSLog("WanNianLi: \(loadWarning ?? "")")
             return
         }
         // 第一次运行：从旧版的 festivals.js / events.js 中导入用户自己添加的条目
@@ -160,6 +174,8 @@ final class DataStore: ObservableObject {
     }
 
     private func saveCustomEvents() {
+        // 损坏的文件没能备份时，不保存，避免覆盖用户数据
+        guard !customEventsReadOnly else { return }
         do {
             try Self.encode(customEvents).write(to: customEventsFile, options: .atomic)
         } catch {
@@ -200,9 +216,16 @@ final class DataStore: ObservableObject {
         let imported: [CustomEvent]
         if url.pathExtension.lowercased() == "js" {
             let text = String(decoding: content, as: UTF8.self)
+            guard LegacyImporter.recognizes(text) else {
+                throw ImportError("文件中没有找到旧版 festivals.js / events.js 的数据（SOLARFESTIVAL、LUNARFESTIVAL、OTHERFESTIVAL 或 SPECIFIC_EVENTS）。")
+            }
             imported = LegacyImporter.customEvents(festivalsJS: text, eventsJS: text)
         } else {
-            imported = try JSONDecoder().decode(CustomEventsFile.self, from: content).events
+            do {
+                imported = try JSONDecoder().decode(CustomEventsFile.self, from: content).events
+            } catch {
+                throw ImportError("文件格式不正确，请选择本程序导出的 JSON 文件。")
+            }
         }
         var events = customEvents
         var added = 0
@@ -214,4 +237,11 @@ final class DataStore: ObservableObject {
         setCustomEvents(events)
         return added
     }
+}
+
+/// 导入失败的原因
+struct ImportError: LocalizedError {
+    let message: String
+    init(_ message: String) { self.message = message }
+    var errorDescription: String? { message }
 }

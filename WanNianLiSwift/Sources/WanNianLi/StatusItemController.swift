@@ -105,7 +105,9 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
             .forEach { $0.needsDisplay = true }
     }
 
-    /// 把弹出窗口（包括箭头部分）的半透明材质换成不透明背景
+    /// 把弹出窗口箭头部分的半透明材质也换成不透明背景。
+    /// 依赖 NSPopover 内部的视图层级（contentView.superview），如果系统改变了层级，
+    /// 只有箭头会恢复为半透明，内容区域的背景由 CalendarView 自己绘制，不受影响
     private func installOpaqueBackground() {
         guard let frameView = popover.contentViewController?.view.window?.contentView?.superview,
               !frameView.subviews.contains(where: { $0 is PopoverBackgroundView }) else { return }
