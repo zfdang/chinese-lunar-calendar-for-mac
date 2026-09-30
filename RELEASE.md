@@ -6,7 +6,18 @@
 
 1. 代码合并到 master，确认 CI（`.github/workflows/release.yml`）通过：
    它会运行农历基准数据校验（`WanNianLiSwift/scripts/check-golden.sh`）并构建两个版本
-2. 在 [CHANGELOG.md](CHANGELOG.md) 中把“未发布”一节改为新版本号和日期
+2. 在 [CHANGELOG.md](CHANGELOG.md) 中把“未发布”一节的标题改为新版本号和日期（如 `## 4.2（2026-10-15）`），
+   再在它上面加一个空的“## 未发布”小节，留给下一个版本
+3. 如果界面有变化，更新网站截图（`docs/images/`）：
+
+   ```bash
+   cd WanNianLiSwift
+   swift run WanNianLi --snapshot /tmp/shots 20260930   # 日期可选，yyyyMMdd，决定日历显示哪一天
+   cp /tmp/shots/{calendar-light,calendar-dark,custom-events,custom-events-dark}.png ../docs/images/
+   ```
+
+   自定义日期的截图显示的是本机保存的自定义日期，截图前确认里面没有不想公开的内容；
+   `icon.png`（菜单栏图标）只用于检查，不需要复制到网站
 
 ## 2. 发布
 
