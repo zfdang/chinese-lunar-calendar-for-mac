@@ -1,4 +1,5 @@
 import AppKit
+import Combine
 import LunarCore
 import SwiftUI
 
@@ -17,10 +18,14 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
     private var updateWindow: UpdateHolidaysWindowController?
     private var customEventsWindow: CustomEventsWindowController?
     private var lastClosed = Date.distantPast
+    private var dataObserver: AnyCancellable?
 
     override init() {
         model = CalendarViewModel(store: store)
         super.init()
+
+        // 记住用户按住 Command 键拖动后的图标位置
+        statusItem.autosaveName = "WanNianLiSwift"
 
         menu.onUpdateHolidays = { [weak self] in self?.showUpdateWindow() }
         menu.onEditCustomEvents = { [weak self] in self?.showCustomEventsWindow() }
@@ -39,6 +44,13 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         popover.delegate = self
 
         refreshIcon()
+        // 节日设置、假日信息变化时，更新图标的提示文字
+        dataObserver = store.$data.dropFirst().sink { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.shownDay = nil
+                self?.refreshIcon()
+            }
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
                                                name: NSApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateAppearance),

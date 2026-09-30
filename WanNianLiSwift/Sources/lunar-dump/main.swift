@@ -5,7 +5,7 @@ import LunarCore
 //   lunar-dump <数据目录> [起始年] [结束年]       每天输出一行（制表符分隔），用于与香港天文台数据、原 calendar.js 对比
 //   lunar-dump --selftest                        运行数据解析和节日规则的自检
 //   lunar-dump --golden [起始年] [结束年]         输出精简的基准数据（每个农历月的初一、每个节气、每年一天的日干支），
-//                                                 用于 scripts/check-golden.sh 检查农历计算是否发生变化
+//                                                 用于 scripts/check-golden.sh 检查农历计算是否发生变化（默认 1900–2100）
 let args = CommandLine.arguments
 guard args.count >= 2 else {
     FileHandle.standardError.write("usage: lunar-dump <data-dir> [from-year] [to-year]\n       lunar-dump --golden [from-year] [to-year]\n".data(using: .utf8)!)
@@ -15,8 +15,8 @@ if args[1] == "--selftest" {
     exit(runSelfTests() ? 0 : 1)
 }
 let golden = args[1] == "--golden"
-let from = args.count > 2 ? Int(args[2])! : 1901
-let to = args.count > 3 ? Int(args[3])! : (golden ? 2099 : 2049)
+let from = args.count > 2 ? Int(args[2])! : (golden ? 1900 : 1901)
+let to = args.count > 3 ? Int(args[3])! : (golden ? 2100 : 2049)
 
 var output = ""
 var date = SolarDate(year: from, month: 1, day: 1)
@@ -29,7 +29,9 @@ if golden {
             output += "D \(iso(date)) \(d.ganZhiDay)\n"
         }
         if d.lunar.day == 1 {
-            output += "M \(iso(date)) \(d.lunar.month)\(d.lunar.isLeap ? " leap" : "") \(d.ganZhiYear)\(d.shengXiao)\n"
+            // 月长：第 30 天是下个月的初一则为 29 天（小月），否则为 30 天（大月）
+            let length = LunarCalendar.lunar(for: date.adding(days: 29)).day == 1 ? 29 : 30
+            output += "M \(iso(date)) \(d.lunar.month)\(d.lunar.isLeap ? " leap" : "") \(length) \(d.ganZhiYear)\(d.shengXiao)\n"
         }
         if !d.solarTerm.isEmpty {
             output += "T \(iso(date)) \(d.solarTerm) \(d.ganZhiMonth)\n"

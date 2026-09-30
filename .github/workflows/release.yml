@@ -10,6 +10,7 @@ on:
     paths:
       - "WanNianLiSwift/**"
       - "docs/data/holidays.json"
+      - "WanNianLiSwift/Tests/**"
       - ".github/workflows/release.yml"
   workflow_dispatch:
 
@@ -17,7 +18,26 @@ permissions:
   contents: write
 
 jobs:
+  # 农历结果来自系统的 ICU，会随 macOS 版本变化，所以在多个版本上校验基准数据。
+  # （应用最低支持 macOS 13，但 GitHub 已不再提供 macOS 13 的 runner。）
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, macos-15, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: WanNianLiSwift
+    steps:
+      - uses: actions/checkout@v4
+      - name: System
+        run: sw_vers && swift --version
+      - name: Test lunar calendar
+        run: ./scripts/check-golden.sh
+
   build:
+    needs: test
     runs-on: macos-15
     defaults:
       run:
@@ -27,9 +47,6 @@ jobs:
 
       - name: Toolchain
         run: swift --version
-
-      - name: Test lunar calendar
-        run: ./scripts/check-golden.sh
 
       - name: Version
         run: |

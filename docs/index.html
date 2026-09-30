@@ -6,6 +6,8 @@
   <title>万年历 · Mac 菜单栏农历日历</title>
   <meta name="description" content="Mac 菜单栏上的农历万年历：农历、节气、节日、国务院调休安排、自定义生日纪念日。原生 Swift 开发，免费开源。">
   <meta name="theme-color" content="#c4473d">
+  <link rel="canonical" href="https://calendar.zfdang.com/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Crect x='1.5' y='3' width='27' height='25.5' rx='6' fill='white' stroke='%23c4473d' stroke-width='2'/%3E%3Cpath d='M1.5 9a6 6 0 0 1 6-6h15a6 6 0 0 1 6 6v1H1.5z' fill='%23c4473d'/%3E%3C/svg%3E">
   <style>
     :root {
       --bg: #f6f5f3;
@@ -163,14 +165,14 @@
           <rect x="1.5" y="3" width="27" height="25.5" rx="6" fill="#fff" stroke="#c4473d" stroke-width="2"/>
           <path d="M1.5 9 V9 a6 6 0 0 1 6 -6 h15 a6 6 0 0 1 6 6 V10 H1.5 Z" fill="#c4473d"/>
           <text id="logo-day" x="15" y="23.5" text-anchor="middle" font-size="12" font-weight="700" fill="#1f1d1b"
-                font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif">30</text>
+                font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif"></text>
         </svg>
         万年历
       </a>
       <div class="nav-links">
         <a href="#features">功能</a>
         <a href="#install">安装</a>
-        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md">更新历史</a>
+        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/CHANGELOG.md">更新历史</a>
         <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac">GitHub</a>
       </div>
     </nav>
@@ -190,8 +192,8 @@
           </a>
         </div>
         <p class="meta">
-          版本 4.1.2 · 需要 macOS 13 或更新版本 · 免费开源<br>
-          不确定选哪个？点左上角 <span aria-label="苹果菜单">&#63743;</span> →“关于本机”，“芯片”一栏写着 Apple M 系列就选 Apple 芯片版。<br>
+          版本 <span class="app-version">4.1.2</span> · 需要 macOS 13 或更新版本 · 免费开源<br>
+          不确定选哪个？打开屏幕左上角的苹果菜单 →“关于本机”，“芯片”一栏写着 Apple M 系列就选 Apple 芯片版。<br>
           macOS 12 及更早版本请下载 <a href="WanNianLi.app-u.zip">旧版程序</a>
         </p>
       </div>
@@ -285,11 +287,11 @@
 
   <footer>
     <div class="wrap row">
-      <div>万年历由 <a href="https://github.com/zfdang">zfdang</a> 开发并开源 · 如商用，须征得作者同意</div>
+      <div>万年历由 <a href="https://github.com/zfdang">zfdang</a> 开发，以 <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/LICENSE">MIT 许可证</a> 开源</div>
       <div>
         <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac">源代码</a> ·
         <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/releases">所有版本</a> ·
-        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md">更新历史</a>
+        <a href="https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/CHANGELOG.md">更新历史</a>
       </div>
     </div>
   </footer>
@@ -297,6 +299,14 @@
   <script>
     // 标志中显示今天的日期
     document.getElementById("logo-day").textContent = new Date().getDate();
+    // 版本号来自 version.json（由 WanNianLiSwift/scripts/publish-website.sh 生成），页面中的数字只是后备
+    fetch("version.json", { cache: "no-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) {
+        if (!v || !v.version) return;
+        document.querySelectorAll(".app-version").forEach(function (el) { el.textContent = v.version; });
+      })
+      .catch(function () {});
   </script>
 </body>
 </html>

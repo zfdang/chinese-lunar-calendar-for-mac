@@ -34,8 +34,15 @@ cp Resources/AppIcon.icns "$APP/Contents/Resources/"
 mkdir -p "$APP/Contents/Resources/calendar-data"
 cp ../docs/data/holidays.json "$APP/Contents/Resources/calendar-data/"
 
-if [ -n "${VERSION:-}" ]; then
-    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" "$APP/Contents/Info.plist"
+# 没有指定 VERSION 时使用最近的 git tag（如 v4.1.2 → 4.1.2）
+if [ -z "${VERSION:-}" ]; then
+    VERSION_FROM_TAG=$(git describe --tags --abbrev=0 --match 'v[0-9]*' 2>/dev/null || true)
+    PLIST_VERSION=${VERSION_FROM_TAG#v}
+else
+    PLIST_VERSION=$VERSION
+fi
+if [ -n "${PLIST_VERSION:-}" ]; then
+    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $PLIST_VERSION" "$APP/Contents/Info.plist"
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $(date +%Y%m%d)" "$APP/Contents/Info.plist"
 fi
 

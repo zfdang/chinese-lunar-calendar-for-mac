@@ -6,7 +6,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         AppearanceMode.saved.apply()
-        MoveToApplications.promptIfNecessary()
+        // 移动到"应用程序"文件夹后会退出并重新启动，不再创建菜单栏图标
+        if MoveToApplications.promptIfNecessary() { return }
         statusItemController = StatusItemController()
         DataStore.shared.startAutomaticHolidayUpdates()
         if let warning = DataStore.shared.loadWarning {

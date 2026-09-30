@@ -29,7 +29,10 @@ def load(p):
     for line in open(p):
         c=line.rstrip("\n").split("\t"); r[c[0]]=(int(c[1]),int(c[2]),int(c[3]),c[8])
     return r
+import os
 for name in ["js","swift"]:
+    if not os.path.exists(f"{S}/{name}.tsv"):
+        continue
     r=load(f"{S}/{name}.tsv"); bad_l=[];bad_j=[]
     for k,v in r.items():
         h=hko.get(k)
