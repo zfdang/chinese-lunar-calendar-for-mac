@@ -6,7 +6,12 @@
 # 2.Code Explanation
 This is a menubar app which shows a simple chinese lunar calendar for OSX.
 
-There are two different implementations for this app:
+There are three different implementations for this app:
+
+### 2.0. WanNianLiSwift (recommended, macOS 13+)
+A native rewrite in Swift (AppKit + SwiftUI) with the same features, no WebView.
+Lunar dates come from Foundation's Chinese calendar (verified day by day against the Hong Kong Observatory tables).
+Build with `WanNianLiSwift/scripts/build-app.sh` (Command Line Tools only). See [WanNianLiSwift/README.md](WanNianLiSwift/README.md).
 
 ### 2.1. WanNianLi
 this project is using the official NSStatusItem to implement the menubar app.

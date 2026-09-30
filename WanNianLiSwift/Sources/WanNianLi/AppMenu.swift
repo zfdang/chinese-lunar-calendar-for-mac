@@ -1,0 +1,78 @@
+import AppKit
+import ServiceManagement
+import SwiftUI
+
+/// 日历左下角的设置菜单
+@MainActor
+final class AppMenu: ObservableObject {
+    static let helpURL = URL(string: "http://calendar.zfdang.com")!
+    static let changelogURL = URL(string: "https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/BUILD.md")!
+    static let contactURL = URL(string: "mailto:me@zfdang.com?subject=About%20Chinese%20Lunar%20Calendar%20for%20MAC")!
+
+    /// 选择"更新假日信息"时调用
+    var onUpdateHolidays: () -> Void = {}
+
+    @Published private(set) var launchAtLogin = AppMenu.isLoginItemEnabled
+
+    /// 已注册为登录项（包括等待用户在系统设置中批准的情况）
+    private static var isLoginItemEnabled: Bool {
+        [.enabled, .requiresApproval].contains(SMAppService.mainApp.status)
+    }
+
+    static var version: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "dev"
+    }
+
+    func refresh() {
+        launchAtLogin = Self.isLoginItemEnabled
+    }
+
+    func setLaunchAtLogin(_ enabled: Bool) {
+        do {
+            if enabled {
+                try SMAppService.mainApp.register()
+            } else {
+                try SMAppService.mainApp.unregister()
+            }
+            if SMAppService.mainApp.status == .requiresApproval {
+                // 需要用户在"系统设置 > 通用 > 登录项"中允许
+                SMAppService.openSystemSettingsLoginItems()
+            }
+        } catch {
+            let alert = NSAlert()
+            alert.messageText = enabled ? "无法设置自动启动" : "无法取消自动启动"
+            alert.informativeText = error.localizedDescription
+            alert.runModal()
+        }
+        refresh()
+    }
+
+    var button: some View {
+        AppMenuButton(menu: self)
+    }
+}
+
+private struct AppMenuButton: View {
+    @ObservedObject var menu: AppMenu
+
+    var body: some View {
+        Menu {
+            Toggle("自动启动", isOn: Binding(get: { menu.launchAtLogin }, set: { menu.setLaunchAtLogin($0) }))
+            Divider()
+            Button("使用帮助") { NSWorkspace.shared.open(AppMenu.helpURL) }
+            Button("更新假日信息…") { menu.onUpdateHolidays() }
+            Divider()
+            Button("版本: \(AppMenu.version)") { NSWorkspace.shared.open(AppMenu.changelogURL) }
+            Button("万年历 © zfdang") { NSWorkspace.shared.open(AppMenu.contactURL) }
+            Divider()
+            Button("退出") { NSApp.terminate(nil) }
+        } label: {
+            Image(systemName: "gearshape")
+        }
+        .menuStyle(.borderlessButton)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help("设置")
+        .onAppear { menu.refresh() }
+    }
+}
