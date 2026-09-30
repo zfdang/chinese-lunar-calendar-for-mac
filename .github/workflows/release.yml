@@ -9,6 +9,7 @@ on:
   pull_request:
     paths:
       - "WanNianLiSwift/**"
+      - "docs/data/holidays.json"
       - ".github/workflows/release.yml"
   workflow_dispatch:
 

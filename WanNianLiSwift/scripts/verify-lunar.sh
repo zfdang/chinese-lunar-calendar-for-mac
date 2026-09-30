@@ -8,7 +8,7 @@ WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
 
 swift build --product lunar-dump >/dev/null
-.build/debug/lunar-dump Resources/calendar-data 1901 2099 > "$WORK/swift.tsv"
+.build/debug/lunar-dump ../docs/data 1901 2099 > "$WORK/swift.tsv"
 node scripts/js-dump.js ../WanNianLi/WanNianLi/Resources/vendors 1901 2049 > "$WORK/js.tsv"
 
 mkdir -p "$WORK/hko"

@@ -8,7 +8,7 @@ import sys
 
 data = json.load(open(sys.argv[1], encoding="utf-8"))
 out = [f"// Version: {data['version']}",
-       "// 国务院公布的假期调整方案（由 WanNianLiSwift/Resources/calendar-data/holidays.json 生成）",
+       "// 国务院公布的假期调整方案（由 docs/data/holidays.json 生成）",
        '// 假日为"+"，工作日为"-"',
        "var HOLIDAYADJUSTMENT = {"]
 for d in sorted(data["days"], key=lambda d: d["date"], reverse=True):

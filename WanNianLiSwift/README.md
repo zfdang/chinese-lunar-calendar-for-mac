@@ -36,7 +36,7 @@
 
 | 数据 | 位置 | 说明 |
 | --- | --- | --- |
-| 调休安排 | `Resources/calendar-data/holidays.json`（内置），在线更新后保存到 `~/Library/Application Support/com.zfdang.calendar/holidays.json` | 使用两者中版本较新的一份 |
+| 调休安排 | 仓库中的 `docs/data/holidays.json`（构建时打包进应用，同时通过 GitHub Pages 发布），在线更新后保存到 `~/Library/Application Support/com.zfdang.calendar/holidays.json` | 使用内置和已下载中版本较新的一份 |
 | 内置节日 | `Sources/LunarCore/Festivals.swift` | 分为传统节日、公历节日、西方节日、纪念日，可在"显示节日"中按分类隐藏 |
 | 自定义日期 | `~/Library/Application Support/com.zfdang.calendar/custom-events.json` | 在"自定义日期"窗口中编辑，可导入 / 导出 |
 
@@ -89,11 +89,15 @@ git tag v4.1 && git push origin v4.1
 
 ## 发布假日信息
 
+调休安排只有一份：`docs/data/holidays.json`。它既会在构建时打包进应用，也会通过 GitHub Pages 发布在
+<https://calendar.zfdang.com/data/holidays.json>。应用在线更新时先访问 Pages 地址（经过 Cloudflare，国内更容易访问），
+失败时再尝试 GitHub raw 地址。
+
 每年国务院公布新的放假安排后：
 
-1. 在 `Resources/calendar-data/holidays.json` 中添加新一年的数据，并把 `version` 改为当天日期（如 `20261105`）
-2. 推送到 master 后，用户的应用会在一周内自动更新，也可以手动"更新假日信息"（地址见 `DataStore.holidaysRemoteURL`）
-3. 如果仍需支持旧版应用，用 `scripts/export-holidays-js.py Resources/calendar-data/holidays.json ../WanNianLi/WanNianLi/Resources/vendors/holidays.js` 生成旧版使用的 holidays.js
+1. 在 `docs/data/holidays.json` 中添加新一年的数据，并把 `version` 改为当天日期（如 `20261105`）
+2. 推送到 master，GitHub Pages 更新后，用户的应用会在一周内自动更新，也可以手动"更新假日信息"
+3. 如果仍需支持旧版应用，用 `scripts/export-holidays-js.py ../docs/data/holidays.json ../WanNianLi/WanNianLi/Resources/vendors/holidays.js` 生成旧版使用的 holidays.js
 
 ## 代码结构
 
