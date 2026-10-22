@@ -2,11 +2,13 @@
 # 应用数据层的回归测试；只需要 Command Line Tools，不依赖 XCTest。
 set -euo pipefail
 cd "$(dirname "$0")/.."
-swift build --product lunar-dump >/dev/null
-BIN_DIR=$(swift build --show-bin-path)
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
-swiftc -parse-as-library -D DEBUG -I "$BIN_DIR/Modules" \
+# 在临时目录显式生成模块和目标文件，不依赖不同 SwiftPM 版本的 .build 目录布局。
+swiftc -parse-as-library -emit-object -emit-module -whole-module-optimization \
+    -module-name LunarCore -emit-module-path "$WORK/LunarCore.swiftmodule" \
+    Sources/LunarCore/*.swift -o "$WORK/LunarCore.o"
+swiftc -parse-as-library -D DEBUG -I "$WORK" \
     Sources/WanNianLi/DataStore.swift Tests/AppRegressionTests.swift \
-    "$BIN_DIR"/LunarCore.build/*.o -o "$WORK/app-regressions"
+    "$WORK/LunarCore.o" -o "$WORK/app-regressions"
 "$WORK/app-regressions"
