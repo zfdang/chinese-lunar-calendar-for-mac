@@ -26,7 +26,7 @@ struct CustomEventsView: View {
 
             Group {
                 if let id = selection, let event = store.customEvents.first(where: { $0.id == id }) {
-                    EventEditor(event: event) { store.upsert($0) }
+                    EventEditor(event: event) { store.update($0) }
                         .id(id)
                 } else {
                     VStack(spacing: 8) {
@@ -190,6 +190,7 @@ private struct EventEditor: View {
         saveTask = Task { @MainActor in
             try? await Task.sleep(nanoseconds: 400_000_000)
             guard !Task.isCancelled else { return }
+            saveTask = nil
             save(event)
         }
     }

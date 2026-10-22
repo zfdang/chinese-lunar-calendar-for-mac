@@ -40,7 +40,9 @@ jobs:
       - name: System
         run: sw_vers && swift --version
       - name: Test lunar calendar
-        run: ./scripts/check-golden.sh
+        run: |
+          ./scripts/check-golden.sh
+          ./scripts/check-app-regressions.sh
 
   build:
     needs: test

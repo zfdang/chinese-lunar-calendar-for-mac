@@ -37,8 +37,10 @@ final class DataStore: ObservableObject {
     private(set) var loadWarning: String?
     private var customEventsReadOnly = false
 
-    private init() {
-        if let override = ProcessInfo.processInfo.environment["WANNIANLI_DATA_DIR"] {
+    init(supportDirectory directory: URL? = nil) {
+        if let directory {
+            supportDirectory = directory
+        } else if let override = ProcessInfo.processInfo.environment["WANNIANLI_DATA_DIR"] {
             // 开发 / 测试时使用单独的数据目录，避免改动真实数据
             supportDirectory = URL(fileURLWithPath: override, isDirectory: true)
         } else {
@@ -201,6 +203,12 @@ final class DataStore: ObservableObject {
         var events = customEvents
         if let i = events.firstIndex(where: { $0.id == event.id }) { events[i] = event } else { events.append(event) }
         setCustomEvents(events)
+    }
+
+    /// 编辑器的延迟保存不能重新创建已经删除的条目。
+    func update(_ event: CustomEvent) {
+        guard customEvents.contains(where: { $0.id == event.id }) else { return }
+        upsert(event)
     }
 
     func delete(ids: Set<UUID>) {
