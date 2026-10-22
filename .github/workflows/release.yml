@@ -24,13 +24,13 @@ concurrency:
 
 jobs:
   # 农历结果来自系统的 ICU，会随 macOS 版本变化，所以在多个版本上校验基准数据。
-  # （应用最低支持 macOS 13，但 GitHub 已不再提供 macOS 13 的 runner。）
-  # 固定版本而不用 macos-latest：latest 目前就是 macos-15，重复跑没有意义；有新版本时在这里添加。
+  # 应用最低支持 macOS 13；CI 使用仍受支持的 macOS 15 和 26，避免已弃用的 runner。
+  # 固定版本以覆盖不同系统的 ICU，并避免 macos-latest 切换造成重复测试。
   test:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-14, macos-15]
+        os: [macos-15, macos-26]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -40,9 +40,9 @@ jobs:
       - name: System
         run: sw_vers && swift --version
       - name: Test lunar calendar
-        run: |
-          ./scripts/check-golden.sh
-          ./scripts/check-app-regressions.sh
+        run: ./scripts/check-golden.sh
+      - name: Test app data
+        run: ./scripts/check-app-regressions.sh
 
   build:
     needs: test
