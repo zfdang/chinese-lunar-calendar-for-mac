@@ -74,6 +74,24 @@ func runSelfTests() -> Bool {
     let encoded = try! JSONEncoder().encode(CustomEventsFile(events: sample))
     check((try? JSONDecoder().decode(CustomEventsFile.self, from: encoded))?.events == sample, "custom events round trip")
 
+    // JSON 解码必须拒绝越界日期；启动读取使用同一路径，能触发现有的损坏文件备份。
+    let invalidRules: [DateRule] = [
+        .lunar(month: 13, day: 1), .lunar(month: 0, day: 1), .lunar(month: 1, day: 0),
+        .lunar(month: 1, day: 31), .solar(month: 13, day: 1), .solar(month: 4, day: 31),
+        .once(year: 2026, month: 2, day: 29), .once(year: 0, month: 1, day: 1),
+        .weekday(month: 1, weekday: 7, nth: 1), .weekday(month: 1, weekday: 0, nth: 0),
+    ]
+    for rule in invalidRules {
+        let content = try! JSONEncoder().encode(CustomEventsFile(events: [CustomEvent(name: "invalid", rule: rule)]))
+        check((try? JSONDecoder().decode(CustomEventsFile.self, from: content)) == nil,
+              "reject invalid rule \(String(reflecting: rule))")
+    }
+    let validRules: [DateRule] = [.solar(month: 2, day: 29), .once(year: 2024, month: 2, day: 29),
+                                  .lunar(month: 12, day: 30), .weekday(month: 12, weekday: 6, nth: -1)]
+    check(validRules.allSatisfy(\.isValid), "valid date rule boundaries")
+    let invalidJS = "var LUNARFESTIVAL = { \"1301\": \"invalid\" }; var OTHERFESTIVAL = { \"0171\": \"invalid\" };"
+    check(LegacyImporter.customEvents(festivalsJS: invalidJS, eventsJS: "").isEmpty, "reject invalid legacy rules")
+
     // 旧版 js：字符串中的 "}"、注释掉的条目、内置节日不重复导入
     let js = """
     var SOLARFESTIVAL = {

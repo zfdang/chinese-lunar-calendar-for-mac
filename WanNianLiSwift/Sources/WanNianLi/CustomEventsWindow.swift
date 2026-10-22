@@ -26,8 +26,11 @@ struct CustomEventsView: View {
 
             Group {
                 if let id = selection, let event = store.customEvents.first(where: { $0.id == id }) {
-                    EventEditor(event: event) { store.upsert($0) }
-                        .id(id)
+                    EventEditor(event: event) { updated in
+                        do { try store.update(updated) }
+                        catch { showMessage("无法保存自定义日期", error.localizedDescription) }
+                    }
+                    .id(id)
                 } else {
                     VStack(spacing: 8) {
                         Image(systemName: "calendar.badge.plus")
@@ -65,8 +68,12 @@ struct CustomEventsView: View {
     private func add() {
         let today = SolarDate.today
         let event = CustomEvent(name: "新的日期", rule: .solar(month: today.month, day: today.day), highlight: true)
-        store.upsert(event)
-        selection = event.id
+        do {
+            try store.upsert(event)
+            selection = event.id
+        } catch {
+            showMessage("无法添加自定义日期", error.localizedDescription)
+        }
     }
 
     private func deleteSelected() {
@@ -77,8 +84,12 @@ struct CustomEventsView: View {
         alert.addButton(withTitle: "删除")
         alert.addButton(withTitle: "取消")
         guard alert.runModal() == .alertFirstButtonReturn else { return }
-        store.delete(ids: [id])
-        selection = nil
+        do {
+            try store.delete(ids: [id])
+            selection = nil
+        } catch {
+            showMessage("无法删除自定义日期", error.localizedDescription)
+        }
     }
 
     private func importEvents() {
@@ -190,6 +201,7 @@ private struct EventEditor: View {
         saveTask = Task { @MainActor in
             try? await Task.sleep(nanoseconds: 400_000_000)
             guard !Task.isCancelled else { return }
+            saveTask = nil
             save(event)
         }
     }

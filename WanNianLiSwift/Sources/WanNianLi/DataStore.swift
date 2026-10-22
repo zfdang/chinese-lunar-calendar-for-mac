@@ -37,8 +37,10 @@ final class DataStore: ObservableObject {
     private(set) var loadWarning: String?
     private var customEventsReadOnly = false
 
-    private init() {
-        if let override = ProcessInfo.processInfo.environment["WANNIANLI_DATA_DIR"] {
+    init(supportDirectory directory: URL? = nil) {
+        if let directory {
+            supportDirectory = directory
+        } else if let override = ProcessInfo.processInfo.environment["WANNIANLI_DATA_DIR"] {
             // 开发 / 测试时使用单独的数据目录，避免改动真实数据
             supportDirectory = URL(fileURLWithPath: override, isDirectory: true)
         } else {
@@ -171,40 +173,54 @@ final class DataStore: ObservableObject {
         func read(_ name: String) -> String {
             (try? String(contentsOf: supportDirectory.appendingPathComponent(name), encoding: .utf8)) ?? ""
         }
-        customEvents = LegacyImporter.customEvents(festivalsJS: read("festivals.js"), eventsJS: read("events.js"))
-        saveCustomEvents()
-    }
-
-    private func saveCustomEvents() {
-        // 损坏的文件没能备份时，不保存，避免覆盖用户数据
-        guard !customEventsReadOnly else { return }
+        let imported = LegacyImporter.customEvents(festivalsJS: read("festivals.js"), eventsJS: read("events.js"))
         do {
-            try Self.encode(customEvents).write(to: customEventsFile, options: .atomic)
+            try saveCustomEvents(imported)
+            customEvents = imported
         } catch {
-            NSLog("WanNianLi: failed to save custom events: \(error.localizedDescription)")
+            loadWarning = "无法保存自定义日期：\(error.localizedDescription)；旧版数据仍保留在原文件中。"
+            NSLog("WanNianLi: \(loadWarning ?? "")")
         }
     }
 
+    private func saveCustomEvents(_ events: [CustomEvent]) throws {
+        // 损坏的文件没能备份时，不保存，避免覆盖用户数据
+        guard !customEventsReadOnly else {
+            throw CustomEventsError("原有自定义日期文件无法备份，暂时不能保存修改。请先备份并修复数据目录中的文件。")
+        }
+        try Self.encode(events).write(to: customEventsFile, options: .atomic)
+    }
+
     static func encode(_ events: [CustomEvent]) throws -> Data {
+        guard events.allSatisfy({ $0.rule.isValid }) else {
+            throw CustomEventsError("自定义日期包含无效的日期规则。")
+        }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
         return try encoder.encode(CustomEventsFile(events: events))
     }
 
-    func setCustomEvents(_ events: [CustomEvent]) {
+    func setCustomEvents(_ events: [CustomEvent]) throws {
+        // 写入成功之后才发布新状态；失败时磁盘、列表和月历都保持原数据。
+        try saveCustomEvents(events)
         customEvents = events
-        saveCustomEvents()
         rebuild()
     }
 
-    func upsert(_ event: CustomEvent) {
+    func upsert(_ event: CustomEvent) throws {
         var events = customEvents
         if let i = events.firstIndex(where: { $0.id == event.id }) { events[i] = event } else { events.append(event) }
-        setCustomEvents(events)
+        try setCustomEvents(events)
     }
 
-    func delete(ids: Set<UUID>) {
-        setCustomEvents(customEvents.filter { !ids.contains($0.id) })
+    /// 编辑器的延迟保存不能重新创建已经删除的条目。
+    func update(_ event: CustomEvent) throws {
+        guard customEvents.contains(where: { $0.id == event.id }) else { return }
+        try upsert(event)
+    }
+
+    func delete(ids: Set<UUID>) throws {
+        try setCustomEvents(customEvents.filter { !ids.contains($0.id) })
     }
 
     /// 导出为 JSON
@@ -219,14 +235,14 @@ final class DataStore: ObservableObject {
         if url.pathExtension.lowercased() == "js" {
             let text = String(decoding: content, as: UTF8.self)
             guard LegacyImporter.recognizes(text) else {
-                throw ImportError("文件中没有找到旧版 festivals.js / events.js 的数据（SOLARFESTIVAL、LUNARFESTIVAL、OTHERFESTIVAL 或 SPECIFIC_EVENTS）。")
+                throw CustomEventsError("文件中没有找到旧版 festivals.js / events.js 的数据（SOLARFESTIVAL、LUNARFESTIVAL、OTHERFESTIVAL 或 SPECIFIC_EVENTS）。")
             }
             imported = LegacyImporter.customEvents(festivalsJS: text, eventsJS: text)
         } else {
             do {
                 imported = try JSONDecoder().decode(CustomEventsFile.self, from: content).events
             } catch {
-                throw ImportError("文件格式不正确，请选择本程序导出的 JSON 文件。")
+                throw CustomEventsError("文件格式不正确，请选择本程序导出的 JSON 文件。")
             }
         }
         var events = customEvents
@@ -236,13 +252,13 @@ final class DataStore: ObservableObject {
             events.append(event)
             added += 1
         }
-        setCustomEvents(events)
+        try setCustomEvents(events)
         return added
     }
 }
 
-/// 导入失败的原因
-struct ImportError: LocalizedError {
+/// 自定义日期操作失败的原因
+struct CustomEventsError: LocalizedError {
     let message: String
     init(_ message: String) { self.message = message }
     var errorDescription: String? { message }

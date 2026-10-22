@@ -13,6 +13,23 @@ public enum DateRule: Codable, Hashable, Sendable {
     /// 除夕（农历年的最后一天）
     case lunarNewYearsEve
 
+    /// 在文件读取和保存边界验证，避免非法规则进入界面和日期计算。
+    public var isValid: Bool {
+        switch self {
+        case let .once(y, m, d):
+            return (1...9999).contains(y) && (1...12).contains(m)
+                && (1...SolarDate.daysInMonth(year: y, month: m)).contains(d)
+        case let .solar(m, d):
+            return (1...12).contains(m) && (1...SolarDate.daysInMonth(year: 2000, month: m)).contains(d)
+        case let .lunar(m, d):
+            return (1...12).contains(m) && (1...30).contains(d)
+        case let .weekday(m, w, n):
+            return (1...12).contains(m) && (0...6).contains(w) && (n == -1 || (1...5).contains(n))
+        case .lunarNewYearsEve:
+            return true
+        }
+    }
+
     /// 规则的文字描述，例如"每年农历八月廿二"
     public var description: String {
         switch self {
@@ -85,5 +102,9 @@ public struct CustomEventsFile: Codable, Sendable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         version = try container.decodeIfPresent(Int.self, forKey: .version) ?? 1
         events = try container.decode([CustomEvent].self, forKey: .events)
+        guard events.allSatisfy({ $0.rule.isValid }) else {
+            throw DecodingError.dataCorruptedError(forKey: .events, in: container,
+                                                   debugDescription: "自定义日期包含无效的日期规则。")
+        }
     }
 }
