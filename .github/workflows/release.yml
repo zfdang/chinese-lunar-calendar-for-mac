@@ -1,11 +1,14 @@
 # 构建 WanNianLiSwift（原生 Swift 版万年历）
 # - 推送 tag：构建 Apple Silicon 和 Intel 两个版本，发布到 GitHub Release
+# - 发布正式版本：校验网站下载文件并创建更新 PR
 # - Pull request / 手动运行：只构建，结果作为 Actions artifact 上传
 name: Build & Release
 
 on:
   push:
     tags: ["*"]
+  release:
+    types: [published]
   pull_request:
     paths:
       - "WanNianLiSwift/**"
@@ -27,6 +30,7 @@ jobs:
   # 应用最低支持 macOS 13；CI 使用仍受支持的 macOS 15 和 26，避免已弃用的 runner。
   # 固定版本以覆盖不同系统的 ICU，并避免 macos-latest 切换造成重复测试。
   test:
+    if: github.event_name != 'release'
     strategy:
       fail-fast: false
       matrix:
@@ -107,4 +111,88 @@ jobs:
             gh release upload "$GITHUB_REF_NAME" build/*.zip --clobber
           else
             gh release create "$GITHUB_REF_NAME" build/*.zip --title "万年历 Swift ${GITHUB_REF_NAME}" --notes-file "$RUNNER_TEMP/notes.md"
+          fi
+
+  website:
+    needs: build
+    if: >-
+      always() && !cancelled() &&
+      (github.event_name == 'release' ||
+       (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') && needs.build.result == 'success'))
+    runs-on: macos-15
+    permissions:
+      contents: write
+      pull-requests: write
+    concurrency:
+      group: website-downloads
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: ${{ github.event.release.tag_name || github.ref_name }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - name: Update website downloads and open PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          # 仅同步最新正式版本，重跑旧 tag 或发布预发布版时不回退网站。
+          latest=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)
+          if [[ "$RELEASE_TAG" != "$latest" ]]; then
+            echo "Skip $RELEASE_TAG: latest stable release is $latest"
+            exit 0
+          fi
+          [[ "$RELEASE_TAG" =~ ^v?[0-9]+(\.[0-9]+)*$ ]] || {
+            echo "Unsupported release tag: $RELEASE_TAG" >&2
+            exit 1
+          }
+          version=${RELEASE_TAG#v}
+          pr=$(gh pr list --base "$DEFAULT_BRANCH" --state open --json number,headRefName \
+            --jq '[.[] | select(.headRefName | startswith("chore/website-release-"))][0].number // empty')
+          if [[ -n "$pr" ]]; then
+            branch=$(gh pr view "$pr" --json headRefName --jq .headRefName)
+            git switch --track "origin/$branch"
+          else
+            branch="chore/website-release-$version-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+            git switch -c "$branch"
+          fi
+
+          WanNianLiSwift/scripts/publish-website.sh "$RELEASE_TAG"
+          # 下载校验期间可能已有更新的版本发布。
+          latest=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)
+          [[ "$RELEASE_TAG" == "$latest" ]] || { echo "Superseded by $latest; skip"; exit 0; }
+          git add docs/WanNianLiSwift-AppleSilicon.zip docs/WanNianLiSwift-Intel.zip docs/version.json docs/index.html
+          if git diff --cached --quiet; then
+            echo "Website downloads are already up to date"
+            exit 0
+          fi
+          # 沿用发布提交的 Git 身份，仅为本次提交指定，不修改仓库配置。
+          git -c user.name="$(git show -s --format=%an "$RELEASE_TAG^{commit}")" \
+              -c user.email="$(git show -s --format=%ae "$RELEASE_TAG^{commit}")" \
+              commit -m "chore: update website downloads to $version"
+          git push -u origin "$branch"
+          cat > "$RUNNER_TEMP/website-pr.md" <<NOTES
+          ## Summary
+
+          Update the website downloads to the latest stable release, $RELEASE_TAG.
+
+          ## Changes
+
+          - Replace the Apple Silicon and Intel downloads with the published release assets.
+          - Update version.json and the fallback version displayed on the website.
+
+          ## Verification
+
+          - Both archives passed architecture, version, and code signature checks.
+          - Confirmed $RELEASE_TAG is still the latest stable release before committing.
+          NOTES
+          if [[ -n "$pr" ]]; then
+            gh pr edit "$pr" --title "chore: update website downloads to $version" --body-file "$RUNNER_TEMP/website-pr.md"
+          else
+            gh pr create --base "$DEFAULT_BRANCH" --head "$branch" \
+              --title "chore: update website downloads to $version" --body-file "$RUNNER_TEMP/website-pr.md"
           fi
