@@ -30,7 +30,16 @@ GitHub Actions 会构建 Apple 芯片和 Intel 芯片两个版本，并创建 Gi
 
 ## 3. 更新网站
 
-网站（calendar.zfdang.com，即仓库中的 `docs/` 目录）提供的下载文件需要更新为新版本：
+发布成功后，`.github/workflows/release.yml` 会自动从最新正式 Release 下载两个安装包，
+检查架构、版本号和签名，并创建网站更新 PR（已有待合并的网站更新 PR 时复用）。
+PR 包含 `docs/` 中两个固定文件名的下载包、`docs/version.json` 和网页后备版本号。
+人工合并后，GitHub Pages 会自动更新。预发布版和旧版本重跑不会回退网站下载。
+
+仓库 Actions 设置需允许 GitHub Actions 创建 pull request（Settings → Actions → General →
+Workflow permissions → Allow GitHub Actions to create and approve pull requests）。
+自动流程只创建或更新 PR，不会批准或合并。
+
+需要手动补发时，在 macOS 上运行：
 
 ```bash
 WanNianLiSwift/scripts/publish-website.sh v4.2

@@ -80,7 +80,7 @@ swift run WanNianLi                # 开发时直接运行
 git tag v4.1 && git push origin v4.1
 ```
 
-版本号取自 tag（去掉开头的 `v`；本地构建时取最近的 tag）。发布后用 `scripts/publish-website.sh <tag>` 更新网站上的下载文件。Pull request 中修改了 `WanNianLiSwift/` 时也会自动构建（只上传为 Actions artifact，不发布）。
+版本号取自 tag（去掉开头的 `v`；本地构建时取最近的 tag）。发布后自动创建网站下载更新 PR，合并后网站生效；也可用 `scripts/publish-website.sh <tag>` 手动补发。Pull request 中修改了 `WanNianLiSwift/` 时也会自动构建（只上传为 Actions artifact，不发布）。
 应用只做了 ad-hoc 签名、没有公证，用户第一次打开时需要按住 Control 点按并选择"打开"。
 
 ## 测试
