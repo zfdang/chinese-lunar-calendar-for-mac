@@ -37,18 +37,19 @@ enum MenuBarIcon {
             NSGraphicsContext.restoreGraphicsState()
 
             // 日期数字
-            let text = String(format: "%02d", day) as NSString
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: NSFont.monospacedDigitSystemFont(ofSize: 10, weight: .semibold),
                 .foregroundColor: NSColor.black,
             ]
-            let textSize = text.size(withAttributes: attributes)
+            let text = NSMutableAttributedString(string: String(format: "%02d", day), attributes: attributes)
+            // 仅收紧两位数字之间的间距，测量后仍整体居中。
+            text.addAttribute(.kern, value: -0.5, range: NSRange(location: 0, length: 1))
+            let textSize = text.size()
             // 按边框内侧居中，并稍微上移，给数字底部留出呼吸空间。
             let inset = outline.lineWidth / 2
             let area = NSRect(x: body.minX + inset, y: body.minY + inset,
                               width: body.width - inset * 2, height: body.height - headerHeight - inset)
-            text.draw(at: NSPoint(x: area.midX - textSize.width / 2, y: area.midY - textSize.height / 2 + 0.15),
-                      withAttributes: attributes)
+            text.draw(at: NSPoint(x: area.midX - textSize.width / 2, y: area.midY - textSize.height / 2 + 0.15))
             return true
         }
         image.isTemplate = true
