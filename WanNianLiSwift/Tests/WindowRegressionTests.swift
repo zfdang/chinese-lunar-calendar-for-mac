@@ -10,7 +10,7 @@ final class WindowTestDelegate: NSObject, NSApplicationDelegate {
         let store = DataStore(supportDirectory: directory)
         controller = StatusItemController(store: store)
         controller?.testOpenCustomEventsFromCalendar()
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
             guard let window = NSApp.windows.first(where: { $0.title == "自定义日期" && $0.isVisible }),
                   let visible = window.screen?.visibleFrame else {
                 FileHandle.standardError.write(Data("custom dates window did not appear\n".utf8))
@@ -20,7 +20,11 @@ final class WindowTestDelegate: NSObject, NSApplicationDelegate {
                 FileHandle.standardError.write(Data("custom dates window is outside the visible screen\n".utf8))
                 exit(1)
             }
-            print("ok   custom dates window is visible within the screen")
+            guard window.isKeyWindow && window.occlusionState.contains(.visible) else {
+                FileHandle.standardError.write(Data("custom dates window is not frontmost and visible\n".utf8))
+                exit(1)
+            }
+            print("ok   custom dates window remains frontmost and visible within the screen")
             try? FileManager.default.removeItem(at: directory)
             NSApp.terminate(nil)
         }

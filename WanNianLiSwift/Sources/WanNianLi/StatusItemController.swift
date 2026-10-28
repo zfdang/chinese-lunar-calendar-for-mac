@@ -190,6 +190,8 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
             if let visible = visibleFrame ?? window.screen?.visibleFrame ?? NSScreen.main?.visibleFrame {
                 window.setFrameOrigin(WindowPlacement.centeredOrigin(size: window.frame.size, in: visible))
             }
+            // 菜单栏弹窗关闭时应用可能尚未完成激活，先将窗口放到其他应用前面。
+            window.orderFrontRegardless()
             window.makeKeyAndOrderFront(nil)
         }
     }
