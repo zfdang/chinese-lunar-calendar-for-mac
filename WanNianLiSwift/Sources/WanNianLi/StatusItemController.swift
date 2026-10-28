@@ -8,7 +8,7 @@ import SwiftUI
 final class StatusItemController: NSObject, NSPopoverDelegate {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let popover = NSPopover()
-    private let store = DataStore.shared
+    private let store: DataStore
     private let model: CalendarViewModel
     private let menu = AppMenu()
 
@@ -20,7 +20,10 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
     private var lastClosed = Date.distantPast
     private var dataObserver: AnyCancellable?
 
-    override init() {
+    override convenience init() { self.init(store: .shared) }
+
+    init(store: DataStore) {
+        self.store = store
         model = CalendarViewModel(store: store)
         super.init()
 
@@ -160,6 +163,20 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         let anchorWindow = popover.contentViewController?.view.window
         let visibleFrame = anchorWindow?.screen?.visibleFrame
         popover.performClose(nil)
+        // 等月历弹窗结束关闭，再显示独立窗口，避免关闭过程抢走焦点或遮住新窗口。
+        DispatchQueue.main.async { [weak self] in
+            self?.presentCustomEventsWindow(on: visibleFrame)
+        }
+    }
+
+    #if DEBUG
+    func testOpenCustomEventsFromCalendar() {
+        showPopover()
+        menu.onEditCustomEvents()
+    }
+    #endif
+
+    private func presentCustomEventsWindow(on visibleFrame: NSRect?) {
         if customEventsWindow == nil {
             customEventsWindow = CustomEventsWindowController(store: store) { [weak self] in
                 self?.customEventsWindow = nil

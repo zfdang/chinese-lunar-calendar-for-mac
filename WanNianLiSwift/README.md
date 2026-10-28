@@ -90,6 +90,7 @@ git tag v4.1 && git push origin v4.1
 
 ```bash
 ./scripts/check-app-regressions.sh # 应用数据层回归测试（仅需 Command Line Tools）
+./scripts/check-window-regressions.sh # 验证自定义日期窗口可见（需要图形界面）
 ./scripts/check-golden.sh      # 自检 + 与基准数据对比（CI 中每次构建都会运行）
 ./scripts/verify-lunar.sh      # 与香港天文台对照表逐日比较（需要网络；不再依赖旧版目录）
 ```
