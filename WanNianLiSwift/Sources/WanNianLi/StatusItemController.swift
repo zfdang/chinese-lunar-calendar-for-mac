@@ -167,12 +167,16 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
                 if self?.popover.isShown == false { self?.showPopover(resetToToday: false) }
             }
         }
-        if let anchorFrame, let visibleFrame, let window = customEventsWindow?.window {
-            window.setFrameOrigin(WindowPlacement.origin(size: window.frame.size, near: anchorFrame, in: visibleFrame))
-        }
         NSApp.activate(ignoringOtherApps: true)
         customEventsWindow?.showWindow(nil)
-        customEventsWindow?.window?.makeKeyAndOrderFront(nil)
+        if let window = customEventsWindow?.window {
+            window.contentView?.layoutSubtreeIfNeeded()
+            if let visible = visibleFrame ?? window.screen?.visibleFrame ?? NSScreen.main?.visibleFrame {
+                let reference = anchorFrame ?? window.frame
+                window.setFrameOrigin(WindowPlacement.origin(size: window.frame.size, near: reference, in: visible))
+            }
+            window.makeKeyAndOrderFront(nil)
+        }
     }
 
     // MARK: - 更新假日信息

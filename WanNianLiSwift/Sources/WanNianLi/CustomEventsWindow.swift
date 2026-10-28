@@ -308,7 +308,11 @@ final class CustomEventsWindowController: NSWindowController, NSWindowDelegate {
         window.title = "自定义日期"
         window.isReleasedWhenClosed = false
         window.delegate = self
-        window.contentViewController = NSHostingController(rootView: CustomEventsView(store: store))
+        let hosting = NSHostingController(rootView: CustomEventsView(store: store))
+        // 选择或添加事件时，表单的理想尺寸可能变化；不要让它自动改变窗口的位置和尺寸。
+        hosting.sizingOptions = []
+        window.contentViewController = hosting
+        window.contentMinSize = NSSize(width: 640, height: 400)
         window.center()
     }
 
