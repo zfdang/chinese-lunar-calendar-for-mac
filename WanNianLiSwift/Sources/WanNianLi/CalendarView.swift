@@ -112,8 +112,14 @@ struct CalendarView: View {
             Text("接下来")
                 .foregroundStyle(Palette.secondaryText)
             if let event = model.upcoming.first {
-                Text("\(event.name) · \(eventDate(event)) · \(countdown(event.daysAway))")
+                Text(event.name)
                     .lineLimit(1)
+                    .truncationMode(.tail)
+                    .layoutPriority(-1)
+                    .help(event.name)
+                Text("\(eventDate(event)) · \(countdown(event.daysAway))")
+                    .lineLimit(1)
+                    .fixedSize()
             } else {
                 Text("近期没有事件")
                     .foregroundStyle(Palette.secondaryText)
@@ -139,7 +145,7 @@ struct CalendarView: View {
     private func eventDate(_ event: UpcomingEvent) -> String {
         let date = event.day.date
         let year = date.year == model.today.year ? "" : "\(date.year)年"
-        return "\(year)\(date.month)月\(date.day)日"
+        return "\(year)\(date.month)月\(date.day)日 农历\(event.day.lunarMonthName)月\(event.day.lunarDayName)"
     }
 
     private var upcomingList: some View {
@@ -183,7 +189,7 @@ struct CalendarView: View {
             }
         }
         .padding(14)
-        .frame(width: 320)
+        .frame(width: 410)
     }
 
     private var weekdayBar: some View {
