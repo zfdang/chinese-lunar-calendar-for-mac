@@ -42,6 +42,7 @@ struct CalendarView: View {
     @State private var hovered: Int?
     @State private var showUpcomingAtTitle = false
     @State private var showUpcomingAtSummary = false
+    @State private var hoveredUpcoming: Int?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -64,6 +65,7 @@ struct CalendarView: View {
             hovered = nil
             showUpcomingAtTitle = false
             showUpcomingAtSummary = false
+            hoveredUpcoming = nil
         }
     }
 
@@ -148,17 +150,19 @@ struct CalendarView: View {
         return "\(year)\(date.month)月\(date.day)日 农历\(event.day.lunarMonthName)月\(event.day.lunarDayName)"
     }
 
-    private var upcomingList: some View {
+    var upcomingList: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("即将到来")
-                .font(.headline)
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(Palette.secondaryText)
+                .frame(maxWidth: .infinity)
             if model.upcoming.isEmpty {
                 Text("未来 90 天没有事件")
                     .foregroundStyle(.secondary)
                     .padding(.vertical, 12)
             } else {
                 VStack(spacing: 0) {
-                    ForEach(Array(model.upcoming.enumerated()), id: \.offset) { _, event in
+                    ForEach(Array(model.upcoming.enumerated()), id: \.offset) { index, event in
                         Button {
                             model.select(event.day)
                             showUpcomingAtTitle = false
@@ -166,21 +170,33 @@ struct CalendarView: View {
                         } label: {
                             HStack(spacing: 8) {
                                 Text(event.name)
+                                    .font(.system(size: 13, weight: .medium))
                                     .lineLimit(1)
                                     .truncationMode(.tail)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Text(eventDate(event))
-                                    .foregroundStyle(.secondary)
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(Palette.secondaryText)
                                     .fixedSize()
                                 Text(countdown(event.daysAway))
-                                    .foregroundStyle(.secondary)
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(Palette.secondaryText)
                                     .fixedSize()
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 10, weight: .semibold))
+                                    .foregroundStyle(Palette.secondaryText)
                             }
-                            .padding(.vertical, 6)
+                            .padding(.horizontal, 10)
+                            .frame(minHeight: 36)
                             .contentShape(Rectangle())
+                            .background(RoundedRectangle(cornerRadius: 6)
+                                .fill(hoveredUpcoming == index ? Palette.hovered : .clear))
                         }
                         .buttonStyle(.plain)
-                        .help(event.name)
+                        .onHover { inside in
+                            hoveredUpcoming = inside ? index : (hoveredUpcoming == index ? nil : hoveredUpcoming)
+                        }
+                        .help("查看\(event.name)的日期")
                     }
                 }
                 Text("显示未来 90 天内最多 6 项")
@@ -190,6 +206,8 @@ struct CalendarView: View {
         }
         .padding(14)
         .frame(width: 410)
+        .background(Palette.background)
+        .onDisappear { hoveredUpcoming = nil }
     }
 
     private var weekdayBar: some View {
