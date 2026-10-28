@@ -145,9 +145,17 @@ struct CalendarView: View {
     }
 
     private func eventDate(_ event: UpcomingEvent) -> String {
+        "\(solarDate(event)) \(lunarDate(event))"
+    }
+
+    private func solarDate(_ event: UpcomingEvent) -> String {
         let date = event.day.date
         let year = date.year == model.today.year ? "" : "\(date.year)年"
-        return "\(year)\(date.month)月\(date.day)日 农历\(event.day.lunarMonthName)月\(event.day.lunarDayName)"
+        return "\(year)\(date.month)月\(date.day)日"
+    }
+
+    private func lunarDate(_ event: UpcomingEvent) -> String {
+        "农历\(event.day.lunarMonthName)月\(event.day.lunarDayName)"
     }
 
     var upcomingList: some View {
@@ -174,14 +182,22 @@ struct CalendarView: View {
                                     .lineLimit(1)
                                     .truncationMode(.tail)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                Text(eventDate(event))
+                                Text(solarDate(event))
                                     .font(.system(size: 11))
                                     .foregroundStyle(Palette.secondaryText)
-                                    .fixedSize()
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.8)
+                                    .frame(width: 82, alignment: .trailing)
+                                Text(lunarDate(event))
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(Palette.secondaryText)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.8)
+                                    .frame(width: 95, alignment: .trailing)
                                 Text(countdown(event.daysAway))
                                     .font(.system(size: 11))
                                     .foregroundStyle(Palette.secondaryText)
-                                    .fixedSize()
+                                    .frame(width: 50, alignment: .trailing)
                                 Image(systemName: "chevron.right")
                                     .font(.system(size: 10, weight: .semibold))
                                     .foregroundStyle(Palette.secondaryText)
@@ -205,7 +221,7 @@ struct CalendarView: View {
             }
         }
         .padding(14)
-        .frame(width: 410)
+        .frame(width: 450)
         .background(Palette.background)
         .onDisappear { hoveredUpcoming = nil }
     }
