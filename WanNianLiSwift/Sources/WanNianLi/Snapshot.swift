@@ -31,6 +31,14 @@ enum Snapshot {
             view.layoutSubtreeIfNeeded()
             RunLoop.current.run(until: Date().addingTimeInterval(0.2))
             save(view, to: dir.appendingPathComponent("calendar-\(name).png"))
+            let list = NSHostingView(rootView: CalendarView(model: model, menu: AppMenu()).upcomingList)
+            list.appearance = NSAppearance(named: appearance)
+            list.frame.size = list.fittingSize
+            let listWindow = NSWindow(contentRect: list.frame, styleMask: .borderless, backing: .buffered, defer: false)
+            listWindow.appearance = NSAppearance(named: appearance)
+            listWindow.contentView = list
+            list.layoutSubtreeIfNeeded()
+            save(list, to: dir.appendingPathComponent("upcoming-\(name).png"))
         }
         // 自定义日期窗口（选中第一项），浅色和深色各一张
         for (suffix, appearance) in [("", NSAppearance.Name.aqua), ("-dark", .darkAqua)] {

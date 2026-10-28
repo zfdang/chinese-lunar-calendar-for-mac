@@ -31,6 +31,7 @@ final class CalendarViewModel: ObservableObject {
     /// 用户点击选中的日期；为 nil 时高亮今天
     @Published private(set) var selected: SolarDate?
     @Published private(set) var today: SolarDate
+    @Published private(set) var upcoming: [UpcomingEvent] = []
 
     private let store: DataStore
     private var cancellable: AnyCancellable?
@@ -42,9 +43,11 @@ final class CalendarViewModel: ObservableObject {
         year = today.year
         month = today.month
         grid = MonthGrid(year: today.year, month: today.month, data: store.data)
+        updateUpcoming(data: store.data)
         cancellable = store.$data.dropFirst().sink { [weak self] data in
             guard let self else { return }
             self.grid = MonthGrid(year: self.year, month: self.month, data: data)
+            self.updateUpcoming(data: data)
         }
     }
 
@@ -53,13 +56,22 @@ final class CalendarViewModel: ObservableObject {
     /// 回到今天，并清除选中的日期
     func showToday() {
         today = .today
+        updateUpcoming(data: store.data)
         selected = nil
         show(year: today.year, month: today.month)
     }
 
     /// 跨天时更新"今天"，保留当前显示的月份和选中的日期
     func refreshToday() {
-        if today != .today { today = .today }
+        if today != .today {
+            today = .today
+            updateUpcoming(data: store.data)
+        }
+    }
+
+    /// 展示今天起 90 天内最多 6 个节日、自定义事件和节气。
+    private func updateUpcoming(data: CalendarData) {
+        upcoming = UpcomingEvents.find(from: today, data: data)
     }
 
     func setYear(_ y: Int) { show(year: y, month: month) }

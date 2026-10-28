@@ -8,7 +8,7 @@ import SwiftUI
 final class StatusItemController: NSObject, NSPopoverDelegate {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let popover = NSPopover()
-    private let store = DataStore.shared
+    private let store: DataStore
     private let model: CalendarViewModel
     private let menu = AppMenu()
 
@@ -20,7 +20,10 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
     private var lastClosed = Date.distantPast
     private var dataObserver: AnyCancellable?
 
-    override init() {
+    override convenience init() { self.init(store: .shared) }
+
+    init(store: DataStore) {
+        self.store = store
         model = CalendarViewModel(store: store)
         super.init()
 
@@ -167,6 +170,13 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         customEventsWindow?.showWindow(nil)
         customEventsWindow?.window?.makeKeyAndOrderFront(nil)
     }
+
+    #if DEBUG
+    func testOpenCustomEventsFromCalendar() {
+        showPopover()
+        menu.onEditCustomEvents()
+    }
+    #endif
 
     // MARK: - 更新假日信息
 

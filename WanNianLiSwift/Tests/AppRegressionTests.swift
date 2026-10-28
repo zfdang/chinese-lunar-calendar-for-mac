@@ -20,6 +20,38 @@ struct AppRegressionTests {
 
     @MainActor
     static func main() throws {
+        let upcomingData = CalendarData(holidays: nil, festivals: [], customEvents: [
+            CustomEvent(name: "Today", rule: .once(year: 2026, month: 12, day: 31)),
+            CustomEvent(name: "New year", rule: .solar(month: 1, day: 1)),
+            CustomEvent(name: "Another event", rule: .once(year: 2027, month: 1, day: 1)),
+            CustomEvent(name: "Later", rule: .once(year: 2027, month: 1, day: 4)),
+        ])
+        let start = SolarDate(year: 2026, month: 12, day: 31)
+        let upcoming = UpcomingEvents.find(from: start, data: upcomingData, days: 4)
+        check(upcoming.map(\.name) == ["Today", "Another event", "New year"],
+              "upcoming events include today and preserve ordering across years")
+        check(upcoming.map(\.daysAway) == [0, 1, 1], "upcoming events calculate calendar-day distances")
+        check(UpcomingEvents.find(from: start, data: upcomingData, days: 4, limit: 2).count == 2,
+              "upcoming event limit is respected")
+        let crowdedData = CalendarData(holidays: nil, festivals: [], customEvents: (1...8).map {
+            CustomEvent(name: "Event \($0)", rule: .once(year: 2026, month: 12, day: 31))
+        })
+        check(UpcomingEvents.find(from: start, data: crowdedData, days: 1).count == 6,
+              "upcoming list defaults to six events even on a busy day")
+        check(UpcomingEvents.find(from: start, data: upcomingData, days: 0).isEmpty,
+              "an empty date range returns no events")
+        let term = UpcomingEvents.find(from: SolarDate(year: 2026, month: 12, day: 22),
+                                       data: CalendarData(), days: 1)
+        check(term.contains { $0.name == "冬至" }, "upcoming events include solar terms")
+        let lunarData = CalendarData(holidays: nil, festivals: [], customEvents: [
+            CustomEvent(name: "Lunar new year", rule: .lunar(month: 1, day: 1))
+        ])
+        let lunar = UpcomingEvents.find(from: SolarDate(year: 2026, month: 2, day: 17), data: lunarData, days: 1)
+        check(lunar.contains { $0.name == "Lunar new year" }, "upcoming events resolve lunar dates")
+        check(UpcomingEvents.find(from: SolarDate(year: 2099, month: 12, day: 31),
+                                  data: CalendarData(), days: 90).allSatisfy { $0.day.date.year == 2099 },
+              "upcoming events stop at the supported year boundary")
+
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: directory) }
         let store = DataStore(supportDirectory: directory)
