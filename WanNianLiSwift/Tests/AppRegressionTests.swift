@@ -1,4 +1,5 @@
 import Foundation
+import CoreGraphics
 import LunarCore
 
 /// 直接编译应用的数据层，保持仅安装 Command Line Tools 时也能运行回归测试。
@@ -20,6 +21,18 @@ struct AppRegressionTests {
 
     @MainActor
     static func main() throws {
+        let screen = CGRect(x: -1440, y: 0, width: 1440, height: 900)
+        let anchor = CGRect(x: -500, y: 370, width: 460, height: 500)
+        let size = CGSize(width: 680, height: 460)
+        let origin = WindowPlacement.origin(size: size, near: anchor, in: screen)
+        let placed = CGRect(origin: origin, size: size)
+        check(screen.contains(placed) && placed.maxX <= anchor.minX,
+              "custom dates window fits beside the calendar on a secondary screen")
+        let smallScreen = CGRect(x: 0, y: 0, width: 800, height: 600)
+        let smallAnchor = CGRect(x: 200, y: 100, width: 460, height: 500)
+        let fallback = WindowPlacement.origin(size: size, near: smallAnchor, in: smallScreen)
+        check(smallScreen.contains(CGRect(origin: fallback, size: size)),
+              "custom dates window remains visible when there is no room beside the calendar")
         let upcomingData = CalendarData(holidays: nil, festivals: [], customEvents: [
             CustomEvent(name: "Today", rule: .once(year: 2026, month: 12, day: 31)),
             CustomEvent(name: "New year", rule: .solar(month: 1, day: 1)),

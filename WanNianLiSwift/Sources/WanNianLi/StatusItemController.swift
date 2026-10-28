@@ -83,10 +83,10 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         }
     }
 
-    private func showPopover() {
+    private func showPopover(resetToToday: Bool = true) {
         guard let button = statusItem.button else { return }
-        // 每次打开时回到今天
-        model.showToday()
+        // 常规打开回到今天，从自定义日期窗口返回时保留选中日期。
+        if resetToToday { model.showToday() }
         refreshIcon()
 
         updateAppearance()
@@ -157,11 +157,18 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
     // MARK: - 自定义日期
 
     private func showCustomEventsWindow() {
+        let anchorWindow = popover.contentViewController?.view.window
+        let anchorFrame = anchorWindow?.frame
+        let visibleFrame = anchorWindow?.screen?.visibleFrame
         popover.performClose(nil)
         if customEventsWindow == nil {
             customEventsWindow = CustomEventsWindowController(store: store) { [weak self] in
                 self?.customEventsWindow = nil
+                if self?.popover.isShown == false { self?.showPopover(resetToToday: false) }
             }
+        }
+        if let anchorFrame, let visibleFrame, let window = customEventsWindow?.window {
+            window.setFrameOrigin(WindowPlacement.origin(size: window.frame.size, near: anchorFrame, in: visibleFrame))
         }
         NSApp.activate(ignoringOtherApps: true)
         customEventsWindow?.showWindow(nil)

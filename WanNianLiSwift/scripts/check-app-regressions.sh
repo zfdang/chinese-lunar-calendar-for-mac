@@ -9,6 +9,6 @@ swiftc -parse-as-library -emit-object -emit-module -whole-module-optimization \
     -module-name LunarCore -emit-module-path "$WORK/LunarCore.swiftmodule" \
     Sources/LunarCore/*.swift -o "$WORK/LunarCore.o"
 swiftc -parse-as-library -D DEBUG -I "$WORK" \
-    Sources/WanNianLi/DataStore.swift Tests/AppRegressionTests.swift \
+    Sources/WanNianLi/DataStore.swift Sources/WanNianLi/WindowPlacement.swift Tests/AppRegressionTests.swift \
     "$WORK/LunarCore.o" -o "$WORK/app-regressions"
 "$WORK/app-regressions"
