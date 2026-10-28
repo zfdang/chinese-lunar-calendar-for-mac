@@ -124,7 +124,10 @@ struct CalendarView: View {
         }
         .font(.system(size: 12))
         .padding(.leading, 10)
-        .padding(.top, 3)
+        .padding(.trailing, 4)
+        .padding(.vertical, 2)
+        .background(RoundedRectangle(cornerRadius: 8).fill(Palette.panel))
+        .padding(.top, 4)
     }
 
     private func countdown(_ days: Int) -> String {
