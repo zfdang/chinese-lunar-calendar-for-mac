@@ -42,7 +42,11 @@ struct CalendarView: View {
     @State private var hovered: Int?
     @State private var showUpcomingAtTitle = false
     @State private var showUpcomingAtSummary = false
-    @State private var hoveredUpcoming: Int?
+    @State private var hoveredUpcoming: String?
+    @State private var hoveredTitleUpcoming = false
+    @State private var hoveredCustomDates = false
+    @State private var hoveredSummaryEvent = false
+    @State private var hoveredSummaryUpcoming = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -66,6 +70,10 @@ struct CalendarView: View {
             showUpcomingAtTitle = false
             showUpcomingAtSummary = false
             hoveredUpcoming = nil
+            hoveredTitleUpcoming = false
+            hoveredCustomDates = false
+            hoveredSummaryEvent = false
+            hoveredSummaryUpcoming = false
         }
     }
 
@@ -83,30 +91,42 @@ struct CalendarView: View {
         .frame(maxWidth: .infinity)
         .frame(height: 34)
         .overlay(alignment: .leading) {
-            upcomingButton(isPresented: $showUpcomingAtTitle)
-                .popover(isPresented: $showUpcomingAtTitle, arrowEdge: .bottom) { upcomingList }
+            iconButton(icon: "list.bullet", help: "即将到来", isHovered: hoveredTitleUpcoming,
+                       onHover: { hoveredTitleUpcoming = $0 }) {
+                toggleUpcoming(atTitle: true)
+            }
+            .popover(isPresented: $showUpcomingAtTitle, arrowEdge: .bottom) { upcomingList }
         }
         .overlay(alignment: .trailing) {
-            Button { menu.onEditCustomEvents() } label: {
-                Image(systemName: "calendar.badge.plus")
-                    .frame(width: 28, height: 28)
-                    .contentShape(Rectangle())
+            iconButton(icon: "calendar.badge.plus", help: "自定义日期", isHovered: hoveredCustomDates,
+                       onHover: { hoveredCustomDates = $0 }) {
+                menu.onEditCustomEvents()
             }
-            .buttonStyle(.plain)
-            .help("自定义日期")
-            .accessibilityLabel("自定义日期")
         }
     }
 
-    private func upcomingButton(isPresented: Binding<Bool>) -> some View {
-        Button { isPresented.wrappedValue.toggle() } label: {
-            Image(systemName: "list.bullet")
+    private func iconButton(icon: String, help: String, isHovered: Bool,
+                            onHover: @escaping (Bool) -> Void, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: icon)
                 .frame(width: 28, height: 28)
+                .background(RoundedRectangle(cornerRadius: 6).fill(isHovered ? Palette.hovered : .clear))
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .help("即将到来")
-        .accessibilityLabel("即将到来")
+        .onHover(perform: onHover)
+        .help(help)
+        .accessibilityLabel(help)
+    }
+
+    private func toggleUpcoming(atTitle: Bool) {
+        if atTitle {
+            showUpcomingAtSummary = false
+            showUpcomingAtTitle.toggle()
+        } else {
+            showUpcomingAtTitle = false
+            showUpcomingAtSummary.toggle()
+        }
     }
 
     private var upcomingSummary: some View {
@@ -114,21 +134,37 @@ struct CalendarView: View {
             Text("接下来")
                 .foregroundStyle(Palette.secondaryText)
             if let event = model.upcoming.first {
-                Text(event.name)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-                    .layoutPriority(-1)
-                    .help(event.name)
-                Text("\(eventDate(event)) · \(countdown(event.daysAway))")
-                    .lineLimit(1)
-                    .fixedSize()
+                Button {
+                    model.select(event.day)
+                } label: {
+                    HStack(spacing: 6) {
+                        Text(event.name)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .layoutPriority(-1)
+                        Text("\(eventDate(event)) · \(countdown(event.daysAway))")
+                            .lineLimit(1)
+                            .fixedSize()
+                    }
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 2)
+                    .background(RoundedRectangle(cornerRadius: 4)
+                        .fill(hoveredSummaryEvent ? Palette.hovered : .clear))
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .onHover { inside in hoveredSummaryEvent = inside }
+                .help("跳转到\(event.name)（\(solarDate(event))）")
             } else {
                 Text("近期没有事件")
                     .foregroundStyle(Palette.secondaryText)
             }
             Spacer(minLength: 0)
-            upcomingButton(isPresented: $showUpcomingAtSummary)
-                .popover(isPresented: $showUpcomingAtSummary, arrowEdge: .top) { upcomingList }
+            iconButton(icon: "list.bullet", help: "即将到来", isHovered: hoveredSummaryUpcoming,
+                       onHover: { hoveredSummaryUpcoming = $0 }) {
+                toggleUpcoming(atTitle: false)
+            }
+            .popover(isPresented: $showUpcomingAtSummary, arrowEdge: .top) { upcomingList }
         }
         .font(.system(size: 12))
         .padding(.leading, 10)
@@ -170,7 +206,7 @@ struct CalendarView: View {
                     .padding(.vertical, 12)
             } else {
                 VStack(spacing: 0) {
-                    ForEach(Array(model.upcoming.enumerated()), id: \.offset) { index, event in
+                    ForEach(model.upcoming) { event in
                         Button {
                             model.select(event.day)
                             showUpcomingAtTitle = false
@@ -206,11 +242,11 @@ struct CalendarView: View {
                             .frame(minHeight: 36)
                             .contentShape(Rectangle())
                             .background(RoundedRectangle(cornerRadius: 6)
-                                .fill(hoveredUpcoming == index ? Palette.hovered : .clear))
+                                .fill(hoveredUpcoming == event.id ? Palette.hovered : .clear))
                         }
                         .buttonStyle(.plain)
                         .onHover { inside in
-                            hoveredUpcoming = inside ? index : (hoveredUpcoming == index ? nil : hoveredUpcoming)
+                            hoveredUpcoming = inside ? event.id : (hoveredUpcoming == event.id ? nil : hoveredUpcoming)
                         }
                         .help("查看\(event.name)的日期")
                     }

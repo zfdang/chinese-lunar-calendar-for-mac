@@ -1,10 +1,17 @@
 import Foundation
 
 /// 日历中即将发生的一个节日、自定义事件或节气。
-public struct UpcomingEvent {
+public struct UpcomingEvent: Identifiable, Hashable, Sendable {
+    public var id: String { "\(day.date.key)-\(name)" }
     public let day: CalendarDay
     public let name: String
     public let daysAway: Int
+
+    public init(day: CalendarDay, name: String, daysAway: Int) {
+        self.day = day
+        self.name = name
+        self.daysAway = daysAway
+    }
 }
 
 public enum UpcomingEvents {
