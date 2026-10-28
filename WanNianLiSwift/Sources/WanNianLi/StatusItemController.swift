@@ -86,10 +86,10 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         }
     }
 
-    private func showPopover(resetToToday: Bool = true) {
+    private func showPopover() {
         guard let button = statusItem.button else { return }
-        // 常规打开回到今天，从自定义日期窗口返回时保留选中日期。
-        if resetToToday { model.showToday() }
+        // 每次打开时回到今天
+        model.showToday()
         refreshIcon()
 
         updateAppearance()
@@ -160,13 +160,15 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
     // MARK: - 自定义日期
 
     private func showCustomEventsWindow() {
-        let anchorWindow = popover.contentViewController?.view.window
-        let visibleFrame = anchorWindow?.screen?.visibleFrame
         popover.performClose(nil)
-        // 等月历弹窗结束关闭，再显示独立窗口，避免关闭过程抢走焦点或遮住新窗口。
-        DispatchQueue.main.async { [weak self] in
-            self?.presentCustomEventsWindow(on: visibleFrame)
+        if customEventsWindow == nil {
+            customEventsWindow = CustomEventsWindowController(store: store) { [weak self] in
+                self?.customEventsWindow = nil
+            }
         }
+        NSApp.activate(ignoringOtherApps: true)
+        customEventsWindow?.showWindow(nil)
+        customEventsWindow?.window?.makeKeyAndOrderFront(nil)
     }
 
     #if DEBUG
@@ -175,26 +177,6 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         menu.onEditCustomEvents()
     }
     #endif
-
-    private func presentCustomEventsWindow(on visibleFrame: NSRect?) {
-        if customEventsWindow == nil {
-            customEventsWindow = CustomEventsWindowController(store: store) { [weak self] in
-                self?.customEventsWindow = nil
-                if self?.popover.isShown == false { self?.showPopover(resetToToday: false) }
-            }
-        }
-        NSApp.activate(ignoringOtherApps: true)
-        customEventsWindow?.showWindow(nil)
-        if let window = customEventsWindow?.window {
-            window.contentView?.layoutSubtreeIfNeeded()
-            if let visible = visibleFrame ?? window.screen?.visibleFrame ?? NSScreen.main?.visibleFrame {
-                window.setFrameOrigin(WindowPlacement.centeredOrigin(size: window.frame.size, in: visible))
-            }
-            // 菜单栏弹窗关闭时应用可能尚未完成激活，先将窗口放到其他应用前面。
-            window.orderFrontRegardless()
-            window.makeKeyAndOrderFront(nil)
-        }
-    }
 
     // MARK: - 更新假日信息
 

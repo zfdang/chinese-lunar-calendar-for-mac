@@ -307,14 +307,8 @@ final class CustomEventsWindowController: NSWindowController, NSWindowDelegate {
         self.onClose = onClose
         window.title = "自定义日期"
         window.isReleasedWhenClosed = false
-        // 菜单栏应用可能从其他空间或全屏应用唤出，窗口应出现在当前空间。
-        window.collectionBehavior = [.moveToActiveSpace, .fullScreenAuxiliary]
         window.delegate = self
-        let hosting = NSHostingController(rootView: CustomEventsView(store: store))
-        // 选择或添加事件时，表单的理想尺寸可能变化；不要让它自动改变窗口的位置和尺寸。
-        hosting.sizingOptions = []
-        window.contentViewController = hosting
-        window.contentMinSize = NSSize(width: 640, height: 400)
+        window.contentViewController = NSHostingController(rootView: CustomEventsView(store: store))
         window.center()
     }
 
