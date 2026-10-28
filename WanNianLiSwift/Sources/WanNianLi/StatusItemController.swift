@@ -158,7 +158,6 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
 
     private func showCustomEventsWindow() {
         let anchorWindow = popover.contentViewController?.view.window
-        let anchorFrame = anchorWindow?.frame
         let visibleFrame = anchorWindow?.screen?.visibleFrame
         popover.performClose(nil)
         if customEventsWindow == nil {
@@ -172,8 +171,7 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
         if let window = customEventsWindow?.window {
             window.contentView?.layoutSubtreeIfNeeded()
             if let visible = visibleFrame ?? window.screen?.visibleFrame ?? NSScreen.main?.visibleFrame {
-                let reference = anchorFrame ?? window.frame
-                window.setFrameOrigin(WindowPlacement.origin(size: window.frame.size, near: reference, in: visible))
+                window.setFrameOrigin(WindowPlacement.centeredOrigin(size: window.frame.size, in: visible))
             }
             window.makeKeyAndOrderFront(nil)
         }
