@@ -151,41 +151,33 @@ struct CalendarView: View {
                     .foregroundStyle(.secondary)
                     .padding(.vertical, 12)
             } else {
-                ScrollView {
-                    VStack(spacing: 0) {
-                        ForEach(Array(model.upcoming.enumerated()), id: \.offset) { index, event in
-                            if index == 0 || model.upcoming[index - 1].day.date != event.day.date {
-                                HStack {
-                                    Text(eventDate(event))
-                                    Spacer()
-                                    Text(countdown(event.daysAway))
-                                }
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                                .padding(.top, index == 0 ? 2 : 10)
+                VStack(spacing: 0) {
+                    ForEach(Array(model.upcoming.enumerated()), id: \.offset) { _, event in
+                        Button {
+                            model.select(event.day)
+                            showUpcomingAtTitle = false
+                            showUpcomingAtSummary = false
+                        } label: {
+                            HStack(spacing: 8) {
+                                Text(event.name)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                Text(eventDate(event))
+                                    .foregroundStyle(.secondary)
+                                    .fixedSize()
+                                Text(countdown(event.daysAway))
+                                    .foregroundStyle(.secondary)
+                                    .fixedSize()
                             }
-                            Button {
-                                model.select(event.day)
-                                showUpcomingAtTitle = false
-                                showUpcomingAtSummary = false
-                            } label: {
-                                HStack {
-                                    Text(event.name).lineLimit(2)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.vertical, 6)
-                                .contentShape(Rectangle())
-                            }
-                            .buttonStyle(.plain)
+                            .padding(.vertical, 6)
+                            .contentShape(Rectangle())
                         }
+                        .buttonStyle(.plain)
+                        .help(event.name)
                     }
                 }
-                .frame(maxHeight: 300)
-                Text("显示未来 90 天内最多 12 项")
+                Text("显示未来 90 天内最多 6 项")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }

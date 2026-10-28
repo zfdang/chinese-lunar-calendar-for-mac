@@ -33,6 +33,11 @@ struct AppRegressionTests {
         check(upcoming.map(\.daysAway) == [0, 1, 1], "upcoming events calculate calendar-day distances")
         check(UpcomingEvents.find(from: start, data: upcomingData, days: 4, limit: 2).count == 2,
               "upcoming event limit is respected")
+        let crowdedData = CalendarData(holidays: nil, festivals: [], customEvents: (1...8).map {
+            CustomEvent(name: "Event \($0)", rule: .once(year: 2026, month: 12, day: 31))
+        })
+        check(UpcomingEvents.find(from: start, data: crowdedData, days: 1).count == 6,
+              "upcoming list defaults to six events even on a busy day")
         check(UpcomingEvents.find(from: start, data: upcomingData, days: 0).isEmpty,
               "an empty date range returns no events")
         let term = UpcomingEvents.find(from: SolarDate(year: 2026, month: 12, day: 22),

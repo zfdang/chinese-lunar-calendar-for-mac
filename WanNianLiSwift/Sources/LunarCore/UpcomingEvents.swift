@@ -10,7 +10,7 @@ public struct UpcomingEvent {
 public enum UpcomingEvents {
     /// 从指定日期（含当天）开始，按日期和日历中的显示顺序查找。
     public static func find(from start: SolarDate, data: CalendarData,
-                            days: Int = 90, limit: Int = 12) -> [UpcomingEvent] {
+                            days: Int = 90, limit: Int = 6) -> [UpcomingEvent] {
         guard days > 0, limit > 0 else { return [] }
         var result: [UpcomingEvent] = []
         for offset in 0..<days {

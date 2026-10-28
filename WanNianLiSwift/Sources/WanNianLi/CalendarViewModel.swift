@@ -69,7 +69,7 @@ final class CalendarViewModel: ObservableObject {
         }
     }
 
-    /// 展示今天起 90 天内最多 12 个节日、自定义事件和节气。
+    /// 展示今天起 90 天内最多 6 个节日、自定义事件和节气。
     private func updateUpcoming(data: CalendarData) {
         upcoming = UpcomingEvents.find(from: today, data: data)
     }
