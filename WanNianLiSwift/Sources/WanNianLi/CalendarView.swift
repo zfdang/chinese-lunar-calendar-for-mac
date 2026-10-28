@@ -40,6 +40,8 @@ struct CalendarView: View {
     private static let weekdays = Array("日一二三四五六").map(String.init)
 
     @State private var hovered: Int?
+    @State private var showUpcomingAtTitle = false
+    @State private var showUpcomingAtSummary = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -48,6 +50,7 @@ struct CalendarView: View {
             grid
             DetailPanel(day: model.detailDay)
                 .padding(.top, 6)
+            upcomingSummary
             Divider()
                 .padding(.top, 8)
             navigationBar
@@ -57,7 +60,11 @@ struct CalendarView: View {
         .padding(.top, 6)
         .padding(.bottom, 4)
         .background(Palette.background)
-        .onDisappear { hovered = nil }
+        .onDisappear {
+            hovered = nil
+            showUpcomingAtTitle = false
+            showUpcomingAtSummary = false
+        }
     }
 
     // MARK: - 标题
@@ -73,6 +80,115 @@ struct CalendarView: View {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 34)
+        .overlay(alignment: .leading) {
+            upcomingButton(isPresented: $showUpcomingAtTitle)
+                .popover(isPresented: $showUpcomingAtTitle, arrowEdge: .bottom) { upcomingList }
+        }
+        .overlay(alignment: .trailing) {
+            Button { menu.onEditCustomEvents() } label: {
+                Image(systemName: "calendar.badge.plus")
+                    .frame(width: 28, height: 28)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .help("自定义日期")
+            .accessibilityLabel("自定义日期")
+        }
+    }
+
+    private func upcomingButton(isPresented: Binding<Bool>) -> some View {
+        Button { isPresented.wrappedValue.toggle() } label: {
+            Image(systemName: "list.bullet")
+                .frame(width: 28, height: 28)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .help("即将到来")
+        .accessibilityLabel("即将到来")
+    }
+
+    private var upcomingSummary: some View {
+        HStack(spacing: 6) {
+            Text("接下来")
+                .foregroundStyle(Palette.secondaryText)
+            if let event = model.upcoming.first {
+                Text("\(event.name) · \(eventDate(event)) · \(countdown(event.daysAway))")
+                    .lineLimit(1)
+            } else {
+                Text("近期没有事件")
+                    .foregroundStyle(Palette.secondaryText)
+            }
+            Spacer(minLength: 0)
+            upcomingButton(isPresented: $showUpcomingAtSummary)
+                .popover(isPresented: $showUpcomingAtSummary, arrowEdge: .top) { upcomingList }
+        }
+        .font(.system(size: 12))
+        .padding(.leading, 10)
+        .padding(.top, 3)
+    }
+
+    private func countdown(_ days: Int) -> String {
+        if days == 0 { return "今天" }
+        if days == 1 { return "明天" }
+        return "还有\(days)天"
+    }
+
+    private func eventDate(_ event: UpcomingEvent) -> String {
+        let date = event.day.date
+        let year = date.year == model.today.year ? "" : "\(date.year)年"
+        return "\(year)\(date.month)月\(date.day)日"
+    }
+
+    private var upcomingList: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("即将到来")
+                .font(.headline)
+            if model.upcoming.isEmpty {
+                Text("未来 90 天没有事件")
+                    .foregroundStyle(.secondary)
+                    .padding(.vertical, 12)
+            } else {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        ForEach(Array(model.upcoming.enumerated()), id: \.offset) { index, event in
+                            if index == 0 || model.upcoming[index - 1].day.date != event.day.date {
+                                HStack {
+                                    Text(eventDate(event))
+                                    Spacer()
+                                    Text(countdown(event.daysAway))
+                                }
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .padding(.top, index == 0 ? 2 : 10)
+                            }
+                            Button {
+                                model.select(event.day)
+                                showUpcomingAtTitle = false
+                                showUpcomingAtSummary = false
+                            } label: {
+                                HStack {
+                                    Text(event.name).lineLimit(2)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.vertical, 6)
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                }
+                .frame(maxHeight: 300)
+                Text("显示未来 90 天内最多 12 项")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(14)
+        .frame(width: 320)
     }
 
     private var weekdayBar: some View {
