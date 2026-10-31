@@ -47,6 +47,12 @@ jobs:
         run: ./scripts/check-golden.sh
       - name: Test app data
         run: ./scripts/check-app-regressions.sh
+      - name: Verify festival snapshot
+        if: matrix.os == 'macos-15'
+        run: |
+          python3 -m venv "$RUNNER_TEMP/festival-tools"
+          "$RUNNER_TEMP/festival-tools/bin/pip" install -r scripts/festival-requirements.txt
+          "$RUNNER_TEMP/festival-tools/bin/python" scripts/generate-festivals.py --check
 
   build:
     needs: test

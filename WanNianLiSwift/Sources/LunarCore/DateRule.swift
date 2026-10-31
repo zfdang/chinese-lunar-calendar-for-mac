@@ -47,12 +47,13 @@ public enum DateRule: Codable, Hashable, Sendable {
         }
     }
 
-    /// 显示顺序：一次性事件、农历节日（含星期规则）、公历节日，与旧版一致
+    /// 显示顺序：一次性事件、农历节日、星期规则、公历节日，与旧版匹配顺序一致。
     var displayGroup: Int {
         switch self {
         case .once: return 0
-        case .lunar, .lunarNewYearsEve, .weekday: return 1
-        case .solar: return 2
+        case .lunar, .lunarNewYearsEve: return 1
+        case .weekday: return 2
+        case .solar: return 3
         }
     }
 }
@@ -62,6 +63,16 @@ public struct DayEvent: Hashable, Sendable {
     public let name: String
     /// 是否以红色醒目显示
     public let highlight: Bool
+    public var calendars: [FestivalCalendar] = []
+
+    /// 格子里使用短名称；详情和即将到来中标明可选日历的所属国家。
+    public var detailName: String {
+        var countries: [String] = []
+        for calendar in calendars where !name.hasPrefix(calendar.countryTitle) && !countries.contains(calendar.countryTitle) {
+            countries.append(calendar.countryTitle)
+        }
+        return countries.isEmpty ? name : "\(name)（\(countries.joined(separator: "、"))）"
+    }
 }
 
 /// 用户自定义的日期、节日或事件
