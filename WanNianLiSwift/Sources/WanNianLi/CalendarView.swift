@@ -138,23 +138,14 @@ struct CalendarView: View {
                 Button {
                     model.select(event.day)
                 } label: {
-                    VStack(alignment: .leading, spacing: 2) {
-                        HStack(spacing: 6) {
-                            Text(event.name)
-                                .fontWeight(.medium)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                            Spacer(minLength: 0)
-                            Text(countdown(event.daysAway))
-                                .fixedSize()
-                        }
-                        Text(eventDate(event))
-                            .font(.system(size: 11))
-                            .foregroundStyle(Palette.secondaryText)
+                    HStack(spacing: 6) {
+                        Text(event.name)
                             .lineLimit(1)
-                            .minimumScaleFactor(0.8)
+                            .truncationMode(.tail)
+                        Text("\(eventDate(event)) · \(countdown(event.daysAway))")
+                            .lineLimit(1)
+                            .fixedSize()
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 4)
                     .padding(.vertical, 2)
                     .background(RoundedRectangle(cornerRadius: 4)
@@ -162,13 +153,14 @@ struct CalendarView: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+                .layoutPriority(1)
                 .onHover { inside in hoveredSummaryEvent = inside }
                 .help("跳转到\(event.name)（\(solarDate(event))）")
             } else {
                 Text("近期没有事件")
                     .foregroundStyle(Palette.secondaryText)
             }
-            if model.upcoming.isEmpty { Spacer(minLength: 0) }
+            Spacer(minLength: 0)
             iconButton(icon: "list.bullet", help: "即将到来", isHovered: hoveredSummaryUpcoming,
                        onHover: { hoveredSummaryUpcoming = $0 }) {
                 toggleUpcoming(atTitle: false)
