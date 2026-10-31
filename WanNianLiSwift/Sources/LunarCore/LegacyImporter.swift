@@ -18,7 +18,7 @@ public enum LegacyImporter {
         func add(_ name: String, _ rule: DateRule?, highlight: Bool) {
             guard let rule, rule.isValid, !name.isEmpty else { return }
             // 与内置节日相同（名称和日期都一样，或者是内置节日的旧名称）的条目不需要导入
-            if Festival.builtin.contains(where: { $0.rule == rule && ($0.name == name || legacyNames[$0.name] == name) }) { return }
+            if Festival.legacyBuiltin.contains(where: { $0.rule == rule && ($0.name == name || legacyNames[$0.name] == name) }) { return }
             let event = CustomEvent(name: name, rule: rule, highlight: highlight)
             if !result.contains(where: { $0.isDuplicate(of: event) }) { result.append(event) }
         }

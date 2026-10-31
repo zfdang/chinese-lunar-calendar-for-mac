@@ -5,6 +5,8 @@ public struct CalendarData: Sendable {
     private struct Entry: Sendable {
         let event: DayEvent
         let group: Int
+        let isBuiltin: Bool
+        let firstYear: Int?
     }
 
     /// 调休安排，键为 "yyyyMMdd"
@@ -23,12 +25,15 @@ public struct CalendarData: Sendable {
             self.holidays[day.date.replacingOccurrences(of: "-", with: "")] = day
         }
         // 内置节日在前，自定义事件在后
-        for f in festivals { add(DayEvent(name: f.name, highlight: f.highlight), rule: f.rule) }
+        for f in festivals {
+            add(DayEvent(name: f.name, highlight: f.highlight, calendars: f.calendar.map { [$0] } ?? []),
+                rule: f.rule, isBuiltin: true, firstYear: f.firstYear)
+        }
         for e in customEvents where !e.name.isEmpty { add(DayEvent(name: e.name, highlight: e.highlight), rule: e.rule) }
     }
 
-    private mutating func add(_ event: DayEvent, rule: DateRule) {
-        let entry = Entry(event: event, group: rule.displayGroup)
+    private mutating func add(_ event: DayEvent, rule: DateRule, isBuiltin: Bool = false, firstYear: Int? = nil) {
+        let entry = Entry(event: event, group: rule.displayGroup, isBuiltin: isBuiltin, firstYear: firstYear)
         switch rule {
         case let .once(y, m, d): once[String(format: "%04d%02d%02d", y, m, d), default: []].append(entry)
         case let .solar(m, d): solar[String(format: "%02d%02d", m, d), default: []].append(entry)
@@ -63,8 +68,23 @@ public struct CalendarData: Sendable {
         }
 
         // 稳定排序：同组内保持内置在前、自定义在后
-        return entries.enumerated()
+        let sorted = entries.enumerated()
             .sorted { ($0.element.group, $0.offset) < ($1.element.group, $1.offset) }
-            .map(\.element.event)
+            .map(\.element)
+        // 多个国家的同名节日只显示一次；个人事件即使同名也保留。
+        var builtinIndexes: [String: Int] = [:]
+        var result: [DayEvent] = []
+        for entry in sorted where date.year >= (entry.firstYear ?? 1) {
+            if entry.isBuiltin, let index = builtinIndexes[entry.event.name] {
+                let previous = result[index]
+                let calendars = previous.calendars + entry.event.calendars.filter { !previous.calendars.contains($0) }
+                result[index] = DayEvent(name: previous.name, highlight: previous.highlight || entry.event.highlight,
+                                         calendars: calendars)
+            } else {
+                if entry.isBuiltin { builtinIndexes[entry.event.name] = result.count }
+                result.append(entry.event)
+            }
+        }
+        return result
     }
 }

@@ -42,6 +42,7 @@ final class AppMenu: ObservableObject {
     static let helpURL = URL(string: "https://calendar.zfdang.com")!
     static let changelogURL = URL(string: "https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/CHANGELOG.md")!
     static let contactURL = URL(string: "mailto:me@zfdang.com?subject=About%20Chinese%20Lunar%20Calendar%20for%20MAC")!
+    static let festivalSourcesURL = URL(string: "https://github.com/zfdang/chinese-lunar-calendar-for-mac/blob/master/WanNianLiSwift/Data/FESTIVALS.md")!
 
     /// 选择"更新假日信息"时调用
     var onUpdateHolidays: () -> Void = {}
@@ -107,6 +108,18 @@ private struct AppMenuButton: View {
                         get: { !store.hiddenCategories.contains(category) },
                         set: { store.setCategory(category, visible: $0) }))
                 }
+                Divider()
+                Menu("国外公共假日") {
+                    Menu("英国") {
+                        ForEach(FestivalCalendar.allCases.filter(\.isBritish)) { calendar in
+                            calendarToggle(calendar)
+                        }
+                    }
+                    ForEach(FestivalCalendar.allCases.filter { !$0.isBritish }) { calendar in
+                        calendarToggle(calendar)
+                    }
+                }
+                Button("节日来源与收录范围…") { NSWorkspace.shared.open(AppMenu.festivalSourcesURL) }
             }
             Button("自定义日期…") { menu.onEditCustomEvents() }
             Divider()
@@ -125,5 +138,11 @@ private struct AppMenuButton: View {
         .fixedSize()
         .help("设置")
         .onAppear { menu.refresh() }
+    }
+
+    private func calendarToggle(_ calendar: FestivalCalendar) -> some View {
+        Toggle(calendar.title, isOn: Binding(
+            get: { store.selectedCalendars.contains(calendar) },
+            set: { store.setCalendar(calendar, visible: $0) }))
     }
 }

@@ -71,7 +71,7 @@ public struct CalendarDay: Hashable, Sendable {
     public var lunarText: String { "\(ganZhiYear)年[\(shengXiao)] \(lunarMonthName)月\(lunarDayName)" }
     /// 当天所有的节日、事件和节气
     public var allEvents: String {
-        (events.map(\.name) + [solarTerm]).filter { !$0.isEmpty }.joined(separator: " ")
+        (events.map(\.detailName) + [solarTerm]).filter { !$0.isEmpty }.joined(separator: " ")
     }
 }
 

@@ -24,7 +24,7 @@ public enum UpcomingEvents {
             let date = start.adding(days: offset)
             guard LunarCalendar.supportedYears.contains(date.year) else { break }
             let day = CalendarDay(date: date, data: data)
-            for name in day.events.map(\.name) + (day.solarTerm.isEmpty ? [] : [day.solarTerm]) {
+            for name in day.events.map(\.detailName) + (day.solarTerm.isEmpty ? [] : [day.solarTerm]) {
                 result.append(UpcomingEvent(day: day, name: name, daysAway: offset))
                 if result.count == limit { return result }
             }

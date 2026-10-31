@@ -4,6 +4,7 @@ public enum FestivalCategory: String, Codable, CaseIterable, Identifiable, Senda
     case publicHoliday
     case western
     case memorial
+    case international
 
     public var id: String { rawValue }
 
@@ -11,8 +12,9 @@ public enum FestivalCategory: String, Codable, CaseIterable, Identifiable, Senda
         switch self {
         case .traditional: return "传统节日"
         case .publicHoliday: return "公历节日"
-        case .western: return "西方节日"
-        case .memorial: return "纪念日"
+        case .western: return "常见西方节日（美式日期）"
+        case .memorial: return "国内纪念日"
+        case .international: return "国际纪念日"
         }
     }
 }
@@ -24,16 +26,28 @@ public struct Festival: Hashable, Sendable {
     public let category: FestivalCategory
     /// 以红色醒目显示（旧版中农历节日和"第几个星期几"类节日为红色）
     public let highlight: Bool
+    public let sourceURL: String?
+    public let firstYear: Int?
+    public let calendar: FestivalCalendar?
 
-    init(_ name: String, _ rule: DateRule, _ category: FestivalCategory, highlight: Bool = false) {
+    init(_ name: String, _ rule: DateRule, _ category: FestivalCategory, highlight: Bool = false,
+         sourceURL: String? = nil, firstYear: Int? = nil, calendar: FestivalCalendar? = nil) {
         self.name = name
         self.rule = rule
         self.category = category
         self.highlight = highlight
+        self.sourceURL = sourceURL
+        self.firstYear = firstYear
+        self.calendar = calendar
     }
 
-    /// 内置节日列表（来自旧版 festivals.js / events.js 的默认内容）
-    public static let builtin: [Festival] = [
+    /// 默认显示的节日。国家日历另外选择，不影响传统节日和中国调休。
+    public static let builtin: [Festival] = legacyBuiltin.filter {
+        $0.category == .traditional || $0.category == .publicHoliday
+    } + FestivalCatalog.common + MemorialDays.builtin
+
+    /// 旧版默认清单仅用于迁移去重；更新数据来源后也不能把旧内置项当作个人事件导入。
+    static let legacyBuiltin: [Festival] = [
         // 传统节日
         Festival("春节", .lunar(month: 1, day: 1), .traditional, highlight: true),
         Festival("元宵节", .lunar(month: 1, day: 15), .traditional, highlight: true),

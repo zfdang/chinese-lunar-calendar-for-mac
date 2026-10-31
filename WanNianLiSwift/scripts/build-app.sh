@@ -33,6 +33,8 @@ cp Resources/AppIcon.icns "$APP/Contents/Resources/"
 # 调休安排与 GitHub Pages 共用一份：docs/data/holidays.json
 mkdir -p "$APP/Contents/Resources/calendar-data"
 cp ../docs/data/holidays.json "$APP/Contents/Resources/calendar-data/"
+mkdir -p "$APP/Contents/Resources/ThirdPartyNotices"
+cp Data/holidays-LICENSE.txt Data/FESTIVALS.md "$APP/Contents/Resources/ThirdPartyNotices/"
 
 # 没有指定 VERSION 时使用最近的 git tag（如 v4.1.2 → 4.1.2）
 if [ -z "${VERSION:-}" ]; then

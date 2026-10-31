@@ -15,6 +15,7 @@
 - 年、月选择框，上年 / 上月 / 下月 / 下年 / 今日按钮
 - 键盘：← 上一年，→ 下一年，↑ 上一月，↓ 下一月，↵ 回到今天
 - 设置菜单：自动启动、外观（跟随系统 / 日间 / 夜间）、显示节日（按分类开关）、自定义日期、使用帮助、更新假日信息、版本、联系作者、退出
+- 节日：保留传统节日与中国公历节日，国内／国际纪念日分别开关；可选英国各地区、美国、法国、德国的公共假日日历，支持离线显示、同名合并和国家标注，见[来源与范围](Data/FESTIVALS.md)
 - 自定义日期：生日、纪念日等，支持每年农历、每年公历、每年某月第几个星期几、某一天；可导入 / 导出
 - 调休安排每周自动检查更新，也可以手动"更新假日信息"
 - 首次运行时，如果不在"应用程序"文件夹，会询问是否移动过去
@@ -30,7 +31,7 @@
 - **节气**：沿用原来 1900–2100 年的节气表，与香港天文台数据完全一致。
 - **月干支**：按"节"（立春、惊蛰……）换月，旧版按农历月计算。
 - **年份范围**：1901–2099（旧版 1901–2049）。
-- **数据格式**：不再使用 js 文件。调休安排为 holidays.json，内置节日写在代码中，自定义日期保存为 custom-events.json；第一次运行时自动从旧版的 festivals.js / events.js 导入用户自己添加的条目。
+- **数据格式**：不再使用 js 文件。调休安排为 holidays.json，传统节日保留原规则，国外日历由固定版本的第三方数据生成并编译到程序中，自定义日期保存为 custom-events.json；第一次运行时自动从旧版的 festivals.js / events.js 导入用户自己添加的条目。
 - **七夕**：内置节日中农历七月初七显示为"七夕"（旧版为"情人节"）。
 - **自动启动**：使用 macOS 13 的 `SMAppService`。
 
@@ -39,7 +40,7 @@
 | 数据 | 位置 | 说明 |
 | --- | --- | --- |
 | 调休安排 | 仓库中的 `docs/data/holidays.json`（构建时打包进应用，同时通过 GitHub Pages 发布），在线更新后保存到 `~/Library/Application Support/com.zfdang.calendar/holidays.json` | 使用内置和已下载中版本较新的一份 |
-| 内置节日 | `Sources/LunarCore/Festivals.swift` | 分为传统节日、公历节日、西方节日、纪念日，可在"显示节日"中按分类隐藏 |
+| 内置节日 | `Sources/LunarCore/Festivals.swift`、`MemorialDays.swift`、`GeneratedFestivalData.swift` | 按分类和国家／地区选择；[来源、许可证与更新方法](Data/FESTIVALS.md) |
 | 自定义日期 | `~/Library/Application Support/com.zfdang.calendar/custom-events.json` | 在"自定义日期"窗口中编辑，可导入 / 导出 |
 
 新旧两个版本共用 `~/Library/Application Support/com.zfdang.calendar/` 目录，但自定义日期的格式不同：新版只在第一次运行时从旧版的
@@ -88,7 +89,7 @@ git tag v4.1 && git push origin v4.1
 ## 测试
 
 ```bash
-./scripts/check-app-regressions.sh # 应用数据层回归测试（仅需 Command Line Tools）
+./scripts/check-app-regressions.sh # 节日来源／地区／迁移及应用数据层回归测试（仅需 Command Line Tools）
 ./scripts/check-window-regressions.sh # 验证自定义日期窗口可见（需要图形界面）
 ./scripts/check-golden.sh      # 自检 + 与基准数据对比（CI 中每次构建都会运行）
 ./scripts/verify-lunar.sh      # 与香港天文台对照表逐日比较（需要网络；不再依赖旧版目录）
@@ -127,7 +128,10 @@ Sources/
     CalendarDay       每天的显示信息（节日、调休、格子中的文字），MonthGrid 月历
     CalendarData      按日期查找节日、事件、调休
     DateRule          日期规则（农历 / 公历 / 第几个星期几 / 某一天）、自定义事件
-    Festivals         内置节日
+    Festivals         节日分类与传统节日，旧版迁移默认清单
+    FestivalCatalog   国家与地区日历的选择和加载
+    GeneratedFestivalData  固定版本第三方节日快照
+    MemorialDays      有来源记录的国内／国际纪念日
     Holidays          holidays.json
     LegacyImporter    从旧版 festivals.js / events.js 导入
     LunarData         节气速查表

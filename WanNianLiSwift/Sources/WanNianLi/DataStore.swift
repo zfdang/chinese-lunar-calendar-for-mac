@@ -25,19 +25,24 @@ final class DataStore: ObservableObject {
     private static let autoCheckInterval: TimeInterval = 7 * 24 * 3600
     private static let lastCheckKey = "holidaysLastCheck"
     private static let hiddenCategoriesKey = "hiddenFestivalCategories"
+    private static let selectedCalendarsKey = "selectedFestivalCalendars"
+    private static let categoriesMigrationKey = "festivalCategoriesVersion"
 
     @Published private(set) var data = CalendarData()
     @Published private(set) var holidays: HolidayData?
     @Published private(set) var customEvents: [CustomEvent] = []
     @Published private(set) var hiddenCategories: Set<FestivalCategory> = []
+    @Published private(set) var selectedCalendars: Set<FestivalCalendar> = []
 
     let supportDirectory: URL
+    private let defaults: UserDefaults
     private var autoCheckTimer: Timer?
     /// 启动时读取数据遇到的问题，需要提示用户
     private(set) var loadWarning: String?
     private var customEventsReadOnly = false
 
-    init(supportDirectory directory: URL? = nil) {
+    init(supportDirectory directory: URL? = nil, defaults: UserDefaults = .standard) {
+        self.defaults = defaults
         if let directory {
             supportDirectory = directory
         } else if let override = ProcessInfo.processInfo.environment["WANNIANLI_DATA_DIR"] {
@@ -49,15 +54,23 @@ final class DataStore: ObservableObject {
         }
         try? FileManager.default.createDirectory(at: supportDirectory, withIntermediateDirectories: true)
 
-        hiddenCategories = Set((UserDefaults.standard.stringArray(forKey: Self.hiddenCategoriesKey) ?? [])
+        hiddenCategories = Set((defaults.stringArray(forKey: Self.hiddenCategoriesKey) ?? [])
             .compactMap(FestivalCategory.init))
+        // 原来隐藏纪念日的用户，拆分后也不应突然看到国际纪念日。
+        if defaults.integer(forKey: Self.categoriesMigrationKey) < 2 {
+            if hiddenCategories.contains(.memorial) { hiddenCategories.insert(.international) }
+            defaults.set(hiddenCategories.map(\.rawValue).sorted(), forKey: Self.hiddenCategoriesKey)
+            defaults.set(2, forKey: Self.categoriesMigrationKey)
+        }
+        selectedCalendars = Set((defaults.stringArray(forKey: Self.selectedCalendarsKey) ?? [])
+            .compactMap(FestivalCalendar.init))
         loadHolidays()
         loadCustomEvents()
         rebuild()
     }
 
     private func rebuild() {
-        let festivals = Festival.builtin.filter { !hiddenCategories.contains($0.category) }
+        let festivals = FestivalCatalog.selected(hiddenCategories: hiddenCategories, calendars: selectedCalendars)
         data = CalendarData(holidays: holidays, festivals: festivals, customEvents: customEvents)
     }
 
@@ -103,7 +116,7 @@ final class DataStore: ObservableObject {
                     throw URLError(.badServerResponse)
                 }
                 guard let holidays = HolidayData.decode(content) else { throw URLError(.cannotParseResponse) }
-                UserDefaults.standard.set(Date(), forKey: Self.lastCheckKey)
+                defaults.set(Date(), forKey: Self.lastCheckKey)
                 return (content, holidays)
             } catch {
                 NSLog("WanNianLi: failed to download \(url): \(error.localizedDescription)")
@@ -128,7 +141,7 @@ final class DataStore: ObservableObject {
     }
 
     private func checkHolidaysIfDue() {
-        let last = UserDefaults.standard.object(forKey: Self.lastCheckKey) as? Date ?? .distantPast
+        let last = defaults.object(forKey: Self.lastCheckKey) as? Date ?? .distantPast
         guard Date().timeIntervalSince(last) > Self.autoCheckInterval else { return }
         Task {
             guard let (content, remote) = try? await fetchRemoteHolidays(), remote.isNewer(than: holidays) else { return }
@@ -140,7 +153,13 @@ final class DataStore: ObservableObject {
 
     func setCategory(_ category: FestivalCategory, visible: Bool) {
         if visible { hiddenCategories.remove(category) } else { hiddenCategories.insert(category) }
-        UserDefaults.standard.set(hiddenCategories.map(\.rawValue).sorted(), forKey: Self.hiddenCategoriesKey)
+        defaults.set(hiddenCategories.map(\.rawValue).sorted(), forKey: Self.hiddenCategoriesKey)
+        rebuild()
+    }
+
+    func setCalendar(_ calendar: FestivalCalendar, visible: Bool) {
+        if visible { selectedCalendars.insert(calendar) } else { selectedCalendars.remove(calendar) }
+        defaults.set(selectedCalendars.map(\.rawValue).sorted(), forKey: Self.selectedCalendarsKey)
         rebuild()
     }
 

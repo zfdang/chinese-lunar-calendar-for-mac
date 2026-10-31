@@ -388,16 +388,11 @@ struct DetailPanel: View {
     let day: CalendarDay
 
     var body: some View {
-        HStack(alignment: .center, spacing: 12) {
-            VStack(alignment: .leading, spacing: 3) {
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(alignment: .firstTextBaseline) {
                 Text("\(day.solarText)  \(day.weekdayName)")
                     .font(.system(size: 13, weight: .semibold))
-                Text("农历\(day.lunarMonthName)月\(day.lunarDayName)　\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日　属\(day.shengXiao)")
-                    .font(.system(size: 12))
-                    .foregroundStyle(Palette.secondaryText)
-            }
-            Spacer(minLength: 0)
-            VStack(alignment: .trailing, spacing: 3) {
+                Spacer(minLength: 0)
                 if let tag = adjustmentTag {
                     Text(tag.text)
                         .font(.system(size: 11))
@@ -406,14 +401,18 @@ struct DetailPanel: View {
                         .padding(.vertical, 1)
                         .background(Capsule().fill(tag.color.opacity(0.15)))
                 }
-                if !day.allEvents.isEmpty {
-                    Text(day.allEvents)
-                        .font(.system(size: 12))
-                        .foregroundStyle(day.hasHighlightedEvent ? Palette.red
-                                         : day.events.isEmpty ? Palette.blue : Color.primary)
-                        .multilineTextAlignment(.trailing)
-                        .lineLimit(2)
-                }
+            }
+            Text("农历\(day.lunarMonthName)月\(day.lunarDayName)　\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日　属\(day.shengXiao)")
+                .font(.system(size: 12))
+                .foregroundStyle(Palette.secondaryText)
+                .lineLimit(1)
+            if !day.allEvents.isEmpty {
+                Text(day.allEvents)
+                    .font(.system(size: 12))
+                    .foregroundStyle(day.hasHighlightedEvent ? Palette.red
+                                     : day.events.isEmpty ? Palette.blue : Color.primary)
+                    .lineLimit(2)
+                    .help(day.allEvents)
             }
         }
         .padding(.horizontal, 10)

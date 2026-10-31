@@ -20,6 +20,10 @@ struct AppRegressionTests {
 
     @MainActor
     static func main() throws {
+        try festivalRegressions()
+        let suite = "app-regressions-" + UUID().uuidString
+        let preferences = UserDefaults(suiteName: suite)!
+        defer { preferences.removePersistentDomain(forName: suite) }
         let upcomingData = CalendarData(holidays: nil, festivals: [], customEvents: [
             CustomEvent(name: "Today", rule: .once(year: 2026, month: 12, day: 31)),
             CustomEvent(name: "New year", rule: .solar(month: 1, day: 1)),
@@ -54,7 +58,7 @@ struct AppRegressionTests {
 
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: directory) }
-        let store = DataStore(supportDirectory: directory)
+        let store = DataStore(supportDirectory: directory, defaults: preferences)
         var event = CustomEvent(name: "Birthday", rule: .solar(month: 1, day: 1))
         try store.upsert(event)
         event.name = "Edited birthday"
@@ -63,7 +67,7 @@ struct AppRegressionTests {
         // 编辑器消失时 flush 的旧草稿，以及未完成的延迟保存，均走 update。
         try store.update(event)
         check(store.customEvents.isEmpty, "delayed editor save does not restore deleted event")
-        let reloaded = DataStore(supportDirectory: directory)
+        let reloaded = DataStore(supportDirectory: directory, defaults: preferences)
         check(reloaded.customEvents.isEmpty, "deleted event stays deleted after reload")
 
         try store.upsert(event)
@@ -88,9 +92,9 @@ struct AppRegressionTests {
         check(day.events.contains { $0.name == event.name }, "failed writes leave calendar data unchanged")
         try FileManager.default.removeItem(at: target)
         try saved.write(to: target)
-        check(DataStore(supportDirectory: directory).customEvents == original, "previous data survives reload")
+        check(DataStore(supportDirectory: directory, defaults: preferences).customEvents == original, "previous data survives reload")
         try store.update(edited)
-        check(DataStore(supportDirectory: directory).customEvents == [edited], "saving works after storage recovers")
+        check(DataStore(supportDirectory: directory, defaults: preferences).customEvents == [edited], "saving works after storage recovers")
         let invalid = CustomEvent(name: "Invalid", rule: .lunar(month: 13, day: 1))
         // 使用原始编码器模拟外部提供的非法 JSON，绕过应用的保存校验。
         let badJSON = try JSONEncoder().encode(CustomEventsFile(events: [invalid]))
@@ -104,7 +108,7 @@ struct AppRegressionTests {
         let damagedDirectory = directory.appendingPathComponent("damaged")
         try FileManager.default.createDirectory(at: damagedDirectory, withIntermediateDirectories: false)
         try badJSON.write(to: damagedDirectory.appendingPathComponent("custom-events.json"))
-        let recovered = DataStore(supportDirectory: damagedDirectory)
+        let recovered = DataStore(supportDirectory: damagedDirectory, defaults: preferences)
         check(recovered.customEvents.isEmpty && recovered.loadWarning != nil, "invalid startup data produces a warning")
         let backups = try FileManager.default.contentsOfDirectory(at: damagedDirectory, includingPropertiesForKeys: nil)
         check(backups.count == 1 && backups[0].lastPathComponent.hasPrefix("custom-events.broken-"),

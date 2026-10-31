@@ -62,6 +62,16 @@ public struct DayEvent: Hashable, Sendable {
     public let name: String
     /// 是否以红色醒目显示
     public let highlight: Bool
+    public var calendars: [FestivalCalendar] = []
+
+    /// 格子里使用短名称；详情和即将到来中标明可选日历的所属国家。
+    public var detailName: String {
+        var countries: [String] = []
+        for calendar in calendars where !name.hasPrefix(calendar.countryTitle) && !countries.contains(calendar.countryTitle) {
+            countries.append(calendar.countryTitle)
+        }
+        return countries.isEmpty ? name : "\(name)（\(countries.joined(separator: "、"))）"
+    }
 }
 
 /// 用户自定义的日期、节日或事件
