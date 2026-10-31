@@ -410,13 +410,17 @@ struct DetailPanel: View {
                         .lineLimit(1)
                 }
                 if !day.allEvents.isEmpty {
-                    Text(day.allEvents)
-                        .font(.system(size: 12))
-                        .foregroundStyle(day.hasHighlightedEvent ? Palette.red
-                                         : day.events.isEmpty ? Palette.blue : Color.primary)
-                        .multilineTextAlignment(.trailing)
-                        .lineLimit(adjustmentTag == nil ? 2 : 1)
-                        .help(day.allEvents)
+                    VStack(alignment: .trailing, spacing: 3) {
+                        ForEach(Array(eventLines.enumerated()), id: \.offset) { _, text in
+                            Text(text)
+                                .lineLimit(eventLines.count == 1 && adjustmentTag == nil ? 2 : 1)
+                        }
+                    }
+                    .font(.system(size: 12))
+                    .foregroundStyle(day.hasHighlightedEvent ? Palette.red
+                                     : day.events.isEmpty ? Palette.blue : Color.primary)
+                    .multilineTextAlignment(.trailing)
+                    .help(day.allEvents)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -426,6 +430,14 @@ struct DetailPanel: View {
         .frame(maxWidth: .infinity)
         .frame(height: 50)
         .background(RoundedRectangle(cornerRadius: 8).fill(Palette.panel))
+    }
+
+    private var eventLines: [String] {
+        let names = (day.events.map(\.detailName) + [day.solarTerm]).filter { !$0.isEmpty }
+        guard adjustmentTag == nil, names.count > 1 else {
+            return names.isEmpty ? [] : [names.joined(separator: " ")]
+        }
+        return [names[0], names.dropFirst().joined(separator: " ")]
     }
 
     /// 调休标记，例如"春节 放假"、"春节 调休上班"
