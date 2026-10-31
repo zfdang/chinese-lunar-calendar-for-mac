@@ -30,6 +30,17 @@ enum Palette {
     static let panel = dynamic(light: 0xF2F3F5, dark: 0x2B2B2E)
     static let hovered = dynamic(light: 0xE9EAED, dark: 0x343438)
     static let selected = Color.accentColor.opacity(0.18)
+
+    static func eventColor(_ event: DayEvent) -> Color {
+        event.highlight ? red : .primary
+    }
+
+    static func eventColor(_ event: UpcomingEvent) -> Color {
+        if let match = event.day.events.first(where: { $0.detailName == event.name }) {
+            return eventColor(match)
+        }
+        return event.name == event.day.solarTerm ? blue : .primary
+    }
 }
 
 struct CalendarView: View {
@@ -140,6 +151,7 @@ struct CalendarView: View {
                 } label: {
                     HStack(spacing: 6) {
                         Text(event.name)
+                            .foregroundStyle(Palette.eventColor(event))
                             .lineLimit(1)
                             .truncationMode(.tail)
                         Text("\(eventDate(event)) · \(countdown(event.daysAway))")
@@ -215,6 +227,7 @@ struct CalendarView: View {
                         } label: {
                             HStack(spacing: 8) {
                                 Text(event.name)
+                                    .foregroundStyle(Palette.eventColor(event))
                                     .font(.system(size: 13, weight: .medium))
                                     .lineLimit(1)
                                     .truncationMode(.tail)
@@ -412,13 +425,11 @@ struct DetailPanel: View {
                 if !day.allEvents.isEmpty {
                     VStack(alignment: .trailing, spacing: 3) {
                         ForEach(Array(eventLines.enumerated()), id: \.offset) { _, text in
-                            Text(text)
+                            text
                                 .lineLimit(eventLines.count == 1 && adjustmentTag == nil ? 2 : 1)
                         }
                     }
                     .font(.system(size: 12))
-                    .foregroundStyle(day.hasHighlightedEvent ? Palette.red
-                                     : day.events.isEmpty ? Palette.blue : Color.primary)
                     .multilineTextAlignment(.trailing)
                     .help(day.allEvents)
                 }
@@ -432,12 +443,23 @@ struct DetailPanel: View {
         .background(RoundedRectangle(cornerRadius: 8).fill(Palette.panel))
     }
 
-    private var eventLines: [String] {
-        let names = (day.events.map(\.detailName) + [day.solarTerm]).filter { !$0.isEmpty }
-        guard adjustmentTag == nil, names.count > 1 else {
-            return names.isEmpty ? [] : [names.joined(separator: " ")]
+    private var eventLines: [Text] {
+        var events = day.events.map {
+            Text($0.detailName).foregroundColor(Palette.eventColor($0))
         }
-        return [names[0], names.dropFirst().joined(separator: " ")]
+        if !day.solarTerm.isEmpty {
+            events.append(Text(day.solarTerm).foregroundColor(Palette.blue))
+        }
+        guard let first = events.first else { return [] }
+        if adjustmentTag == nil, events.count > 1 {
+            return [first, joinedEvents(Array(events.dropFirst()))]
+        }
+        return [joinedEvents(events)]
+    }
+
+    private func joinedEvents(_ events: [Text]) -> Text {
+        guard let first = events.first else { return Text("") }
+        return events.dropFirst().reduce(first) { $0 + Text(" ") + $1 }
     }
 
     /// 调休标记，例如"春节 放假"、"春节 调休上班"
