@@ -30,6 +30,17 @@ enum Palette {
     static let panel = dynamic(light: 0xF2F3F5, dark: 0x2B2B2E)
     static let hovered = dynamic(light: 0xE9EAED, dark: 0x343438)
     static let selected = Color.accentColor.opacity(0.18)
+
+    static func eventColor(_ event: DayEvent) -> Color {
+        event.highlight ? red : .primary
+    }
+
+    static func eventColor(_ event: UpcomingEvent) -> Color {
+        if let match = event.day.events.first(where: { $0.detailName == event.name }) {
+            return eventColor(match)
+        }
+        return event.name == event.day.solarTerm ? blue : .primary
+    }
 }
 
 struct CalendarView: View {
@@ -133,15 +144,16 @@ struct CalendarView: View {
         HStack(spacing: 6) {
             Text("接下来")
                 .foregroundStyle(Palette.secondaryText)
+                .fixedSize()
             if let event = model.upcoming.first {
                 Button {
                     model.select(event.day)
                 } label: {
                     HStack(spacing: 6) {
                         Text(event.name)
+                            .foregroundStyle(Palette.eventColor(event))
                             .lineLimit(1)
                             .truncationMode(.tail)
-                            .layoutPriority(-1)
                         Text("\(eventDate(event)) · \(countdown(event.daysAway))")
                             .lineLimit(1)
                             .fixedSize()
@@ -153,6 +165,7 @@ struct CalendarView: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+                .layoutPriority(1)
                 .onHover { inside in hoveredSummaryEvent = inside }
                 .help("跳转到\(event.name)（\(solarDate(event))）")
             } else {
@@ -214,6 +227,7 @@ struct CalendarView: View {
                         } label: {
                             HStack(spacing: 8) {
                                 Text(event.name)
+                                    .foregroundStyle(Palette.eventColor(event))
                                     .font(.system(size: 13, weight: .medium))
                                     .lineLimit(1)
                                     .truncationMode(.tail)
@@ -388,11 +402,17 @@ struct DetailPanel: View {
     let day: CalendarDay
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            HStack(alignment: .firstTextBaseline) {
+        HStack(alignment: .center, spacing: 12) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text("\(day.solarText)  \(day.weekdayName)")
                     .font(.system(size: 13, weight: .semibold))
-                Spacer(minLength: 0)
+                Text("农历\(day.lunarMonthName)月\(day.lunarDayName)　\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日　属\(day.shengXiao)")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Palette.secondaryText)
+                    .lineLimit(1)
+            }
+            .fixedSize(horizontal: true, vertical: false)
+            VStack(alignment: .trailing, spacing: 3) {
                 if let tag = adjustmentTag {
                     Text(tag.text)
                         .font(.system(size: 11))
@@ -400,25 +420,46 @@ struct DetailPanel: View {
                         .padding(.horizontal, 6)
                         .padding(.vertical, 1)
                         .background(Capsule().fill(tag.color.opacity(0.15)))
+                        .lineLimit(1)
+                }
+                if !day.allEvents.isEmpty {
+                    VStack(alignment: .trailing, spacing: 3) {
+                        ForEach(Array(eventLines.enumerated()), id: \.offset) { _, text in
+                            text
+                                .lineLimit(eventLines.count == 1 && adjustmentTag == nil ? 2 : 1)
+                        }
+                    }
+                    .font(.system(size: 12))
+                    .multilineTextAlignment(.trailing)
+                    .help(day.allEvents)
                 }
             }
-            Text("农历\(day.lunarMonthName)月\(day.lunarDayName)　\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日　属\(day.shengXiao)")
-                .font(.system(size: 12))
-                .foregroundStyle(Palette.secondaryText)
-                .lineLimit(1)
-            if !day.allEvents.isEmpty {
-                Text(day.allEvents)
-                    .font(.system(size: 12))
-                    .foregroundStyle(day.hasHighlightedEvent ? Palette.red
-                                     : day.events.isEmpty ? Palette.blue : Color.primary)
-                    .lineLimit(2)
-                    .help(day.allEvents)
-            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .frame(maxWidth: .infinity, minHeight: 50)
+        .frame(maxWidth: .infinity)
+        .frame(height: 50)
         .background(RoundedRectangle(cornerRadius: 8).fill(Palette.panel))
+    }
+
+    private var eventLines: [Text] {
+        var events = day.events.map {
+            Text($0.detailName).foregroundColor(Palette.eventColor($0))
+        }
+        if !day.solarTerm.isEmpty {
+            events.append(Text(day.solarTerm).foregroundColor(Palette.blue))
+        }
+        guard let first = events.first else { return [] }
+        if adjustmentTag == nil, events.count > 1 {
+            return [first, joinedEvents(Array(events.dropFirst()))]
+        }
+        return [joinedEvents(events)]
+    }
+
+    private func joinedEvents(_ events: [Text]) -> Text {
+        guard let first = events.first else { return Text("") }
+        return events.dropFirst().reduce(first) { $0 + Text(" ") + $1 }
     }
 
     /// 调休标记，例如"春节 放假"、"春节 调休上班"
