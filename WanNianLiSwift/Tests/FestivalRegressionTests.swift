@@ -39,6 +39,19 @@ extension AppRegressionTests {
               "country labels are not repeated when already part of the festival name")
         check(!day(usa, 2026, 7, 3).isOffDay && !day(usa, 2026, 7, 3).isRestDay,
               "foreign public holidays do not mark Chinese workdays as days off")
+        check(names(usa, 2026, 6, 19).first == "端午节"
+              && names(usa, 2026, 6, 19).contains("六月节"),
+              "foreign generated dates do not displace traditional festivals")
+        check(names(data([.england]), 2026, 5, 4).first == "青年节",
+              "Chinese solar festivals retain priority over foreign bank holidays")
+        let personal = data([.unitedStates], custom: [CustomEvent(name: "个人提醒", rule: .once(year: 2026, month: 6, day: 19))])
+        check(names(personal, 2026, 6, 19).first == "个人提醒",
+              "personal one-off reminders retain their original display priority")
+        let birthday = LunarCalendar.lunar(for: SolarDate(year: 2026, month: 5, day: 10))
+        let birthdayData = data(custom: [CustomEvent(name: "农历生日", rule: .lunar(month: birthday.month, day: birthday.day))])
+        check(names(birthdayData, 2026, 5, 10).first == "农历生日"
+              && names(birthdayData, 2026, 5, 10).contains("母亲节"),
+              "lunar birthdays retain their priority over generated common western festivals")
         check(names(usa, 2026, 9, 7).contains("美国劳动节")
               && names(usa, 2026, 5, 1).contains("劳动节"),
               "US Labor Day remains distinct from Chinese Labor Day")

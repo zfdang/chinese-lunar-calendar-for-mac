@@ -47,12 +47,13 @@ public enum DateRule: Codable, Hashable, Sendable {
         }
     }
 
-    /// 显示顺序：一次性事件、农历节日（含星期规则）、公历节日，与旧版一致
+    /// 显示顺序：一次性事件、农历节日、星期规则、公历节日，与旧版匹配顺序一致。
     var displayGroup: Int {
         switch self {
         case .once: return 0
-        case .lunar, .lunarNewYearsEve, .weekday: return 1
-        case .solar: return 2
+        case .lunar, .lunarNewYearsEve: return 1
+        case .weekday: return 2
+        case .solar: return 3
         }
     }
 }

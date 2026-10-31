@@ -29,9 +29,12 @@ public struct Festival: Hashable, Sendable {
     public let sourceURL: String?
     public let firstYear: Int?
     public let calendar: FestivalCalendar?
+    /// 匹配日期的存储规则不应改变显示优先级；国外日历放在本地节日后。
+    let displayGroup: Int
 
     init(_ name: String, _ rule: DateRule, _ category: FestivalCategory, highlight: Bool = false,
-         sourceURL: String? = nil, firstYear: Int? = nil, calendar: FestivalCalendar? = nil) {
+         sourceURL: String? = nil, firstYear: Int? = nil, calendar: FestivalCalendar? = nil,
+         displayGroup: Int? = nil) {
         self.name = name
         self.rule = rule
         self.category = category
@@ -39,6 +42,7 @@ public struct Festival: Hashable, Sendable {
         self.sourceURL = sourceURL
         self.firstYear = firstYear
         self.calendar = calendar
+        self.displayGroup = displayGroup ?? rule.displayGroup
     }
 
     /// 默认显示的节日。国家日历另外选择，不影响传统节日和中国调休。

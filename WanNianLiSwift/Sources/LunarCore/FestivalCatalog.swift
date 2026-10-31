@@ -66,11 +66,13 @@ public enum FestivalCatalog {
                 let fields = item.split(separator: ":")
                 precondition(fields.count == 2 && fields[0].count == 4, "Invalid generated festival date")
                 let name = GeneratedFestivalData.names[Int(fields[1])!]
+                let wasWeekdayRule = ["母亲节", "父亲节", "感恩节"].contains(name)
                 let rule = DateRule.once(year: year, month: Int(fields[0].prefix(2))!, day: Int(fields[0].suffix(2))!)
                 precondition(rule.isValid, "Invalid generated festival rule")
                 result.append(Festival(name, rule, .western,
-                                       highlight: highlight && ["母亲节", "父亲节", "感恩节"].contains(name),
-                                       sourceURL: sourceURL, calendar: calendar))
+                                       highlight: highlight && wasWeekdayRule,
+                                       sourceURL: sourceURL, calendar: calendar,
+                                       displayGroup: calendar != nil ? 4 : wasWeekdayRule ? 2 : 3))
             }
         }
         return result

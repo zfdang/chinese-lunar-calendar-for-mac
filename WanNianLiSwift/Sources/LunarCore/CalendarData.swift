@@ -27,13 +27,15 @@ public struct CalendarData: Sendable {
         // 内置节日在前，自定义事件在后
         for f in festivals {
             add(DayEvent(name: f.name, highlight: f.highlight, calendars: f.calendar.map { [$0] } ?? []),
-                rule: f.rule, isBuiltin: true, firstYear: f.firstYear)
+                rule: f.rule, isBuiltin: true, firstYear: f.firstYear, displayGroup: f.displayGroup)
         }
         for e in customEvents where !e.name.isEmpty { add(DayEvent(name: e.name, highlight: e.highlight), rule: e.rule) }
     }
 
-    private mutating func add(_ event: DayEvent, rule: DateRule, isBuiltin: Bool = false, firstYear: Int? = nil) {
-        let entry = Entry(event: event, group: rule.displayGroup, isBuiltin: isBuiltin, firstYear: firstYear)
+    private mutating func add(_ event: DayEvent, rule: DateRule, isBuiltin: Bool = false,
+                              firstYear: Int? = nil, displayGroup: Int? = nil) {
+        let entry = Entry(event: event, group: displayGroup ?? rule.displayGroup,
+                          isBuiltin: isBuiltin, firstYear: firstYear)
         switch rule {
         case let .once(y, m, d): once[String(format: "%04d%02d%02d", y, m, d), default: []].append(entry)
         case let .solar(m, d): solar[String(format: "%02d%02d", m, d), default: []].append(entry)
