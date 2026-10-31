@@ -389,11 +389,17 @@ struct DetailPanel: View {
     let day: CalendarDay
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            HStack(alignment: .firstTextBaseline) {
+        HStack(alignment: .center, spacing: 12) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text("\(day.solarText)  \(day.weekdayName)")
                     .font(.system(size: 13, weight: .semibold))
-                Spacer(minLength: 0)
+                Text("农历\(day.lunarMonthName)月\(day.lunarDayName)　\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日　属\(day.shengXiao)")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Palette.secondaryText)
+                    .lineLimit(1)
+            }
+            .fixedSize(horizontal: true, vertical: false)
+            VStack(alignment: .trailing, spacing: 3) {
                 if let tag = adjustmentTag {
                     Text(tag.text)
                         .font(.system(size: 11))
@@ -401,24 +407,24 @@ struct DetailPanel: View {
                         .padding(.horizontal, 6)
                         .padding(.vertical, 1)
                         .background(Capsule().fill(tag.color.opacity(0.15)))
+                        .lineLimit(1)
+                }
+                if !day.allEvents.isEmpty {
+                    Text(day.allEvents)
+                        .font(.system(size: 12))
+                        .foregroundStyle(day.hasHighlightedEvent ? Palette.red
+                                         : day.events.isEmpty ? Palette.blue : Color.primary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(adjustmentTag == nil ? 2 : 1)
+                        .help(day.allEvents)
                 }
             }
-            Text("农历\(day.lunarMonthName)月\(day.lunarDayName)　\(day.ganZhiYearByLiChun)年 \(day.ganZhiMonth)月 \(day.ganZhiDay)日　属\(day.shengXiao)")
-                .font(.system(size: 12))
-                .foregroundStyle(Palette.secondaryText)
-                .lineLimit(1)
-            if !day.allEvents.isEmpty {
-                Text(day.allEvents)
-                    .font(.system(size: 12))
-                    .foregroundStyle(day.hasHighlightedEvent ? Palette.red
-                                     : day.events.isEmpty ? Palette.blue : Color.primary)
-                    .lineLimit(2)
-                    .help(day.allEvents)
-            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .frame(maxWidth: .infinity, minHeight: 50)
+        .frame(maxWidth: .infinity)
+        .frame(height: 50)
         .background(RoundedRectangle(cornerRadius: 8).fill(Palette.panel))
     }
 
