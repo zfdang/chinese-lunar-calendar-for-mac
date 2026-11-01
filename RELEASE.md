@@ -5,18 +5,20 @@
 ## 1. 准备
 
 1. 代码合并到 master，确认 CI（`.github/workflows/release.yml`）通过：
-   它会运行农历基准数据校验（`WanNianLiSwift/scripts/check-golden.sh`）并构建两个版本
+   它会在 macOS 15、26 上校验农历基准数据与应用数据，并构建 Apple 芯片和 Intel 两个版本，
+   发布前检查两个安装包的架构、版本和签名。ARM runner 容量不足时可能排队等待，不需要切换构建机
 2. 在 [CHANGELOG.md](CHANGELOG.md) 中把“未发布”一节的标题改为新版本号和日期（如 `## 4.2（2026-10-15）`），
    再在它上面加一个空的“## 未发布”小节，留给下一个版本
 3. 如果界面有变化，更新网站截图（`docs/images/`）：
 
    ```bash
    cd WanNianLiSwift
-   swift run WanNianLi --snapshot /tmp/shots 20260930   # 日期可选，yyyyMMdd，决定日历显示哪一天
+   WANNIANLI_DATA_DIR=/tmp/calendar-demo swift run WanNianLi --snapshot /tmp/shots 20261107
+   # /tmp/calendar-demo 中预先放入仅含示例事件的 custom-events.json；日期格式 yyyyMMdd
    cp /tmp/shots/{calendar-light,calendar-dark,custom-events,custom-events-dark}.png ../docs/images/
    ```
 
-   自定义日期的截图显示的是本机保存的自定义日期，截图前确认里面没有不想公开的内容；
+   使用单独的示例数据目录，避免公开本机真实生日和纪念日。日历截图应包含同一天的多个事件，以检查右侧两行显示和各自颜色；
    `icon.png`（菜单栏图标）只用于检查，不需要复制到网站
 
 ## 2. 发布
