@@ -207,7 +207,7 @@
   <div class="wrap">
     <section id="features">
       <h2>功能</h2>
-      <p class="sub">原生 Swift 开发，轻巧、省电，与系统外观融为一体。</p>
+      <p class="sub">农历、放假调休和重要日子，随时点开就能查看。</p>
       <div class="features">
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
@@ -217,7 +217,7 @@
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2"/><path d="M16 3h5v5"/></svg></div>
           <h3>准确的农历</h3>
-          <p>使用系统自带的中国历法计算，与香港天文台 1921–2099 年对照表逐日核对一致。显示干支、生肖、二十四节气。</p>
+          <p>查看农历日期、干支、生肖和二十四节气，支持 1901–2099 年。农历已与香港天文台 1921–2099 年对照表逐日核对一致。</p>
         </div>
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4h11l-1 4h6v9H9l1-4H4"/></svg></div>
@@ -227,7 +227,7 @@
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           <h3>即将到来与倒计时</h3>
-          <p>月历下方实时展示最近的节日、节气或自定义事件，可一键查看未来 90 天日程列表并点击跳转。</p>
+          <p>月历下方显示最近的节日、节气或自定义事件及倒计时，可展开未来 90 天内最多 6 项，点击跳转到当天。</p>
         </div>
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
@@ -236,8 +236,8 @@
         </div>
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></div>
-          <h3>外观与快捷键</h3>
-          <p>跟随系统或固定日间 / 夜间模式，内置节日按分类开关，支持键盘方向键与开机自动启动。</p>
+          <h3>选择你关心的节日</h3>
+          <p>传统节日、公历节日与国内外纪念日按需显示，还可选择英国、美国、法国、德国的公共假日日历，同名节日合并并标注国家。</p>
         </div>
       </div>
     </section>
@@ -250,7 +250,7 @@
           <ul>
             <li>在月历右上角或设置菜单中打开“自定义日期”快速添加</li>
             <li>自动计算倒计时与下一次公历日期</li>
-            <li>在月历“即将到来”中提前提醒并醒目高亮</li>
+            <li>在月历“即将到来”中查看倒计时与醒目事件</li>
             <li>导出为文件备份，换电脑时再导入</li>
           </ul>
         </div>
@@ -264,14 +264,23 @@
       </div>
     </section>
 
+    <section>
+      <h2>4.5.1，让重要日子看得更清楚</h2>
+      <p class="sub">“接下来”保留完整的一行信息；当天的事件在详情右侧利用两行显示，切换日期时高度保持稳定。</p>
+      <ul>
+        <li>生日、节日与节气各自保留颜色：醒目事件为红色，普通事件为正常文字色，节气为蓝色</li>
+        <li>内容较多时悬停查看全文，同名国外节日会注明所属国家</li>
+        <li>支持跟随系统、日间和夜间外观，方向键翻页与开机自动启动</li>
+      </ul>
+    </section>
+
     <section id="install">
       <h2>安装</h2>
       <p class="sub">下载后解压，把 WanNianLiSwift 拖到“应用程序”文件夹即可。</p>
       <div class="steps">
         <div class="step">
           <h3>第一次打开</h3>
-          <p>程序没有经过 Apple 公证。如果提示“无法验证开发者”，在“访达”中按住 Control 点按程序，选择“打开”；或者在终端中执行：</p>
-          <pre><code>xattr -cr /Applications/WanNianLiSwift.app</code></pre>
+          <p>程序尚未经过 Apple 公证。首次打开如被阻止，确认从本站或 GitHub 下载后，在“系统设置 → 隐私与安全性”中查看提示并选择“仍要打开”。参见 <a href="https://support.apple.com/zh-cn/102445">Apple 的打开说明</a>。</p>
         </div>
         <div class="step">
           <h3>调整系统时钟（推荐）</h3>
