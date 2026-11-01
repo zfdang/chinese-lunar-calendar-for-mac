@@ -5,8 +5,8 @@
 ## 1. 准备
 
 1. 代码合并到 master，确认 CI（`.github/workflows/release.yml`）通过：
-   它会在 macOS 15、26 的 Intel runner 上校验农历基准数据与应用数据，并交叉构建 Apple 芯片和 Intel 两个版本。
-   使用 Intel runner 避开 ARM runner 的容量排队提示，发布前仍会检查两个安装包的架构、版本和签名
+   它会在 macOS 15、26 上校验农历基准数据与应用数据，并构建 Apple 芯片和 Intel 两个版本，
+   发布前检查两个安装包的架构、版本和签名。ARM runner 容量不足时可能排队等待，不需要切换构建机
 2. 在 [CHANGELOG.md](CHANGELOG.md) 中把“未发布”一节的标题改为新版本号和日期（如 `## 4.2（2026-10-15）`），
    再在它上面加一个空的“## 未发布”小节，留给下一个版本
 3. 如果界面有变化，更新网站截图（`docs/images/`）：
